@@ -1,0 +1,55 @@
+---
+title: "Appendix A"
+subtitle: "Constraints keys defined for the *.zoning file in the OZFS data standard"
+execute: 
+  echo: false
+  warning: false
+format:
+#  docx:
+#    reference-doc: ..\custom-reference-doc.docx
+  html:
+    self-contained: true
+    theme: minty
+    toc: true
+    toc-location: left
+editor: visual
+---
+
+The following constraints are defined for use in the constraints array in the \*.zoning file in the OZFS data standard.
+
+| **Constraint name** | **Description** | **Units** |
+|------------------------|------------------------|------------------------|
+| `far` | Floor area ratio | None (dimensionless ratio) |
+| `fl_area` | Floor area | Square feet |
+| `fl_area_first` | Floor area of the ground floor | Square feet |
+| `fl_area_top` | Floor area of the top floor | Square feet |
+| `footprint` | Building footprint area | Square feet |
+| `height` | Building height (based on definitions contained in the zoning code) | Feet |
+| `height_eave` | Distance from the ground to the eave of the building. | Feet |
+| `lot_cov_bldg` | Percent of lot area covered by buildings | Whole-number percentage points |
+| `lot_size` | The area of the lot | Acres |
+| `parking_covered` | The number of covered parking spaces | Number of spaces |
+| `parking_enclosed` | The number of enclosed parking spaces | Number of spaces |
+| `parking_uncovered` | The number of uncovered parking spaces | Number of spaces |
+| `setback_dist_boundary` | The distance from the building to the boundary of the zoning district. | Feet |
+| `setback_front` | The distance from the building to the front of the parcel. | Feet |
+| `setback_front_sum` | The sum of the front setback (distance from the building to the front of the parcel) and the rear setback (distance from the building to the rear of the parcel). | Feet |
+| `setback_rear` | The distance from the building to the rear of the parcel. | Feet |
+| `setback_side_ext` | The distance from the building to the exterior (street-facing) side of a corner parcel | Feet |
+| `setback_side_int` | The distance from the building to the interior side of a parcel (the side that is adjacent to another parcel). | Feet |
+| `setback_side_sum` | The sum of both side setbacks. | Feet |
+| `stories` | The number of stories in a building | Number of stories |
+| `unit_0bed_qty` | The number of studio (zero-bedroom) units in a building | Number of units |
+| `unit_1bed_qty` | The number of one-bedroom units in a building | Number of units |
+| `unit_2bed_qty` | The number of two-bedroom units in a building | Number of units |
+| `unit_3bed_qty` | The number of three-bedroom units in a building | Number of units |
+| `unit_4bed_qty` | The number of four-bedroom units in a building | Number of units |
+| `unit_density` | The number of housing units per land area of the parcel | Units per acre |
+| `unit_pct_0bed` | The percentage of housing units in a building that are studio (zero-bedroom) units | Whole-number percentage points |
+| `unit_pct_1bed` | The percentage of housing units in a building that are one-bedroom units | Whole-number percentage points |
+| `unit_pct_2bed` | The percentage of housing units in a building that are two-bedroom units | Whole-number percentage points |
+| `unit_pct_3bed` | The percentage of housing units in a building that are three-bedroom units | Whole-number percentage points |
+| `unit_pct_4bed` | The percentage of housing units in a building that are four-bedroom units | Whole-number percentage points |
+| `unit_qty` | The number of units in a building | Number of units |
+| `unit_size` | The size of a housing unit within a building | Square feet |
+| `unit_size_avg` | The average size of all housing units within a building | Square feet |

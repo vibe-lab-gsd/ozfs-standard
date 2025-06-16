@@ -1,0 +1,48 @@
+---
+title: "Appendix B"
+subtitle: "Variable names that may be included in OZFS expressions"
+execute: 
+  echo: false
+  warning: false
+format:
+  docx:
+    reference-doc: ..\custom-reference-doc.docx
+#  html:
+#    self-contained: true
+#    theme: minty
+#    toc: true
+#    toc-location: left
+editor: visual
+---
+
+The following variables names can be included in expressions within the constraints and definitions arrays of a \*.zoning file.
+
+| Variable name | Unit of observation | Source for value |
+|------------------|------------------|-------------------------------------|
+| `bedrooms` | Dwelling unit | Value for `bedrooms` key in the `unit_info` array in the \*.bldg file. |
+| `bldg_depth` | Building | Value for `depth` key in the `bldg_info` array in the \*.bldg file. |
+| `bldg_width` | Building | Value for `width` key in the `bldg_info` array in the \*.bldg file. |
+| `far` | Building/parcel | Floor area ratio calculated (with an appropriate unit conversion) from the sum of `gross_fl_area` values in the `level_info` array in the \*.bldg file and the `lot_area` value for the parcel centroid feature in the \*.parcel file. |
+| `fl_area` | Building | Sum of `gross_fl_area` values in the `level_info` array in the \*.bldg file. |
+| `floors` | Building | Number of floors in the building calculated as the maximum `level` value in the `level_info` array in the \*.bldg file. |
+| `height` | Building | Building height calculated from one or more of the `height_*` values in the `bldg_info` array in the \*.bldg file, based on the height definitions specified in the \*.zoning file. |
+| `height_deck` | Building | Taken directly from the `height_deck` value in the `bldg_info` array in the \*.bldg file. |
+| `height_eave` | Building | Taken directly from the `height_eave` value in the `bldg_info` array in the \*.bldg file. |
+| `height_plate` | Building | Taken directly from the `height_plate` value in the `bldg_info` array in the \*.bldg file. |
+| `height_top` | Building | Taken directly from the `height_top` value in the `bldg_info` array in the \*.bldg file. |
+| `height_tower` | Building | Taken directly from the `height_tower` value in the `bldg_info` array in the \*.bldg file. |
+| `lot_area` | Parcel | Taken directly from the `lot_area` value for the parcel centroid feature in the \*.parcel file. |
+| `lot_depth` | Parcel | Taken directly from the `lot_depth` value for the parcel centroid feature in the \*.parcel file. |
+| `lot_type` | Parcel | Inferred based on whether any of the lot edges for a parcel in the \*.parcel file is classified as `exterior side` |
+| `lot_width` | Parcel | Taken directly from the `lot_width` value for the parcel centroid feature in the \*.parcel file. |
+| `max_unit_size` | Building | Calculated as the maximum `fl_area` value in the `unit_info` array in the \*.bldg file. |
+| `min_unit_size` | Building | Calculated as the minimum `fl_area` value in the `unit_info` array in the \*.bldg file. |
+| `parking_enclosed` | Building | Taken directly from the `parking` value in the `bldg_info` array in the \*.bldg file. |
+| `roof_type` | Building | Taken directly from the `roof_type` value in hte `building_info` array in the \*.bldg file. |
+| `total_bedrooms` | Building | Sum of values for the `bedrooms` key in the `unit_info` array in the \*.bldg file. |
+| `total_units` | Building | Sum of values for the `qty` key in the `unit_info` array in the \*.bldg file. |
+| `units_0bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 0 in the \*.bldg file. |
+| `units_1bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 1 in the \*.bldg file. |
+| `units_2bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 2 in the \*.bldg file. |
+| `units_3bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 3 in the \*.bldg file. |
+| `units_4bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 4 or more in the \*.bldg file. |
