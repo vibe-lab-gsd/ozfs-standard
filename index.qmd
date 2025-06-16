@@ -6,13 +6,13 @@ execute:
   echo: false
   warning: false
 format:
-#  docx:
-#    reference-doc: custom-reference-doc.docx
- html:
-   self-contained: true
-   theme: minty
-   toc: true
-   toc-location: left
+  docx:
+    reference-doc: custom-reference-doc.docx
+# html:
+#   self-contained: true
+#   theme: minty
+#   toc: true
+#   toc-location: left
 editor: visual
 ---
 
@@ -185,7 +185,7 @@ Building characteristics for a single building are stored in json file with the 
 
 ```{r}
 #| label: fig-bldg-data
-#| fig-cap: "Structure of JSON file defining building attributes"
+#| fig-cap: "Structure of *.bldg file"
 
 here("figures",
      "bldg_data_structure.png") |>
