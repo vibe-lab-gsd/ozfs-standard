@@ -230,11 +230,11 @@ The \*zoning files were created using NZA data compiled by published by the Merc
 
 [^1]: Cockrell Hill, Dallas, Garland, Highland Park, Irving, Rowlett, and University Park.
 
-Appendix E includes several examples of text from specific zoning codes together with how these passages were translated into the OZFS data standard. The sample set of zoning regulations for 162 municipalities in the Dallas-Forth Worth region in available at {{{{dataverse}}}}} (cite dataverse).
+The sample set of zoning regulations for 162 municipalities in the Dallas-Forth Worth region in available at {{{{dataverse}}}}} (cite dataverse).
 
 ## Parcel geometry
 
-The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. The code used to generate the \*.parcel files from these two datasets is available at {{{{{github repo}}}}} and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse). More information on the process is provided in Appendix F.
+The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. The code used to generate the \*.parcel files from these two datasets is available at {{{{{github repo}}}}} and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse). More information on the process is provided in Appendix E.
 
 ## Building characteristics
 
