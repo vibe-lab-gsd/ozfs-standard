@@ -1,0 +1,261 @@
+---
+title: "Open Zoning Feed Specification"
+subtitle: "Data standards for describing zoning regulations, parcel geometry, and building characteristics"
+bibliography: ozfs.bib
+execute: 
+  echo: false
+  warning: false
+format:
+#  docx:
+#    reference-doc: custom-reference-doc.docx
+ html:
+   self-contained: true
+   theme: minty
+   toc: true
+   toc-location: left
+editor: visual
+---
+
+# Abstract
+
+100 words
+
+```{r load-libraries, message=FALSE}
+library(tidyverse)
+library(here)
+library(kableExtra)
+```
+
+# Introduction
+
+Scholars and advocates in the United States have shown an increasing interest in assembling data on zoning regulations across municipalities on order to document the degree to which zoning constrains the production of housing. These efforts are hampered by the absence of a flexible and generalizeable data standard that can describe complex zoning regulations in a way that can be consistently parsed by software. The purpose of this paper is to introduce the Open Zoning Feed Specification (OZFS) and offer it as a solution that can describe zoning regulations in a more a complete and consistent manner than the existing state of practice.
+
+## Prior work
+
+An example of the type of research and analysis that is stymied by the lack of standardized, machine-readable zoning data is a study by Conway [-@conway_if_2021], which addresses the question of how statewide proposals to relax zoning restrictions in California might impact traffic congestion. That analysis required strong assumptions with regards to allowable setbacks, since these data were not available in a consistent format for municipalities across the state. These assumptions (derived from existing building footprints) were not unreasonable. The method probably overestimates allowable building footprints as often as it underestimated them, so the aggregated results about the overall increases in traffic congestion were probably valid. However, this approach would be less likely to yield useful results about the effects of the proposed policies on specific road segments or within small areas.
+
+The largest existing effort to compile zoning regulations for municipalities throughout the United States into a comprehensive, nationwide database is the National Zoning Atlas (NZA) [@national_zoning_atlas_national_2025], a project led and founded by Sara Bronin [@national_zoning_atlas_national_2025-1]. NZA coordinates among local teams to encode zoning regulations. Early in the NZA data collection program, contributors would enter information from the zoning codes into a spreadsheet as tabular (rectangular) data, with a sheet for each municipality, a row for each zoning district, and a column for each of a large number of variables intended to comprehensively represent the regulations that could be represented in a zoning code [@bronin_how_2021]. NZA subsequently changed its data collection process to replace the use of spreadsheets with an online editor tool that was accessible to those who had registered with NZA [@bronin_how_2023]. The editor tool may have recorded data in a similar format to the spreadsheets and geospatial files that were used previously, although since these data sets are not shared publicly, NZA is free to modify its data structures from time to time according to its internal needs. The current data collection methodology is not publicly available [@national_zoning_atlas_how_2025]. Individual contributors are free to store and share the data they collect in any format, in addition to sharing it with NZA using their current data-entry tools. Tabular data formats seem to have been the most common.
+
+The Mercatus Center at George Mason University has provided funding for local NZA data compilation efforts in nine states and regions [@mercatus_center_state_2024]. Data collected by the teams in those regions are available on the Mercatus website as spreadsheets (csv or Excel) with accompanying geojson files. The Mercatus website includes a data dictionary [@kahn_nza_2024] that notes in its introduction that some numeric variables are commonly encoded as strings, which can be an error in the way they were entered, or it may be necessary in some cases because "it is very common for numeric variables in these datasets to have no single numeric value due to complex and context-dependent regulations within districts" [@kahn_nza_2024, pp. 1].
+
+The Metropolitan Area Planning Council (MAPC), which is the regional planning agency for the Boston metropolitan area, maintains an online zoning atlas for the 101 cities and towns it serves [@metropolitan_area_planning_council_mapc_2025]. MAPC began collecting data for its zoning atlas in 2012 and published its initial version in 2020 [@reardon_introduction_2020]. The MAPC Zoning Atlas effort has since been incorporated into NZA [@national_zoning_atlas_massachusetts_2025]. Their compiled zoning data are viewable through an interactive map and downloadable either as ESRI shapefiles or as csv files (both using a tabular data format).
+
+NZA is tightly controlled, both in terms of who has access to the data and who can contribute. The format they currently use to store zoning data is not public. Contributors must be approved by NZA and, although the compiled data is available through an interactive map [@national_zoning_atlas_explore_2025], it is not downloadable for incorporation into third-party software or detailed analysis by researchers (individual contributors to NZA can choose to publish or share the data they collect). It is not open data, in the sense that its terms of use [@national_zoning_atlas_terms_2025] does not comply with the Open Knowledge Foundation's definition of Openness "Knowledge is open if anyone is free to access, use, modify, and share it – subject, at most, to measures that preserve provenance and openness" [@open_knowledge_foundation_open_2015]. This is not necessarily a weakness of the project. There are many advantages to a more closed approach to data collection and dissemination, including better control of data quality and an assurance that the data will not be used for purposes that are not aligned with an organization's values and priorities. On the other hand, this approach does create a barrier to the use of the data and the adoption of the data collection methodologies and formats.
+
+The Center for Spatial Planning Analytics and Visualization (CSPAV) at Georgia Institute of Technology has digitized has created an interactive dashboard for exploring zoning regulations in Atlanta [@schwabacher_atl_2022]. Like NZA, CSPAV does not allow users to download the data powering its interactive map, and its data format is not apparent from the dashboard itself.
+
+Other efforts at compiling zoning regulations in a machine-readable format include Envelope [@envelope_about_2022] and Zonenomics [@zoneomics_zoneomics_2024]. These are efforts by private firms to compile data that can be sold directly to users, or a that can be used in analyses that the firms do on behalf of customers (and are thus somewhat less open than the NZA effort). Envelope is not longer operating, and detailed information on their data format is not available. Zoneomics offers data through a paid API subscription. API outputs are in a json or geojson format, which offers the potential to overcome a weakness of a tabular data format: variables do not necessarily need to be stored for any districts they are not defined for. As noted by Kahn [-@kahn_nza_2024] for NZA data published by the Mercatus Center, some variable values are necessarily encoded by non-standardized text strings that describe constraints that may depend on land use or on characteristics of the building of the parcel.
+
+A limitation of the data structures used by all of the efforts described above is that they do not offer a consistent method for encoding constraints on the building form that are dependent on features of the building (e.g. when the required setback depends on the building height) or on features of the parcel (e.g. when the required setback depends on the the parcel width). Moreover, none of them differentiate between definitions of terms that may be used differently in different jurisdictions. For example, one jurisdiction might define height as the top of the roof for any structure, but another might define height (for particular roof types) as the midpoint between the top of the roof and the eave. As another example, zoning codes may have different setback requirements for multifamily homes and for townhomes, but a building that is defined as a multifamily building based on the definitions used in one jurisdiction might be defined as a row of townhomes in another. Another limitation is that, with exception of the Zoneomics API, all the efforts described above use a tabular data structure, which would require that any variable defined for any district in the dataset (or in the entire nation, if the goal is to compile a harmonized national dataset) must be defined (at least with a null value) for all districts.
+
+## Contribution
+
+The aim of the OZFS data standard is to offer a scaleable, extendable foundation that can serve as the basis for analytic methods and software that can improve:
+
+-   developers' understanding of where there may be opportunities to build new housing,
+-   policy-makers' understanding of where there may be the greatest opportunity to increase opportunities for housing development through targeted changes to zoning regulations, and
+-   researchers' understanding of how variations in zoning regulations might relate to variations in outcomes of interest such as housing affordability, transportation accessibility, or economic development.
+
+The OZFS data standard uses a geojson data form to describe zoning regulations, which offers the flexibility to define only those variables that are defined for a particular zoning district and to add additional key-value pairs for new variables as needed. We incorporate the use of expressions (in the Python syntax) and nested arrays to define constraints that are dependent on land use or on characteristics of buildings and parcels, as well as to define municipality-level definitions of relating to building characteristics. To ensure that buildings and parcels are described in a way that is interpretable by these expressions, the OZFS data standard also includes standards for encoding building and parcel characteristics.
+
+We aim to maximize the usefulness of this effort by publishing this data standard under a creative commons license. We hope it will prove useful to:
+
+-   contributors who want to create OZFS data by manually translating the texts of zoning codes into the OZFS data format,
+
+-   data scientists who want to develop applications to automate the creation of OZFS data from zoning codes and geospatial parcel data files, and
+
+-   software developers who want to create tools for housing developers and policy-makers seeking to increase the supply of housing.
+
+We were directly inspired by OpenStreetMap [@openstreetmap], which has defined a flexible data standard for encoding geographic data, allowing volunteer contributors their data collection efforts toward the effort of assembling a global digital map of the world. Noteably, the OpenStreetMap data standard itself has changed over time, as contributors have coordinated to define additional features. It is our vision that OZFS will likewise be revised by contributors over time to better describe the full range of and complexity of zoning code features.
+
+# OZFS Data Structures
+
+The OZFS data standard includes three files: a file with a \*.zoning extension to describe the zoning regulations for a particular municipality; a file with a \*.parcel extension to describe the geometry of all parcels (or all parcels of interest) within a municipality; and a file with a \*.building extension to describe the geometry of a proposed building.
+
+## Zoning regulations
+
+Zoning data are encoded in a separate \*.zoning file for each municipality. The \*.zoning file is formatted as a geojson file, which offers the advantages of a nested data structure. The specific structure of the \*.zoning file is illustrated in @fig-zoning-structure.
+
+```{r fig-zoning-structure}
+#| fig-cap: "Structure of the zoning file"
+
+here("figures",
+     "zoning_structure.png") |>
+  knitr::include_graphics()
+```
+
+The top level of the file is an array with six key-value pairs:
+
+-   `Type`: As for geojson files, the value for this key should be "FeatureCollection."
+
+-   `version`: The version of the OZFS data standard used in this file. The current version of the standard is 0.5.0.
+
+-   `muni_name`: The name of the municipality this zoning code refers to. This is a required value.
+
+-   `date`: The most recent date on which the zoning regulations are known to have been in effect. This is a required value.
+
+-   `definitions` is an array of definitions of terms (in the current version of the standard, height and residential building types) that may very from one municipality to the next and are defined in the text of the zoning code.
+
+-   `features` contains information on each zoning district, where each district represented by an array of three elements: `type`, `properties`, and `geometry`. As for geojson files, the value for the `type` key will be "Feature" and the geometry key takes an array of coordinates describing the geometry of the feature (in this case, the district boundary). The value for the `properties` key is an of key-value pairs that may include the following:
+
+    -   `dist_name` is the name of district. This value is required if there is no value for `dist_name` and optional otherwise.
+
+    -   `dist_abbr` is the abbreviated name of district. This value is required if there is no value for `dist_name` and optional otherwise.
+
+    -   `planned_dev` is a binary value indicating wheter this is a planned development district (where the entire district will be developed by a single developer who negotiates constraints directly with the municipality). This value is optional and is assumed to have a value of false if it is missing.
+
+    -   `overlay` is a binary value indicating whether this district is an overlay district (a district that modifies the requirements of any base districts it overlaps). This value is optional and is assumed to have a value of false if it is missing.
+
+    -   `res_types_allowd` is a list of residential land uses that are allowed in the district. All values in the list must also appear in the `definitions` array. This list of values is required if neither the value of the `planned_dev` key nor the value of the `overlay` key is true.
+
+    -   `constraints` is an array of constraints that define allowable building characteristics. The `constraints` key must be present if neither the value of the `planned_dev` key nor the value of the `overlay` key is true.
+
+The definitions array (defined for the municipality as a whole) and the constraints array (defined for each district in the features array that is not a planned development district or an overlay district) are described in greater detail below.
+
+### Constraints
+
+Constraints are described by numeric values or expressions and are stored in the structure illustrated in @fig-constraints. Possible constraints include `setback_front` (the front setback), `far` (the floor area ratio), and `lot_cov_bldg` (the lot coverage). Appendix A includes the constraints that have been defined for the \*.zoning file, together with their descriptions. For each constraint that is included in the constraints array, a minimum value `min_val` and/or a maximum value `max_val` must be given.
+
+```{r}
+#| label: fig-constraints
+#| fig-cap: "Data structure for constraints in the *.zoning file"
+
+here("figures",
+     "constraint_structure.png") |>
+  knitr::include_graphics()
+```
+
+Minimum and maximum values for constraints are stored as arrays including the following key-value pairs:
+
+-   `expression`: These can either be constant numeric values or equations (in Python syntax) referring to variables listed in Appendix B.
+-   `condition`: The condition under which the minimum or maximum value applies. This key is required if the number of elements in the min_value (or max_value) array is greater than one. The condition can be a logical expression (in Python syntax) defining the condition under which the minimum (or maximum) value applies. Appendix B includes a full list of the of the variables that can be used in constraint and condition expressions, along with a description of each variable. If the condition under which the value applies cannot be described as a logical expression within with one or more of those variables, it may be described in a text string (which will limit machine-readability).
+-   `min_max`: This key is required if the list of expressions has a more than one element in it. It is a character string that can take one of two values: `min` or `max`. A value of `min` indicates that the governing constraint is the minimum of the possible values listed in the `expression` key. A value of `maximum` indicates that the governing constraint is the maximum of the possible values listed in the `expression` key.
+
+### Definitions
+
+There may be terms that are used in many different zoning codes, but with definitions that vary across municipalities. The current version of the OZFS standard (version 0.5.0) requires definitions for height and for types of residential buildings. Other definitions may be added to future extensions of the standard.
+
+For each definition, one or more arrays comprising conditions and expressions can be defined. The value of the `condition` key defines the circumstance under which the value of the `expression` key applies and should be a logical statement (one that returns a value of true or false) in Python syntax, referencing any of the variable names listed in Appendix B. The value of the `expression` key should be an equation (in Python syntax) referencing any of the variable names listed in Appendix B. As an example, if the height of a building is defined as the top of the highest wall plate for buildings with a flat roof type and the mid-point between the top of the roof and the eave for all roof types except a flat roof (see Appendix C for an illustration of various roof types), the height definition would be coded as illustrated in @fig-height-def-ex.
+
+```{r fig-height-def-ex}
+#| fig-cap: "Illustrative example of a height definition"
+
+here("figures",
+     "height-def-ex.png") |>
+  knitr::include_graphics()
+```
+
+Conditions do not necessarily need to be mutually exclusive. When they are not, they are applied in the order in which they appear. For example, if the residential building type `res_type` of a building with three or more units units is defined as `multifamily` building unless all units have outside entrances on the ground level, in which case it is defined as a `townhouse`, this could be encoded as illustrated in @fig-res-type-def-ex. In that example, all buildings with only one dwelling unit would be defined as single-family. Of the remaining buildings, all buildings with two units would be defined as duplexes. Of the remaining buildings (all of which would have three or more dwelling units), those in which all units have an outside, ground-level entrances would be classified as townhouses, and all other buildings with three or more units would be classified as multifamily buildings.
+
+```{r fig-res-type-def-ex}
+#| fig-cap: "Illustrative example of a residential type definition"
+
+here("figures",
+     "res-type-def-ex.png") |>
+  knitr::include_graphics()
+```
+
+## Parcel geometry
+
+Parcel geometry data representing parcel boundaries as polygons are commonly available in GIS files from state, county, or municipal open-data portals. These require pre-processing for zoning analysis because applying required setbacks to determine the buildable area of a parcel requires information not only about the shape and location of the parcel, but also about its orientation with respect to the street, since zoning codes may specify difference setbacks for the front, sides, and rear of a parcel, respectively.
+
+In the OZFS data standard, parcels must be represented in a geojson file that includes, for each parcel, line strings representing each parcel edge (front, back, and side(s) and a point representing the parcel centroid. All features have a `parcel_id` key with a value that uniquely identifies which parcel each edge or centroid is associated with.
+
+Each feature in the parcel dataset will also have a key `side` that can take one of six values:
+
+-   `front` indicates that this is a line string representing the front of a parcel.
+-   `rear` indicates that this is line string representing the rear of a parcel.
+-   `interior side` indicates that this is a line string representing the interior side of a parcel (the side adjacent to another parcel).
+-   `exterior side` indicates that this is a line string representing the exterior side of a parcel. Only a corner lot can have an exterior side. This is the side of a corner lot that is adjacent (and approximately parallel) to the street that is not indicated in the parcel's address.
+-   `unknown` indicates that this is a line string representing the side of a parcel that has not been classified into one of the above categories (for irregular parcel geometries and/or parcels where the relationship to the adjacent street network is unclear).
+-   `centroid` indicates that this is a point representing the parcel's centroid.
+
+Parcel centroids have three additional key/value pairs. `lot_width` indicates the width of the parcel in feet. `lot_depth` indicates the depth of the parcel in feet. `lot_area` indicates the area of the parcel in acres.
+
+In addition to parcel geometry features, the \*.parcel file must also include a `version` key indicating what version of the OZFS standard the file is consistent with. The version described in this paper is 0.5.0.
+
+## Building characteristics
+
+Building characteristics for a single building are stored in json file with the structure illustrated in @fig-bldg-data. The file includes three arrays:
+
+-   `bldg_info` includes information on the characteristics of the overall building (building dimensions and number of parking spaces within the structure).
+-   `unit_info` includes information in each type of unit within the building,
+-   `level_info` contains information on each level within the building, and
+-   `parking_info` optionally contains information about each on-site parking area.
+
+```{r}
+#| label: fig-bldg-data
+#| fig-cap: "Structure of JSON file defining building attributes"
+
+here("figures",
+     "bldg_data_structure.png") |>
+  knitr::include_graphics()
+```
+
+### Building dimensions
+
+All building dimensions are in feet. The building information array includes the height from the ground to the top of the building (`height_top`), from the ground to the highest wall plate (`height_plate`), as well as the building `width`, the building `depth`, and the building's roof type (`roof_type`). Refer to Appendix C for an illustration of roof types that are defined for use in OZFS.
+
+As noted in the section on zoning constraints, there are differences among zoning codes with regards to how a building's height is defined for various roof types. For roof types other than a flat roof, the eave height must be specified in the `height_eave` key. For Mansard roofs, `height_deck` must be specified as well.
+
+If the building includes towers, chimneys, antennas, or mechanical structures, the (maximum) height of these (from the roof) can optionally be specified with the `height_tower` key.
+
+The `sep_platted` key is used to indicate whether each until in the building would be on a separately platted parcel (this may be used to determine whether the building meet's a municipality's definition of a townhome). There is also an optional `parking` key to indicate the number of parking spaces contained within the building's structure (i.e. in a garage).
+
+### Level information
+
+The level array includes, for each level of the building, a two-element array with the level number and the gross floor area (in square feet) of that level. Above-ground levels are numbered with positive sequential numbers beginning at one (for the lowest above-ground level), and below-ground level are numbered with numbers decreasing from negative one (for the level closest to the ground).
+
+### Unit information
+
+The unit array includes an array specifying the following characteristics for each unit type, where units are classified as being of the same type if they have the same values for each characteristic below:
+
+-   `fl_area`: The floor area of the unit in square feet.
+
+-   `bedrooms`: The number of bedrooms in the unit, expressed as a whole number with a minimum value of zero (for a studio unit).
+
+-   `entry_level`: The level number the entrance to the unit is on.
+
+-   `outside_entry`: A binary value indicating whether the entrance to the unit is directly from the outside of the building.
+
+In addition to the four characteristics above, there is also a `qty` key to indicate how many units of each type are in the building.
+
+# Sample Dataset
+
+We have compiled a sample dataset with zoning regulations and parcel geometry for a set of 162 municipalities in the Dallas/Forth Worth region of Texas, as well as sample building characteristic data for four hypothetical multifamily homes.
+
+## Zoning regulations
+
+The \*zoning files were created using NZA data compiled by published by the Mercatus Center at George Mason University [@mercatus_center_state_2024] as a starting point. We converted that data for each of 161 cites in the Dallas-Forth Worth region into a \*.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. Appendix D offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. For XX cities[^1], we added these definitions directly from their respective municipal zoning codes. For the remaining YYY cities, we used the residential building type definitions that are prescribed by the NZA method that was current at the time the data were collected, as described in Appendix D.
+
+[^1]: Cockrell Hill, Dallas, Garland, Highland Park, Irving, Rowlett, and University Park.
+
+Appendix E includes several examples of text from specific zoning codes together with how these passages were translated into the OZFS data standard. The sample set of zoning regulations for 162 municipalities in the Dallas-Forth Worth region in available at {{{{dataverse}}}}} (cite dataverse).
+
+## Parcel geometry
+
+The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. The code used to generate the \*.parcel files from these two datasets is available at {{{{{github repo}}}}} and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse). More information on the process is provided in Appendix F.
+
+## Building characteristics
+
+We have also created sample \*.bldg files for each of four hypothetical buildings: One two-unit building; two different four-unit buildings, and a twelve-unit building. These can be used as an example to guide the creation of \*.bldg files for other proposed buildings. They can be also be used to test applications intended to check whether a proposed building is allowable under existing zoning regulations on a particular parcel. These sample building files are available at {{{{dataverse}}}}} (cite dataverse).
+
+# Opportunities for future development
+
+This paper, including the accompanying appendices, represents a complete description of the data standard. The full text of the this paper (with appendices) can be found at: {{{{{}}}}}}} We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.
+
+The most immediate opportunities for improvement that we have identified are the treatments of overlay districts, and site grades.
+
+## Overlay districts
+
+The current version of the \*.zoning file structure indicates whether a district is an overlay district, but does not require any information about the regulations within overlay districts. Future extensions of the data standard could include a sensible and useful scheme for storing data on the regulations in overlay district in a way that software can easily determine how to resolve the interactions between the requirements in overlay districts and those in the base districts that they overlap.
+
+## Site grade
+
+The \*.parcel file currently includes information about the two-dimensional geometry of each parcel, but does not include any information about grades and elevations. This information could be relevant for some zoning analysis where the grade might have an effect, for example, on how the height of a building is measured. Future extensions of the data standard could incorporate information about grades and elevations in the \*.parcel file. Keys could also be added to the \*.zoning file to specify how site grade might influence the definitions of building heights in each municipality. Our initial test cases were in the Dallas-Forth Worth region, where there is minimal variation in elevation.
+
+# Conclusion
+
+This data standard represents an important step towards the development of scaleable, automated methods that can facilitate strategic increases in the supply of housing in the United States through their direct use by developers and policy-makers. They also offer researchers new opportunities to uncover the ways in which zoning regulations vary across the United States.
+
+# References
