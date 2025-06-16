@@ -6,13 +6,13 @@ execute:
   echo: false
   warning: false
 format:
-  docx:
-    reference-doc: custom-reference-doc.docx
-# html:
-#   self-contained: true
-#   theme: minty
-#   toc: true
-#   toc-location: left
+#  docx:
+#    reference-doc: custom-reference-doc.docx
+ html:
+   self-contained: true
+   theme: minty
+   toc: true
+   toc-location: left
 editor: visual
 ---
 
@@ -135,7 +135,7 @@ Minimum and maximum values for constraints are stored as arrays including the fo
 
 There may be terms that are used in many different zoning codes, but with definitions that vary across municipalities. The current version of the OZFS standard (version 0.5.0) requires definitions for height and for types of residential buildings. Other definitions may be added to future extensions of the standard.
 
-For each definition, one or more arrays comprising conditions and expressions can be defined. The value of the `condition` key defines the circumstance under which the value of the `expression` key applies and should be a logical statement (one that returns a value of true or false) in Python syntax, referencing any of the variable names listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html). The value of the `expression` key should be an equation (in Python syntax) referencing any of the variable names listed in Appendix B. As an example, if the height of a building is defined as the top of the highest wall plate for buildings with a flat roof type and the mid-point between the top of the roof and the eave for all roof types except a flat roof (see Appendix C for an illustration of various roof types), the height definition would be coded as illustrated in @fig-height-def-ex.
+For each definition, one or more arrays comprising conditions and expressions can be defined. The value of the `condition` key defines the circumstance under which the value of the `expression` key applies and should be a logical statement (one that returns a value of true or false) in Python syntax, referencing any of the variable names listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html). The value of the `expression` key should be an equation (in Python syntax) referencing any of the variable names listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html). As an example, if the height of a building is defined as the top of the highest wall plate for buildings with a flat roof type and the mid-point between the top of the roof and the eave for all roof types except a flat roof (see [Appendix C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html) for an illustration of various roof types), the height definition would be coded as illustrated in @fig-height-def-ex.
 
 ```{r fig-height-def-ex}
 #| fig-cap: "Illustrative example of a height definition"
@@ -194,7 +194,7 @@ here("figures",
 
 ### Building dimensions
 
-All building dimensions are in feet. The building information array includes the height from the ground to the top of the building (`height_top`), from the ground to the highest wall plate (`height_plate`), as well as the building `width`, the building `depth`, and the building's roof type (`roof_type`). Refer to Appendix C for an illustration of roof types that are defined for use in OZFS.
+All building dimensions are in feet. The building information array includes the height from the ground to the top of the building (`height_top`), from the ground to the highest wall plate (`height_plate`), as well as the building `width`, the building `depth`, and the building's roof type (`roof_type`). Refer to [Appendix C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html) for an illustration of roof types that are defined for use in OZFS.
 
 As noted in the section on zoning constraints, there are differences among zoning codes with regards to how a building's height is defined for various roof types. For roof types other than a flat roof, the eave height must be specified in the `height_eave` key. For Mansard roofs, `height_deck` must be specified as well.
 

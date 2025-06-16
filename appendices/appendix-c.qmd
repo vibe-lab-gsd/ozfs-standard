@@ -1,0 +1,52 @@
+---
+title: "Appendix C"
+subtitle: "Roof types and height variables in the OZFS data standard"
+execute: 
+  echo: false
+  warning: false
+format:
+#  docx:
+#    reference-doc: ..\custom-reference-doc.docx
+  html:
+    self-contained: true
+    theme: minty
+    toc: true
+    toc-location: left
+editor: visual
+---
+
+The `roof_type` variable in the OZFS \*.bldg file can take any of the following values:
+
+-   `"flat"`: A flat roof with the same height across the entire structure.
+
+-   `"skillion"`: A roof without a ridge that is higher on one side than the other.
+
+-   `"mansard"`: A roof with two slopes on each of four sides.
+
+-   `"hip"`: A roof with one slope on each of four sides.
+
+-   `"gable"`: A roof with one slope on each of two opposite sides.
+
+-   `"gambrel"`: A roof with two slopes on each of two opposite sides.
+
+```{r fig-roofs}
+
+library(tidyverse)
+library(here)
+library(kableExtra)
+
+here("figures",
+     "roofs_placeholder.png") |>
+  knitr::include_graphics()
+```
+
+The table below indicate which roof height variables must be defined for each of the above roof types.
+
+| Roof type  | `height_top`  | `height_plate` | `height_eave` | `height_deck` |
+|------------|:-------------:|:--------------:|:-------------:|:-------------:|
+| `flat`     |       x       |       x        |               |               |
+| `skillion` |       x       |       x        |       x       |               |
+| `mansard`  |       x       |       x        |       x       |       x       |
+| `hip`      |       x       |       x        |       x       |               |
+| `gable`    |       x       |       x        |       x       |               |
+| `gambrel`  |       x       |       x        |       x       |               |
