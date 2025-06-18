@@ -234,7 +234,7 @@ The sample set of zoning regulations for 162 municipalities in the Dallas-Forth 
 
 ## Parcel geometry
 
-The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. The code used to generate the \*.parcel files from these two datasets is available at {{{{{github repo}}}}} and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse). More information on the process is provided in Appendix E.
+The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. Appendix E contains details on how the \*.parcel files were assembled from these source. and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).
 
 ## Building characteristics
 

@@ -18,7 +18,7 @@ editor: visual
 The following constraints are defined for use in the constraints array in the \*.zoning file in the OZFS data standard.
 
 | **Constraint name** | **Description** | **Units** |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | `far` | Floor area ratio | None (dimensionless ratio) |
 | `fl_area` | Floor area | Square feet |
 | `fl_area_first` | Floor area of the ground floor | Square feet |

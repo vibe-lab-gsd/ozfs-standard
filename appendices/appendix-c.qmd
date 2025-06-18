@@ -42,11 +42,11 @@ here("figures",
 
 The table below indicate which roof height variables must be defined for each of the above roof types.
 
-| Roof type  | `height_top`  | `height_plate` | `height_eave` | `height_deck` |
-|------------|:-------------:|:--------------:|:-------------:|:-------------:|
-| `flat`     |       x       |       x        |               |               |
-| `skillion` |       x       |       x        |       x       |               |
-| `mansard`  |       x       |       x        |       x       |       x       |
-| `hip`      |       x       |       x        |       x       |               |
-| `gable`    |       x       |       x        |       x       |               |
-| `gambrel`  |       x       |       x        |       x       |               |
+| Roof type  | `height_top` | `height_plate` | `height_eave` | `height_deck` |
+|------------|:------------:|:--------------:|:-------------:|:-------------:|
+| `flat`     |      x       |       x        |               |               |
+| `skillion` |      x       |       x        |       x       |               |
+| `mansard`  |      x       |       x        |       x       |       x       |
+| `hip`      |      x       |       x        |       x       |               |
+| `gable`    |      x       |       x        |       x       |               |
+| `gambrel`  |      x       |       x        |       x       |               |
