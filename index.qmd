@@ -40,8 +40,7 @@ The Mercatus Center at George Mason University has provided funding for local NZ
 
 The Metropolitan Area Planning Council (MAPC), which is the regional planning agency for the Boston metropolitan area, maintains an online zoning atlas for the 101 cities and towns it serves [@metropolitan_area_planning_council_mapc_2025]. MAPC began collecting data for its zoning atlas in 2012 and published its initial version in 2020 [@reardon_introduction_2020]. The MAPC Zoning Atlas effort has since been incorporated into NZA [@national_zoning_atlas_massachusetts_2025]. Their compiled zoning data are viewable through an interactive map and downloadable either as ESRI shapefiles or as csv files (both using a tabular data format).
 
-NZA is tightly controlled, both in terms of who has access to the data and who can contribute. The format they currently use to store zoning data is not public. Contributors must be approved by NZA and, although the compiled data is available through an interactive map [@national_zoning_atlas_explore_2025], it is not downloadable for incorporation into third-party software or detailed analysis by researchers (individual contributors to NZA can choose to publish or share the data they collect). It is not open data, in the sense that its terms of use [@national_zoning_atlas_terms_2025] does not meet the Open Knowledge Foundation's definition of Openness: "Knowledge is open if anyone is free to access, use, modify, and share it – subject, at most, to measures that preserve provenance and openness" [@open_knowledge_foundation_open_2015]. This is not necessarily a weakness of the project. There are many advantages to a more closed approach to data collection and dissemination, including better control of data quality and an assurance that the data will not be used for purposes that are not aligned with an organization's values and priorities. On the other hand, this approach does create a barrier to data use 
-and to the adoption of data collection methodologies and formats.
+NZA is tightly controlled, both in terms of who has access to the data and who can contribute. The format they currently use to store zoning data is not public. Contributors must be approved by NZA and, although the compiled data is available through an interactive map [@national_zoning_atlas_explore_2025], it is not downloadable for incorporation into third-party software or detailed analysis by researchers (individual contributors to NZA can choose to publish or share the data they collect). It is not open data, in the sense that its terms of use [@national_zoning_atlas_terms_2025] does not meet the Open Knowledge Foundation's definition of Openness: "Knowledge is open if anyone is free to access, use, modify, and share it – subject, at most, to measures that preserve provenance and openness" [@open_knowledge_foundation_open_2015]. This is not necessarily a weakness of the project. There are many advantages to a more closed approach to data collection and dissemination, including better control of data quality and an assurance that the data will not be used for purposes that are not aligned with an organization's values and priorities. On the other hand, this approach does create a barrier to data use and to the adoption of data collection methodologies and formats.
 
 The Center for Spatial Planning Analytics and Visualization (CSPAV) at Georgia Institute of Technology has digitized has created an interactive dashboard for exploring zoning regulations in Atlanta [@schwabacher_atl_2022]. Like NZA, CSPAV does not allow users to download the data powering its interactive map, and its data format is not apparent from the dashboard itself.
 
@@ -71,7 +70,13 @@ We were directly inspired by OpenStreetMap [@openstreetmap], which has defined a
 
 # OZFS Data Structures
 
-The OZFS data standard includes three files: a file with a \*.zoning extension to describe the zoning regulations for a particular municipality; a file with a \*.parcel extension to describe the geometry of all parcels (or all parcels of interest) within a municipality; and a file with a \*.building extension to describe the geometry of a proposed building.
+The OZFS data standard includes three files:
+
+-   a file with a \*.zoning extension to describe the zoning regulations for a particular municipality;
+
+-   a file with a \*.parcel extension to describe the geometry of all parcels (or all parcels of interest) within a municipality; and
+
+-   a file with a \*.building extension to describe the geometry of a proposed building.
 
 ## Zoning regulations
 
