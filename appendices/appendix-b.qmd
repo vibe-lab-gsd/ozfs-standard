@@ -18,7 +18,7 @@ editor: visual
 The following variables names can be included in expressions within the constraints and definitions arrays of a \*.zoning file.
 
 | Variable name | Unit of observation | Source for value |
-|----|----|----|
+|------------------|------------------|------------------------------------|
 | `bedrooms` | Dwelling unit | Value for `bedrooms` key in the `unit_info` array in the \*.bldg file. |
 | `bldg_depth` | Building | Value for `depth` key in the `bldg_info` array in the \*.bldg file. |
 | `bldg_width` | Building | Value for `width` key in the `bldg_info` array in the \*.bldg file. |
@@ -37,8 +37,11 @@ The following variables names can be included in expressions within the constrai
 | `lot_width` | Parcel | Taken directly from the `lot_width` value for the parcel centroid feature in the \*.parcel file. |
 | `max_unit_size` | Building | Calculated as the maximum `fl_area` value in the `unit_info` array in the \*.bldg file. |
 | `min_unit_size` | Building | Calculated as the minimum `fl_area` value in the `unit_info` array in the \*.bldg file. |
+| `n_ground_entry` | Building | Calculated as the sum of `qty` in the `unit_info`array in the \*.bldg file across all unit types where `ground_entry` has a value of `"True"`. |
+| `n_outside_entry` | Building | Calculated as the sum of `qty` in the `unit_info`array in the \*.bldg file across all unit types where `outside_entry` has a value of `"True"`. |
 | `parking_enclosed` | Building | Taken directly from the `parking` value in the `bldg_info` array in the \*.bldg file. |
-| `roof_type` | Building | Taken directly from the `roof_type` value in hte `building_info` array in the \*.bldg file. |
+| `roof_type` | Building | Taken directly from the `roof_type` value in the `building_info` array in the \*.bldg file. |
+| `sep_platting` | Building | Taken directly from the `sep_platting` value in the `building_info` array in the \*.bldg file. |
 | `total_bedrooms` | Building | Sum of values for the `bedrooms` key in the `unit_info` array in the \*.bldg file. |
 | `total_units` | Building | Sum of values for the `qty` key in the `unit_info` array in the \*.bldg file. |
 | `units_0bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 0 in the \*.bldg file. |
