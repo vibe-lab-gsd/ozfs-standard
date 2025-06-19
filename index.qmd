@@ -6,19 +6,19 @@ execute:
   echo: false
   warning: false
 format:
-#  docx:
-#    reference-doc: custom-reference-doc.docx
- html:
-   self-contained: true
-   theme: minty
-   toc: true
-   toc-location: left
+  docx:
+    reference-doc: custom-reference-doc.docx
+# html:
+#   self-contained: true
+#   theme: minty
+#   toc: true
+#   toc-location: left
 editor: visual
 ---
 
 # Abstract
 
-100 words
+Efforts to conduct detailed analysis of the variation in and consequences of zoning regulations have been hampered by the lack of standardized, machine-readable data on the requirements described in the texts of municipal zoning codes. Existing efforts to assemble data on zoning regulations have relied on database structures that are not well-suited to the complexity of zoning regulations. In this paper, we introduce and describe the Open Zoning Feed Specification (OZFS) standard as a recommended format for describing zoning regulations, parcel geometry, and building characteristics. We introduce a sample dataset that uses the OZFS standard to describe zoning regulations and parcel geometries for a set of 162 municipalities in the Dallas-Fort Worth region of Texas. The OZFS data standard offers a foundation on which software can be developed to analyze zoning regulations in greater detail than has previously been possible to do at a regional scale.
 
 ```{r load-libraries, message=FALSE}
 library(tidyverse)
@@ -185,9 +185,8 @@ In addition to parcel geometry features, the \*.parcel file must also include a 
 Building characteristics for a single building are stored in json file with the structure illustrated in @fig-bldg-data. The file includes three arrays:
 
 -   `bldg_info` includes information on the characteristics of the overall building (building dimensions and number of parking spaces within the structure).
--   `unit_info` includes information in each type of unit within the building,
--   `level_info` contains information on each level within the building, and
--   `parking_info` optionally contains information about each on-site parking area.
+-   `unit_info` includes information in each type of unit within the building, and
+-   `level_info` contains information on each level within the building.
 
 ```{r}
 #| label: fig-bldg-data
