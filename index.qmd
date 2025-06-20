@@ -1,6 +1,14 @@
 ---
 title: "Open Zoning Feed Specification"
 subtitle: "Data standards for describing zoning regulations, parcel geometry, and building characteristics"
+authors: 
+  - name: Carole Turley Voulgaris
+    affiliation: Harvard Graduate School of Design
+  - name: Kamryn Mansfield
+    affiliation: Harvard Graduate School of Design
+  - name: Houpu Li
+    affiliation: Harvard Graduate School of Design
+
 bibliography: ozfs.bib
 execute: 
   echo: false
@@ -104,9 +112,9 @@ The top level of the file is an array with six key-value pairs:
 
 -   `features` contains information on each zoning district, where each district represented by an array of three elements: `type`, `properties`, and `geometry`. As for geojson files, the value for the `type` key will be "Feature" and the geometry key takes an array of coordinates describing the geometry of the feature (in this case, the district boundary). The value for the `properties` key is an of key-value pairs that may include the following:
 
-    -   `dist_name` is the name of district. This value is required if there is no value for `dist_name` and optional otherwise.
+    -   `dist_name` is the name of district. This value is optional.
 
-    -   `dist_abbr` is the abbreviated name of district. This value is required if there is no value for `dist_name` and optional otherwise.
+    -   `dist_abbr` is the abbreviated name of district. This value is required.
 
     -   `planned_dev` is a binary value indicating wheter this is a planned development district (where the entire district will be developed by a single developer who negotiates constraints directly with the municipality). This value is optional and is assumed to have a value of false if it is missing.
 
@@ -133,9 +141,9 @@ here("figures",
 
 Minimum and maximum values for constraints are stored as arrays including the following key-value pairs:
 
--   `condition`: The condition under which the minimum or maximum value applies. This key is required if the number of elements in the min_value (or max_value) array is greater than one. The condition can be a logical expression (in Python syntax) defining the condition under which the minimum (or maximum) value applies. [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html) includes a full list of the of the variables that can be used in constraint and condition expressions, along with a description of each variable. If the condition under which the value applies cannot be described as a logical expression within with one or more of those variables, it may be described in a text string (which will limit machine-readability).
--   `expression`: These can either be constant numeric values or equations (in Python syntax) referring to variables listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
--   `min_max`: This key is required if the list of expressions has a more than one element in it. It is a character string that can take one of two values: `min` or `max`. A value of `min` indicates that the governing constraint is the minimum of the possible values listed in the `expression` key. A value of `maximum` indicates that the governing constraint is the maximum of the possible values listed in the `expression` key.
+-   `condition`: The condition under which the minimum or maximum value applies. This key is required if the number of elements in the min_value (or max_value) array is greater than one. The condition can be a logical expression (in Python syntax) defining the condition under which the minimum (or maximum) value applies. [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html) includes a full list of the of the variables that can be used in constraint and condition expressions, along with a description of each variable. If the condition under which the value applies cannot be described as a logical expression (one that evaluates to True or False) with one or more of those variables, it may be described in a text string (which will limit machine-readability).
+-   `expression`: These can either be constant numeric values or equations (in Python syntax) referring to variables listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html). This can be a list of multiple values or expressions, in which case the `min_max` key should be used to specify whether the minimum or maximum value in the list should be used. If the value of the `condition` key is a text string that is not a logical expression, the value of the `expression` key may be a list of numbers (where the text string will describe the circumstances in which each number applies).
+-   `min_max`: This key is required if the list of expressions has a more than one element in it and `condition` is a logical expression (rather than just a free-form text string). It is a character string that can take one of two values: `min` or `max`. A value of `min` indicates that the governing constraint is the minimum of the possible values listed in the `expression` key. A value of `maximum` indicates that the governing constraint is the maximum of the possible values listed in the `expression` key.
 
 {{ ADD A COUPLE ILLUSTRATIVE EXAMPLES }}
 
@@ -231,7 +239,9 @@ In addition to the four characteristics above, there is also a `qty` key to indi
 
 We have compiled a sample dataset with zoning regulations and parcel geometry for a set of 162 municipalities in the Dallas/Forth Worth region of Texas, as well as sample building characteristic data for four hypothetical residential buildings.
 
-The \*zoning files were created using NZA data published by the Mercatus Center at George Mason University [@mercatus_center_state_2024] as a starting point. We converted that data for each of 161 cites in the Dallas-Forth Worth region into a \*.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. [Appendix D](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html) offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. For XX cities[^1], we added these definitions directly from their respective municipal zoning codes. For the remaining YYY cities, we used the residential building type definitions that are implied by the NZA method that was current at the time the data were collected, as described in [Appendix D](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html).
+## Zoning regulations
+
+The \*zoning files were created using NZA data published by the Mercatus Center at George Mason University [@mercatus_center_state_2024] as a starting point. We converted that data for each of 161 cites in the Dallas-Forth Worth region into a \*.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. [Appendix D](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html) offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. For XX cities[^1], we added these definitions directly from their respective municipal zoning codes. For the remaining YYY cities, we used the residential building type definitions that are implied by the NZA method that was current at the time the data were collected, as described in [Appendix D](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html). We encoded the zoning regulations for the city of Dallas (which is not included in the data published by the Mercatus Center) directly from the zoning code text [@dallas_city_dallas_2024].
 
 [^1]: Cockrell Hill, Dallas, Garland, Highland Park, Irving, Rowlett, and University Park.
 

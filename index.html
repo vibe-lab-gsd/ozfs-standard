@@ -3096,6 +3096,7 @@ vertical-align: -.125em;
   </ul></li>
   <li><a href="#sample-dataset" id="toc-sample-dataset" class="nav-link" data-scroll-target="#sample-dataset">Sample Dataset</a>
   <ul class="collapse">
+  <li><a href="#zoning-regulations-1" id="toc-zoning-regulations-1" class="nav-link" data-scroll-target="#zoning-regulations-1">Zoning regulations</a></li>
   <li><a href="#parcel-geometry-1" id="toc-parcel-geometry-1" class="nav-link" data-scroll-target="#parcel-geometry-1">Parcel geometry</a></li>
   <li><a href="#building-characteristics-1" id="toc-building-characteristics-1" class="nav-link" data-scroll-target="#building-characteristics-1">Building characteristics</a></li>
   </ul></li>
@@ -3120,10 +3121,31 @@ vertical-align: -.125em;
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Carole Turley Voulgaris </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Harvard Graduate School of Design
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Kamryn Mansfield </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Harvard Graduate School of Design
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
   
     
   </div>
@@ -3337,8 +3359,11 @@ Figure 5: Structure of *.bldg file
 <section id="sample-dataset" class="level1">
 <h1>Sample Dataset</h1>
 <p>We have compiled a sample dataset with zoning regulations and parcel geometry for a set of 162 municipalities in the Dallas/Forth Worth region of Texas, as well as sample building characteristic data for four hypothetical residential buildings.</p>
-<p>The *zoning files were created using NZA data published by the Mercatus Center at George Mason University <span class="citation" data-cites="mercatus_center_state_2024">(<a href="#ref-mercatus_center_state_2024" role="doc-biblioref">Mercatus Center 2024</a>)</span> as a starting point. We converted that data for each of 161 cites in the Dallas-Forth Worth region into a *.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a> offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. For XX cities<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, we added these definitions directly from their respective municipal zoning codes. For the remaining YYY cities, we used the residential building type definitions that are implied by the NZA method that was current at the time the data were collected, as described in <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a>.</p>
+<section id="zoning-regulations-1" class="level2">
+<h2 class="anchored" data-anchor-id="zoning-regulations-1">Zoning regulations</h2>
+<p>The *zoning files were created using NZA data published by the Mercatus Center at George Mason University <span class="citation" data-cites="mercatus_center_state_2024">(<a href="#ref-mercatus_center_state_2024" role="doc-biblioref">Mercatus Center 2024</a>)</span> as a starting point. We converted that data for each of 161 cites in the Dallas-Forth Worth region into a *.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a> offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. For XX cities<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, we added these definitions directly from their respective municipal zoning codes. For the remaining YYY cities, we used the residential building type definitions that are implied by the NZA method that was current at the time the data were collected, as described in <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a>. We encoded the zoning regulations for the city of Dallas (which is not included in the data published by the Mercatus Center) directly from the zoning code text <span class="citation" data-cites="dallas_city_dallas_2024">(<a href="#ref-dallas_city_dallas_2024" role="doc-biblioref">Dallas City 2024</a>)</span>.</p>
 <p>The sample set of zoning regulations for 162 municipalities in the Dallas-Forth Worth region in available at {{{{dataverse}}}}} (cite dataverse).</p>
+</section>
 <section id="parcel-geometry-1" class="level2">
 <h2 class="anchored" data-anchor-id="parcel-geometry-1">Parcel geometry</h2>
 <p>The *.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data <span class="citation" data-cites="various_appraisal_districts_land_2024">(<a href="#ref-various_appraisal_districts_land_2024" role="doc-biblioref">Various Appraisal Districts 2024</a>)</span> and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles <span class="citation" data-cites="uscensus_tiger_roads_2024">(<a href="#ref-uscensus_tiger_roads_2024" role="doc-biblioref">U.S. Census Bureau, Geography Division 2024</a>)</span>. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html">Appendix E</a> contains details on how the *.parcel files were assembled from these sources. and the *.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).</p>
@@ -3380,6 +3405,9 @@ Bronin, Sara C., Scott Markley, Aline Fader, and Evan Derickson. 2023. <span>“
 </div>
 <div id="ref-conway_if_2021" class="csl-entry" role="listitem">
 Conway, Matthew Wigginton. 2021. <span>“If You Zone It, Who Will Come, and How Will They Travel? The Effects of Relaxed Zoning Regulations on Travel Behavior.”</span> PhD thesis, United States – Arizona: Arizona State University. <a href="https://www.proquest.com/docview/2533144762/abstract/3AA6C787EA7A466DPQ/1">https://www.proquest.com/docview/2533144762/abstract/3AA6C787EA7A466DPQ/1</a>.
+</div>
+<div id="ref-dallas_city_dallas_2024" class="csl-entry" role="listitem">
+Dallas City. 2024. <em>The Dallas City Code</em>. <a href="https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-75159">https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-75159</a>.
 </div>
 <div id="ref-envelope_about_2022" class="csl-entry" role="listitem">
 Envelope. 2022. <span>“About Envelope City. About Envelope City.”</span> 2022. <a href="https://medium.com/envelopecity">https://medium.com/envelopecity</a>.
