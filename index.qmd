@@ -120,7 +120,7 @@ The definitions array (defined for the municipality as a whole) and the constrai
 
 ### Constraints
 
-Constraints are described by numeric values or expressions and are stored in the structure illustrated in @fig-constraints. Possible constraints include `setback_front` (the front setback), `far` (the floor area ratio), and `lot_cov_bldg` (the lot coverage). [Appendix A](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-a.html) includes the constraints that have been defined for the \*.zoning file, together with their descriptions. For each constraint that is included in the constraints array, a minimum value `min_val` and/or a maximum value `max_val` must be given.
+Constraints are described by numeric values or expressions and are stored in the structure illustrated in @fig-constraints. Possible constraints include `setback_front` (the front setback), `far` (the floor area ratio), and `lot_cov_bldg` (the lot coverage). [Appendix A](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-a.html) includes a complete list of constraints that have been defined for the \*.zoning file, together with their descriptions. For each constraint that is included in the constraints array, a minimum value `min_val` and/or a maximum value `max_val` must be given.
 
 ```{r}
 #| label: fig-constraints
@@ -136,6 +136,8 @@ Minimum and maximum values for constraints are stored as arrays including the fo
 -   `condition`: The condition under which the minimum or maximum value applies. This key is required if the number of elements in the min_value (or max_value) array is greater than one. The condition can be a logical expression (in Python syntax) defining the condition under which the minimum (or maximum) value applies. [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html) includes a full list of the of the variables that can be used in constraint and condition expressions, along with a description of each variable. If the condition under which the value applies cannot be described as a logical expression within with one or more of those variables, it may be described in a text string (which will limit machine-readability).
 -   `expression`: These can either be constant numeric values or equations (in Python syntax) referring to variables listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
 -   `min_max`: This key is required if the list of expressions has a more than one element in it. It is a character string that can take one of two values: `min` or `max`. A value of `min` indicates that the governing constraint is the minimum of the possible values listed in the `expression` key. A value of `maximum` indicates that the governing constraint is the maximum of the possible values listed in the `expression` key.
+
+{{ ADD A COUPLE ILLUSTRATIVE EXAMPLES }}
 
 ### Definitions
 
@@ -237,7 +239,7 @@ The sample set of zoning regulations for 162 municipalities in the Dallas-Forth 
 
 ## Parcel geometry
 
-The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. Appendix E contains details on how the \*.parcel files were assembled from these sources. and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).
+The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data [@various_appraisal_districts_land_2024] and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles [@uscensus_tiger_roads_2024]. [Appendix E](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html) contains details on how the \*.parcel files were assembled from these sources. and the \*.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).
 
 ## Building characteristics
 
@@ -245,7 +247,7 @@ We have also created sample \*.bldg files for each of four hypothetical building
 
 # Opportunities for future development
 
-This paper, including the accompanying appendices, represents a complete description of the data standard. The full text of the this paper (with appendices) can be found at: {{{{{}}}}}}} We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.
+This paper, including the accompanying appendices, represents a complete description of the data standard. The full text of the this paper (with appendices) can be found at <https://github.com/vibe-lab-gsd/ozfs-standard>. We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.
 
 The most immediate opportunities for improvement that we have identified are the treatments of overlay districts, and site grades.
 

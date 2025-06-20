@@ -1,0 +1,215 @@
+---
+title: "Appendix E"
+subtitle: "Process for creating *.parcel files from TIGER/Line road centerline files and county parcel geometry files"
+execute: 
+  echo: false
+  warning: false
+format:
+#  docx:
+#    reference-doc: ..\custom-reference-doc.docx
+  html:
+    self-contained: true
+    theme: minty
+    toc: true
+    toc-location: left
+editor: visual
+---
+
+This appendix documents the method we used to generate \*.parcel files from road centerline files and county assessors' office parcel geometry files. A python script implementing this method can be found at <https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/data-assembly-code/Intro_PECT.py>. A more throrough description of the method can be found at <https://tidyparcel-documentation.netlify.app/>.
+
+The OZFS \*.parcel file identifies each parcel edge as a line string that is labeled as one of five types:
+
+-   `front` indicates that this is a line string representing the front of a parcel.
+-   `rear` indicates that this is line string representing the rear of a parcel.
+-   `interior side` indicates that this is a line string representing the interior side of a parcel (the side adjacent to another parcel).
+-   `exterior side` indicates that this is a line string representing the exterior side of a parcel. Only a corner lot can have an exterior side. This is the side of a corner lot that is adjacent (and approximately parallel) to the street that is not indicated in the parcel's address.
+-   `unknown` indicates that this is a line string representing the side of a parcel that has not been classified into one of the above categories (for irregular parcel geometries and/or parcels where the relationship to the adjacent street network is unclear).
+
+County assessors offices commonly maintain GIS files that store the boundaries of each parcel as a polygon. To convert these to a set of labeled line strings, we first classified each parcel into one of several types, and then applied one of several methods for classifying parcel edges depending on the parcel type.
+
+# Classifying parcel types
+
+Accurately classifying parcels is a crucial step to enhance the precision of our final side classification. Given the complexity of urban parcel shapes, we categorized them into several types, each requiring a distinct approach to labeling parcel edges.
+
+## Irregular addresses
+
+The front of a parcel is identified based in part on its orientation to the street in the street centerline file that shares a name with the street in the parcel address. Parcels with duplicated addresses, those without addresses, or those with addresses indicating streets that are not included in the street centerline file are classified as separate parcel types.
+
+For parcels with irregular addresses, the `front` of the parcel is identified as the closest segment to the nearest road centerline that is nearly parallel (a difference in bearing of no more than 20 degrees) to that centerline. The edge that is farthest from the road centerline will be identified as the `rear`. Any remaining edges that are adjacent to another parcel will be classified as `interior_side` and those that are not adjacent to another parcel will be classified as `exterior_side`.
+
+If the above method does not result in a parcel with four edges, including one front and one rear, all parcel edges are re-classified as `unknown`.
+
+### Duplicated Address Parcels
+
+These are typically commercial/public parcels where multiple, separate parcels are recorded under the same address.
+
+```{r}
+#| label: fig-dup-parcel-label
+#| fig-cap: "An example of duplicated parcels"
+
+library(here)
+
+here("figures",
+     "duplicated_parcels_label.jpg") |>
+  knitr::include_graphics()
+```
+
+### No Match Address Parcels
+
+These parcels have address information but the street indicated on the parcel address is not included in the road centerline file.
+
+```{r}
+#| label: fig-no-match-address
+#| fig-cap: "Examples of no match address parcels"
+
+here("figures",
+     "no_match_addr_parcel.jpg") |>
+  knitr::include_graphics()
+```
+
+### No Address Parcels
+
+These parcels lack any address data, making them challenging to associate with a road centerline.
+
+```{r}
+#| label: fig-no-address
+#| fig-cap: "Example of a parcel without an associated address"
+
+here("figures",
+     "no_address_parcel.jpg") |>
+  knitr::include_graphics()
+```
+
+## Jagged Parcels
+
+Parcels without an irregular address that have at least six edges and a high (greater than 50th percentile for its county) shape index (perimeter to area ratio) are classified as jagged parcels.
+
+```{r}
+#| label: fig-jagged-label
+#| fig-cap: "An example of a jagged parcel"
+
+here("figures",
+     "jagged_parcel.jpg") |>
+  knitr::include_graphics()
+```
+
+We have not attempted to label the sides of jagged parcels. All sides of these parcels are classified as `unknown`.
+
+## Regular parcels
+
+Regular parcels are approximately rectangular, with four distinct sides that meet at approximately right angles, with two sides approximately parallel to the centerline of the street that shares a name with the parcel address. They are further classified as either inside parcels or corner parcels.
+
+For regular parcels, the `front` of of the parcel is classified as the edge closest to the road centerline for the road named in the parcel address. The parcel farthest from that road is classified as the `rear`. Any remaining edges that are adjacent to another parcel will be classified as `interior_side` and those that are not adjacent to another parcel will be classified as `exterior_side`.
+
+### Regular Inside Parcels
+
+A regular parcel without an `exterior_side` is classified as a regular inside parcel.
+
+```{r}
+#| label: fig-reg-inside-label
+#| fig-cap: "Examples of regular inside parcels"
+
+here("figures",
+     "regular_inside_parcel.jpg") |>
+  knitr::include_graphics()
+```
+
+### Regular Corner Parcels
+
+A regular parcel with an `exterior_side` is classified as a regular corner parcel.
+
+```{r}
+#| label: fig-reg-outside-label
+#| fig-cap: "Examples of regular corner parcels"
+
+here("figures",
+     "regular_corner_parcel.jpg") |>
+  knitr::include_graphics()
+```
+
+## Cul-de-sac Parcels
+
+These parcels are typically situated at the end of a cul-de-sac so that the front of the parcel is not parallel with the road centerline. The parcel address shares a street name with the road that ends in a cul-de-sac.
+
+```{r}
+#| label: fig-cul-de-sac-label
+#| fig-cap: "Examples of cul-de-sac parcels"
+
+here("figures",
+     "cul_de_sac_parcel_standard.jpg") |>
+  knitr::include_graphics()
+```
+
+Cul-de-sac parcels will generally have a curved parcel edge (which is commonly the front of the parcel). Adjacent parcel edges with a difference in bearing of less than twenty degrees are treated as part of the same parcel edge.
+
+For cul-de-sac parcels, the side farthest from the road named in the parcel address is classified as the `rear`. Of the remaining edges, those that are adjacent to other parcels are labeled as `interior_side`. Of the edges that are neither the `rear` nor an `interior_side`, the closest to the road named in the parcel address is labeled as the `front`, and any remaining edges are labeled as `exterior_side`.
+
+If the above method does not result in a parcel with four edges, including one front and one rear, all parcel edges are re-classified as `unknown`.
+
+## Curve Parcels
+
+These parcels are not cul-de-sac parcels and have at least one curved edge.
+
+```{r}
+#| label: fig-curve-parcel-label
+#| fig-cap: "Example of a curve parcel"
+
+here("figures",
+     "curve_parcel_2.jpg") |>
+  knitr::include_graphics()
+```
+
+Some parcels appear to be cul-de-sac parcels, because they back a cul-de-sac, but their addresses indicate that the front of the parcel is on a through street. They will classified be classified as curve parcels if they have a curved edge.
+
+```{r}
+#| label: fig-false-cul-de-sac
+#| fig-cap: "Curve parcels that back a cul-de-sac"
+
+here("figures",
+     "curve_parcel_1.jpg") |>
+  knitr::include_graphics()
+```
+
+Adjacent parcel edges with a difference in bearing of less than twenty degrees are treated as part of the same curved parcel edge.
+
+The edge closest to and approximately parallel to a street sharing a name with the street in parcel address will be labeled as the parcel `front`, and the side furthest from that street will be labeled as the `rear`. Of the remaining edges, those that are adjactent to another parcel will be labeled as `interior_side` and those that are not will be labeled as `exterior_side`.
+
+If the above method does not result in a parcel with four edges, including one front and one rear, all parcel edges are re-classified as `unknown`.
+
+## Special Parcels
+
+Parcels that have an address that can be matched to a street in the road centerline file, but do not conform to any of the above classifications are categorized as special parcels.
+
+```{r}
+#| label: fig-special-parcel-label
+#| fig-cap: "Example of a special parcel"
+
+here("figures",
+     "special_parcel.jpg") |>
+  knitr::include_graphics()
+```
+
+-   For the parcels with three distinct edges:
+    -   The nearest edge should be labeled as the "front", and the farthest edge should be labeled as the "rear".\
+    -   For the remaining edges:
+        -   If it is shared with another parcel, label it as 'Interior side'.\
+        -   If it is not a shared edge, label it as 'Exterior side'.
+-   For the parcels with four distinct edges:
+    -   Identify the two edges with the smallest angles and label the nearest as `front` and the farthest as `rear`.\
+    -   For the remaining edges:
+        -   If it is shared with another parcel, label it as 'Interior side'.\
+        -   If it is not a shared edge, label it as 'Exterior side'.
+-   For the parcels with another number of distinct edges:
+    -   Identify the edges parallel to the nearest road (`angle < 20`).
+        -   Label the edge with the smallest distance as the "front" and the edge with the greatest distance as the "rear".\
+        -   For the remaining edges:
+            -   If an edge is also parallel to the nearest road and connects to the front, it should also be labeled as "front".\
+            -   If an edge is also parallel to the nearest road and connects to the rear, it should be labeled as "rear".
+                -   For any remaining edges:
+                    -   If it is between two front edges or within the bounding box of front edges, label it as front.\
+                    -   If it is between two rear edges or within the bounding box of rear edges, label it as rear.\
+    -   For the remaining edges:
+        -   If it is shared with another parcel, label it as "Interior side".\
+        -   If it is not a shared edge, label it as "Exterior side".
+
+If the above method does not result in a parcel with four edges, including one front and one rear, all parcel edges are re-classified as `unknown`.

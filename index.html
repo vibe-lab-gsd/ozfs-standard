@@ -3214,7 +3214,7 @@ Figure 1: Structure of the zoning file
 <p>The definitions array (defined for the municipality as a whole) and the constraints array (defined for each district in the features array that is not a planned development district or an overlay district) are described in greater detail below.</p>
 <section id="constraints" class="level3">
 <h3 class="anchored" data-anchor-id="constraints">Constraints</h3>
-<p>Constraints are described by numeric values or expressions and are stored in the structure illustrated in <a href="#fig-constraints" class="quarto-xref">Figure 2</a>. Possible constraints include <code>setback_front</code> (the front setback), <code>far</code> (the floor area ratio), and <code>lot_cov_bldg</code> (the lot coverage). <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-a.html">Appendix A</a> includes the constraints that have been defined for the *.zoning file, together with their descriptions. For each constraint that is included in the constraints array, a minimum value <code>min_val</code> and/or a maximum value <code>max_val</code> must be given.</p>
+<p>Constraints are described by numeric values or expressions and are stored in the structure illustrated in <a href="#fig-constraints" class="quarto-xref">Figure 2</a>. Possible constraints include <code>setback_front</code> (the front setback), <code>far</code> (the floor area ratio), and <code>lot_cov_bldg</code> (the lot coverage). <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-a.html">Appendix A</a> includes a complete list of constraints that have been defined for the *.zoning file, together with their descriptions. For each constraint that is included in the constraints array, a minimum value <code>min_val</code> and/or a maximum value <code>max_val</code> must be given.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-constraints" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3235,6 +3235,7 @@ Figure 2: Data structure for constraints in the *.zoning file
 <li><code>expression</code>: These can either be constant numeric values or equations (in Python syntax) referring to variables listed in <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html">Appendix B</a>.</li>
 <li><code>min_max</code>: This key is required if the list of expressions has a more than one element in it. It is a character string that can take one of two values: <code>min</code> or <code>max</code>. A value of <code>min</code> indicates that the governing constraint is the minimum of the possible values listed in the <code>expression</code> key. A value of <code>maximum</code> indicates that the governing constraint is the maximum of the possible values listed in the <code>expression</code> key.</li>
 </ul>
+<p>{{ ADD A COUPLE ILLUSTRATIVE EXAMPLES }}</p>
 </section>
 <section id="definitions" class="level3">
 <h3 class="anchored" data-anchor-id="definitions">Definitions</h3>
@@ -3340,7 +3341,7 @@ Figure 5: Structure of *.bldg file
 <p>The sample set of zoning regulations for 162 municipalities in the Dallas-Forth Worth region in available at {{{{dataverse}}}}} (cite dataverse).</p>
 <section id="parcel-geometry-1" class="level2">
 <h2 class="anchored" data-anchor-id="parcel-geometry-1">Parcel geometry</h2>
-<p>The *.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data <span class="citation" data-cites="various_appraisal_districts_land_2024">(<a href="#ref-various_appraisal_districts_land_2024" role="doc-biblioref">Various Appraisal Districts 2024</a>)</span> and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles <span class="citation" data-cites="uscensus_tiger_roads_2024">(<a href="#ref-uscensus_tiger_roads_2024" role="doc-biblioref">U.S. Census Bureau, Geography Division 2024</a>)</span>. Appendix E contains details on how the *.parcel files were assembled from these sources. and the *.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).</p>
+<p>The *.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data <span class="citation" data-cites="various_appraisal_districts_land_2024">(<a href="#ref-various_appraisal_districts_land_2024" role="doc-biblioref">Various Appraisal Districts 2024</a>)</span> and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles <span class="citation" data-cites="uscensus_tiger_roads_2024">(<a href="#ref-uscensus_tiger_roads_2024" role="doc-biblioref">U.S. Census Bureau, Geography Division 2024</a>)</span>. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html">Appendix E</a> contains details on how the *.parcel files were assembled from these sources. and the *.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).</p>
 </section>
 <section id="building-characteristics-1" class="level2">
 <h2 class="anchored" data-anchor-id="building-characteristics-1">Building characteristics</h2>
@@ -3349,7 +3350,7 @@ Figure 5: Structure of *.bldg file
 </section>
 <section id="opportunities-for-future-development" class="level1">
 <h1>Opportunities for future development</h1>
-<p>This paper, including the accompanying appendices, represents a complete description of the data standard. The full text of the this paper (with appendices) can be found at: {{{{{}}}}}}} We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.</p>
+<p>This paper, including the accompanying appendices, represents a complete description of the data standard. The full text of the this paper (with appendices) can be found at <a href="https://github.com/vibe-lab-gsd/ozfs-standard" class="uri">https://github.com/vibe-lab-gsd/ozfs-standard</a>. We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.</p>
 <p>The most immediate opportunities for improvement that we have identified are the treatments of overlay districts, and site grades.</p>
 <section id="overlay-districts" class="level2">
 <h2 class="anchored" data-anchor-id="overlay-districts">Overlay districts</h2>
