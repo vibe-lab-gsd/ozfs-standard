@@ -120,7 +120,7 @@ The top level of the file is an array with six key-value pairs:
 
     -   `overlay` is a binary value indicating whether this district is an overlay district (a district that modifies the requirements of any base districts it overlaps). This value is optional and is assumed to have a value of false if it is missing.
 
-    -   `res_types_allowd` is a list of residential land uses that are allowed in the district. All values in the list must also appear in the `definitions` array. This list of values is required if neither the value of the `planned_dev` key nor the value of the `overlay` key is true.
+    -   `res_types_allowed` is a list of residential land uses that are allowed in the district. All values in the list must also appear in the `definitions` array. If this list of values is missing, it is assumed that no residential uses are allowed in the district. This list of values is not required if either the value of the `planned_dev` key or the value of the `overlay` key is true.
 
     -   `constraints` is an array of constraints that define allowable building characteristics. The `constraints` key must be present if neither the value of the `planned_dev` key nor the value of the `overlay` key is true.
 
