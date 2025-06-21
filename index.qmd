@@ -110,13 +110,13 @@ The top level of the file is an array with six key-value pairs:
 
 -   `definitions` is an array of definitions of terms (in the current version of the standard, height and residential building types) that may very from one municipality to the next and are defined in the text of the zoning code.
 
--   `features` contains information on each zoning district, where each district represented by an array of three elements: `type`, `properties`, and `geometry`. As for geojson files, the value for the `type` key will be "Feature" and the geometry key takes an array of coordinates describing the geometry of the feature (in this case, the district boundary). The value for the `properties` key is an of key-value pairs that may include the following:
+-   `features` contains information on each zoning district, where each district is represented by an array of three elements: `type`, `properties`, and `geometry`. As for geojson files, the value for the `type` key will be "Feature" and the geometry key takes an array of coordinates describing the geometry of the feature (in this case, the district boundary). The value for the `properties` key is a list of key-value pairs that may include the following:
 
     -   `dist_name` is the name of district. This value is optional.
 
     -   `dist_abbr` is the abbreviated name of district. This value is required.
 
-    -   `planned_dev` is a binary value indicating wheter this is a planned development district (where the entire district will be developed by a single developer who negotiates constraints directly with the municipality). This value is optional and is assumed to have a value of false if it is missing.
+    -   `planned_dev` is a binary value indicating whether this is a planned development district (where the entire district will be developed by a single developer who negotiates constraints directly with the municipality). This value is optional and is assumed to have a value of false if it is missing.
 
     -   `overlay` is a binary value indicating whether this district is an overlay district (a district that modifies the requirements of any base districts it overlaps). This value is optional and is assumed to have a value of false if it is missing.
 
@@ -161,7 +161,7 @@ here("figures",
   knitr::include_graphics()
 ```
 
-Conditions do not necessarily need to be mutually exclusive. When they are not, they are applied in the order in which they appear. For example, if the residential building type (`res_type`) of a building with three or more units units is defined as `multifamily` building unless all units have outside entrances on the ground level, in which case it is defined as a `townhouse`, this could be encoded as illustrated in @fig-res-type-def-ex. In that example, all buildings with only one dwelling unit would be defined as single-family. Of the remaining buildings, all buildings with two units would be defined as duplexes. Of the remaining buildings (all of which would have three or more dwelling units), those in which all units have an outside, ground-level entrances would be classified as townhouses, and all other buildings with three or more units would be classified as multifamily buildings.
+Conditions do not necessarily need to be mutually exclusive. When they are not, they are applied in the order in which they appear. For example, if the residential building type (`res_type`) of a building with three or more units is defined as `multifamily` building unless all units have outside entrances on the ground level, in which case it is defined as a `townhouse`, this could be encoded as illustrated in @fig-res-type-def-ex. In that example, all buildings with only one dwelling unit would be defined as single-family. Of the remaining buildings, all buildings with two units would be defined as duplexes. Of the remaining buildings (all of which would have three or more dwelling units), those in which all units have an outside, ground-level entrances would be classified as townhouses, and all other buildings with three or more units would be classified as multifamily buildings.
 
 ```{r fig-res-type-def-ex}
 #| fig-cap: "Illustrative example of a residential type definition"
@@ -253,7 +253,7 @@ The \*.parcel files were derived from the 2024 Land Parcels page of the Texas Ge
 
 ## Building characteristics
 
-We have also created sample \*.bldg files for each of four hypothetical buildings: One two-unit building; two different four-unit buildings, and a twelve-unit building. These can be used as an example to guide the creation of \*.bldg files for other proposed buildings. They can be also be used to test applications intended to check whether a proposed building is allowable under existing zoning regulations on a particular parcel. These sample building files are available at {{{{dataverse}}}}} (cite dataverse).
+We have also created sample \*.bldg files for each of four hypothetical buildings: One two-unit building; two different four-unit buildings, and a twelve-unit building. These can be used as an example to guide the creation of \*.bldg files for other proposed buildings. They can also be used to test applications intended to check whether a proposed building is allowable under existing zoning regulations on a particular parcel. These sample building files are available at {{{{dataverse}}}}} (cite dataverse).
 
 # Opportunities for future development
 
