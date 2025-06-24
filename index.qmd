@@ -142,61 +142,69 @@ Minimum and maximum values for constraints are stored as arrays including the fo
 -   `expression`: These can either be constant numeric values or equations (in Python syntax) referring to variables listed in [Appendix B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html). This can be a list of multiple values or expressions, in which case the `min_max` key should be used to specify whether the minimum or maximum value in the list should be used. If the value of the `condition` key is a text string that is not a logical expression, the value of the `expression` key may be a list of numbers (where the text string will describe the circumstances in which each number applies).
 -   `min_max`: This key is required if the list of expressions has a more than one element in it and `condition` is a logical expression (rather than just a free-form text string). It is a character string that can take one of two values: `min` or `max`. A value of `min` indicates that the governing constraint is the minimum of the possible values listed in the `expression` key. A value of `maximum` indicates that the governing constraint is the maximum of the possible values listed in the `expression` key.
 
-{{ ADD A COUPLE ILLUSTRATIVE EXAMPLES }}
+The four examples below illustrate how zoning code text can be stored in the \*.zoning file.
 
-example 1
+#### Example 1: A single constraint value
 
-Dallas Agricultural District: "Minimum front yard is 50 feet."
+For the Dallas Agricultural District (cite Dallas zoning code), the required minimum side setback is simply the same value for every allowed use. The corresponding \*.zoning file input is shown in @fig-const-ex-1.
+
+> *Minimum side yard is 20 feet.*
 
 ```{r}
 #| label: fig-const-ex-1
-#| fig-cap: "Data structure for constraints in the *.zoning file"
+#| fig-cap: "A single value for interior side setback requirement in Dallas, TX"
 
 here("figures",
-     "constraint_structure.png") |>
+     "constraint_example_1.png") |>
   knitr::include_graphics()
 ```
 
-example 2
+#### Example 2: Using min_max field
 
-Cockrell Hill Single-Family District: "No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater"
+For the Cockrell Hill Single-Family District (cite Cockrell Hill zoning code), there is a list of expressions for the minumum side and rear setbacks where the maximum value must be selected. The corresponding \*.zoning file input is shown in @fig-const-ex-2.
+
+> *No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater*
 
 ```{r}
 #| label: fig-const-ex-2
-#| fig-cap: "Data structure for constraints in the *.zoning file"
+#| fig-cap: "Using min_max field to describe interior side setback requirement in Cockrell Hill, TX"
 
 here("figures",
-     "constraint_structure.png") |>
+     "constraint_example_2.png") |>
   knitr::include_graphics()
 ```
 
-example 3
+#### Example 3: Multiple conditions
 
-Fort Worth Height Exceptions: the height of a building in the “A” through “F” districts may be increased when the front, side and rear yard dimensions are each increased above the minimum requirements by one foot for each foot such building exceeds the height limit of the district in which it is located.
+@fig-const-ex-3 from the Fort Worth Zoning Ordinance (cite Fort Worth zoning code) shows how a district's setback requirements are recorded when the value depends on the building height.
+
+> *The height of a building in the “A” through “F” districts may be increased when the front, side and rear yard dimensions are each increased above the minimum requirements by one foot for each foot such building exceeds the height limit of the district in which it is located.*
 
 ```{r}
 #| label: fig-const-ex-3
-#| fig-cap: "Data structure for constraints in the *.zoning file"
+#| fig-cap: "Multiple conditions for interior side setback requirement in Fort Worth, TX"
 
 here("figures",
-     "constraint_structure.png") |>
+     "constraint_example_3.png") |>
   knitr::include_graphics()
 ```
 
-example 4
+#### Example 4: Complex conditions
 
-Addison Urban Center District: "The build-to line for primary buildings, structures, walls and fences shall be ten feet on all public street frontages except along residential streets (category C) and residential mew streets (category D), which shall have build-to lines as established later in this section. Up to 25 percent of any street frontage of a building may vary from this build-to line, but shall not be less than five feet, nor more than 25 feet."
+While the computer will not be able to interpret complex conditions like those listed for the Urban Center District in Addison (cite Addison zoning code), they can still be stored in the \*.zoning file as shown in @fig-const-ex-4.
 
-"The build-to line for residential streets (category C) shall be five feet where a building or structure fronts public open space. In all other cases along residential streets, a maximum of 75 percent of any block face may be constructed to the five-foot build-to line with the remainder of the block face being constructed no closer than eight feet, nor more than 25 feet from the R.O.W."
-
-"The build-to line for residential mew streets (category D) shall be contiguous with the R.O.W. A minimum of 70 percent of the build-to line of any block or parcel must be occupied by buildings or parking structures."
+> *The build-to line for primary buildings, structures, walls and fences shall be ten feet on all public street frontages except along residential streets (category C) and residential mew streets (category D), which shall have build-to lines as established later in this section. Up to 25 percent of any street frontage of a building may vary from this build-to line, but shall not be less than five feet, nor more than 25 feet.*
+>
+> *The build-to line for residential streets (category C) shall be five feet where a building or structure fronts public open space. In all other cases along residential streets, a maximum of 75 percent of any block face may be constructed to the five-foot build-to line with the remainder of the block face being constructed no closer than eight feet, nor more than 25 feet from the R.O.W.*
+>
+> *The build-to line for residential mew streets (category D) shall be contiguous with the R.O.W. A minimum of 70 percent of the build-to line of any block or parcel must be occupied by buildings or parking structures.*
 
 ```{r}
 #| label: fig-const-ex-4
-#| fig-cap: "Data structure for constraints in the *.zoning file"
+#| fig-cap: "Complex conditions describing interior side setback requirement in Addison, TX"
 
 here("figures",
-     "constraint_structure.png") |>
+     "constraint_example_4.png") |>
   knitr::include_graphics()
 ```
 
