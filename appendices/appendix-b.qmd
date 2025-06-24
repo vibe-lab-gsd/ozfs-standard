@@ -18,7 +18,7 @@ editor: visual
 The following variables names can be included in expressions within the constraints and definitions arrays of a \*.zoning file.
 
 | Variable name | Unit of observation | Source for value |
-|------------------|------------------|------------------------------------|
+|------------------------|------------------------|------------------------|
 | `bedrooms` | Dwelling unit | Value for `bedrooms` key in the `unit_info` array in the \*.bldg file. |
 | `bldg_depth` | Building | Value for `depth` key in the `bldg_info` array in the \*.bldg file. |
 | `bldg_width` | Building | Value for `width` key in the `bldg_info` array in the \*.bldg file. |
@@ -49,3 +49,4 @@ The following variables names can be included in expressions within the constrai
 | `units_2bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 2 in the \*.bldg file. |
 | `units_3bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 3 in the \*.bldg file. |
 | `units_4bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 4 or more in the \*.bldg file. |
+| `dist_abbr` | Zoning | Taken from the `dist_abbr` field of the specific feature in the \*.zoning file |
