@@ -144,6 +144,62 @@ Minimum and maximum values for constraints are stored as arrays including the fo
 
 {{ ADD A COUPLE ILLUSTRATIVE EXAMPLES }}
 
+example 1
+
+Dallas Agricultural District: "Minimum front yard is 50 feet."
+
+```{r}
+#| label: fig-const-ex-1
+#| fig-cap: "Data structure for constraints in the *.zoning file"
+
+here("figures",
+     "constraint_structure.png") |>
+  knitr::include_graphics()
+```
+
+example 2
+
+Cockrell Hill Single-Family District: "No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater"
+
+```{r}
+#| label: fig-const-ex-2
+#| fig-cap: "Data structure for constraints in the *.zoning file"
+
+here("figures",
+     "constraint_structure.png") |>
+  knitr::include_graphics()
+```
+
+example 3
+
+Fort Worth Height Exceptions: the height of a building in the “A” through “F” districts may be increased when the front, side and rear yard dimensions are each increased above the minimum requirements by one foot for each foot such building exceeds the height limit of the district in which it is located.
+
+```{r}
+#| label: fig-const-ex-3
+#| fig-cap: "Data structure for constraints in the *.zoning file"
+
+here("figures",
+     "constraint_structure.png") |>
+  knitr::include_graphics()
+```
+
+example 4
+
+Addison Urban Center District: "The build-to line for primary buildings, structures, walls and fences shall be ten feet on all public street frontages except along residential streets (category C) and residential mew streets (category D), which shall have build-to lines as established later in this section. Up to 25 percent of any street frontage of a building may vary from this build-to line, but shall not be less than five feet, nor more than 25 feet."
+
+"The build-to line for residential streets (category C) shall be five feet where a building or structure fronts public open space. In all other cases along residential streets, a maximum of 75 percent of any block face may be constructed to the five-foot build-to line with the remainder of the block face being constructed no closer than eight feet, nor more than 25 feet from the R.O.W."
+
+"The build-to line for residential mew streets (category D) shall be contiguous with the R.O.W. A minimum of 70 percent of the build-to line of any block or parcel must be occupied by buildings or parking structures."
+
+```{r}
+#| label: fig-const-ex-4
+#| fig-cap: "Data structure for constraints in the *.zoning file"
+
+here("figures",
+     "constraint_structure.png") |>
+  knitr::include_graphics()
+```
+
 ### Definitions
 
 There may be terms that are used in many different zoning codes, but with definitions that vary across municipalities. The current version of the OZFS standard (version 0.5.0) requires definitions for height and for types of residential buildings. Other definitions may be added to future extensions of the standard.
