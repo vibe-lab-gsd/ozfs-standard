@@ -8,7 +8,8 @@ authors:
     affiliation: Harvard Graduate School of Design
   - name: Houpu Li
     affiliation: Harvard Graduate School of Design
-
+abstract: >
+  Efforts to conduct detailed analysis of the variation in and consequences of zoning regulations have been hampered by the lack of standardized, machine-readable data on the requirements described in the texts of municipal zoning codes. Existing efforts to assemble data on zoning regulations have relied on database structures that are not well-suited to the complexity of zoning regulations. In this paper, we introduce and describe the Open Zoning Feed Specification (OZFS) standard as a recommended format for describing zoning regulations, parcel geometry, and building characteristics. We introduce a sample dataset that uses the OZFS standard to describe zoning regulations and parcel geometries for a set of 162 municipalities in the Dallas-Fort Worth region of Texas. The OZFS data standard offers a foundation on which software can be developed to analyze zoning regulations in greater detail than has previously been possible to do at a regional scale.
 bibliography: ozfs.bib
 execute: 
   echo: false
@@ -23,10 +24,6 @@ format:
    toc-location: left
 editor: visual
 ---
-
-# Abstract
-
-Efforts to conduct detailed analysis of the variation in and consequences of zoning regulations have been hampered by the lack of standardized, machine-readable data on the requirements described in the texts of municipal zoning codes. Existing efforts to assemble data on zoning regulations have relied on database structures that are not well-suited to the complexity of zoning regulations. In this paper, we introduce and describe the Open Zoning Feed Specification (OZFS) standard as a recommended format for describing zoning regulations, parcel geometry, and building characteristics. We introduce a sample dataset that uses the OZFS standard to describe zoning regulations and parcel geometries for a set of 162 municipalities in the Dallas-Fort Worth region of Texas. The OZFS data standard offers a foundation on which software can be developed to analyze zoning regulations in greater detail than has previously been possible to do at a regional scale.
 
 ```{r load-libraries, message=FALSE}
 library(tidyverse)
