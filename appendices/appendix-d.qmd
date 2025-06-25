@@ -15,7 +15,11 @@ format:
 editor: visual
 ---
 
-This documents the process by which we created zoning data files according to the Open Zoning Feed Specification (OZFS) format using already-recorded National Zoning Atlas (NZA) data. The main steps are summarized in the sections that follow.
+```{r}
+library(here)
+```
+
+This appendix documents the process by which we created zoning data files according to the Open Zoning Feed Specification (OZFS) format using already-recorded National Zoning Atlas (NZA) data. The main steps are summarized in the sections that follow.
 
 #### Data Preparation
 
@@ -29,9 +33,7 @@ This documents the process by which we created zoning data files according to th
 
 #### Run R Script
 
--   Inputs
-
--   Outputs
+-   Function Descriptions
 
 -   Manual Adjustments
 
@@ -39,13 +41,31 @@ This documents the process by which we created zoning data files according to th
 
 ### Gather Needed Data
 
-The NZA often has two files for each city: a tabular file storing all the zoning regulations, and a geojson file storing the zoning district geometries. To convert to OZFS, these two files were required for each city. The table below gives more details on the files used in the R script. Because the geometry file stored an abbreviated district name attached to its geometry, we didn’t need to change anything in that file, but there were some changes needed to prepare the tabular data.
+The NZA often has two files for each city: a tabular file storing the zoning regulations, and a geojson file storing the zoning district geometries. To convert to OZFS, these two files were required for each city. The table below gives more details on the files used in the R script. Because the geometry file stored an abbreviated district name attached to its geometry, we didn’t need to change anything in that file, but there were some changes needed to prepare the tabular data.
+
++---------------------+-----------------------------------------------------------------------+---------------------------+
+| **Data Needed**     | **Description**                                                       | **Acceptable File Types** |
++---------------------+-----------------------------------------------------------------------+---------------------------+
+| Tabular Zoning Data | Data stored in NZA-standard tabular format                            | .csv                      |
+|                     |                                                                       |                           |
+|                     |                                                                       | .xlsx                     |
++---------------------+-----------------------------------------------------------------------+---------------------------+
+| District Geometries | Zoning district geometries with a field for abbreviated district name | .geojson                  |
++---------------------+-----------------------------------------------------------------------+---------------------------+
 
 ### Change NZA Column Names
 
-With the tabular data as an Excel(.xlsx) file, we changed the names of each column for easier reading and manipulation in R. There will hopefully be an R script that can automatically change the column names, but that doesn’t exist yet, so we manually changed them. As shown in the figure below, the new column name is generally created by the constraint name, as it appears in the OZFS, followed by a representation of the land use. The string “\_1” for 1-family treatments, “\_2” for 2-family treatments, “\_3”, for 3-family treatments, and "\_4" for 4+family treatments. A table comparing the old and the new file names can be found \[here\].
+With the tabular data as an Excel(.xlsx) file, we changed the names of each column for easier reading and manipulation in R. As shown in the figure below, the new column name is generally created by the constraint name, as it appears in the OZFS, followed by a representation of the land use.
 
-![Column Names Immage](images/1_nza_ozfs.png){#fig-col-names width="70%"}
+```{r}
+#| fig-cap: "New column naming convention"
+
+here("figures",
+     "nza_to_ozfs_1.png") |>
+  knitr::include_graphics()
+```
+
+The land use designations were the string “\_1” for 1-family treatments, “\_2” for 2-family treatments, “\_3”, for 3-family treatments, and "\_4" for 4+family treatments. Often townhomes were explained with different requirements, so we also added a "\_th" for townhome treatments. A table comparing the NZA column names and the our updated column names is found at the end of this appendix.
 
 ### Clean Up Data
 
@@ -65,36 +85,919 @@ The parking columns needed to be updated in a similar way. For all but 1-family 
 
 #### Columns to represent conditional constraints
 
-Perhaps the most difficult manual adjustment to the tabular data was adding columns to represent conditional constraints or criteria-based requirements. With these types of constraints, the NZA format often recorded one value and then left a special note about the condition or criteria, but the OZFS has a way to store some of these conditional and criteria-based requirements. The pattern we used for naming these additional columns was based on the OZFS format, which can contain multiple lists of rules describing how a constraint is calculated. The possible fields in each list of rules are described as follows:
+Perhaps the most difficult manual adjustment to the tabular data was adding columns to represent conditional constraints or criteria-based requirements. With these types of constraints, the NZA format often recorded one value and then left a special note about the condition or criteria, but the OZFS has a way to store some of these conditional and criteria-based requirements. The pattern we used for naming these additional columns was based on the OZFS format, which can contain multiple lists of rules describing how a constraint is calculated. The additional fields added to the columns are described as follows.
 
--   **expression**: Every rule list will have an expression, or list of expressions, used to get a constraint value.
+-   **rule:** This was connected to the arrays under the `min_val` or `max_val` fields in OZFS. rule1 denotes the first item in the array of conditions, rule2 denotes the second item in the array of conditions, etc.
 
--   **condition**: This field will be present if the constraint value is conditional to another value; like building height, lot width, etc. The condition must be written using Python syntax. (ex. “height \>= 10 and lot_width \< 60”)
+-   **expression**: This was directly connected to the `expression`, or list of expressions, in the OZFS. Each array will always have at least one expression, so if there were columns added, at least one of them was an expression column.
 
--   **criterion**: This field is included when there is a “min” or “max” criterion that determines the constraint value from a list of multiple expressions. If there are conditions that can’t be expressed by OZFS standards, then multiple expressions can be given with the criterion “dependent”.
+-   **condition**: This was connected to the `condition` field in OZFS which will be present if the constraint value is conditional to another value; like building height, lot width, etc. The condition was written using Python syntax following OZFS standards. (ex. “height \>= 10 and lot_width \< 60”)
 
--   **more_restrictive**: If there is a “dependent” criterion, this field will explain the case that merits the more restrictive constraint value listed.
+-   **criterion**: This was connected to the `min_max` field which is included when there is a “min” or “max” criterion that determines the constraint value from a list of multiple expressions. If there were multiple expressions with conditions that couldn't be expressed by OZFS standards, then "dependent" was recorded under the criterion column.
+
+-   **more_restrictive**: If there was a “dependent” criterion, this field explained the case that merits the more restrictive constraint value listed. It would be read into the OZFS format as another `condition` in the OZFS array.
 
 When the constraint in the NZA data was recorded as a single value or expression, it was left in the original cell. If there were constraints requiring a conditional rule or a criterion, then new columns were added to the excel file. The names of the new columns followed a specific pattern that stated the rule number and the rule item that was being recorded. This rule number and rule item were placed in between the constraint name and land use designation as shown in the figure below.
 
+```{r}
+#| fig-cap: "Naming convention for additional columns"
+
+here("figures",
+     "nza_to_ozfs_2.png") |>
+  knitr::include_graphics()
+```
+
 To illustrate this, text from an example city’s zoning code is given:
 
-*For single family homes less than or equal to 36 feet in height, the minimum front setback is equal to the height of the building but need not exceed 30 feet. For single family homes greater than 36 feet in height, the minimum front setback is 40 feet.*
+> *For single family homes less than or equal to 36 feet in height, the minimum front setback is equal to the height of the building but need not exceed 30 feet. For single family homes greater than 36 feet in height, the minimum front setback is 40 feet.*
 
 Unlike the NZA, the OZFS standard has a specific way to represent this unique constraint, and the figure below shows how it would be structured. The table shows how this information was added to the NZA excel sheet using the column naming pattern. Note that the original column indicating the name and land use was kept and left blank. This original column left blank was need for the code to work properly.
 
+```{r}
+#| fig-cap: "Naming convention example"
+
+here("figures",
+     "nza_to_ozfs_3.png") |>
+  knitr::include_graphics()
+```
+
++---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
+| **setback_front_1** | **setback_front_rule1_condition_1** | **setback_front_rule1_criterion_1** | **setback_front_rule1_expression1_1** | **setback_front_rule1_expression2_1** | **setback_front_rule2_condition_1** | **setback_front_rule2_expression_1** |
++---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
+|                     | height \<= 36                       | min                                 | height                                | 30                                    | height \> 36                        | 40                                   |
++---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
+
 ## Run R Script
 
-After cleaning and preparing the data, we created an R script to convert it into the OZFS format. See the raw R script here. The following sections briefly describe the inputs, outputs, and final adjustments made.
+After cleaning and preparing the data, we created an R script to convert it to OZFS format. The following sections briefly describe the functions in the script and final adjustments made. The r script is attached at the end of this appendix.
 
-### Inputs
+### Function Descriptions
 
-The R script has three inputs: The path to a folder of tabular data files, the path to a folder of district geometry files, and the path to a folder where the newly created .zoning files will be stored. It is important to note that the order of each file in the folders mattered. For the R script to work, the geometry folder needed to have one file per city in the exact same order that the tabular data folder listed its cities’ files. We did this by naming each file by the city it represented.
+#### make_ozfs()
 
-### Outputs
+This is the main function of the R script and has five inputs:
 
-The R script creates the OZFS .zoning file for each city and puts them in the specified folder. After running the R script, we needed to make a few manual updates that we haven’t put in the R code yet.
+-   `nza_files_folder:` The folder containing the NZA tabular data. There was a separate file for each city we were working with.
+
+-   `geom_files_folder:` The folder containing the NZA geometry data. It was important to have one file for each individual city in the exact same order as the files for the tabular data.
+
+-   `new_folder_to_save_to:` The path to the folder where the \*.zoning files would be saved.
+
+-   `col_descriptions_path:` The path to an excel sheet we created that listed all the constraint names (in OZFS format) and whether the NZA record the min or max value. See the table below for the contents of the col_descriptions file.
+
+-   `extra_overlay_geom_file:` This is an option variable that would take in the file path to a geojson with extra overlay districts that weren't recorded in the NZA tabular data but were found in geometry files.
+
+col_descriptions file contents
+
+|                       |                |
+|-----------------------|----------------|
+| **col_name**          | **min_or_max** |
+| lot_size              | min            |
+| setback_front         | min            |
+| setback_side_int      | min            |
+| setback_side_ext      | min            |
+| setback_rear          | min            |
+| setback_side_sum      | min            |
+| setback_front_sum     | min            |
+| setback_dist_boundary | min            |
+| lot_cov_bldg          | max            |
+| parking_enclosed​      | min            |
+| parking_covered​       | min            |
+| parking_uncovered     | min            |
+| stories               | max            |
+| height                | max            |
+| height_eave           | max            |
+| unit_size             | min            |
+| unit_size_avg         | min            |
+| unit_density          | max            |
+| unit_qty              | max            |
+| unit_0bed_qty         | max            |
+| unit_1bed_qty         | max            |
+| unit_2bed_qty         | max            |
+| unit_3bed_qty         | max            |
+| unit_4bed_qty         | max            |
+| unit_pct_0bed         | max            |
+| unit_pct_1bed         | max            |
+| unit_pct_2bed         | max            |
+| unit_pct_3bed         | max            |
+| unit_pct_4bed         | max            |
+| footprint             | max            |
+| fl_area               | max            |
+| fl_area_first         | min            |
+| fl_area_top           | min            |
+| far                   | max            |
+
+The `make_ozfs()` function calls other functions in the script to create a \*.zoning file for each city and saves the new files to the specified folder.
+
+#### atlas_to_ozfs()
+
+The `atlas_to_ozfs()` function has the following inputs:
+
+-   `nza_file_path:` The path to one NZA file (must be xlsx or csv).
+
+-   `col_descriptions:` The col_descriptions data frame created from the col_descriptions file
+
+-   `use_type_indicators:` A list of the use_type_indicators, or the suffixes that identify the uses. This list is created in the `make_ozfs()` function and contains the following variables:
+
+    -   1_unit = "\_1"
+
+    -   2_unit = "\_2"
+
+    -   3_unit = "\_3"
+
+    -   4_plus = "-4"
+
+    -   townhome = "th"
+
+-   `version_date:` The last date that the zoning code was updated.
+
+The function returns a list following OZFS standards that is ready to be transformed into a geojson.
+
+#### organize_feature()
+
+This function is used during the process of creating the OZFS formatted list in the `atlas_to_ozfs()` function. It takes in one row of the zoning atlas data frame (`atlas_row_df`), the `col_descriptions`, and the `use_type_indicators`, and returns a list that mimics what that district's feature array will be in the OZFS.
+
+#### make_constraints
+
+As the code loops through each constraint in the `organize_feature()` function, the `make_constraints()` function takes in a data frame of all the constraints (`constraints_df`) and a list that filters the columns of the `atlas_row_df` data for each individual use. It returns a list of the specific constraint section of the OZFS to be added to the feature list being created.
+
+#### organize_rules
+
+The `make_constraints()` function checks to see if there are columns that indicate conditional rules. If there are, then a filtered data set is created containing only the rules for the specific constraint. Using this `df_with_rules` data frame and the constraint name, the `organize_rules()` function creates a list of all the conditions that would need to be in the OZFS. This is used in the `make_constraints()` function to add to each constraint with conditional requirements.
+
+#### add_geometry_to_ozfs
+
+Once the above functions are run, the zoning regulations will have been successfully put into list form following the OZFS standards. The `add_geometry_to_ozfs()` function takes the geometry file and matches each district geometry with the correct OZFS feature using the abbreviated district name.
+
+#### add_extra_overlays
+
+This function is used if there is an `extra_overlay_geom_file` present. It takes the list of NZA-formatted data and adds any other overlays that may not have been part of the original NZA files.
+
+#### write_list_as_json
+
+This function simply takes the list that was created following OZFS, converts it to geojson format, and writes it as a \*.zoning file.
 
 ### Manual Adjustments
 
-The only manual adjustments we made were to the height definitions that appear at top level of the .zoning file. The R script only added generic height definitions, so we needed to go into each .zoning file and make any adjustments to the height definitions to match what is recorded in each individual zoning code.
+After running the r script, we made a few manual adjustments to the definitions that appear at top level of the .zoning file. The R script created generic height and res_type definitions that have common definitions of height and have res_types that match the way NZA represented residential uses. The layout of these generic definitions are shown in the figure below.
+
+```{r}
+#| fig-cap: "Generic definitions"
+
+here("figures",
+     "nza_to_ozfs_4.png") |>
+  knitr::include_graphics()
+```
+
+## Column Name Comparison {#section-colnames}
+
+The following table shows the original NZA column names and the updated column names we used for the code to run smoothly.
+
++------------------------------------------------------------------+------------------------------+
+| **NZA Column Names**                                             | **Updated Column Names**     |
++------------------------------------------------------------------+------------------------------+
+| Jurisdiction                                                     | muni_name                    |
++------------------------------------------------------------------+------------------------------+
+| County                                                           | county                       |
++------------------------------------------------------------------+------------------------------+
+| Abbreviated District Name                                        | dist_abbr                    |
++------------------------------------------------------------------+------------------------------+
+| Full District Name                                               | dist_name                    |
++------------------------------------------------------------------+------------------------------+
+| District Mapped                                                  | mapped                       |
++------------------------------------------------------------------+------------------------------+
+| District Mapped But Extinct                                      | mapped_extinct               |
++------------------------------------------------------------------+------------------------------+
+| Overlay                                                          | overlay                      |
++------------------------------------------------------------------+------------------------------+
+| Type of Zoning District                                          | dist_type                    |
++------------------------------------------------------------------+------------------------------+
+| Affordable Housing District                                      | aff_housing_dist             |
++------------------------------------------------------------------+------------------------------+
+| Elderly Housing District                                         | elder_housing_dist           |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Treatment                                               | use_permitted_1              |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Treatment                                               | use_permitted_2              |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Treatment                                               | use_permitted_3              |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Treatment                                              | use_permitted_4              |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Min. Lot (ACRES)                                        | lot_size_1                   |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Front Setback (# of feet)                               | setback_front_1              |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Side Setback (# of feet)                                | setback_side_int_1           |
++------------------------------------------------------------------+------------------------------+
+| NA (new constraint)                                              | setback_side_ext_1           |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Rear Setback (# of feet)                                | setback_rear_1               |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_1               |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_1                |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Min. \# Parking Spaces                                  | parking_1                    |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Max. Height (# of stories)                              | stories_1                    |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Max. Height (# of feet)                                 | height_1                     |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Floor to Area Ratio                                     | far_1                        |
++------------------------------------------------------------------+------------------------------+
+| 1-Family Min. Unit Size (SF)                                     | unit_size_1                  |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Affordable Housing Only                                 | aff_housing_2                |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Elderly Housing Only                                    | elder_housing_2              |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Min. Lot (ACRES)                                        | lot_size_2                   |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Max. Density (UNITS/ACRE)                               | unit_density_2               |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Front Setback (# of feet)                               | setback_front_2              |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Side Setback (# of feet)                                | setback_side_int_2           |
++------------------------------------------------------------------+------------------------------+
+| NA (new constraint)                                              | setback_side_ext_2           |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Rear Setback (# of feet)                                | setback_rear_2               |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_2               |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_2                |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Min. \# Parking Spaces Per Studio or 1BR                | parking_2                    |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Min. \# Parking Spaces Per 2+ BR                        | NA (combined with parking_2) |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Max. Height (# of stories)                              | stories_2                    |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Max. Height (# of feet)                                 | height_2                     |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Floor to Area Ratio                                     | far_2                        |
++------------------------------------------------------------------+------------------------------+
+| 2-Family Min. Unit Size (SF)                                     | unit_size_2                  |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Affordable Housing Only                                 | aff_housing_3                |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Elderly Housing Only                                    | elder_housing_3              |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Min. Lot (ACRES)                                        | lot_size_3                   |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Max. Density (UNITS/ACRE)                               | unit_density_3               |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Front Setback (# of feet)                               | setback_front_3              |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Side Setback (# of feet)                                | setback_side_int_3           |
++------------------------------------------------------------------+------------------------------+
+| NA (new constraint)                                              | setback_side_ext_3           |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Rear Setback (# of feet)                                | setback_rear_3               |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_3               |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_3                |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Min. \# Parking Spaces Per Studio or 1BR                | parking_3                    |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Min. \# Parking Spaces Per 2+ BR                        | NA (combined with parking_3) |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Connection to Sewer and/or Water Required               | swr_connect_3                |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Connection or Proximity to Public Transit Required      | tran_connect_3               |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Max. Height (# of stories)                              | stories_3                    |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Max. Height (# of feet)                                 | height_3                     |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Floor to Area Ratio                                     | far_3                        |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Min. Unit Size (SF)                                     | unit_size_3                  |
++------------------------------------------------------------------+------------------------------+
+| 3-Family Max. \# Bedrooms Per Unit                               | bedrooms_3                   |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Affordable Housing Only                                | aff_housing_4                |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Elderly Housing Only                                   | elder_housing_4              |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Min. Lot (ACRES)                                       | lot_size_4                   |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. Density (UNITS/ACRE)                              | unit_density_4               |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Front Setback (# of feet)                              | setback_front_4              |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Side Setback (# of feet)                               | setback_side_int_4           |
++------------------------------------------------------------------+------------------------------+
+| NA (new constraint)                                              | setback_side_ext_4           |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Rear Setback (# of feet)                               | setback_rear_4               |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. Lot Coverage - Buildings (%)                      | lot_cov_bldg_4               |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_4                |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Min. \# Parking Spaces Per Studio or 1BR               | parking_4                    |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Min. \# Parking Spaces Per 2+ BR                       | NA (combined with parking_4) |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Connection to Sewer and/or Water Required              | swr_connect_4                |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Connection or Proximity to Public Transit Required     | tran_connect_4               |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. Height (# of stories)                             | stories_4                    |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. Height (# of feet)                                | height_4                     |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Floor to Area Ratio                                    | far_4                        |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Min. Unit Size (SF)                                    | unit_size_4                  |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. \# Bedrooms Per Unit                              | bedrooms_4                   |
++------------------------------------------------------------------+------------------------------+
+| 4+-Family Max. \# Units Per Building                             | unit_qty_4                   |
++------------------------------------------------------------------+------------------------------+
+| Special Notes                                                    | notes_special                |
++------------------------------------------------------------------+------------------------------+
+| Tooltip Notes                                                    | notes_tooltip                |
++------------------------------------------------------------------+------------------------------+
+
+## R script {#section-rscript}
+
+Below is the R script that was used to create the OZFS files from the NZA data.
+
+```{r echo = TRUE}
+library(tidyverse)
+library(readxl)
+library(sf)
+library(rjson)
+
+## takes a folder full of nza files and
+## a folder full of geometry files that match the nza files in order
+## and writes to a new folder all the ozfs .zoning files it created
+make_ozfs <- function(nza_files_folder, 
+                      geom_files_folder, 
+                      new_folder_to_save_to, 
+                      col_descriptions_path,
+                      extra_overlay_geom_file = NULL){
+  
+  nza_files_list <- list.files(nza_files_folder, full.names = TRUE)
+  geom_files_list <- list.files(geom_files_folder, full.names = TRUE)
+  
+  # import col_descriptions file
+  if (file.exists(col_descriptions_path)){
+    splt <- strsplit(col_descriptions_path, "[.]")[[1]]
+    ext <- splt[[length(splt)]]
+    if (ext == "csv"){
+      col_descriptions <- read.csv(col_descriptions_path)
+    } else if (ext == "xlsx"){
+      col_descriptions <- read_excel(col_descriptions_path)
+    } else{
+      stop("col_descriptions must be .xlsx or .csv")
+    }
+  } else{
+    stop("col_descriptions must be .xlsx or .csv")
+  }
+  
+  # establish use_type_indicators
+  use_type_indicators <- list(`1_unit` = "_1", 
+                              `2_unit` = "_2",
+                              `3_unit` = "_3",
+                              `4_plus` = "_4",
+                              `townhome` = "_th")
+  
+  # start empty lists to track errors
+  ozfs_errors <- c()
+  ozfs_warnings <- c()
+  geom_errors <- c()
+  geom_warnings <- c()
+  overlay_errors <- c()
+  overlay_warnings <- c()
+  
+  # loop through each NZA file
+  for (i in 1:length(nza_files_list)){
+    nza_file_path <- nza_files_list[[i]]
+    
+    file_name <- basename(nza_files_list[[i]])
+    file_name_no_ext <- sub(".xlsx","",file_name)
+    
+    ozfs_list_format <- tryCatch(
+      {
+        # Code that might throw an error
+        atlas_to_ozfs(nza_file_path, 
+                      col_descriptions, 
+                      use_type_indicators,
+                      version_date = "2024-08-14")
+      }, warning = function(w) {
+        return(c("warning",paste(w$message,nza_file_path)))
+      }, error = function(e) {
+        # Code to run if an error occurs
+        return(c("error",paste(e$message,nza_file_path)))
+        
+      }
+    )
+    
+    if (ozfs_list_format[[1]] == "warning"){
+      ozfs_warnings <- c(ozfs_warnings, ozfs_list_format[[2]])
+    }
+    if (ozfs_list_format[[1]] == "error"){
+      ozfs_errors <- c(ozfs_errors, ozfs_list_format[[2]])
+    }
+    
+    ozfs_list_with_geom <- tryCatch(
+      {
+        # Code that might throw an error
+        add_geometry_to_ozfs(geom_files_list[[i]], ozfs_list_format)
+      }, warning = function(w) {
+        return(c("warning",paste(w$message,nza_file_path)))
+      },
+      error = function(e) {
+        # Code to run if an error occurs
+        return(c("error",paste(e$message,nza_file_path)))
+        
+      }
+    )
+    
+    if (ozfs_list_with_geom[[1]] == "warning"){
+      geom_warnings <- c(geom_warnings, ozfs_list_with_geom[[2]])
+    }
+    if (ozfs_list_with_geom[[1]] == "error"){
+      geom_errors <- c(geom_errors, ozfs_list_with_geom[[2]])
+    }
+    
+    
+    if (!is.null(extra_overlay_geom_file)){
+      ozfs_list_with_geom <- tryCatch(
+        {
+          # Code that might throw an error
+          add_extra_overlays(extra_overlay_geom_file, ozfs_list_with_geom)
+        }, warning = function(w) {
+          return(c("warning",paste(w$message,nza_file_path)))
+        },
+        error = function(e) {
+          # Code to run if an error occurs
+          return(c("error",paste(e$message,nza_file_path)))
+          
+        }
+      )
+      
+      if (ozfs_list_with_geom[[1]] == "warning"){
+        overlay_warnings <- c(ozfs_warnings, ozfs_list_format[[2]])
+      }
+      if (ozfs_list_with_geom[[1]] == "error"){
+        overlay_errors <- c(ozfs_errors, ozfs_list_format[[2]])
+      }
+    }
+    
+    new_file_directory <- paste0(new_folder_to_save_to, file_name_no_ext, ".zoning")
+    write_list_as_json(ozfs_list_with_geom, new_file_directory)
+  }
+  
+  if (!is.null(extra_overlay_geom_file)){
+    list(ozfs_errors = ozfs_errors,
+         ozfs_warnings = ozfs_warnings,
+         geom_errors = geom_errors,
+         geom_warnings = geom_warnings,
+         overlay_errors = geom_errors,
+         overlay_warnings = geom_warnings)
+  } else{
+    list(ozfs_errors = ozfs_errors,
+         ozfs_warnings = ozfs_warnings,
+         geom_errors = geom_errors,
+         geom_warnings = geom_warnings)
+  }
+  
+}
+
+## Returns a list following OZFS standards 
+## that is ready to be switched to a geojosn
+atlas_to_ozfs <- function(nza_file_path, #Path to one NZA file (must be xlsx or csv)
+                          col_descriptions, #col_descriptions data frame
+                          use_type_indicators, #use_type_indicators list
+                          version_date = "2024-08-14"){ #the date the zoning ordinance was updated
+  
+  if (file.exists(nza_file_path)){
+    splt <- strsplit(nza_file_path, "[.]")[[1]]
+    ext <- splt[[length(splt)]]
+    if (ext == "csv"){
+      atlas_df <- read.csv(nza_file_path)
+    } else if (ext == "xlsx"){
+      atlas_df <- read_excel(nza_file_path)
+    } else{
+      stop("nza_file_path must be .xlsx or .csv")
+    }
+  } else{
+    stop("nza_file_path must be .xlsx or .csv")
+  }
+  
+  # start the geojson list with an empty features list
+  ozfs_format <- list(type = "FeatureCollection",
+                      version = "0.5.0",
+                      muni_name = atlas_df[[1,"muni_name"]],
+                      date = version_date,
+                      definitions = list(height = list(list(condition = "roof_type == 'flat'",
+                                                            expression = "height_top"),
+                                                       list(condition = "roof_type == 'hip'",
+                                                            expression = "0.5 * (height_top + height_eave)"),
+                                                       list(condition = "roof_type == 'mansard'",
+                                                            expression = "height_deck"),
+                                                       list(condition = "roof_type == 'gable'",
+                                                            expression = "0.5 * (height_top + height_eave)"),
+                                                       list(condition = "roof_type == 'skillion'",
+                                                            expression = "0.5 * (height_top + height_eave)"),
+                                                       list(condition = "roof_type == 'gambrel'",
+                                                            expression = "0.5 * (height_top + height_eave)")),
+                                         res_type = list(list(condition = "total_units == 1",
+                                                               expression = "'1_unit'"),
+                                                          list(condition = "total_units == 2",
+                                                               expression = "'2_unit'"),
+                                                         list(condition = list("total_units > 2", 
+                                                                               "n_outside_entry == total_units",
+                                                                               "n_ground_entry == total_units",
+                                                                               "sep_platting == TRUE"),
+                                                              expression = "'townhome'"),
+                                                          list(condition = "total_units == 3",
+                                                               expression = "'3_unit'"),
+                                                          list(condition = "total_units > 3",
+                                                               expression = "'4_plus'"))),
+                      features = list())
+  
+  
+  # loop through each row of atlas_df
+  for (i in 1:nrow(atlas_df)){
+    atlas_row_df <- atlas_df[i,]
+    ozfs_format$features[[i]] <- organize_feature(atlas_row_df, 
+                                                   col_descriptions, 
+                                                   use_type_indicators)
+    
+  }
+  
+  ozfs_format
+}
+
+## Returns a list representing one feature of the geojson 
+## (one feature is one zoning district)
+organize_feature <- function(atlas_row_df, 
+                             col_descriptions, 
+                             use_type_indicators){
+  
+  # create a list with a column for 
+  separated_uses <- use_type_indicators
+  uses_permitted <- c()
+  for (i in 1:length(use_type_indicators)){
+    use_name <- names(use_type_indicators)[[i]]
+    indicator <- use_type_indicators[[i]]
+    
+    filtered_columns <- atlas_row_df[,grep(indicator, names(atlas_row_df))]
+    
+    if (ncol(filtered_columns) == 0){
+      separated_uses[[i]] <- NULL
+      next
+    }
+    
+    names(filtered_columns) <- gsub(indicator,"",names(filtered_columns))
+    
+    if (!is.na(filtered_columns$use_permitted) & filtered_columns$use_permitted == "Allowed/Conditional"){
+      uses_permitted <- c(uses_permitted, use_name)
+    }
+    
+    separated_uses[[i]] <- filtered_columns
+  }
+  
+  
+  # start with a bare list for the features data to fill
+  features_list <- list(type = "Feature", 
+                        properties = list(),
+                        geometry = list())
+  
+  # add the properties
+  
+  # dist_name
+  if (!is.na(atlas_row_df[[1,"dist_name"]])){
+    features_list$properties[["dist_name"]] <- atlas_row_df[[1,"dist_name"]]
+  }
+  
+  # dist_abbr
+  if (!is.na(atlas_row_df[[1,"dist_abbr"]])){
+    features_list$properties[["dist_abbr"]] <- atlas_row_df[[1,"dist_abbr"]]
+  }
+  
+  # planned_dev
+  if (is.na(atlas_row_df[[1,"dist_abbr"]])){
+    features_list$properties$planned_dev <- FALSE
+  } else if (atlas_row_df[[1,"dist_abbr"]] == "PD" | atlas_row_df[[1,"dist_abbr"]] == "PRD"){
+    features_list$properties$planned_dev <- TRUE
+  } else{
+    features_list$properties$planned_dev <- FALSE
+  }
+  
+  # overlay
+  if (is.na(atlas_row_df[[1,"overlay"]])){
+    features_list$properties$overlay <- FALSE
+  } else if (atlas_row_df[[1,"overlay"]] == "No"){
+    features_list$properties$overlay <- FALSE
+  } else{
+    features_list$properties$overlay <- TRUE
+    return(features_list)
+  }
+  
+  # res_types_allowed
+  if (length(uses_permitted) > 0){
+    features_list$properties$res_types_allowed <- uses_permitted
+  }
+  
+  # constraints
+  
+  # filter col_descriptions to just the constraint columns this district has
+  constraints_df <- col_descriptions |>
+    filter(col_name %in% gsub("_[^_]+$","",names(atlas_row_df)))
+  
+  if (nrow(constraints_df) > 0){
+    features_list$properties$constraints <- make_constraints(constraints_df, separated_uses)
+  }
+  
+  if (length(features_list$properties$constraints) == 0){
+    features_list$properties$constraints <- NULL
+  }
+  
+  return(features_list)
+}
+
+# prepares the constraints section
+make_constraints <- function(constraints_df, separated_uses){
+  
+  constraints_list <- list()
+  for (i in 1:nrow(constraints_df)){
+    constraint_name <- constraints_df$col_name[[i]]
+    min_or_max <- constraints_df$min_or_max[[i]]
+    
+    if (min_or_max == "min"){
+      minmax_vals <- c("min_val","max_val")
+    } else{
+      minmax_vals <- c("max_val","min_val")
+    }
+    
+    for (minmax_loop in 1:2){
+      
+      if (minmax_loop == 2){
+        new_constraint_name <- paste0(constraint_name, "_minmax")
+      } else{
+        new_constraint_name <- constraint_name
+      }
+      
+      filtered_separated_uses <- separated_uses
+      for (j in 1:length(separated_uses)){
+        constraint_data <- separated_uses[[j]]
+        filtered_data <- constraint_data |>
+          select(grep(constraint_name,names(constraint_data), value = TRUE))
+        
+        if (minmax_loop == 1){
+          filtered_data <- filtered_data |> 
+            select(!grep("minmax",names(filtered_data), value = TRUE))
+        } else {
+          filtered_data <- filtered_data |> 
+            select(grep("minmax",names(filtered_data), value = TRUE))
+        }
+        
+        # if filtered_data is blank or NA, 
+        # it means there is no value for that constraint
+        # we make either of those scenarios NULL so that it gets the proper use groupings
+        if (ncol(filtered_data) == 0){
+          filtered_data <- NA
+        } else if (rowSums(is.na(filtered_data)) == ncol(filtered_data)){
+          filtered_data <- NA
+        }
+        
+        
+        
+        filtered_separated_uses[[j]] <- filtered_data
+      }
+      
+      # Create a unique key for each data frame by serializing to a character string
+      key_vec <- sapply(filtered_separated_uses, function(x) paste(serialize(x, NULL), collapse = "-"))
+      
+      # Group the list element names by the serialization key
+      grouped_uses <- split(names(filtered_separated_uses), key_vec)
+      
+      rule_list <- list()
+      grouped_uses_count <- length(grouped_uses)
+      for (use_group in grouped_uses){
+        
+        conditions_string <- paste0("res_type == '", use_group,"'")
+        use_condition <- paste(conditions_string, collapse = " or ")
+        
+        one_use <- use_group[[1]]
+        use_df <- filtered_separated_uses[[one_use]]
+        
+        if (class(use_df)[[1]] == "logical"){
+          grouped_uses_count <- grouped_uses_count - 1
+          next
+        }
+        
+        organized_rules <- organize_rules(use_df, new_constraint_name)
+        
+        if (grouped_uses_count > 1 & !is.null(organized_rules)){
+          
+          for (rule_num in 1:length(organized_rules)){
+            organized_rules[[rule_num]]$condition <- append(organized_rules[[rule_num]]$condition, list(use_condition))
+          }
+        }
+        
+        rule_list <- append(rule_list, organized_rules)
+      }
+      
+      # only add the organized rule list to the constraints list if it has values
+      if (length(rule_list) > 0){
+        constraints_list[[constraint_name]][[minmax_vals[[minmax_loop]]]] <- rule_list
+      } 
+    }
+    
+  }
+  
+  return(constraints_list)
+  
+}
+
+# prepares the itmes under min_val or max_val
+organize_rules <- function(df_with_rules, constraint_name){
+  
+  # this is to check if the df_with_rules is NA
+  # which means there was no value recorded
+  if (class(df_with_rules)[[1]] == "logical"){
+    return(NULL)
+  }
+  
+  # find out how many rules there are
+  counter <- 1
+  df <- df_with_rules[1,grep(paste0("rule", counter), names(df_with_rules))]
+  
+  
+  while (ncol(df) > 0){
+    counter <- counter + 1
+    df <- df_with_rules[1 ,grep(paste0("rule", counter), names(df_with_rules))]
+  }
+  
+  rules_count <- counter - 1
+  
+  df_just_rules <- df_with_rules[1 ,grep(paste0(constraint_name, "_rule"), names(df_with_rules))]
+  if (is.null(df_with_rules[[constraint_name]])){
+    df_no_rules <- data.frame(constraint = NA)
+  } else{
+    df_no_rules <- df_with_rules[1 ,constraint_name]
+  }
+  
+  if (!is.na(df_no_rules[[1,1]])){
+    rule_list <- list(list(expression = list(df_with_rules[1,1][[1]])))
+    return(rule_list)
+  } else if (rowSums(is.na(df_just_rules)) == ncol(df_just_rules)){
+    return(NULL)
+  }
+  
+  # loop through each rule and make it a list
+  all_rule_list <- list()
+  for (i in 1:rules_count){
+    # create a list that we will keep adding to
+    rule_list <- list()
+    
+    # New df with an isolated rule
+    rule_df <- df_with_rules[ ,grep(paste0(constraint_name,"_rule", i), names(df_with_rules))]
+    
+    # if it has one of the fields, we will add it to rule_list
+    
+    logical_operator <- NULL
+    # logical_operator
+    if (sum(grep("logical_operator", names(rule_df))) > 0 ){
+      # assign value to logical_operator
+      logical_operator <- rule_df[[1, grep("logical_operator",names(rule_df))]]
+    }
+    
+    # conditions
+    if (sum(grep("condition", names(rule_df))) > 0 ){
+      # make a df to assign multiple values to the array of conditions
+      condition_df <- rule_df[ , grep("condition",names(rule_df))]
+      
+      if (is.null(logical_operator)){
+        condition_value <- condition_df[[1,1]]
+      } else{
+        condition_list <- c()
+        for (j in 1:ncol(condition_df)){
+          condition_list <- c(condition_list,condition_df[[1,j]])
+          condition_value <- paste(condition_list, collapse = paste0(" ", tolower(logical_operator), " "))
+        }
+        
+      }
+      rule_list$condition <- append(rule_list$condition,list(condition_value))
+      
+    }
+    
+    # criterion (was changed to min_max)
+    if (sum(grep("criterion", names(rule_df))) > 0 ){
+      
+      criterion <- rule_df[[1, grep("criterion",names(rule_df))[1]]]
+      
+      if (criterion == "dependent"){
+        if (sum(grep("more_restrictive", names(rule_df))) > 0 ){
+          rule_list$condition <- append(rule_list$condition, rule_df[[1, grep("more_restrictive",names(rule_df))[1]]])
+        } else{ # there is no explanation for some reason
+          rule_list$condition <- append(rule_list$condition, "Special condition that wasn't stated")
+        }
+      } else{
+        rule_list$min_max <- rule_df[[1, grep("criterion",names(rule_df))[1]]]
+      }
+    }
+    
+    # expression(s)
+    if (sum(grep("expression", names(rule_df))) > 0 ){
+      # make a df to see if it is more than one expression and to extract data
+      df_expression <- rule_df[ , grep(paste0("expression"), names(rule_df))]
+      
+      for (j in 1:ncol(df_expression)){
+        rule_list$expression[[j]] <- as.character(df_expression[[1,j]])
+      }
+      
+    }
+    # add each rule list to the total rules list
+    all_rule_list[[i]] <- rule_list
+  }
+  
+  return(all_rule_list)
+}
+
+# Matches the the districts of the zoning info to 
+# the districts in the geometry file
+add_geometry_to_ozfs <- function(boundary_file_path, ozfs_list){
+  
+  boundaries <- rjson::fromJSON(file = boundary_file_path)
+  for (i in 1:length(ozfs_list$features)){
+    zoning_dist_abbr <- ozfs_list$features[[i]]$properties$dist_abbr
+    city <- ozfs_list$features[[i]]$properties$muni_name
+    for (j in 1:length(boundaries$features)){
+      boundary_dist_name <- boundaries$features[[j]]$properties$`Abbreviated District Name`
+      if (zoning_dist_abbr == boundary_dist_name){
+        ozfs_list$features[[i]]$geometry <- boundaries$features[[j]]$geometry
+      }
+    }
+  }
+  ozfs_list
+}
+
+# Takes the output of the add_geometry_to_ozfs() function searches through 
+# an sf object with extra overlays to add any features to the ozfs format. 
+# The sf object must have dist_name, dist_abbr, muni_name, and geometry
+add_extra_overlays <- function(extra_overlay_geom_file, ozfs_list){
+  extra_overlays <- fromJSON(file = extra_overlay_geom_file)
+  
+  city_idx <- c()
+  for (k in 1:length(extra_overlays$features)){
+    if (extra_overlays$features[[k]]$properties$muni_name == ozfs_list$muni_name){
+      city_idx <- c(city_idx, k)
+    }
+  }
+  
+  for (i in city_idx){
+    overlay_feature_i <- extra_overlays$features[[i]]
+    abbr <- overlay_feature_i$properties$dist_abbr
+    
+    # find the feature in ozfs_list
+    feature <- 0
+    for (j in 1:length(ozfs_list$features)){
+      if (ozfs_list$features[[j]]$properties$dist_abbr == abbr){
+        feature <- ozfs_list$features[[j]]
+        break
+      }
+    }
+    
+    if (class(feature) == "list"){ # if the feature exists, we add geometry
+      ozfs_list$features[[j]]$geometry <- overlay_feature_i$geometry
+    } else{ # if the feature doesn't exist, we create a new feature and add it
+      # add a new feature
+      overlay_feature_i$properties$muni_name <- NULL
+      overlay_feature_i$properties$planned_dev <- ifelse(abbr %in% c("PD","PRD"),TRUE,FALSE)
+      overlay_feature_i$properties$overlay <- TRUE
+      
+      # add a the overlay feature to the end of the features
+      ozfs_list$features[[length(ozfs_list$features) + 1]] <- overlay_feature_i
+    }
+    
+    
+  }
+  
+  return(ozfs_list) 
+}
+
+# writes a list as a json and
+# stores it in specified file
+write_list_as_json <- function(list, file_directory){
+  json <- toJSON(list)
+  write(json, file_directory)
+}
+
+# make_ozfs(nza_files_folder = "file_path_to_nza_excel_files",
+#           geom_files_folder = "file_path_to_nza_geom_files",
+#           new_folder_to_save_to = "file_path_to_nza_ozfs_files",
+#           col_descriptions_path = "file_path_to_col_descriptions_sheet",
+#           extra_overlay_geom_file = "file_path_to_the_extra_overlays_data")
+  
+
+```
