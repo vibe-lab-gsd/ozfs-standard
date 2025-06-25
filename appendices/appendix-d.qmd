@@ -127,6 +127,10 @@ here("figures",
 |                     | height \<= 36                       | min                                 | height                                | 30                                    | height \> 36                        | 40                                   |
 +---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
 
+### Note on tabular data restrictions 
+
+Adding extra columns to satisfy conditional requirements sometimes caused problems if there were more than one district with different columns that needed to be added. To make it so the code still read the columns correctly without worrying about NA values, we sometimes added redundant expressions. For example, if District 1 had two conditions that each gave a single constraint value, but District 2 had two conditions that each gave a list of constraint values where the correct value was the max, then District 1 also had to work with extra expression columns even though it wasn't needed. To avoid empty cells, District 1 would have two expression columns and a criterion column where it would have to choose the maximum value between two of the same values. This technically still follows OZFS format, but it is less efficient and harder to read.
+
 ## Run R Script
 
 After cleaning and preparing the data, we created an R script to convert it to OZFS format. The following sections briefly describe the functions in the script and final adjustments made. The r script is attached at the end of this appendix.
