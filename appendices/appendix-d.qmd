@@ -121,13 +121,12 @@ here("figures",
   knitr::include_graphics()
 ```
 
-+---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
+|  |  |  |  |  |  |  |
+|----|----|----|----|----|----|----|
 | **setback_front_1** | **setback_front_rule1_condition_1** | **setback_front_rule1_criterion_1** | **setback_front_rule1_expression1_1** | **setback_front_rule1_expression2_1** | **setback_front_rule2_condition_1** | **setback_front_rule2_expression_1** |
-+---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
-|                     | height \<= 36                       | min                                 | height                                | 30                                    | height \> 36                        | 40                                   |
-+---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
+|  | height \<= 36 | min | height | 30 | height \> 36 | 40 |
 
-### Note on tabular data restrictions 
+### Note on tabular data restrictions
 
 Adding extra columns to satisfy conditional requirements sometimes caused problems if there were more than one district with different columns that needed to be added. To make it so the code still read the columns correctly without worrying about NA values, we sometimes added redundant expressions. For example, if District 1 had two conditions that each gave a single constraint value, but District 2 had two conditions that each gave a list of constraint values where the correct value was the max, then District 1 also had to work with extra expression columns even though it wasn't needed. To avoid empty cells, District 1 would have two expression columns and a criterion column where it would have to choose the maximum value between two of the same values. This technically still follows OZFS format, but it is less efficient and harder to read.
 
@@ -257,175 +256,92 @@ here("figures",
 
 The following table shows the original NZA column names and the updated column names we used for the code to run smoothly.
 
-+------------------------------------------------------------------+------------------------------+
-| **NZA Column Names**                                             | **Updated Column Names**     |
-+------------------------------------------------------------------+------------------------------+
-| Jurisdiction                                                     | muni_name                    |
-+------------------------------------------------------------------+------------------------------+
-| County                                                           | county                       |
-+------------------------------------------------------------------+------------------------------+
-| Abbreviated District Name                                        | dist_abbr                    |
-+------------------------------------------------------------------+------------------------------+
-| Full District Name                                               | dist_name                    |
-+------------------------------------------------------------------+------------------------------+
-| District Mapped                                                  | mapped                       |
-+------------------------------------------------------------------+------------------------------+
-| District Mapped But Extinct                                      | mapped_extinct               |
-+------------------------------------------------------------------+------------------------------+
-| Overlay                                                          | overlay                      |
-+------------------------------------------------------------------+------------------------------+
-| Type of Zoning District                                          | dist_type                    |
-+------------------------------------------------------------------+------------------------------+
-| Affordable Housing District                                      | aff_housing_dist             |
-+------------------------------------------------------------------+------------------------------+
-| Elderly Housing District                                         | elder_housing_dist           |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Treatment                                               | use_permitted_1              |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Treatment                                               | use_permitted_2              |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Treatment                                               | use_permitted_3              |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Treatment                                              | use_permitted_4              |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Min. Lot (ACRES)                                        | lot_size_1                   |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Front Setback (# of feet)                               | setback_front_1              |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Side Setback (# of feet)                                | setback_side_int_1           |
-+------------------------------------------------------------------+------------------------------+
-| NA (new constraint)                                              | setback_side_ext_1           |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Rear Setback (# of feet)                                | setback_rear_1               |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_1               |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_1                |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Min. \# Parking Spaces                                  | parking_1                    |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Max. Height (# of stories)                              | stories_1                    |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Max. Height (# of feet)                                 | height_1                     |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Floor to Area Ratio                                     | far_1                        |
-+------------------------------------------------------------------+------------------------------+
-| 1-Family Min. Unit Size (SF)                                     | unit_size_1                  |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Affordable Housing Only                                 | aff_housing_2                |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Elderly Housing Only                                    | elder_housing_2              |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Min. Lot (ACRES)                                        | lot_size_2                   |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Max. Density (UNITS/ACRE)                               | unit_density_2               |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Front Setback (# of feet)                               | setback_front_2              |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Side Setback (# of feet)                                | setback_side_int_2           |
-+------------------------------------------------------------------+------------------------------+
-| NA (new constraint)                                              | setback_side_ext_2           |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Rear Setback (# of feet)                                | setback_rear_2               |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_2               |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_2                |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Min. \# Parking Spaces Per Studio or 1BR                | parking_2                    |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Min. \# Parking Spaces Per 2+ BR                        | NA (combined with parking_2) |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Max. Height (# of stories)                              | stories_2                    |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Max. Height (# of feet)                                 | height_2                     |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Floor to Area Ratio                                     | far_2                        |
-+------------------------------------------------------------------+------------------------------+
-| 2-Family Min. Unit Size (SF)                                     | unit_size_2                  |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Affordable Housing Only                                 | aff_housing_3                |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Elderly Housing Only                                    | elder_housing_3              |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Min. Lot (ACRES)                                        | lot_size_3                   |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Max. Density (UNITS/ACRE)                               | unit_density_3               |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Front Setback (# of feet)                               | setback_front_3              |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Side Setback (# of feet)                                | setback_side_int_3           |
-+------------------------------------------------------------------+------------------------------+
-| NA (new constraint)                                              | setback_side_ext_3           |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Rear Setback (# of feet)                                | setback_rear_3               |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_3               |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_3                |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Min. \# Parking Spaces Per Studio or 1BR                | parking_3                    |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Min. \# Parking Spaces Per 2+ BR                        | NA (combined with parking_3) |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Connection to Sewer and/or Water Required               | swr_connect_3                |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Connection or Proximity to Public Transit Required      | tran_connect_3               |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Max. Height (# of stories)                              | stories_3                    |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Max. Height (# of feet)                                 | height_3                     |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Floor to Area Ratio                                     | far_3                        |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Min. Unit Size (SF)                                     | unit_size_3                  |
-+------------------------------------------------------------------+------------------------------+
-| 3-Family Max. \# Bedrooms Per Unit                               | bedrooms_3                   |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Affordable Housing Only                                | aff_housing_4                |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Elderly Housing Only                                   | elder_housing_4              |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Min. Lot (ACRES)                                       | lot_size_4                   |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. Density (UNITS/ACRE)                              | unit_density_4               |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Front Setback (# of feet)                              | setback_front_4              |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Side Setback (# of feet)                               | setback_side_int_4           |
-+------------------------------------------------------------------+------------------------------+
-| NA (new constraint)                                              | setback_side_ext_4           |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Rear Setback (# of feet)                               | setback_rear_4               |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. Lot Coverage - Buildings (%)                      | lot_cov_bldg_4               |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_4                |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Min. \# Parking Spaces Per Studio or 1BR               | parking_4                    |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Min. \# Parking Spaces Per 2+ BR                       | NA (combined with parking_4) |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Connection to Sewer and/or Water Required              | swr_connect_4                |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Connection or Proximity to Public Transit Required     | tran_connect_4               |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. Height (# of stories)                             | stories_4                    |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. Height (# of feet)                                | height_4                     |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Floor to Area Ratio                                    | far_4                        |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Min. Unit Size (SF)                                    | unit_size_4                  |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. \# Bedrooms Per Unit                              | bedrooms_4                   |
-+------------------------------------------------------------------+------------------------------+
-| 4+-Family Max. \# Units Per Building                             | unit_qty_4                   |
-+------------------------------------------------------------------+------------------------------+
-| Special Notes                                                    | notes_special                |
-+------------------------------------------------------------------+------------------------------+
-| Tooltip Notes                                                    | notes_tooltip                |
-+------------------------------------------------------------------+------------------------------+
+|  |  |
+|----|----|
+| **NZA Column Names** | **Updated Column Names** |
+| Jurisdiction | muni_name |
+| County | county |
+| Abbreviated District Name | dist_abbr |
+| Full District Name | dist_name |
+| District Mapped | mapped |
+| District Mapped But Extinct | mapped_extinct |
+| Overlay | overlay |
+| Type of Zoning District | dist_type |
+| Affordable Housing District | aff_housing_dist |
+| Elderly Housing District | elder_housing_dist |
+| 1-Family Treatment | use_permitted_1 |
+| 2-Family Treatment | use_permitted_2 |
+| 3-Family Treatment | use_permitted_3 |
+| 4+-Family Treatment | use_permitted_4 |
+| 1-Family Min. Lot (ACRES) | lot_size_1 |
+| 1-Family Front Setback (# of feet) | setback_front_1 |
+| 1-Family Side Setback (# of feet) | setback_side_int_1 |
+| NA (new constraint) | setback_side_ext_1 |
+| 1-Family Rear Setback (# of feet) | setback_rear_1 |
+| 1-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_1 |
+| 1-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_1 |
+| 1-Family Min. \# Parking Spaces | parking_1 |
+| 1-Family Max. Height (# of stories) | stories_1 |
+| 1-Family Max. Height (# of feet) | height_1 |
+| 1-Family Floor to Area Ratio | far_1 |
+| 1-Family Min. Unit Size (SF) | unit_size_1 |
+| 2-Family Affordable Housing Only | aff_housing_2 |
+| 2-Family Elderly Housing Only | elder_housing_2 |
+| 2-Family Min. Lot (ACRES) | lot_size_2 |
+| 2-Family Max. Density (UNITS/ACRE) | unit_density_2 |
+| 2-Family Front Setback (# of feet) | setback_front_2 |
+| 2-Family Side Setback (# of feet) | setback_side_int_2 |
+| NA (new constraint) | setback_side_ext_2 |
+| 2-Family Rear Setback (# of feet) | setback_rear_2 |
+| 2-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_2 |
+| 2-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_2 |
+| 2-Family Min. \# Parking Spaces Per Studio or 1BR | parking_2 |
+| 2-Family Min. \# Parking Spaces Per 2+ BR | NA (combined with parking_2) |
+| 2-Family Max. Height (# of stories) | stories_2 |
+| 2-Family Max. Height (# of feet) | height_2 |
+| 2-Family Floor to Area Ratio | far_2 |
+| 2-Family Min. Unit Size (SF) | unit_size_2 |
+| 3-Family Affordable Housing Only | aff_housing_3 |
+| 3-Family Elderly Housing Only | elder_housing_3 |
+| 3-Family Min. Lot (ACRES) | lot_size_3 |
+| 3-Family Max. Density (UNITS/ACRE) | unit_density_3 |
+| 3-Family Front Setback (# of feet) | setback_front_3 |
+| 3-Family Side Setback (# of feet) | setback_side_int_3 |
+| NA (new constraint) | setback_side_ext_3 |
+| 3-Family Rear Setback (# of feet) | setback_rear_3 |
+| 3-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_3 |
+| 3-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_3 |
+| 3-Family Min. \# Parking Spaces Per Studio or 1BR | parking_3 |
+| 3-Family Min. \# Parking Spaces Per 2+ BR | NA (combined with parking_3) |
+| 3-Family Connection to Sewer and/or Water Required | swr_connect_3 |
+| 3-Family Connection or Proximity to Public Transit Required | tran_connect_3 |
+| 3-Family Max. Height (# of stories) | stories_3 |
+| 3-Family Max. Height (# of feet) | height_3 |
+| 3-Family Floor to Area Ratio | far_3 |
+| 3-Family Min. Unit Size (SF) | unit_size_3 |
+| 3-Family Max. \# Bedrooms Per Unit | bedrooms_3 |
+| 4+-Family Affordable Housing Only | aff_housing_4 |
+| 4+-Family Elderly Housing Only | elder_housing_4 |
+| 4+-Family Min. Lot (ACRES) | lot_size_4 |
+| 4+-Family Max. Density (UNITS/ACRE) | unit_density_4 |
+| 4+-Family Front Setback (# of feet) | setback_front_4 |
+| 4+-Family Side Setback (# of feet) | setback_side_int_4 |
+| NA (new constraint) | setback_side_ext_4 |
+| 4+-Family Rear Setback (# of feet) | setback_rear_4 |
+| 4+-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_4 |
+| 4+-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_4 |
+| 4+-Family Min. \# Parking Spaces Per Studio or 1BR | parking_4 |
+| 4+-Family Min. \# Parking Spaces Per 2+ BR | NA (combined with parking_4) |
+| 4+-Family Connection to Sewer and/or Water Required | swr_connect_4 |
+| 4+-Family Connection or Proximity to Public Transit Required | tran_connect_4 |
+| 4+-Family Max. Height (# of stories) | stories_4 |
+| 4+-Family Max. Height (# of feet) | height_4 |
+| 4+-Family Floor to Area Ratio | far_4 |
+| 4+-Family Min. Unit Size (SF) | unit_size_4 |
+| 4+-Family Max. \# Bedrooms Per Unit | bedrooms_4 |
+| 4+-Family Max. \# Units Per Building | unit_qty_4 |
+| Special Notes | notes_special |
+| Tooltip Notes | notes_tooltip |
 
 ## R script {#section-rscript}
 

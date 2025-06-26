@@ -18,10 +18,11 @@ editor: visual
 The following variables names can be included in expressions within the constraints and definitions arrays of a \*.zoning file.
 
 | Variable name | Unit of observation | Source for value |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `bedrooms` | Dwelling unit | Value for `bedrooms` key in the `unit_info` array in the \*.bldg file. |
 | `bldg_depth` | Building | Value for `depth` key in the `bldg_info` array in the \*.bldg file. |
 | `bldg_width` | Building | Value for `width` key in the `bldg_info` array in the \*.bldg file. |
+| `dist_abbr` | Zoning | Taken from the `dist_abbr` field of the specific feature in the \*.zoning file |
 | `far` | Building/parcel | Floor area ratio calculated (with an appropriate unit conversion) from the sum of `gross_fl_area` values in the `level_info` array in the \*.bldg file and the `lot_area` value for the parcel centroid feature in the \*.parcel file. |
 | `fl_area` | Building | Sum of `gross_fl_area` values in the `level_info` array in the \*.bldg file. |
 | `floors` | Building | Number of floors in the building calculated as the maximum `level` value in the `level_info` array in the \*.bldg file. |
@@ -40,6 +41,7 @@ The following variables names can be included in expressions within the constrai
 | `n_ground_entry` | Building | Calculated as the sum of `qty` in the `unit_info`array in the \*.bldg file across all unit types where `ground_entry` has a value of `"True"`. |
 | `n_outside_entry` | Building | Calculated as the sum of `qty` in the `unit_info`array in the \*.bldg file across all unit types where `outside_entry` has a value of `"True"`. |
 | `parking_enclosed` | Building | Taken directly from the `parking` value in the `bldg_info` array in the \*.bldg file. |
+| `res_type` | Building | Residential use type calculated from one or more of the values in the \*.bldg file, based on the res_type definitions specified in the \*.zoning file. |
 | `roof_type` | Building | Taken directly from the `roof_type` value in the `building_info` array in the \*.bldg file. |
 | `sep_platting` | Building | Taken directly from the `sep_platting` value in the `building_info` array in the \*.bldg file. |
 | `total_bedrooms` | Building | Sum of values for the `bedrooms` key in the `unit_info` array in the \*.bldg file. |
@@ -49,4 +51,3 @@ The following variables names can be included in expressions within the constrai
 | `units_2bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 2 in the \*.bldg file. |
 | `units_3bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 3 in the \*.bldg file. |
 | `units_4bed` | Building | Sum of values for the `qty` key in the `unit_info` array, for all units where the value for `bedrooms` is 4 or more in the \*.bldg file. |
-| `dist_abbr` | Zoning | Taken from the `dist_abbr` field of the specific feature in the \*.zoning file |
