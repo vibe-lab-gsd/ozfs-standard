@@ -25,6 +25,8 @@ The following variables names can be included in expressions within the constrai
 | `dist_abbr` | Zoning | Taken from the `dist_abbr` field of the specific feature in the \*.zoning file |
 | `far` | Building/parcel | Floor area ratio calculated (with an appropriate unit conversion) from the sum of `gross_fl_area` values in the `level_info` array in the \*.bldg file and the `lot_area` value for the parcel centroid feature in the \*.parcel file. |
 | `fl_area` | Building | Sum of `gross_fl_area` values in the `level_info` array in the \*.bldg file. |
+| `fl_area_first` | Building | The value of the `gross_fl_area` of level one in the `level_info` array in the \*.bldg file. |
+| `fl_area_top` | Building | The value of the `gross_fl_area` of the highest level in the `level_info` array in the \*.bldg file. |
 | `floors` | Building | Number of floors in the building calculated as the maximum `level` value in the `level_info` array in the \*.bldg file. |
 | `height` | Building | Building height calculated from one or more of the `height_*` values in the `bldg_info` array in the \*.bldg file, based on the height definitions specified in the \*.zoning file. |
 | `height_deck` | Building | Taken directly from the `height_deck` value in the `bldg_info` array in the \*.bldg file. |
