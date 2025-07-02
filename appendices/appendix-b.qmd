@@ -5,13 +5,13 @@ execute:
   echo: false
   warning: false
 format:
-  docx:
-    reference-doc: ..\custom-reference-doc.docx
-#  html:
-#    self-contained: true
-#    theme: minty
-#    toc: true
-#    toc-location: left
+  # docx:
+  #   reference-doc: ..\custom-reference-doc.docx
+ html:
+   self-contained: true
+   theme: minty
+   toc: true
+   toc-location: left
 editor: visual
 ---
 
