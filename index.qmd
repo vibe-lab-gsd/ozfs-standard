@@ -37,7 +37,7 @@ Scholars and advocates in the United States have shown an increasing interest in
 
 ## Prior work
 
-An example of the type of research and analysis that is stymied by the lack of standardized, machine-readable zoning data is a study by Conway [-@conway_if_2021], which addresses the question of how statewide proposals to relax zoning restrictions in California might impact traffic congestion. That analysis required strong assumptions with regards to allowable setbacks, since these data were not available in a consistent format for municipalities across the state. These assumptions (derived from existing building footprints) were not unreasonable. The method probably overestimates allowable building footprints as often as it underestimated them, so the aggregated results about the overall increases in traffic congestion were probably valid. However, this approach would be less likely to yield useful results about the effects of the proposed policies on specific road segments or within small areas.
+An example of the type of research and analysis that is stymied by the lack of standardized, machine-readable zoning data is a study by Conway [-@conway_if_2021], which addresses the question of how statewide proposals to relax zoning restrictions in California might impact traffic congestion. That analysis required strong assumptions with regards to, for example, allowable setbacks, since these data were not available in a consistent format for municipalities across the state. These assumptions (derived from existing building footprints) were not unreasonable. The method might overestimate allowable building footprints as often as it underestimates them, so the estimated increases in traffic congestion were reasonable. However, this approach would be less likely to yield useful results about the effects of the proposed policies on specific road segments or within small areas.
 
 The largest existing effort to compile zoning regulations for municipalities throughout the United States into a comprehensive, nationwide database is the National Zoning Atlas (NZA) [@national_zoning_atlas_national_2025], a project led and founded by Sara Bronin [@national_zoning_atlas_national_2025-1]. NZA coordinates among local teams to encode zoning regulations. Early in the NZA data collection program, contributors would enter information from the zoning codes into a spreadsheet as tabular (rectangular) data, with a sheet for each municipality, a row for each zoning district, and a column for each of a large number of variables intended to comprehensively represent the regulations that could be represented in a zoning code [@bronin_how_2021]. NZA subsequently changed its data collection process to replace the use of spreadsheets with an online editor tool that was accessible to those who had registered with NZA [@bronin_how_2023]. The editor tool may have recorded data in a similar format to the spreadsheets and geospatial files that were used previously, although since these data sets are not shared publicly, NZA is free to modify its data structures from time to time according to its internal needs. The current data collection methodology is not publicly available [@national_zoning_atlas_how_2025]. Individual contributors are free to store and share the data they collect in any format, in addition to sharing it with NZA using their current data-entry tools. Tabular data formats seem to have been the most common.
 
@@ -146,9 +146,11 @@ The four examples below illustrate how zoning code text can be stored in the \*.
 
 #### Example 1: A single constraint value
 
-For the Dallas Agricultural District (cite Dallas zoning code), the required minimum side setback is simply the same value for every allowed use. The corresponding \*.zoning file input is shown in @fig-const-ex-1.
+In Dallas, the minimum is side setback is specified for agricultural districts as follows:
 
-> *Minimum side yard is 20 feet.*
+> *Minimum side yard is 20 feet.* [@CityOfDallas_51A_4_111]
+
+The corresponding *.zoning file input is shown in @fig-const-ex-1.
 
 ```{r}
 #| label: fig-const-ex-1
@@ -161,9 +163,11 @@ here("figures",
 
 #### Example 2: Using min_max field
 
-For the Cockrell Hill Single-Family District (cite Cockrell Hill zoning code), there is a list of expressions for the minumum side and rear setbacks where the maximum value must be selected. The corresponding \*.zoning file input is shown in @fig-const-ex-2.
+For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage. 
 
-> *No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater*
+> *No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater* [@CockrellHillZoning_2010, pp. 13]
+
+This requires a list of expressions for the minimum side and rear setbacks where the selected value should be the greater of the result of the two expressions. The corresponding \*.zoning file input is shown in @fig-const-ex-2.
 
 ```{r}
 #| label: fig-const-ex-2
@@ -191,7 +195,7 @@ here("figures",
 
 #### Example 4: Complex conditions
 
-While the computer will not be able to interpret complex conditions like those listed for the Urban Center District in Addison (cite Addison zoning code), they can still be stored in the \*.zoning file as shown in @fig-const-ex-4.
+While a software algorithm may not be able to interpret complex conditions like those listed for the Urban Center District in Addison (cite Addison zoning code), they can still be stored in the \*.zoning file as shown in @fig-const-ex-4.
 
 > *The build-to line for primary buildings, structures, walls and fences shall be ten feet on all public street frontages except along residential streets (category C) and residential mew streets (category D), which shall have build-to lines as established later in this section. Up to 25 percent of any street frontage of a building may vary from this build-to line, but shall not be less than five feet, nor more than 25 feet.*
 >
@@ -324,7 +328,7 @@ The most immediate opportunities for improvement that we have identified are the
 
 ## Overlay districts
 
-The current version of the \*.zoning file structure indicates whether a district is an overlay district, but does not require any information about the regulations within overlay districts. Future extensions of the data standard could include a sensible and useful scheme for storing data on the regulations in overlay district in a way that software can easily determine how to resolve the interactions between the requirements in overlay districts and those in the base districts that they overlap.
+The current version of the \*.zoning file structure indicates whether a district is an overlay district, but does not require any information about the regulations within overlay districts. Future extensions of the data standard could include a sensible and useful scheme for storing data on the regulations in overlay districts in a way that software can easily determine how to resolve the interactions between the requirements in overlay districts and those in the base districts that they overlap.
 
 ## Site grade
 
