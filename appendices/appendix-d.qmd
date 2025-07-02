@@ -121,10 +121,11 @@ here("figures",
   knitr::include_graphics()
 ```
 
-|  |  |  |  |  |  |  |
-|----|----|----|----|----|----|----|
++---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
 | **setback_front_1** | **setback_front_rule1_condition_1** | **setback_front_rule1_criterion_1** | **setback_front_rule1_expression1_1** | **setback_front_rule1_expression2_1** | **setback_front_rule2_condition_1** | **setback_front_rule2_expression_1** |
-|  | height \<= 36 | min | height | 30 | height \> 36 | 40 |
++---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
+|                     | height \<= 36                       | min                                 | height                                | 30                                    | height \> 36                        | 40                                   |
++---------------------+-------------------------------------+-------------------------------------+---------------------------------------+---------------------------------------+-------------------------------------+--------------------------------------+
 
 ### Note on tabular data restrictions
 
@@ -256,92 +257,175 @@ here("figures",
 
 The following table shows the original NZA column names and the updated column names we used for the code to run smoothly.
 
-|  |  |
-|----|----|
-| **NZA Column Names** | **Updated Column Names** |
-| Jurisdiction | muni_name |
-| County | county |
-| Abbreviated District Name | dist_abbr |
-| Full District Name | dist_name |
-| District Mapped | mapped |
-| District Mapped But Extinct | mapped_extinct |
-| Overlay | overlay |
-| Type of Zoning District | dist_type |
-| Affordable Housing District | aff_housing_dist |
-| Elderly Housing District | elder_housing_dist |
-| 1-Family Treatment | use_permitted_1 |
-| 2-Family Treatment | use_permitted_2 |
-| 3-Family Treatment | use_permitted_3 |
-| 4+-Family Treatment | use_permitted_4 |
-| 1-Family Min. Lot (ACRES) | lot_size_1 |
-| 1-Family Front Setback (# of feet) | setback_front_1 |
-| 1-Family Side Setback (# of feet) | setback_side_int_1 |
-| NA (new constraint) | setback_side_ext_1 |
-| 1-Family Rear Setback (# of feet) | setback_rear_1 |
-| 1-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_1 |
-| 1-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_1 |
-| 1-Family Min. \# Parking Spaces | parking_1 |
-| 1-Family Max. Height (# of stories) | stories_1 |
-| 1-Family Max. Height (# of feet) | height_1 |
-| 1-Family Floor to Area Ratio | far_1 |
-| 1-Family Min. Unit Size (SF) | unit_size_1 |
-| 2-Family Affordable Housing Only | aff_housing_2 |
-| 2-Family Elderly Housing Only | elder_housing_2 |
-| 2-Family Min. Lot (ACRES) | lot_size_2 |
-| 2-Family Max. Density (UNITS/ACRE) | unit_density_2 |
-| 2-Family Front Setback (# of feet) | setback_front_2 |
-| 2-Family Side Setback (# of feet) | setback_side_int_2 |
-| NA (new constraint) | setback_side_ext_2 |
-| 2-Family Rear Setback (# of feet) | setback_rear_2 |
-| 2-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_2 |
-| 2-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_2 |
-| 2-Family Min. \# Parking Spaces Per Studio or 1BR | parking_2 |
-| 2-Family Min. \# Parking Spaces Per 2+ BR | NA (combined with parking_2) |
-| 2-Family Max. Height (# of stories) | stories_2 |
-| 2-Family Max. Height (# of feet) | height_2 |
-| 2-Family Floor to Area Ratio | far_2 |
-| 2-Family Min. Unit Size (SF) | unit_size_2 |
-| 3-Family Affordable Housing Only | aff_housing_3 |
-| 3-Family Elderly Housing Only | elder_housing_3 |
-| 3-Family Min. Lot (ACRES) | lot_size_3 |
-| 3-Family Max. Density (UNITS/ACRE) | unit_density_3 |
-| 3-Family Front Setback (# of feet) | setback_front_3 |
-| 3-Family Side Setback (# of feet) | setback_side_int_3 |
-| NA (new constraint) | setback_side_ext_3 |
-| 3-Family Rear Setback (# of feet) | setback_rear_3 |
-| 3-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_3 |
-| 3-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_3 |
-| 3-Family Min. \# Parking Spaces Per Studio or 1BR | parking_3 |
-| 3-Family Min. \# Parking Spaces Per 2+ BR | NA (combined with parking_3) |
-| 3-Family Connection to Sewer and/or Water Required | swr_connect_3 |
-| 3-Family Connection or Proximity to Public Transit Required | tran_connect_3 |
-| 3-Family Max. Height (# of stories) | stories_3 |
-| 3-Family Max. Height (# of feet) | height_3 |
-| 3-Family Floor to Area Ratio | far_3 |
-| 3-Family Min. Unit Size (SF) | unit_size_3 |
-| 3-Family Max. \# Bedrooms Per Unit | bedrooms_3 |
-| 4+-Family Affordable Housing Only | aff_housing_4 |
-| 4+-Family Elderly Housing Only | elder_housing_4 |
-| 4+-Family Min. Lot (ACRES) | lot_size_4 |
-| 4+-Family Max. Density (UNITS/ACRE) | unit_density_4 |
-| 4+-Family Front Setback (# of feet) | setback_front_4 |
-| 4+-Family Side Setback (# of feet) | setback_side_int_4 |
-| NA (new constraint) | setback_side_ext_4 |
-| 4+-Family Rear Setback (# of feet) | setback_rear_4 |
-| 4+-Family Max. Lot Coverage - Buildings (%) | lot_cov_bldg_4 |
-| 4+-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_4 |
-| 4+-Family Min. \# Parking Spaces Per Studio or 1BR | parking_4 |
-| 4+-Family Min. \# Parking Spaces Per 2+ BR | NA (combined with parking_4) |
-| 4+-Family Connection to Sewer and/or Water Required | swr_connect_4 |
-| 4+-Family Connection or Proximity to Public Transit Required | tran_connect_4 |
-| 4+-Family Max. Height (# of stories) | stories_4 |
-| 4+-Family Max. Height (# of feet) | height_4 |
-| 4+-Family Floor to Area Ratio | far_4 |
-| 4+-Family Min. Unit Size (SF) | unit_size_4 |
-| 4+-Family Max. \# Bedrooms Per Unit | bedrooms_4 |
-| 4+-Family Max. \# Units Per Building | unit_qty_4 |
-| Special Notes | notes_special |
-| Tooltip Notes | notes_tooltip |
++------------------------------------------------------------------+----------------------------------+
+| **NZA Column Names**                                             | **Updated Column Names**         |
++------------------------------------------------------------------+----------------------------------+
+| Jurisdiction                                                     | muni_name                        |
++------------------------------------------------------------------+----------------------------------+
+| County                                                           | county                           |
++------------------------------------------------------------------+----------------------------------+
+| Abbreviated District Name                                        | dist_abbr                        |
++------------------------------------------------------------------+----------------------------------+
+| Full District Name                                               | dist_name                        |
++------------------------------------------------------------------+----------------------------------+
+| District Mapped                                                  | mapped                           |
++------------------------------------------------------------------+----------------------------------+
+| District Mapped But Extinct                                      | mapped_extinct                   |
++------------------------------------------------------------------+----------------------------------+
+| Overlay                                                          | overlay                          |
++------------------------------------------------------------------+----------------------------------+
+| Type of Zoning District                                          | dist_type                        |
++------------------------------------------------------------------+----------------------------------+
+| Affordable Housing District                                      | aff_housing_dist                 |
++------------------------------------------------------------------+----------------------------------+
+| Elderly Housing District                                         | elder_housing_dist               |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Treatment                                               | use_permitted_1                  |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Treatment                                               | use_permitted_2                  |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Treatment                                               | use_permitted_3                  |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Treatment                                              | use_permitted_4                  |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Min. Lot (ACRES)                                        | lot_size_1                       |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Front Setback (# of feet)                               | setback_front_1                  |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Side Setback (# of feet)                                | setback_side_int_1               |
++------------------------------------------------------------------+----------------------------------+
+| NA (new constraint)                                              | setback_side_ext_1               |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Rear Setback (# of feet)                                | setback_rear_1                   |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_1                   |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_1                    |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Min. \# Parking Spaces                                  | parking_1                        |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Max. Height (# of stories)                              | stories_1                        |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Max. Height (# of feet)                                 | height_1                         |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Floor to Area Ratio                                     | far_1                            |
++------------------------------------------------------------------+----------------------------------+
+| 1-Family Min. Unit Size (SF)                                     | unit_size_1                      |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Affordable Housing Only                                 | aff_housing_2                    |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Elderly Housing Only                                    | elder_housing_2                  |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Min. Lot (ACRES)                                        | lot_size_2                       |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Max. Density (UNITS/ACRE)                               | unit_density_2                   |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Front Setback (# of feet)                               | setback_front_2                  |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Side Setback (# of feet)                                | setback_side_int_2               |
++------------------------------------------------------------------+----------------------------------+
+| NA (new constraint)                                              | setback_side_ext_2               |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Rear Setback (# of feet)                                | setback_rear_2                   |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_2                   |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_2                    |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Min. \# Parking Spaces Per Studio or 1BR                | parking_2                        |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Min. \# Parking Spaces Per 2+ BR                        | NA (combined with parking_2)     |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Max. Height (# of stories)                              | stories_2                        |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Max. Height (# of feet)                                 | height_2                         |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Floor to Area Ratio                                     | far_2                            |
++------------------------------------------------------------------+----------------------------------+
+| 2-Family Min. Unit Size (SF)                                     | unit_size_2                      |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Affordable Housing Only                                 | aff_housing_3                    |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Elderly Housing Only                                    | elder_housing_3                  |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Min. Lot (ACRES)                                        | lot_size_3                       |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Max. Density (UNITS/ACRE)                               | unit_density_3                   |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Front Setback (# of feet)                               | setback_front_3                  |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Side Setback (# of feet)                                | setback_side_int_3               |
++------------------------------------------------------------------+----------------------------------+
+| NA (new constraint)                                              | setback_side_ext_3               |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Rear Setback (# of feet)                                | setback_rear_3                   |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Max. Lot Coverage - Buildings (%)                       | lot_cov_bldg_3                   |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Max. Lot Coverage - Buildings & Impervious Surface (%)  | lot_cov_imp_3                    |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Min. \# Parking Spaces Per Studio or 1BR                | parking_3                        |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Min. \# Parking Spaces Per 2+ BR                        | NA (combined with parking_3)     |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Connection to Sewer and/or Water Required               | swr_connect_3                    |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Connection or Proximity to Public Transit Required      | tran_connect_3                   |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Max. Height (# of stories)                              | stories_3                        |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Max. Height (# of feet)                                 | height_3                         |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Floor to Area Ratio                                     | far_3                            |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Min. Unit Size (SF)                                     | unit_size_3                      |
++------------------------------------------------------------------+----------------------------------+
+| 3-Family Max. \# Bedrooms Per Unit                               | bedrooms_3                       |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Affordable Housing Only                                | aff_housing_4                    |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Elderly Housing Only                                   | elder_housing_4                  |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Min. Lot (ACRES)                                       | lot_size_4                       |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. Density (UNITS/ACRE)                              | unit_density_4                   |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Front Setback (# of feet)                              | setback_front_4                  |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Side Setback (# of feet)                               | setback_side_int_4               |
++------------------------------------------------------------------+----------------------------------+
+| NA (new constraint)                                              | setback_side_ext_4               |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Rear Setback (# of feet)                               | setback_rear_4                   |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. Lot Coverage - Buildings (%)                      | lot_cov_bldg_4                   |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. Lot Coverage - Buildings & Impervious Surface (%) | lot_cov_imp_4                    |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Min. \# Parking Spaces Per Studio or 1BR               | parking_4                        |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Min. \# Parking Spaces Per 2+ BR                       | NA (combined with parking_4)     |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Connection to Sewer and/or Water Required              | swr_connect_4                    |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Connection or Proximity to Public Transit Required     | tran_connect_4                   |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. Height (# of stories)                             | stories_4                        |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. Height (# of feet)                                | height_4                         |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Floor to Area Ratio                                    | far_4                            |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Min. Unit Size (SF)                                    | unit_size_4                      |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. \# Bedrooms Per Unit                              | bedrooms_4                       |
++------------------------------------------------------------------+----------------------------------+
+| 4+-Family Max. \# Units Per Building                             | unit_qty_4                       |
++------------------------------------------------------------------+----------------------------------+
+| Special Notes                                                    | notes_special                    |
++------------------------------------------------------------------+----------------------------------+
+| Tooltip Notes                                                    | notes_tooltip                    |
++------------------------------------------------------------------+----------------------------------+
 
 ## R script {#section-rscript}
 
@@ -492,10 +576,11 @@ make_ozfs <- function(nza_files_folder,
 
 ## Returns a list following OZFS standards 
 ## that is ready to be switched to a geojosn
-atlas_to_ozfs <- function(nza_file_path, #Path to one NZA file (must be xlsx or csv)
-                          col_descriptions, #col_descriptions data frame
-                          use_type_indicators, #use_type_indicators list
-                          version_date = "2024-08-14"){ #the date the zoning ordinance was updated
+atlas_to_ozfs <- function(
+    nza_file_path, #Path to one NZA file (must be xlsx or csv)
+    col_descriptions, #col_descriptions data frame
+    use_type_indicators, #use_type_indicators list
+    version_date = "2024-08-14"){ #the date the zoning ordinance was updated
   
   if (file.exists(nza_file_path)){
     splt <- strsplit(nza_file_path, "[.]")[[1]]
@@ -516,31 +601,33 @@ atlas_to_ozfs <- function(nza_file_path, #Path to one NZA file (must be xlsx or 
                       version = "0.5.0",
                       muni_name = atlas_df[[1,"muni_name"]],
                       date = version_date,
-                      definitions = list(height = list(list(condition = "roof_type == 'flat'",
-                                                            expression = "height_top"),
-                                                       list(condition = "roof_type == 'hip'",
-                                                            expression = "0.5 * (height_top + height_eave)"),
-                                                       list(condition = "roof_type == 'mansard'",
-                                                            expression = "height_deck"),
-                                                       list(condition = "roof_type == 'gable'",
-                                                            expression = "0.5 * (height_top + height_eave)"),
-                                                       list(condition = "roof_type == 'skillion'",
-                                                            expression = "0.5 * (height_top + height_eave)"),
-                                                       list(condition = "roof_type == 'gambrel'",
-                                                            expression = "0.5 * (height_top + height_eave)")),
-                                         res_type = list(list(condition = "total_units == 1",
-                                                               expression = "'1_unit'"),
-                                                          list(condition = "total_units == 2",
-                                                               expression = "'2_unit'"),
-                                                         list(condition = list("total_units > 2", 
-                                                                               "n_outside_entry == total_units",
-                                                                               "n_ground_entry == total_units",
-                                                                               "sep_platting == TRUE"),
-                                                              expression = "'townhome'"),
-                                                          list(condition = "total_units == 3",
-                                                               expression = "'3_unit'"),
-                                                          list(condition = "total_units > 3",
-                                                               expression = "'4_plus'"))),
+                      definitions = list(
+                        height = list(
+                          list(condition = "roof_type == 'flat'",
+                               expression = "height_top"),
+                          list(condition = "roof_type == 'hip'",
+                               expression = "0.5 * (height_top + height_eave)"),
+                          list(condition = "roof_type == 'mansard'",
+                               expression = "height_deck"),
+                          list(condition = "roof_type == 'gable'",
+                               expression = "0.5 * (height_top + height_eave)"),
+                          list(condition = "roof_type == 'skillion'",
+                               expression = "0.5 * (height_top + height_eave)"),
+                          list(condition = "roof_type == 'gambrel'",
+                               expression = "0.5 * (height_top + height_eave)")
+                          ),
+                        res_type = list(
+                          list(condition = "total_units == 1",
+                               expression = "'1_unit'"),
+                          list(condition = "total_units == 2",
+                               expression = "'2_unit'"),
+                          list(condition = list("total_units > 2",                                                               "n_outside_entry == total_units",
+                                                "n_ground_entry == total_units",                                                 "sep_platting == TRUE"),
+                               expression = "'townhome'"),
+                          list(condition = "total_units == 3",
+                               expression = "'3_unit'"),
+                          list(condition = "total_units > 3",
+                               expression = "'4_plus'"))),
                       features = list())
   
   
@@ -578,7 +665,8 @@ organize_feature <- function(atlas_row_df,
     
     names(filtered_columns) <- gsub(indicator,"",names(filtered_columns))
     
-    if (!is.na(filtered_columns$use_permitted) & filtered_columns$use_permitted == "Allowed/Conditional"){
+    if (!is.na(filtered_columns$use_permitted) & 
+        filtered_columns$use_permitted == "Allowed/Conditional"){
       uses_permitted <- c(uses_permitted, use_name)
     }
     
@@ -634,7 +722,8 @@ organize_feature <- function(atlas_row_df,
     filter(col_name %in% gsub("_[^_]+$","",names(atlas_row_df)))
   
   if (nrow(constraints_df) > 0){
-    features_list$properties$constraints <- make_constraints(constraints_df, separated_uses)
+    features_list$properties$constraints <- 
+      make_constraints(constraints_df, separated_uses)
   }
   
   if (length(features_list$properties$constraints) == 0){
@@ -682,7 +771,8 @@ make_constraints <- function(constraints_df, separated_uses){
         
         # if filtered_data is blank or NA, 
         # it means there is no value for that constraint
-        # we make either of those scenarios NULL so that it gets the proper use groupings
+        # we make either of those scenarios NULL so that it gets the 
+        # proper use groupings
         if (ncol(filtered_data) == 0){
           filtered_data <- NA
         } else if (rowSums(is.na(filtered_data)) == ncol(filtered_data)){
@@ -695,7 +785,8 @@ make_constraints <- function(constraints_df, separated_uses){
       }
       
       # Create a unique key for each data frame by serializing to a character string
-      key_vec <- sapply(filtered_separated_uses, function(x) paste(serialize(x, NULL), collapse = "-"))
+      key_vec <- sapply(filtered_separated_uses, 
+                        function(x) paste(serialize(x, NULL), collapse = "-"))
       
       # Group the list element names by the serialization key
       grouped_uses <- split(names(filtered_separated_uses), key_vec)
@@ -720,7 +811,8 @@ make_constraints <- function(constraints_df, separated_uses){
         if (grouped_uses_count > 1 & !is.null(organized_rules)){
           
           for (rule_num in 1:length(organized_rules)){
-            organized_rules[[rule_num]]$condition <- append(organized_rules[[rule_num]]$condition, list(use_condition))
+            organized_rules[[rule_num]]$condition <- 
+              append(organized_rules[[rule_num]]$condition, list(use_condition))
           }
         }
         
@@ -729,7 +821,8 @@ make_constraints <- function(constraints_df, separated_uses){
       
       # only add the organized rule list to the constraints list if it has values
       if (length(rule_list) > 0){
-        constraints_list[[constraint_name]][[minmax_vals[[minmax_loop]]]] <- rule_list
+        constraints_list[[constraint_name]][[minmax_vals[[minmax_loop]]]] <-
+          rule_list
       } 
     }
     
@@ -755,12 +848,16 @@ organize_rules <- function(df_with_rules, constraint_name){
   
   while (ncol(df) > 0){
     counter <- counter + 1
-    df <- df_with_rules[1 ,grep(paste0("rule", counter), names(df_with_rules))]
+    df <- df_with_rules[1,
+                        grep(paste0("rule", counter), 
+                             names(df_with_rules))]
   }
   
   rules_count <- counter - 1
   
-  df_just_rules <- df_with_rules[1 ,grep(paste0(constraint_name, "_rule"), names(df_with_rules))]
+  df_just_rules <- df_with_rules[1,
+                                 grep(paste0(constraint_name, "_rule"), 
+                                      names(df_with_rules))]
   if (is.null(df_with_rules[[constraint_name]])){
     df_no_rules <- data.frame(constraint = NA)
   } else{
@@ -781,7 +878,10 @@ organize_rules <- function(df_with_rules, constraint_name){
     rule_list <- list()
     
     # New df with an isolated rule
-    rule_df <- df_with_rules[ ,grep(paste0(constraint_name,"_rule", i), names(df_with_rules))]
+    rule_df <- df_with_rules[,
+                            grep(paste0(constraint_name,
+                                          "_rule", i), 
+                                 names(df_with_rules))]
     
     # if it has one of the fields, we will add it to rule_list
     
@@ -789,13 +889,17 @@ organize_rules <- function(df_with_rules, constraint_name){
     # logical_operator
     if (sum(grep("logical_operator", names(rule_df))) > 0 ){
       # assign value to logical_operator
-      logical_operator <- rule_df[[1, grep("logical_operator",names(rule_df))]]
+      logical_operator <- rule_df[[1, 
+                                   grep("logical_operator",
+                                        names(rule_df))]]
     }
     
     # conditions
     if (sum(grep("condition", names(rule_df))) > 0 ){
       # make a df to assign multiple values to the array of conditions
-      condition_df <- rule_df[ , grep("condition",names(rule_df))]
+      condition_df <- rule_df[, 
+                              grep("condition",
+                                   names(rule_df))]
       
       if (is.null(logical_operator)){
         condition_value <- condition_df[[1,1]]
@@ -803,34 +907,49 @@ organize_rules <- function(df_with_rules, constraint_name){
         condition_list <- c()
         for (j in 1:ncol(condition_df)){
           condition_list <- c(condition_list,condition_df[[1,j]])
-          condition_value <- paste(condition_list, collapse = paste0(" ", tolower(logical_operator), " "))
+          condition_value <- paste(condition_list, 
+                                   collapse = paste0(" ", 
+                                                     tolower(logical_operator),
+                                                     " "))
         }
         
       }
-      rule_list$condition <- append(rule_list$condition,list(condition_value))
+      rule_list$condition <- append(rule_list$condition,
+                                    list(condition_value))
       
     }
     
     # criterion (was changed to min_max)
     if (sum(grep("criterion", names(rule_df))) > 0 ){
       
-      criterion <- rule_df[[1, grep("criterion",names(rule_df))[1]]]
+      criterion <- rule_df[[1, 
+                            grep("criterion",
+                                 names(rule_df))[1]]]
       
       if (criterion == "dependent"){
-        if (sum(grep("more_restrictive", names(rule_df))) > 0 ){
-          rule_list$condition <- append(rule_list$condition, rule_df[[1, grep("more_restrictive",names(rule_df))[1]]])
+        if (sum(grep("more_restrictive", 
+                     names(rule_df))) > 0 ){
+          rule_list$condition <- append(rule_list$condition, 
+                                        rule_df[[1, 
+                                                 grep("more_restrictive",
+                                                      names(rule_df))[1]]])
         } else{ # there is no explanation for some reason
-          rule_list$condition <- append(rule_list$condition, "Special condition that wasn't stated")
+          rule_list$condition <- append(rule_list$condition, 
+                                        "Special condition that wasn't stated")
         }
       } else{
-        rule_list$min_max <- rule_df[[1, grep("criterion",names(rule_df))[1]]]
+        rule_list$min_max <- rule_df[[1, 
+                                      grep("criterion",
+                                           names(rule_df))[1]]]
       }
     }
     
     # expression(s)
     if (sum(grep("expression", names(rule_df))) > 0 ){
       # make a df to see if it is more than one expression and to extract data
-      df_expression <- rule_df[ , grep(paste0("expression"), names(rule_df))]
+      df_expression <- rule_df[, 
+                               grep(paste0("expression"), 
+                                    names(rule_df))]
       
       for (j in 1:ncol(df_expression)){
         rule_list$expression[[j]] <- as.character(df_expression[[1,j]])
@@ -852,8 +971,10 @@ add_geometry_to_ozfs <- function(boundary_file_path, ozfs_list){
   for (i in 1:length(ozfs_list$features)){
     zoning_dist_abbr <- ozfs_list$features[[i]]$properties$dist_abbr
     city <- ozfs_list$features[[i]]$properties$muni_name
+    
     for (j in 1:length(boundaries$features)){
-      boundary_dist_name <- boundaries$features[[j]]$properties$`Abbreviated District Name`
+      boundary_dist_name <- 
+        boundaries$features[[j]]$properties$`Abbreviated District Name`
       if (zoning_dist_abbr == boundary_dist_name){
         ozfs_list$features[[i]]$geometry <- boundaries$features[[j]]$geometry
       }
@@ -870,7 +991,8 @@ add_extra_overlays <- function(extra_overlay_geom_file, ozfs_list){
   
   city_idx <- c()
   for (k in 1:length(extra_overlays$features)){
-    if (extra_overlays$features[[k]]$properties$muni_name == ozfs_list$muni_name){
+    if (extra_overlays$features[[k]]$properties$muni_name == 
+        ozfs_list$muni_name){
       city_idx <- c(city_idx, k)
     }
   }
@@ -893,7 +1015,10 @@ add_extra_overlays <- function(extra_overlay_geom_file, ozfs_list){
     } else{ # if the feature doesn't exist, we create a new feature and add it
       # add a new feature
       overlay_feature_i$properties$muni_name <- NULL
-      overlay_feature_i$properties$planned_dev <- ifelse(abbr %in% c("PD","PRD"),TRUE,FALSE)
+      
+      overlay_feature_i$properties$planned_dev <- 
+        ifelse(abbr %in% c("PD","PRD"),TRUE,FALSE)
+      
       overlay_feature_i$properties$overlay <- TRUE
       
       # add a the overlay feature to the end of the features
