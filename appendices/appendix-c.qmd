@@ -29,6 +29,8 @@ The `roof_type` variable in the OZFS \*.bldg file can take any of the following 
 
 -   `"gambrel"`: A roof with two slopes on each of two opposite sides.
 
+-   `"barrel"`: A roof with arcs on each of two opposite sides.
+
 ```{r fig-roofs}
 
 library(tidyverse)
@@ -50,3 +52,4 @@ The table below indicate which roof height variables must be defined for each of
 | `hip`      |      x       |       x        |       x       |               |
 | `gable`    |      x       |       x        |       x       |               |
 | `gambrel`  |      x       |       x        |       x       |               |
+| `barrel`   |      x       |       x        |       x       |               |
