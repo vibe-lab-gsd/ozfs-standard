@@ -150,7 +150,7 @@ In Dallas, the minimum is side setback is specified for agricultural districts a
 
 > *Minimum side yard is 20 feet.* [@CityOfDallas_51A_4_111]
 
-The corresponding *.zoning file input is shown in @fig-const-ex-1.
+The corresponding \*.zoning file input is shown in @fig-const-ex-1.
 
 ```{r}
 #| label: fig-const-ex-1
@@ -163,7 +163,7 @@ here("figures",
 
 #### Example 2: Using min_max field
 
-For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage. 
+For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage.
 
 > *No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater* [@CockrellHillZoning_2010, pp. 13]
 
