@@ -39,11 +39,11 @@ The following constraints are defined for use in the constraints array in the \*
 | `setback_side_int` | The distance from the building to the interior side of a parcel (the side that is adjacent to another parcel). | Feet |
 | `setback_side_sum` | The sum of both side setbacks. | Feet |
 | `stories` | The number of stories in a building | Number of stories |
-| `unit_0bed` | The number of studio (zero-bedroom) units in a building | Number of units |
-| `unit_1bed` | The number of one-bedroom units in a building | Number of units |
-| `unit_2bed` | The number of two-bedroom units in a building | Number of units |
-| `unit_3bed` | The number of three-bedroom units in a building | Number of units |
-| `unit_4bed` | The number of four-bedroom units in a building | Number of units |
+| `units_0bed` | The number of studio (zero-bedroom) units in a building | Number of units |
+| `units_1bed` | The number of one-bedroom units in a building | Number of units |
+| `units_2bed` | The number of two-bedroom units in a building | Number of units |
+| `units_3bed` | The number of three-bedroom units in a building | Number of units |
+| `units_4bed` | The number of four-bedroom units in a building | Number of units |
 | `unit_density` | The number of housing units per land area of the parcel | Units per acre |
 | `unit_pct_0bed` | The percentage of housing units in a building that are studio (zero-bedroom) units | Whole-number percentage points |
 | `unit_pct_1bed` | The percentage of housing units in a building that are one-bedroom units | Whole-number percentage points |
