@@ -284,7 +284,7 @@ As noted in the section on zoning constraints, there are differences among zonin
 
 If the building includes towers, chimneys, antennas, or mechanical structures, the (maximum) height of these (from the roof) can optionally be specified with the `height_tower` key.
 
-The `sep_platted` key is used to indicate whether each until in the building would be on a separately platted parcel (this may be used to determine whether the building meet's a municipality's definition of a townhome). There is also an optional `parking` key to indicate the number of parking spaces contained within the building's structure (i.e. in a garage).
+The `sep_platting` key is used to indicate whether each until in the building would be on a separately platted parcel and the `unit_separation` key describes how units are separated (by a "party_wall", a "fire_wall", or an "open_area"). These keys may be used to determine whether the building meet's a municipality's definition of a townhome. There is also an optional `parking` key to indicate the number of parking spaces contained within the building's structure (i.e. in a garage).
 
 ### Level information
 
