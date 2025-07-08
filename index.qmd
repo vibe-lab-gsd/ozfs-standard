@@ -8,6 +8,10 @@ authors:
     affiliation: Harvard Graduate School of Design
   - name: Houpu Li
     affiliation: Harvard Graduate School of Design
+  - name: Paul Salama
+    affiliation: Independent
+  - name: Elizabeth Christoforetti
+    affiliation: Havard Graduate School of Design
 abstract: >
   Efforts to conduct detailed analysis of the variation in and consequences of zoning regulations have been hampered by the lack of standardized, machine-readable data on the requirements described in the texts of municipal zoning codes. Existing efforts to assemble data on zoning regulations have relied on database structures that are not well-suited to the complexity of zoning regulations. In this paper, we introduce and describe the Open Zoning Feed Specification (OZFS) standard as a recommended format for describing zoning regulations, parcel geometry, and building characteristics. We introduce a sample dataset that uses the OZFS standard to describe zoning regulations and parcel geometries for a set of 162 municipalities in the Dallas-Fort Worth region of Texas. The OZFS data standard offers a foundation on which software can be developed to analyze zoning regulations in greater detail than has previously been possible to do at a regional scale.
 bibliography: ozfs.bib
@@ -150,7 +154,7 @@ In Dallas, the minimum is side setback is specified for agricultural districts a
 
 > *Minimum side yard is 20 feet.* [@CityOfDallas_51A_4_111]
 
-The corresponding *.zoning file input is shown in @fig-const-ex-1.
+The corresponding \*.zoning file input is shown in @fig-const-ex-1.
 
 ```{r}
 #| label: fig-const-ex-1
@@ -163,7 +167,7 @@ here("figures",
 
 #### Example 2: Using min_max field
 
-For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage. 
+For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage.
 
 > *No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater* [@CockrellHillZoning_2010, pp. 13]
 
