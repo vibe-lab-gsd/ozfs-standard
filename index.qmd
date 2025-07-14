@@ -199,7 +199,7 @@ here("figures",
 
 #### Example 4: Complex conditions
 
-While a software algorithm may not be able to interpret complex conditions like those listed for the Urban Center District in Addison (cite Addison zoning code), they can still be stored in the \*.zoning file as shown in @fig-const-ex-4.
+While a software algorithm may not be able to interpret complex conditions like those listed for the Urban Center District in Addison (cite Addison zoning code), they can still be stored in the \*.zoning file as shown in @fig-const-ex-4. Note that the setback exceptions for parts of the block face were not encoded since the current OZFS standard assumes a relatively rectangular building with no specific orientation.
 
 > *The build-to line for primary buildings, structures, walls and fences shall be ten feet on all public street frontages except along residential streets (category C) and residential mew streets (category D), which shall have build-to lines as established later in this section. Up to 25 percent of any street frontage of a building may vary from this build-to line, but shall not be less than five feet, nor more than 25 feet.*
 >
@@ -337,6 +337,12 @@ The current version of the \*.zoning file structure indicates whether a district
 ## Site grade
 
 The \*.parcel file currently includes information about the two-dimensional geometry of each parcel, but does not include any information about grades and elevations. This information could be relevant for some zoning analysis where the grade might have an effect, for example, on how the height of a building is measured. Future extensions of the data standard could incorporate information about grades and elevations in the \*.parcel file. Keys could also be added to the \*.zoning file to specify how site grade might influence the definitions of building heights in each municipality. Our initial test cases were in the Dallas-Forth Worth region, where there is minimal variation in elevation.
+
+## Building Representation
+
+The current \*.bldg file structure is only capable of describing rectangular buildings by encoding the width and depth of the building. A method to describe building's with a more complex footprint could be explored in future versions of the data standard. This could potentially be accomplished by adding geometry to the \*.bldg file in a similar way geometry is contained in the \*.parcel file.
+
+Another addition could include ways to describe the orientation of the building in both the \*.bldg file and the \*.zoning file. The current data standard assumes that the building can be oriented in any direction, but there may be cases where the zoning code requires the building to be oriented in a specific way. This addition would require distinguishing and labeling the sides of the building in the \*.bldg file and adding building orientation constraints to the \*.zoning file.
 
 # Conclusion
 
