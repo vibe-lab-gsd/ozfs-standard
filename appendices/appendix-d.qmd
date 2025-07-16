@@ -201,18 +201,6 @@ The `atlas_to_ozfs()` function has the following inputs:
 
 -   `col_descriptions:` The col_descriptions data frame created from the col_descriptions file
 
--   `use_type_indicators:` A list of the use_type_indicators, or the suffixes that identify the uses. This list is created in the `make_ozfs()` function and contains the following variables:
-
-    -   1_unit = "\_1"
-
-    -   2_unit = "\_2"
-
-    -   3_unit = "\_3"
-
-    -   4_plus = "-4"
-
-    -   townhome = "th"
-
 -   `version_date:` The last date that the zoning code was updated.
 
 The function returns a list following OZFS standards that is ready to be transformed into a geojson.
@@ -220,6 +208,18 @@ The function returns a list following OZFS standards that is ready to be transfo
 #### organize_feature()
 
 This function is used during the process of creating the OZFS formatted list in the `atlas_to_ozfs()` function. It takes in one row of the zoning atlas data frame (`atlas_row_df`), the `col_descriptions`, and the `use_type_indicators`, and returns a list that mimics what that district's feature array will be in the OZFS.
+
+The `use_type_indicators` variable is a list describing the name that the land use designation corresponds to. If there are no columns describing the use_type_indicator values, then the default we used is shown below.
+
+-   1_unit = "\_1"
+
+-   2_unit = "\_2"
+
+-   3_unit = "\_3"
+
+-   4_plus = "-4"
+
+-   townhome = "th"
 
 #### make_constraints()
 
@@ -243,7 +243,7 @@ This function simply takes the list that was created following OZFS, converts it
 
 ### Manual Adjustments
 
-After running the r script, we made a few manual adjustments to the definitions that appear at top level of the .zoning file. The R script created generic height and res_type definitions that have common definitions of height and have res_types that match the way NZA represented residential uses. The layout of these generic definitions are shown in the figure below.
+After running the r script, we made a few manual adjustments to the definitions that appear at the top level of the .zoning file. The R script created generic height and res_type definitions that have common definitions of height and have res_types that match the way NZA represented residential uses. The layout of these generic definitions are shown in the figure below.
 
 ```{r}
 #| fig-cap: "Generic definitions"
@@ -253,15 +253,11 @@ here("figures",
   knitr::include_graphics()
 ```
 
-After updating the generic definitions manually, we created a function called `update_res_types()` that changed any conditions relying on res_type to match the res_type names that were updated manually. To avoid this step in the future, the use_type_indicators could be edited. Below is an example.
+After updating the generic definitions manually, we created a function called `update_res_types()` that changed any conditions relying on res_type to match the res_type names that were updated manually. To avoid this step in the future, the use_type_indicator values could be stated under the use_type_indicator columns of the tabular data as shown in the example below. The definitions would still need to be manually adjusted.
 
--   single_family = "\_1"
-
--   duplex = "\_2"
-
--   multifamily = "\_3"
-
--   townhouse = "th"
+| use_type_indicator_1 | use_type_indicator_2 | use_type_indicator_3 | use_type_indicator_4 | use_type_indicator_th |
+|----|----|----|----|----|
+| single_family | duplex | triplex | multifamily | townhouse |
 
 ## Column Name Comparison {#section-colnames}
 
@@ -289,6 +285,16 @@ The following table shows the original NZA column names and the updated column n
 | Affordable Housing District                                      | aff_housing_dist             |
 +------------------------------------------------------------------+------------------------------+
 | Elderly Housing District                                         | elder_housing_dist           |
++------------------------------------------------------------------+------------------------------+
+| NA (optional column we added)                                    | use_type_indicator_1         |
++------------------------------------------------------------------+------------------------------+
+| NA (optional column we added)                                    | use_type_indicator_2         |
++------------------------------------------------------------------+------------------------------+
+| NA (optional column we added)                                    | use_type_indicator_3         |
++------------------------------------------------------------------+------------------------------+
+| NA (optional column we added)                                    | use_type_indicator_4         |
++------------------------------------------------------------------+------------------------------+
+| NA (optional column we added)                                    | use_type_indicator_th        |
 +------------------------------------------------------------------+------------------------------+
 | 1-Family Treatment                                               | use_permitted_1              |
 +------------------------------------------------------------------+------------------------------+
@@ -474,12 +480,7 @@ make_ozfs <- function(nza_files_folder,
     stop("col_descriptions must be .xlsx or .csv")
   }
   
-  # establish use_type_indicators
-  use_type_indicators <- list(`1_unit` = "_1", 
-                              `2_unit` = "_2",
-                              `3_unit` = "_3",
-                              `4_plus` = "_4",
-                              `townhome` = "_th")
+  
   
   # start empty lists to track errors
   ozfs_errors <- c()
@@ -496,12 +497,14 @@ make_ozfs <- function(nza_files_folder,
     file_name <- basename(nza_files_list[[i]])
     file_name_no_ext <- sub(".xlsx","",file_name)
     
+    
+    
+    
     ozfs_list_format <- tryCatch(
       {
         # Code that might throw an error
         atlas_to_ozfs(nza_file_path, 
-                      col_descriptions, 
-                      use_type_indicators,
+                      col_descriptions,
                       version_date = "2024-08-14")
       }, warning = function(w) {
         return(c("warning",paste(w$message,nza_file_path)))
@@ -588,7 +591,6 @@ make_ozfs <- function(nza_files_folder,
 ## that is ready to be switched to a geojosn
 atlas_to_ozfs <- function(nza_file_path, #Path to one NZA file (must be xlsx or csv)
                           col_descriptions, #col_descriptions data frame
-                          use_type_indicators, #use_type_indicators list
                           version_date = "2024-08-14"){ #the date the zoning ordinance was updated
   
   if (file.exists(nza_file_path)){
@@ -604,6 +606,24 @@ atlas_to_ozfs <- function(nza_file_path, #Path to one NZA file (must be xlsx or 
   } else{
     stop("nza_file_path must be .xlsx or .csv")
   }
+  
+  if (TRUE %in% grepl("use_type_indicator",names(atlas_df))){
+    use_type_df <- atlas_df[1,grep("use_type_indicator", names(atlas_df))]
+    use_type_indicators <- lapply(names(use_type_df), function(x){
+      split_vec <- strsplit(x,"_")[[1]]
+      last_item <- split_vec[length(split_vec)]
+      return(paste0("_",last_item))
+    })
+    names(use_type_indicators) <- unlist(as.list(use_type_df))
+  } else{
+    # establish use_type_indicators
+    use_type_indicators <- list(`1_unit` = "_1", 
+                                `2_unit` = "_2",
+                                `3_unit` = "_3",
+                                `4_plus` = "_4",
+                                `townhome` = "_th")
+  }
+  
   
   # start the geojson list with an empty features list
   ozfs_format <- list(type = "FeatureCollection",
@@ -913,8 +933,12 @@ organize_rules <- function(df_with_rules, constraint_name){
       criterion <- rule_df[[1, grep("criterion",names(rule_df))[1]]]
       
       if (criterion == "dependent"){
-        if (sum(grep("more_restrictive", names(rule_df))) > 0 ){
-          rule_list$condition <- append(rule_list$condition, rule_df[[1, grep("more_restrictive",names(rule_df))[1]]])
+        if (sum(grep("more_restrictive", names(rule_df))) > 0){
+          if (!is.na(rule_df[[1, grep("more_restrictive",names(rule_df))[1]]])){
+            rule_list$condition <- append(rule_list$condition, rule_df[[1, grep("more_restrictive",names(rule_df))[1]]])
+          } else{
+            rule_list$condition <- append(rule_list$condition, "Special condition that wasn't stated")
+          }
         } else{ # there is no explanation for some reason
           rule_list$condition <- append(rule_list$condition, "Special condition that wasn't stated")
         }
@@ -1009,12 +1033,374 @@ write_list_as_json <- function(list, file_directory){
   write(json, file_directory)
 }
 
-
+## Here is an example of what the code looks like
 # make_ozfs(nza_files_folder = "file_path_to_nza_excel_files",
 #           geom_files_folder = "file_path_to_nza_geom_files",
 #           new_folder_to_save_to = "file_path_to_nza_ozfs_files",
 #           col_descriptions_path = "file_path_to_col_descriptions_sheet",
 #           extra_overlay_geom_file = "file_path_to_the_extra_overlays_data")
   
+
+
+###########################
+###########################
+# The following functions are not needed, but helped us
+# make sure the ozfs files were transfered correctly
+###########################
+###########################
+
+# this function helps see if there were errors in the ozfs files
+ozfs_validate <- function(list_of_files){
+  
+  # start the empty list where we will store errors
+  error_list <- list()
+  
+  # loop through each file
+  for (file in list_of_files){
+    list_of_errors <- c() # can have multiple per file. will combine at the end
+    list_of_warnings <- c()
+    
+    file_name <- basename(file)
+    
+    # CHECK GEOJSON COMPATIBILITY #
+    ozfs_listed <- tryCatch(
+      {
+        fromJSON(file = file)
+      }, error = function(e) {
+        # Code to run if an error occurs
+        return("error")
+      }
+    )
+    
+    if (class(ozfs_listed) == "character"){
+      error_list[[file_name]]$errors <- "not geojson format"
+      next
+    }
+    
+    # CHECK CITY_NAME, VERSION, AND DATE #
+    if (is.null(ozfs_listed$muni_name)){
+      list_of_errors <- c(list_of_errors, "no muni_name field")
+    }
+    
+    if (is.null(ozfs_listed$version)){
+      list_of_errors <- c(list_of_errors, "no version field")
+    }
+    
+    if (is.null(ozfs_listed$date)){
+      list_of_errors <- c(list_of_errors, "no date field")
+    }
+    
+    # CHECK DEFINITIONS #
+    
+    if (!"height" %in% names(ozfs_listed$definitions)){
+      list_of_errors <- c(list_of_errors, "no height def.")
+    }
+    
+    if (!"res_type" %in% names(ozfs_listed$definitions)){
+      list_of_errors <- c(list_of_errors, "no res_type def.")
+    }
+    
+    # CHECK FEATURES #
+    # loop through each feature
+    for (feature_idx in 1:length(ozfs_listed$features)){
+      
+      properties <- ozfs_listed$features[[feature_idx]]$properties
+      
+      if (is.null(properties$dist_abbr)){ # check for dist_abbr
+        dist_abbr <- feature_idx # variable to use in the warnings
+        list_of_warnings <- c(list_of_warnings, paste(dist_abbr,": no dist_abbr field"))
+      } else{
+        dist_abbr <- properties$dist_abbr # variable to use in warnings
+      }
+      
+      # if there are constraints, then it will
+      # save them as a variable to loop through later
+      if (!is.null(properties$constraints)){
+        constraints <- properties$constraints
+      } else{
+        break
+      }
+      
+      # possible constraint names that could be listed
+      possible_constraint_names <- c("lot_area",
+                                     "setback_front",
+                                     "setback_side_int",
+                                     "setback_side_ext",
+                                     "setback_rear",
+                                     "setback_side_sum",
+                                     "setback_front_sum",
+                                     "setback_dist_boundary",
+                                     "lot_cov_bldg",
+                                     "parking_enclosed",
+                                     "parking_covered",
+                                     "parking_uncovered",
+                                     "stories",
+                                     "height",
+                                     "height_eave",
+                                     "unit_size",
+                                     "unit_size_avg",
+                                     "unit_density",
+                                     "total_units",
+                                     "units_0bed",
+                                     "units_1bed",
+                                     "units_2bed",
+                                     "units_3bed",
+                                     "units_4bed",
+                                     "unit_pct_0bed",
+                                     "unit_pct_1bed",
+                                     "unit_pct_2bed",
+                                     "unit_pct_3bed",
+                                     "unit_pct_4bed",
+                                     "footprint",
+                                     "fl_area",
+                                     "fl_area_first",
+                                     "fl_area_top",
+                                     "far")
+      
+      # possible variables that could be used in expressions
+      # given a random value just so they will be evaluated correctly
+      lot_width <- 1
+      lot_depth <- 1
+      lot_area <- 1
+      lot_type <- "corner"
+      bedrooms <- 1
+      total_bedrooms <- 1
+      units_0bed <- 1
+      units_1bed <- 1
+      units_2bed <- 1
+      units_3bed <- 1
+      units_4bed <- 1
+      total_units <- 1
+      fl_area <- 1
+      fl_area_bottom <- 1
+      parking_covered <- 1
+      parking_uncovered <- 1
+      parking_enclosed <- 1
+      parking_floors <- 1
+      parking_bel_grade <- "yes"
+      garage_entry <- "front"
+      height <- 1
+      height_eave <- 1
+      floors <- 1
+      min_unit_size <- 1
+      max_unit_size <- 1
+      far <- 1
+      bldg_width <- 1
+      bldg_dpth <- 1
+      level_units_table <- 1
+      units_floor1 <- 1
+      units_floor2 <- 1
+      units_floor3 <- 1
+      res_type <- "1_unit"
+      
+      
+      # stating which constraints are written properly
+      proper_constraint_names <- names(constraints) %in% possible_constraint_names
+      
+      # if there are any constraints not written correctly,
+      # a warning note is given
+      if (FALSE %in% proper_constraint_names){
+        incorrect_constraint_names <- names(constraints)[proper_constraint_names == FALSE]
+        list_of_warnings <- c(list_of_warnings, paste("bad constraint names:",paste(incorrect_constraint_names, collapse = ", ")))
+      }
+      
+      # CHECK INDIVIDUAL CONSTRAINTS #
+      # loop through each constraint
+      for (constraint_idx in 1:length(constraints)){
+        constraint_name <- names(constraints)[[constraint_idx]]
+        constraint_list <- constraints[[constraint_idx]]
+        
+        if (!is.null(constraint_list$min_val) & !is.null(constraint_list$max_val)){
+          minmax_vals <- c("min_val","max_val")
+        } else if (!is.null(constraint_list$min_val)){
+          minmax_vals <- "min_val"
+        } else if (!is.null(constraint_list$max_val)){
+          minmax_vals <- "max_val"
+        } else{
+          list_of_errors <- c(list_of_errors, paste(dist_abbr,": no min or max vals for",constraint_name))
+        }
+        
+        # Loop through the value lists
+        for (minmax_idx in 1:length(minmax_vals)){
+          minmax_name <- minmax_vals[[minmax_idx]]
+          minmax <- constraint_list[[minmax_name]]
+          
+          
+          # Loop through each item in the value list
+          for (condition_num in 1:length(minmax)){
+            val_list <- minmax[[condition_num]]
+            
+            if (is.null(val_list$expression)){ # expression field is required
+              list_of_errors <- c(list_of_errors, paste(dist_abbr,": no expression for",minmax_name, "of",constraint_name))
+            } else{
+              parsed_expression <- tryCatch(
+                {
+                  parse(text = val_list$expression)
+                }, error = function(e) {
+                  # Code to run if an error occurs
+                  return("error")
+                }
+              )
+              
+              if (class(parsed_expression) == "character"){ # # expressions must parse properly
+                list_of_errors <- c(list_of_errors, paste(dist_abbr,": expression parse error for",minmax_name, "of",constraint_name))
+              } else{
+                eval_expression <- tryCatch(
+                  {
+                    eval(parsed_expression)
+                  }, error = function(e) {
+                    # Code to run if an error occurs
+                    return("error")
+                  }
+                )
+                if (class(eval_expression) == "character"){ # expressions must evaluate properly
+                  list_of_errors <- c(list_of_errors, paste(dist_abbr,": expression eval error for",minmax_name, "of",constraint_name))
+                }
+                if (is.na(eval_expression)){ # NAs shouldn't exist
+                  list_of_warnings <- c(list_of_warnings, paste(dist_abbr,": NA expression encountered for",minmax_name, "of",constraint_name))
+                }
+              }
+            }
+            
+            if (!is.null(val_list$min_max)){
+              if (!val_list$min_max %in% c("min","max")){
+                # if min_max is something besides "min" or "max" it will cause en error
+                list_of_errors <- c(list_of_errors, paste(dist_abbr,": improper min_max for",minmax_name, "of",constraint_name))
+              }
+              if (length(val_list$expression) == 1){
+                # if there is a min_max, there should be multiple values in expression
+                list_of_warnings <- c(list_of_warnings, paste(dist_abbr,": min_max not needed",minmax_name, "of",constraint_name))
+              }
+            }
+            
+            
+          } # end loop through each item in the value list
+          
+        } # end loop through the value lists
+        
+      } # end loop through each constraint
+      
+    } # end loop through each feature
+    
+    
+    
+    if (length(list_of_warnings) > 0){
+      error_list[[file_name]]$warnings <- list_of_warnings
+    }
+    if (length(list_of_errors) > 0){
+      error_list[[file_name]]$errors <- list_of_errors
+    }
+    
+  } # end loop through each file
+  
+  
+  if (length(error_list) == 0){
+    return(cat("Files appear to follow proper OZFS standards \n"))
+  } else if (length(error_list) == 1){
+    cat("There was",paste(length(error_list), "file with errors or warnings \n\n"))
+  } else{
+    cat("There were",paste(length(error_list), "files with errors or warnings \n\n"))
+  }
+  
+  return(error_list)
+}
+
+# this function is only needed if there are different res_types than the default and they werent added to the tabular data.
+update_res_types <- function(res_types_file_path, ozfs_folder_path, path_to_save_files){
+  if (!dir.exists(path_to_save_files)){
+    dir.create(path_to_save_files)
+  }
+
+  res_types_df <- read.csv(res_types_file_path)
+  list_of_files <- list.files(ozfs_folder_path, full.names = TRUE)
+
+  # keep track of unchanged files
+  unchanged_files <- c()
+
+  # loop through each file
+  for (file_idx in 1:length(list_of_files)){
+    file <- list_of_files[[file_idx]]
+    file_name <- basename(file)
+    # Read lines from file
+    text <- readLines(file)
+
+    if (!file_name %in% res_types_df$city_file_name){
+      unchanged_files <- c(unchanged_files, file_name)
+      next
+    }
+
+    res_types_list <- c(`1_unit` = res_types_df[res_types_df$city_file_name == file_name,"X1_unit"],
+                        `2_unit` = res_types_df[res_types_df$city_file_name == file_name,"X2_unit"],
+                        `3_unit` = res_types_df[res_types_df$city_file_name == file_name,"X3_unit"],
+                        `4_plus` = res_types_df[res_types_df$city_file_name == file_name,"X4_plus"],
+                        `townhome` = res_types_df[res_types_df$city_file_name == file_name,"townhome"])
+
+    # Create a list with each use_type and its corresponding NZA use_type
+    row_vals <- as.vector(unlist(res_types_list))
+    split_vals <- split(names(res_types_list), row_vals)
+    
+    # The loop below will replace res_types where 
+    # - one new res_type corresponds to one NZA res_type and where
+    # - one new res_type corresponds to multiple NZA res_types but they are always
+    #   in a condition together
+    split_vals_combined <- lapply(split_vals, function(x) paste(x, collapse = "' or res_type == '"))
+    for (list_id in 1:length(split_vals_combined)){
+      find_string <- split_vals_combined[[list_id]]
+      replace_string <- names(split_vals_combined)[[list_id]]
+      text <- gsub(find_string, replace_string, text)
+    }
+    
+    # If there are multiple NZA res_types that correspond with a new res_type
+    # then they will need to be replaced in the res_types_allowed field 
+    # where they are currently separated by a comma
+    multiples_ids <- which(sapply(split_vals,length) > 1)
+    if (length(multiples_ids) > 0){
+      split_vals_comma <- sapply(split_vals, function(x) paste(x, collapse = '","'))
+      for (mult_id in multiples_ids){
+        find_string <- split_vals_comma[[mult_id]]
+        new_name <- names(split_vals_comma)[[mult_id]]
+        text <- gsub(find_string, new_name, text)
+        
+        # After all those changes, the only NZA res_types that should be remaining
+        # are the ones in the conditions that are separated from the ones with which
+        # they share a new res_type
+        # We need to add one other condition so it reads into the computer the same
+        old_res_types <- split_vals[[mult_id]]
+        for (old_name in old_res_types){
+          num_units <- strsplit(old_name, "_")[[1]][[1]]
+          find_string <- paste0("res_type == '", old_name,"'")
+          if (num_units == 4){
+            replace_string <- paste0("(res_type == '", new_name,"' and total_units >= ",num_units, ")")
+          } else{
+            replace_string <- paste0("(res_type == '", new_name,"' and total_units == ",num_units, ")")
+          }
+          text <- gsub(find_string, replace_string, text)
+        }
+        
+      } # end loop through multiples_ids
+    }
+    
+    # this should catch any last replacements that are needed. Idealy, this step
+    # wouldn't find any replacements that are needed, but the way the NZA was transfered
+    # might cause a few files to need this last step.
+    for (i in 1:length(res_types_list)){
+      find_string <- names(res_types_list)[[i]]
+      replace_string <- res_types_list[[i]]
+      text <- gsub(find_string, replace_string, text)
+    }
+
+    # Write to specified file
+    writeLines(text, paste0(path_to_save_files,"/",file_name))
+
+  }# end loop through each file
+  
+  if (length(list_of_files) == 1){
+    return(cat(paste("Updated one file\n")))
+  } else{
+    return(cat(paste("Updated",length(list_of_files),"files\n")))
+  }
+  
+  
+}
 
 ```
