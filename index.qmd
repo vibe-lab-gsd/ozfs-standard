@@ -55,7 +55,7 @@ Where startups have focused on depth within one city, atlas projects emphasize b
 
 ### Toward an open zoning data standard
 
-Calls for a “GTFS for zoning” date back at least a decade (link to Andrew Salzberg post). (Presumably) inside individual firms, bespoke JSON or GraphQL schemas now power automated tools and linked formulas. None, however, has been published as a public, versioned specification that cities, researchers, and software vendors can adopt without reinvention.
+Calls for a “GTFS for zoning” date back at least a decade [@salzberg_lets_2013]. (Presumably) inside individual firms, bespoke JSON or GraphQL schemas now power automated tools and linked formulas. None, however, has been published as a public, versioned specification that cities, researchers, and software vendors can adopt without reinvention.
 
 The Open Zoning Feed Specification (OZFS) positions itself in this gap. It seeks to combine the machine-readability achieved by single-city startups with the cross-jurisdiction reach demonstrated by atlas projects, offering a modular JSON/GeoJSON feed that captures multi-dimensional, conditional rules as in the most robust open data standards.
 
