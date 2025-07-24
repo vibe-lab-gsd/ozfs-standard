@@ -79,6 +79,22 @@ A limitation of the data structures used by all of the efforts described above i
 
 ## Contribution
 
+The Open Zoning Feed Specification (OZFS) is offered as a scalable, extensible data schema for encoding residential-zoning regulations at the parcel level in a way that is both machine-readable and jurisdiction-agnostic. OZFS is implemented in GeoJSON, a geographic extension of JSON that retains JSON’s nested flexibility. OZFS departs from legacy tabular formats by storing only those variables actually defined in a district and permitting new key–value pairs without changing the underlying schema.
+
+OZFS makes six specific contributions:
+1. Non-tabular structure.  A hierarchical JSON model represents districts, bulk options (this is older OZ terminology. Not sure exactly how you describe now), and optional constraints, eliminating combinatorial explosion (alt. column-inflation) and redundant data entry.
+2. Jurisdiction-specific definitions.  Each feed contains an explicit glossary for locally defined terms—e.g., townhouse, multifamily, cluster development—so that uniform semantics are not imposed.
+3. Python-syntax mathematical expressions. Controls may be stored as formulas (MaxHeight = 0.5 * LotDepth), allowing rules that reference parcel or building attributes without manual pre-calculation.
+4. Variable-referencing mechanism. Constraints can point to other variables in the same feed, supporting compound rules and one-time entry of shared values.
+5. Embedded conditional logic.  The schema accommodates context-dependent provisions (if BuildingSetback ≥ 15 then MaxHeight = 35 else 30) that spreadsheets cannot capture consistently.
+6. Zoning-parcel–building rectification protocol. A preprocessing protocol in Python and R aligns lot edges and centroids with zoning districts, enabling automated feasibility checks.
+
+These features support use cases that extend beyond aggregations and cross-jurisdictional comparison: mapping where a “three-over-one” mixed-use prototype is permitted as-of-right across an entire region; pinpointing parcels whose irregular geometry or site conditions prevents them from reaching nominal entitlements; or simulating the parcel-level impact of relaxing yard requirements.  Ultimately OZFS can be a data schema for crowd-sourced or large-language-model pipelines to ingest full zoning codes and emit consistent, interoperable OZFS feeds.
+
+By releasing OZFS under a Creative Commons license, we aim to invite contribution and revision, much as the OpenStreetMap data model has evolved through community stewardship.  We anticipate successive versions that refine residential typologies, incorporate a multiplicity of geospatial layers, and allow more complex spatial definitions. But the core principles—JSON hierarchy, explicit local definitions, formula and conditional support—are intended to remain stable so that automated ingestion and downstream analysis can rely on a consistent, open standard.
+
+## Contribution (OLD)
+
 The aim of the OZFS data standard is to offer a scaleable, extendable foundation that can serve as the basis for analytic methods and software that can improve:
 
 -   developers' understanding of where there may be opportunities to build new housing,
