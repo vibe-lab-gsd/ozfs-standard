@@ -362,6 +362,57 @@ We have also created sample \*.bldg files for each of four hypothetical building
 
 # Opportunities for future development
 
+This paper, including the accompanying appendices, represents a complete description of the current data specification and standard. The full text of this paper (with appendices) can be found at <https://github.com/vibe-lab-gsd/ozfs-standard>. We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.
+
+Several important opportunities for improvement remain open for future versions:
+
+## Overlay systems and spatially-defined modifiers
+
+The current schema records all base districts and overlays together, identifying districts as overlays but does not yet capturing their regulations nor priority rules to help reconcile overlays with the base district. Future work should:
+- allow multiple simultaneous overlays (e.g. “Downtown Core” + “Inclusionary Housing”);
+- provide a deterministic precedence model so applications can resolve conflicts among base and overlay provisions;
+- support geometry-based overlays defined mathematically, for example: “within a quarter mile of a transit station” or “2000 feet outside of an airport runway”; and
+- store or reference official and unofficial environmental layers (wetlands, riverfronts, FEMA flood plains, site grading) with rigor sufficient for zoning use.
+
+The above aligns with the Sarah Williams patent filing (https://patents.google.com/patent/US20130132041).
+
+## Three-dimensional and vertical-plane controls
+
+Maximum height is only one of many constraints operating in the vertical dimension or Z-plane. Spatially-defined planes limiting bulk or defining view corridors are common. Other constraints only take effect at or above specific elevations: step-backs, tower separation, and penthouse max floorplates. A future OZFS enhancement should:
+- allow parametric planes and angular envelopes, not just fixed limits;
+- expand the roof-typology catalogue beyond the initial set; and
+- be able to reference these planes in conditional expressions
+
+## Additional constraint families
+
+This implementation of OZ prioritized constraints present in the Dallas-Fort Worth metropolitan area, but the full extent of zoning constraint definitions is vast. Catalogues such as PlaceCode 3.0 (https://github.com/vibe-lab-gsd/OpenZoning/blob/main/references/zoning_codes/PlaceCode%203.0%20Savannah%2020180517.pdf) and Grand Urban Rules book (https://www.google.com/books/edition/Grand_Urban_Rules/w_60W3cJqhoC?hl=en&gbpv=1) attempt to provide exhaustive and irreducible lists.  Extending the constraint dictionary beyond the initial set will be essential for ensuring broad applicability for the standard. Insights from previous zoning work (at Envelope) suggests that all bulk zoning reduces to a finite set of spatial operations on volumes.
+
+## File storage strategy
+Single GeoJSON files per jurisdiction maximizes human readability and permits version tracking with Git, but we foresee drawbacks with the current approach, including in terms of processing speed and indexing, topological checks, and file size. Some potential areas for optimization are:
+- separating districts and overlays into multiple geospatial layers (potentially using GeoPackage)
+- separate geospatial and zoning files (to enable readability by standard GIS software)
+
+Future guidance should specify how feeds can be stored and partitioned without breaking referential integrity.
+
+## Split districts
+
+Where a parcel straddles two districts, jurisdictions differ on whether the parcel must be subdivided, may distribute entitlements, or must apply the most restrictive rule.  A subsequent version may encode:
+- a sub-parceling routine to generate regulatory sublots;
+- jurisdiction-specific precedence flags (e.g. “restrictive-prevails” vs “pro-rated FAR”); and
+- per-municipality reconciliation logic.
+
+## Site grade
+
+The \*.parcel file currently includes information about the two-dimensional geometry of each parcel, but does not include any information about grades and elevations. This information could be relevant for some zoning analysis where the grade might have an effect, for example, on how the height of a building is measured. Future extensions of the data standard could incorporate information about grades and elevations in the \*.parcel file. Keys could also be added to the \*.zoning file to specify how site grade might influence the definitions of building heights in each municipality. Our initial test cases were in the Dallas-Forth Worth region, where there is minimal variation in elevation.
+
+## Building Representation
+
+The current \*.bldg file structure is only capable of describing rectangular buildings by encoding the width and depth of the building. A method to describe building's with a more complex footprint could be explored in future versions of the data standard. This could potentially be accomplished by adding geometry to the \*.bldg file in a similar way geometry is contained in the \*.parcel file.
+
+Another addition could include ways to describe the orientation of the building in both the \*.bldg file and the \*.zoning file. The current data standard assumes that the building can be oriented in any direction, but there may be cases where the zoning code requires the building to be oriented in a specific way. This addition would require distinguishing and labeling the sides of the building in the \*.bldg file and adding building orientation constraints to the \*.zoning file.
+
+# Opportunities for future development (OLD)
+
 This paper, including the accompanying appendices, represents a complete description of the data standard. The full text of the this paper (with appendices) can be found at <https://github.com/vibe-lab-gsd/ozfs-standard>. We welcome potential users and other interested parties to submit issues and/or pull requests with comments and suggestions to improve the usefulness of the data standard, or to note inaccuracies in the sample dataset.
 
 The most immediate opportunities for improvement that we have identified are the treatments of overlay districts, and site grades.
