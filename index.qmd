@@ -81,13 +81,7 @@ A limitation of the data structures used by all of the efforts described above i
 
 The Open Zoning Feed Specification (OZFS) is offered as a scalable, extensible data schema for encoding residential zoning regulations at the parcel level in a way that is both machine-readable and jurisdiction-agnostic. OZFS is implemented in GeoJSON, a geographic extension of JSON that retains JSON’s nested flexibility. OZFS departs from legacy tabular formats by storing only those variables actually defined in a district and permitting new key–value pairs without changing the underlying schema.
 
-OZFS makes six specific contributions:
-1. Non-tabular structure. A hierarchical JSON model represents districts, bulk options (this is older OZ terminology. Not sure exactly how you describe now), and optional constraints, eliminating combinatorial explosion (alt. column-inflation) and redundant data entry.
-2. Jurisdiction-specific definitions. Each feed contains an explicit glossary for locally defined terms—e.g., townhouse, multifamily, cluster development—so that uniform semantics are not imposed.
-3. Python-syntax mathematical expressions. Controls may be stored as formulas (`MaxHeight` = 0.5 * `LotDepth`), allowing rules that reference parcel or building attributes without manual precalculation.
-4. Variable-referencing mechanism. Constraints can point to other variables in the same feed, supporting compound rules and one-time entry of shared values.
-5. Embedded conditional logic. The schema accommodates context-dependent provisions (`if BuildingSetback ≥ 15 then MaxHeight = 35 else 30`) that spreadsheets cannot capture consistently.
-6. Zoning-parcel–building rectification protocol. A preprocessing protocol in Python and R aligns lot edges and centroids with zoning districts, enabling automated feasibility checks.
+OZFS makes six specific contributions: 1. Non-tabular structure. A hierarchical JSON model represents districts, bulk options (this is older OZ terminology. Not sure exactly how you describe now), and optional constraints, eliminating combinatorial explosion (alt. column-inflation) and redundant data entry. 2. Jurisdiction-specific definitions. Each feed contains an explicit glossary for locally defined terms—e.g., townhouse, multifamily, cluster development—so that uniform semantics are not imposed. 3. Python-syntax mathematical expressions. Controls may be stored as formulas (`MaxHeight` = 0.5 \* `LotDepth`), allowing rules that reference parcel or building attributes without manual precalculation. 4. Variable-referencing mechanism. Constraints can point to other variables in the same feed, supporting compound rules and one-time entry of shared values. 5. Embedded conditional logic. The schema accommodates context-dependent provisions (`if BuildingSetback ≥ 15 then MaxHeight = 35 else 30`) that spreadsheets cannot capture consistently. 6. Zoning-parcel–building rectification protocol. A preprocessing protocol in Python and R aligns lot edges and centroids with zoning districts, enabling automated feasibility checks.
 
 These features support use cases that extend beyond aggregations and cross-jurisdictional comparison: mapping where a “three-over-one” mixed-use prototype is permitted as-of-right across an entire region; pinpointing parcels whose irregular geometry or site conditions prevents them from reaching nominal entitlements; or simulating the parcel-level impact of relaxing yard requirements. Ultimately OZFS can be a data schema for crowd-sourced or large-language-model pipelines to ingest full zoning codes and emit consistent, interoperable OZFS feeds.
 
@@ -316,11 +310,11 @@ here("figures",
 
 All building dimensions are in feet. The building information array includes the height from the ground to the top of the building (`height_top`), from the ground to the highest wall plate (`height_plate`), as well as the building `width`, the building `depth`, and the building's roof type (`roof_type`). Refer to [Appendix C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html) for an illustration of roof types that are defined for use in OZFS.
 
-As noted in the section on zoning constraints, there are differences among zoning codes with regards to how a building's height is defined for various roof types. For roof types other than a flat roof, the eave height must be specified in the `height_eave` key. For Mansard roofs, `height_deck` must be specified as well.
+As noted in the section on zoning constraints, there are differences among zoning codes with regards to how a building's height is defined for various roof types. For roof types other than a flat roof, the eave height must be specified in the `height_eave` key, and the roof pitch must be specified in the `roof_pitch` key. For Mansard roofs, `height_deck` must be specified as well. For roofs with a parapet, the `height_parapet`, should also be added.
 
 If the building includes towers, chimneys, antennas, or mechanical structures, the (maximum) height of these (from the roof) can optionally be specified with the `height_tower` key.
 
-The `sep_platting` key is used to indicate whether each until in the building would be on a separately platted parcel and the `unit_separation` key describes how units are separated (by a "party_wall", a "fire_wall", or an "open_area"). These keys may be used to determine whether the building meet's a municipality's definition of a townhome. There is also an optional `parking` key to indicate the number of parking spaces contained within the building's structure (i.e. in a garage).
+The `sep_platting` key is used to indicate whether each until in the building would be on a separately platted parcel and the `unit_separation` key describes how units are separated (by a "party_wall", a "fire_wall", or an "open_area"). If units are separated by a party wall or fire wall, the `sep_wall_length` key stores the length of the separation wall. These keys may be used to determine whether the building meet's a municipality's definition of a townhome. There is also an optional `parking` key to indicate the number of parking spaces contained within the building's structure (i.e. in a garage).
 
 ### Level information
 
@@ -368,38 +362,27 @@ Several important opportunities for improvement remain open for future versions:
 
 ## Overlay systems and spatially-defined modifiers
 
-The current schema records all base districts and overlays together, identifying districts as overlays but does not yet capturing their regulations nor priority rules to help reconcile overlays with the base district. Future work should:
-- allow multiple simultaneous overlays (e.g. “Downtown Core” + “Inclusionary Housing”);
-- provide a deterministic precedence model so applications can resolve conflicts among base and overlay provisions;
-- support geometry-based overlays defined mathematically, for example: “within a quarter mile of a transit station” or “2000 feet outside of an airport runway”; and
-- store or reference official and unofficial environmental layers (wetlands, riverfronts, FEMA flood plains, site grading) with rigor sufficient for zoning use.
+The current schema records all base districts and overlays together, identifying districts as overlays but does not yet capturing their regulations nor priority rules to help reconcile overlays with the base district. Future work should: - allow multiple simultaneous overlays (e.g. “Downtown Core” + “Inclusionary Housing”); - provide a deterministic precedence model so applications can resolve conflicts among base and overlay provisions; - support geometry-based overlays defined mathematically, for example: “within a quarter mile of a transit station” or “2000 feet outside of an airport runway”; and - store or reference official and unofficial environmental layers (wetlands, riverfronts, FEMA flood plains, site grading) with rigor sufficient for zoning use.
 
 The above aligns with the Sarah Williams patent filing (https://patents.google.com/patent/US20130132041).
 
 ## Three-dimensional and vertical-plane controls
 
-Maximum height is only one of many constraints operating in the vertical dimension or Z-plane. Spatially-defined planes limiting bulk or defining view corridors are common. Other constraints only take effect at or above specific elevations: step-backs, tower separation, and penthouse max floorplates. A future OZFS enhancement should:
-- allow parametric planes and angular envelopes, not just fixed limits;
-- expand the roof-typology catalogue beyond the initial set; and
-- be able to reference these planes in conditional expressions
+Maximum height is only one of many constraints operating in the vertical dimension or Z-plane. Spatially-defined planes limiting bulk or defining view corridors are common. Other constraints only take effect at or above specific elevations: step-backs, tower separation, and penthouse max floorplates. A future OZFS enhancement should: - allow parametric planes and angular envelopes, not just fixed limits; - expand the roof-typology catalogue beyond the initial set; and - be able to reference these planes in conditional expressions
 
 ## Additional constraint families
 
-This implementation of OZ prioritized constraints present in the Dallas-Fort Worth metropolitan area, but the full extent of zoning constraint definitions is vast. Catalogues such as PlaceCode 3.0 (https://github.com/vibe-lab-gsd/OpenZoning/blob/main/references/zoning_codes/PlaceCode%203.0%20Savannah%2020180517.pdf) and Grand Urban Rules book (https://www.google.com/books/edition/Grand_Urban_Rules/w_60W3cJqhoC?hl=en&gbpv=1) attempt to provide exhaustive and irreducible lists.  Extending the constraint dictionary beyond the initial set will be essential for ensuring broad applicability for the standard. Insights from previous zoning work (at Envelope) suggests that all bulk zoning reduces to a finite set of spatial operations on volumes.
+This implementation of OZ prioritized constraints present in the Dallas-Fort Worth metropolitan area, but the full extent of zoning constraint definitions is vast. Catalogues such as PlaceCode 3.0 (https://github.com/vibe-lab-gsd/OpenZoning/blob/main/references/zoning_codes/PlaceCode%203.0%20Savannah%2020180517.pdf) and Grand Urban Rules book (https://www.google.com/books/edition/Grand_Urban_Rules/w_60W3cJqhoC?hl=en&gbpv=1) attempt to provide exhaustive and irreducible lists. Extending the constraint dictionary beyond the initial set will be essential for ensuring broad applicability for the standard. Insights from previous zoning work (at Envelope) suggests that all bulk zoning reduces to a finite set of spatial operations on volumes.
 
 ## File storage strategy
-Single GeoJSON files per jurisdiction maximizes human readability and permits version tracking with Git, but we foresee drawbacks with the current approach, including in terms of processing speed and indexing, topological checks, and file size. Some potential areas for optimization are:
-- separating districts and overlays into multiple geospatial layers (potentially using GeoPackage)
-- separate geospatial and zoning files (to enable readability by standard GIS software)
+
+Single GeoJSON files per jurisdiction maximizes human readability and permits version tracking with Git, but we foresee drawbacks with the current approach, including in terms of processing speed and indexing, topological checks, and file size. Some potential areas for optimization are: - separating districts and overlays into multiple geospatial layers (potentially using GeoPackage) - separate geospatial and zoning files (to enable readability by standard GIS software)
 
 Future guidance should specify how feeds can be stored and partitioned without breaking referential integrity.
 
 ## Split districts
 
-Where a parcel straddles two districts, jurisdictions differ on whether the parcel must be subdivided, may distribute entitlements, or must apply the most restrictive rule.  A subsequent version may encode:
-- a sub-parceling routine to generate regulatory sublots;
-- jurisdiction-specific precedence flags (e.g. “restrictive-prevails” vs “pro-rated FAR”); and
-- per-municipality reconciliation logic.
+Where a parcel straddles two districts, jurisdictions differ on whether the parcel must be subdivided, may distribute entitlements, or must apply the most restrictive rule. A subsequent version may encode: - a sub-parceling routine to generate regulatory sublots; - jurisdiction-specific precedence flags (e.g. “restrictive-prevails” vs “pro-rated FAR”); and - per-municipality reconciliation logic.
 
 ## Site grade
 
