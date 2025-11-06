@@ -2163,8 +2163,7 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#prior-work" id="toc-prior-work" class="nav-link" data-scroll-target="#prior-work">Prior work</a>
   <ul class="collapse">
   <li><a href="#cross-jurisdictional-zoning-atlases" id="toc-cross-jurisdictional-zoning-atlases" class="nav-link" data-scroll-target="#cross-jurisdictional-zoning-atlases">Cross-jurisdictional zoning atlases</a></li>
@@ -2172,7 +2171,6 @@ vertical-align: -.125em;
   <li><a href="#toward-an-open-zoning-data-standard" id="toc-toward-an-open-zoning-data-standard" class="nav-link" data-scroll-target="#toward-an-open-zoning-data-standard">Toward an open zoning data standard</a></li>
   </ul></li>
   <li><a href="#contribution" id="toc-contribution" class="nav-link" data-scroll-target="#contribution">Contribution</a></li>
-  </ul></li>
   <li><a href="#ozfs-data-structures" id="toc-ozfs-data-structures" class="nav-link" data-scroll-target="#ozfs-data-structures">OZFS Data Structures</a>
   <ul class="collapse">
   <li><a href="#zoning-regulations" id="toc-zoning-regulations" class="nav-link" data-scroll-target="#zoning-regulations">Zoning regulations</a>
@@ -2286,32 +2284,33 @@ vertical-align: -.125em;
 <h1>Introduction</h1>
 <p>Zoning is the primary regulator of land use in the United States, yet the details of its provisions remain locked in hundred-page texts differing across thousands of jurisdictions. This opacity impacts not only scholars, advocates, and legislators, but also owners, architects, planners, and developers of all stripes. Recent atlas initiatives demonstrate that high-level variables such as permitted use or base density can be aggregated across jurisdictions, but those tabular compilations struggle to express the spatial, conditional, and mathematical rules that actually determine what may be built on an individual parcel.</p>
 <p>This paper introduces the Open Zoning Feed Specification (OZFS), a data and geometry standard designed to encode zoning’s multi-dimensional logic in a form software can parse directly for parcel-level analysis. OZFS adopts a modular JSON/GeoJSON structure that stores numeric constraints, conditional expressions, and local definitions alongside district polygons, enabling automated feasibility checks for a single lot and scaleable aggregation to blocks, neighborhoods, or regions. OZFS treats zoning rules as structured data, an approach analogous to the General Transit Feed Specification in public transportation planning. Through this approach, OZFS seeks to improve the reproducibility of empirical research, lower the barriers and costs of due diligence for practitioners, and furnish decision-makers with a fine-grained basis for understanding land use.</p>
-<section id="prior-work" class="level2">
-<h2 class="anchored" data-anchor-id="prior-work">Prior work</h2>
+</section>
+<section id="prior-work" class="level1">
+<h1>Prior work</h1>
 <p>Established open data standards for urban data include the General Transit Feed Specification (GTFS) and OpenStreetMaps (OSM).</p>
 <p>OSM, an effort to assemble an open-source, digital map of the world, was established in 2004 <span class="citation" data-cites="osm_history_2025">(<a href="#ref-osm_history_2025" role="doc-biblioref">Open Street Map Contributors 2025b</a>)</span>. It encodes data in an XML data format where all spatial features can be encoded as point locations and paths connecting points, with polygons represented as closed paths. A flexible free-tagging system <span class="citation" data-cites="free_tags_2025">(<a href="#ref-free_tags_2025" role="doc-biblioref">Open Street Map Contributors 2025a</a>)</span> allows an unlimited number of attributes to be specified to describe each feature, for example, by identifying a line as a road or as a fence and (for roads but not fences) specifying whether it permits bicycles.</p>
 <p>GTFS was initially developed through a joint effort by Google and Portland TriMet in 2005 to facilitate incorporating transit route and schedule data into Google Maps’ trip-planning application <span class="citation" data-cites="goldstein_pioneering_2013">(<a href="#ref-goldstein_pioneering_2013" role="doc-biblioref">McHugh 2013</a>)</span>. It encodes information about transit routes, stops, trips, and agencies as tabular data in a set of csv files. The data standard since has expanded to include additional tables (each in its own csv file) to include information about transit characteristics such as fares or pathways through stations. A strength of both of these efforts has been the use of a flexible data standard that can evolve to fully describe its subject while maintaining backwards-compatibility with data compiled under earlier versions of the standard.</p>
 <p>Calls for a “GTFS for zoning” date back more than a decade <span class="citation" data-cites="salzberg_lets_2013">(<a href="#ref-salzberg_lets_2013" role="doc-biblioref">Salzberg 2013</a>)</span>. While OSM allows for large-n analysis of street network topology <span class="citation" data-cites="boeing2019urban">(<a href="#ref-boeing2019urban" role="doc-biblioref">Boeing 2019</a>)</span> and GTFS likewise allows for analysis of transit service availability within neighborhoods and across cities <span class="citation" data-cites="voulgaris2025transit deweese2020tale">(<a href="#ref-voulgaris2025transit" role="doc-biblioref">Voulgaris, Ray, and Fischer 2025</a>; <a href="#ref-deweese2020tale" role="doc-biblioref">DeWeese et al. 2020</a>)</span>, similar work analyzing zoning codes across jurisdiction remains time- and resource-prohibitive. An example of the type of research and analysis that is stymied by the lack of standardized, machine-readable zoning data is a study by Conway <span class="citation" data-cites="conway_if_2021">(<a href="#ref-conway_if_2021" role="doc-biblioref">2021</a>)</span>, which addresses the question of how statewide proposals to relax zoning restrictions in California might impact traffic congestion in and around Los Angeles. That analysis required strong assumptions with regards to, for example, allowable setbacks, since these data were not available in a consistent format for municipalities across the state. These assumptions (derived from existing building footprints) were not unreasonable and yielded sensible estimates of of congestion impacts across the Los Angeles region. However, this approach would be less likely to yield useful results about the effects of the proposed policies on specific road segments or within small areas.</p>
-<section id="cross-jurisdictional-zoning-atlases" class="level3">
-<h3 class="anchored" data-anchor-id="cross-jurisdictional-zoning-atlases">Cross-jurisdictional zoning atlases</h3>
+<section id="cross-jurisdictional-zoning-atlases" class="level2">
+<h2 class="anchored" data-anchor-id="cross-jurisdictional-zoning-atlases">Cross-jurisdictional zoning atlases</h2>
 <p>A few organizations have sought to compile zoning data across jurisdictions. The earliest of these that we have identified is the Zoning Atlas compiled by the Metropolitan Area Planning Council (MAPC), which is the regional planning agency for the Boston metropolitan area <span class="citation" data-cites="metropolitan_area_planning_council_mapc_2025">(<a href="#ref-metropolitan_area_planning_council_mapc_2025" role="doc-biblioref">Metropolitan Area Planning Council 2025</a>)</span>. The MAPC Zoning Atlas includes data for 101 cities and towns in Massachussetts. MAPC began collecting data for its zoning atlas in 2012 and published its initial version in 2020 <span class="citation" data-cites="reardon_introduction_2020">(<a href="#ref-reardon_introduction_2020" role="doc-biblioref">Reardon, Partridge, and Perkins-High 2020</a>)</span>. Their compiled zoning data are viewable through an interactive map and downloadable either as ESRI shapefiles or as csv files (both using a tabular data format).</p>
 <p>National Zoning Atlas (NZA) represents the largest effort to compile harmonized zoning data and aims to decode zoning and similar regulations nationwide <span class="citation" data-cites="national_zoning_atlas_national_2025">(<a href="#ref-national_zoning_atlas_national_2025" role="doc-biblioref">National Zoning Atlas 2025b</a>)</span>. Beginning with a spreadsheet template for Connecticut municipalities <span class="citation" data-cites="bronin_how_2021">(<a href="#ref-bronin_how_2021" role="doc-biblioref">Bronin and Ilyankou 2021</a>)</span>, NZA now uses an internal data entry form <span class="citation" data-cites="bronin_how_2023">(<a href="#ref-bronin_how_2023" role="doc-biblioref">Bronin et al. 2023</a>)</span> and hosts an interactive map. Its controlled workflow has produced the largest publicly viewable corpus of zoning attributes in the United States. NZA does not publish downloadable datasets, although external contributors to the National Zoning Atlas are free to publish and share the data they provide to NZA (MAPC has contributed data from its Zoning Atlas to the broader NZA effort <span class="citation" data-cites="national_zoning_atlas_massachusetts_2025">(<a href="#ref-national_zoning_atlas_massachusetts_2025" role="doc-biblioref">National Zoning Atlas 2025a</a>)</span>). Some external contributors to the NZA have been funded by The Mercatus Center at George Mason University, which has published NZA data for nine states and regions as spreadsheets (csv or Excel) with accompanying geojson files on its website <span class="citation" data-cites="mercatus_center_state_2024">(<a href="#ref-mercatus_center_state_2024" role="doc-biblioref">Mercatus Center 2024</a>)</span>.</p>
 <p>Both the MAPC Zoning Atlas and the National Zoning Atlas have advanced comparative research and public transparency, yet their tabular formats place a limit on the number of attributes that can be defined for any zoning district. They also cannot easily encode conditional logic (e.g., setbacks dependent on street-fronting width) or divergent local definitions of “height,” “townhouse,” and other key terms. The Mercatus Center’s Zoning Atlas data dictionary <span class="citation" data-cites="kahn_nza_2024">(<a href="#ref-kahn_nza_2024" role="doc-biblioref">Kahn 2024</a>)</span> that notes this weakness in explaining that some numeric variables are encoded as strings because “it is very common for numeric variables in these datasets to have no single numeric value due to complex and context-dependent regulations within districts” <span class="citation" data-cites="kahn_nza_2024">(<a href="#ref-kahn_nza_2024" role="doc-biblioref">Kahn 2024, 1</a>)</span>.</p>
 </section>
-<section id="machine-readable-zoning-and-automated-feasibility-tools" class="level3">
-<h3 class="anchored" data-anchor-id="machine-readable-zoning-and-automated-feasibility-tools">Machine-readable zoning and automated feasibility tools</h3>
+<section id="machine-readable-zoning-and-automated-feasibility-tools" class="level2">
+<h2 class="anchored" data-anchor-id="machine-readable-zoning-and-automated-feasibility-tools">Machine-readable zoning and automated feasibility tools</h2>
 <p>In the mid-2010s, a wave of venture-backed “proptech” start-ups—Envelope in New York, Flux’s Metro prototype in Austin, Gridics in Miami—showed that raw zoning text can be parsed into parcel-specific, three-dimensional massing or feasibility outputs. Each firm harbored desires to expand beyond their launch city and become a de facto national standard, yet the business case faltered, requiring additional bespoke services. Numerous more recent platforms, not limited to Deepblocks, UrbanForm, zlvas, and Zoneomics, continue the machine-readability push, but their internal data models remain closed. Collectively, these efforts prove the technical feasibility of automated code translation while underscoring the market need for an open, interoperable specification.</p>
 <p>Zoneomics offers data through a paid API subscription. API outputs are in a json or geojson format, which offers the potential to overcome a weakness of a tabular data format: variables do not necessarily need to be stored for any districts they are not defined for. As noted by Kahn <span class="citation" data-cites="kahn_nza_2024">(<a href="#ref-kahn_nza_2024" role="doc-biblioref">2024</a>)</span> for NZA data published by the Mercatus Center, some variable values are necessarily encoded by text strings that describe constraints that may depend on land use or on characteristics of the building of the parcel, and these text strings cannot be consistently interpreted by software.</p>
 <p>A limitation of the data structures used by all of the efforts described above is that they do not offer a consistent method for encoding constraints on the building form that are dependent on features of the building (e.g. when the required setback depends on the building height) or on features of the parcel (e.g. when the required setback depends on the the parcel width). Moreover, none of them differentiate between definitions of terms that may be used differently in different jurisdictions. For example, one jurisdiction might define height as the top of the roof for any structure, but another might define height (for particular roof types) as the midpoint between the top of the roof and the eave. As another example, zoning codes may have different setback requirements for multifamily homes and for townhomes, but a building that is defined as a multifamily building based on the definitions used in one jurisdiction might be defined as a row of townhomes in another. Another limitation is that, with exception of the Zoneomics API, all the efforts that provide downloadable data use a tabular data structure, which requires that any variable defined for any district in the dataset (or in the entire nation, if the goal is to compile a harmonized national dataset) must be defined (at least with a null value) for all districts.</p>
 </section>
-<section id="toward-an-open-zoning-data-standard" class="level3">
-<h3 class="anchored" data-anchor-id="toward-an-open-zoning-data-standard">Toward an open zoning data standard</h3>
+<section id="toward-an-open-zoning-data-standard" class="level2">
+<h2 class="anchored" data-anchor-id="toward-an-open-zoning-data-standard">Toward an open zoning data standard</h2>
 <p>Inside individual proptech firms, bespoke JSON or GraphQL schemas presumably power automated tools and linked formulas. None, however, has been published as a public, versioned specification that cities, researchers, and software vendors can adopt without reinvention.</p>
 <p>The Open Zoning Feed Specification (OZFS) addresses in this gap. It seeks to combine the machine-readability achieved by single-city startups with the cross-jurisdiction reach demonstrated by atlas projects, offering a modular JSON/GeoJSON feed that captures multi-dimensional, conditional rules as in the most robust open data standards.</p>
 </section>
 </section>
-<section id="contribution" class="level2">
-<h2 class="anchored" data-anchor-id="contribution">Contribution</h2>
+<section id="contribution" class="level1">
+<h1>Contribution</h1>
 <p>The Open Zoning Feed Specification (OZFS) is offered as a scalable, extensible data schema for encoding residential zoning regulations at the parcel level in a way that is both machine-readable and jurisdiction-agnostic. OZFS is implemented in GeoJSON, a geographic extension of JSON that retains JSON’s nested flexibility. OZFS departs from legacy tabular formats by storing only those variables actually defined in a district and permitting new key–value pairs without changing the underlying schema.</p>
 <p>OZFS makes six specific contributions:</p>
 <ol type="1">
@@ -2324,7 +2323,6 @@ vertical-align: -.125em;
 </ol>
 <p>These features support use cases that extend beyond aggregations and cross-jurisdictional comparison: mapping where a prototype multifamily home is permitted as-of-right across an entire region; pinpointing parcels whose irregular geometry or site conditions prevents them from reaching nominal entitlements; or simulating the parcel-level impact of relaxing yard requirements. Ultimately OZFS can be a data schema for crowd-sourced or large-language-model pipelines to ingest full zoning codes and emit consistent, interoperable OZFS feeds.</p>
 <p>By releasing OZFS under a Creative Commons license, we aim to invite contribution and revision, much as the OpenStreetMap and GTFS data standards has evolved with stakeholder needs. We anticipate successive versions that refine residential typologies, incorporate a multiplicity of geospatial layers, and allow more complex spatial definitions. But the core principles—JSON hierarchy, explicit local definitions, formula and conditional support—are intended to remain stable so that automated ingestion and downstream analysis can rely on a consistent, open standard.</p>
-</section>
 </section>
 <section id="ozfs-data-structures" class="level1">
 <h1>OZFS Data Structures</h1>
@@ -2393,9 +2391,7 @@ Figure 2: Data structure for constraints in the *.zoning file
 <li><code>min_max</code>: This key is required if the list of expressions has a more than one element in it and <code>condition</code> is a logical expression (rather than just a free-form text string). It is a character string that can take one of two values: <code>min</code> or <code>max</code>. A value of <code>min</code> indicates that the governing constraint is the minimum of the possible values listed in the <code>expression</code> key. A value of <code>maximum</code> indicates that the governing constraint is the maximum of the possible values listed in the <code>expression</code> key.</li>
 </ul>
 <p>The four examples below illustrate how zoning code text can be stored in the *.zoning file.</p>
-<section id="example-1-a-single-constraint-value" class="level4">
-<h4 class="anchored" data-anchor-id="example-1-a-single-constraint-value">Example 1: A single constraint value</h4>
-<p>In Dallas, the minimum is side setback is specified for agricultural districts as follows:</p>
+<p><strong>Example 1: A single constraint value.</strong> In Dallas, the minimum is side setback is specified for agricultural districts as follows:</p>
 <blockquote class="blockquote">
 <p><em>Minimum side yard is 20 feet.</em> <span class="citation" data-cites="CityOfDallas_51A_4_111">(<a href="#ref-CityOfDallas_51A_4_111" role="doc-biblioref">City of Dallas 2024</a>)</span></p>
 </blockquote>
@@ -2414,10 +2410,7 @@ Figure 3: A single value for interior side setback requirement in Dallas, TX
 </div>
 </div>
 </div>
-</section>
-<section id="example-2-using-min_max-field" class="level4">
-<h4 class="anchored" data-anchor-id="example-2-using-min_max-field">Example 2: Using min_max field</h4>
-<p>For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage.</p>
+<p><strong>Example 2: Using min_max field.</strong> For the Cockrell Hill Single-Family District, the minimum side setback depends on the length of the front footage.</p>
 <blockquote class="blockquote">
 <p><em>No structure shall be closer to a side or rear lot line than five feet or a distance equal to 10% of the front footage of the lot, whichever distance shall be greater</em> <span class="citation" data-cites="CockrellHillZoning_2010">(<a href="#ref-CockrellHillZoning_2010" role="doc-biblioref">City of Cockrell Hill 2010, 13</a>)</span></p>
 </blockquote>
@@ -2436,10 +2429,7 @@ Figure 4: Using min_max field to describe interior side setback requirement in 
 </div>
 </div>
 </div>
-</section>
-<section id="example-3-multiple-conditions" class="level4">
-<h4 class="anchored" data-anchor-id="example-3-multiple-conditions">Example 3: Multiple conditions</h4>
-<p><a href="#fig-const-ex-3" class="quarto-xref">Figure 5</a> from the Fort Worth Zoning Ordinance (cite Fort Worth zoning code) shows how a district’s setback requirements are recorded when the value depends on the building height.</p>
+<p><strong>Example 3: Multiple conditions.</strong> <a href="#fig-const-ex-3" class="quarto-xref">Figure 5</a> from the Fort Worth Zoning Ordinance <span class="citation" data-cites="FortWorthZoningCode">(<a href="#ref-FortWorthZoningCode" role="doc-biblioref">City of Fort Worth, Texas 2007</a>)</span> shows how a district’s setback requirements are recorded when the value depends on the building height.</p>
 <blockquote class="blockquote">
 <p><em>The height of a building in the “A” through “F” districts may be increased when the front, side and rear yard dimensions are each increased above the minimum requirements by one foot for each foot such building exceeds the height limit of the district in which it is located.</em></p>
 </blockquote>
@@ -2457,10 +2447,7 @@ Figure 5: Multiple conditions for interior side setback requirement in Fort Wor
 </div>
 </div>
 </div>
-</section>
-<section id="example-4-complex-conditions" class="level4">
-<h4 class="anchored" data-anchor-id="example-4-complex-conditions">Example 4: Complex conditions</h4>
-<p>While a software algorithm may not be able to interpret complex conditions like those listed for the Urban Center District in Addison <span class="citation" data-cites="AddisonUDC2024">(<a href="#ref-AddisonUDC2024" role="doc-biblioref">Town of Addison, Texas 2024</a>)</span>, they can still be stored in the *.zoning file as shown in <a href="#fig-const-ex-4" class="quarto-xref">Figure 6</a>. Note that the setback exceptions for parts of the block face were not encoded since the current OZFS standard assumes a relatively rectangular building with no specific orientation (this is discussed later in this paper under “Opportunities for future development”).</p>
+<p><strong>Example 4: Complex conditions.</strong> While a software algorithm may not be able to interpret complex conditions like those listed for the Urban Center District in Addison <span class="citation" data-cites="AddisonUDC2024">(<a href="#ref-AddisonUDC2024" role="doc-biblioref">Town of Addison, Texas 2024</a>)</span>, they can still be stored in the *.zoning file as shown in <a href="#fig-const-ex-4" class="quarto-xref">Figure 6</a>. Note that the setback exceptions for parts of the block face were not encoded since the current OZFS standard assumes a relatively rectangular building with no specific orientation (this is discussed later in this paper under “Opportunities for future development”).</p>
 <blockquote class="blockquote">
 <p><em>The build-to line for primary buildings, structures, walls and fences shall be ten feet on all public street frontages except along residential streets (category C) and residential mew streets (category D), which shall have build-to lines as established later in this section. Up to 25 percent of any street frontage of a building may vary from this build-to line, but shall not be less than five feet, nor more than 25 feet.</em></p>
 <p><em>The build-to line for residential streets (category C) shall be five feet where a building or structure fronts public open space. In all other cases along residential streets, a maximum of 75 percent of any block face may be constructed to the five-foot build-to line with the remainder of the block face being constructed no closer than eight feet, nor more than 25 feet from the R.O.W.</em></p>
@@ -2480,7 +2467,6 @@ Figure 6: Complex conditions describing interior side setback requirement in Ad
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="definitions" class="level3">
 <h3 class="anchored" data-anchor-id="definitions">Definitions</h3>
@@ -2521,7 +2507,7 @@ Figure 8: Illustrative example of a residential type definition
 <h2 class="anchored" data-anchor-id="parcel-geometry">Parcel geometry</h2>
 <p>Parcel geometry data representing parcel boundaries as polygons are commonly available in GIS files from state, county, or municipal open-data portals. These require pre-processing for zoning analysis because applying required setbacks to determine the buildable area of a parcel requires information not only about the shape and location of the parcel, but also about its orientation with respect to the street, since zoning codes may specify difference setbacks for the front, sides, and rear of a parcel, respectively.</p>
 <p>In the OZFS data standard, parcels must be represented in a geojson file that includes, for each parcel, line strings representing each parcel edge (front, back, and side(s) and a point representing the parcel centroid. All features have a <code>parcel_id</code> key with a value that uniquely identifies which parcel each edge or centroid is associated with.</p>
-<p>Each feature in the parcel dataset will also have a key <code>side</code> that can take one of six values:</p>
+<p>Each feature in the parcel dataset will also have a key, <code>side</code> , that can take one of six values:</p>
 <ul>
 <li><code>front</code> indicates that this is a line string representing the front of a parcel.</li>
 <li><code>rear</code> indicates that this is line string representing the rear of a parcel.</li>
@@ -2581,19 +2567,19 @@ Figure 9: Structure of *.bldg file
 </section>
 <section id="sample-dataset" class="level1">
 <h1>Sample Dataset</h1>
-<p>We have compiled a sample dataset with zoning regulations and parcel geometry for a set of 162 municipalities in the Dallas/Forth Worth region of Texas, as well as sample building characteristic data for four hypothetical residential buildings.</p>
+<p>We have compiled a sample dataset with zoning regulations and parcel geometry for a set of 71 municipalities in the Dallas/Forth Worth region of Texas, as well as sample building characteristic data for four hypothetical residential buildings.</p>
 <section id="zoning-regulations-1" class="level2">
 <h2 class="anchored" data-anchor-id="zoning-regulations-1">Zoning regulations</h2>
-<p>The *zoning files were created using NZA data published by the Mercatus Center at George Mason University <span class="citation" data-cites="mercatus_center_state_2024">(<a href="#ref-mercatus_center_state_2024" role="doc-biblioref">Mercatus Center 2024</a>)</span> as a starting point. We converted that data for each of 161 cites in the Dallas-Forth Worth region into a *.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a> offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. For XX cities<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, we added these definitions directly from their respective municipal zoning codes. For the remaining YYY cities, we used the residential building type definitions that are implied by the NZA method that was current at the time the data were collected, as described in <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a>. We encoded the zoning regulations for the city of Dallas (which is not included in the data published by the Mercatus Center) directly from the zoning code text <span class="citation" data-cites="dallas_city_dallas_2024">(<a href="#ref-dallas_city_dallas_2024" role="doc-biblioref">Dallas City 2024</a>)</span>.</p>
-<p>The sample set of zoning regulations for 162 municipalities in the Dallas-Forth Worth region in available at {{{{dataverse}}}}} (cite dataverse).</p>
+<p>The *zoning files were created using NZA data published by the Mercatus Center at George Mason University <span class="citation" data-cites="mercatus_center_state_2024">(<a href="#ref-mercatus_center_state_2024" role="doc-biblioref">Mercatus Center 2024</a>)</span> as a starting point. We converted that data for each of 71 cities in the Dallas-Forth Worth region into a *.zoning file consistent with the OZFS data standard. Textual notes in NZA fields were used to create key:value tags that were not represented by any NZA field and/or to formulate expressions to represent context-dependent constraints. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html">Appendix D</a> offers a detailed description of process for converting data from the NZA data data format (as represented by the data published by Mercatus Center) to the OZFS data format. NZA data does not include municipality specific definitions for residential building types or for building heights. We added these definitions directly from their respective municipal zoning codes. We encoded the zoning regulations for the city of Dallas (which is not included in the data published by the Mercatus Center) directly from the zoning code text <span class="citation" data-cites="dallas_city_dallas_2024">(<a href="#ref-dallas_city_dallas_2024" role="doc-biblioref">Dallas City 2024</a>)</span>.</p>
+<p>The sample set of zoning regulations for 71 municipalities in the Dallas-Forth Worth region in available from the Harvard Dataverse <span class="citation" data-cites="ozfs_zones_71_dfw2025">(<a href="#ref-ozfs_zones_71_dfw2025" role="doc-biblioref">Voulgaris et al. 2025</a>)</span>.</p>
 </section>
 <section id="parcel-geometry-1" class="level2">
 <h2 class="anchored" data-anchor-id="parcel-geometry-1">Parcel geometry</h2>
-<p>The *.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data <span class="citation" data-cites="various_appraisal_districts_land_2024">(<a href="#ref-various_appraisal_districts_land_2024" role="doc-biblioref">Various Appraisal Districts 2024</a>)</span> and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles <span class="citation" data-cites="uscensus_tiger_roads_2024">(<a href="#ref-uscensus_tiger_roads_2024" role="doc-biblioref">U.S. Census Bureau, Geography Division 2024</a>)</span>. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html">Appendix E</a> contains details on how the *.parcel files were assembled from these sources. and the *.parcel files themselves are available at {{{{dataverse}}}}} (cite dataverse).</p>
+<p>The *.parcel files were derived from the 2024 Land Parcels page of the Texas Geographic Information Office (TxGIO) data hub parcel data <span class="citation" data-cites="various_appraisal_districts_land_2024">(<a href="#ref-various_appraisal_districts_land_2024" role="doc-biblioref">Various Appraisal Districts 2024</a>)</span> and from the road centerline files from the 2024 United States Census Bureau TIGER/Line Shapefiles <span class="citation" data-cites="uscensus_tiger_roads_2024">(<a href="#ref-uscensus_tiger_roads_2024" role="doc-biblioref">U.S. Census Bureau, Geography Division 2024</a>)</span>. <a href="https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html">Appendix E</a> contains details on how the *.parcel files were assembled from these sources. and the *.parcel files themselves are available from the Harvard Dataverse <span class="citation" data-cites="ozfs_parcels_71_dfw_2025">(<a href="#ref-ozfs_parcels_71_dfw_2025" role="doc-biblioref">Voulgaris, Li, and Mansfield 2025</a>)</span>.</p>
 </section>
 <section id="building-characteristics-1" class="level2">
 <h2 class="anchored" data-anchor-id="building-characteristics-1">Building characteristics</h2>
-<p>We have also created sample *.bldg files for each of four hypothetical buildings: One two-unit building; two different four-unit buildings, and a twelve-unit building. These can be used as an example to guide the creation of *.bldg files for other proposed buildings. They can also be used to test applications intended to check whether a proposed building is allowable under existing zoning regulations on a particular parcel. These sample building files are available at {{{{dataverse}}}}} (cite dataverse).</p>
+<p>We have also created sample *.bldg files for each of four hypothetical buildings: One two-unit building; two different four-unit buildings, and a twelve-unit building. These can be used as an example to guide the creation of *.bldg files for other proposed buildings. They can also be used to test applications intended to check whether a proposed building is allowable under existing zoning regulations on a particular parcel. These sample building files are available from the Harvard Dataverse <span class="citation" data-cites="ozfs_buildings_2025">(<a href="#ref-ozfs_buildings_2025" role="doc-biblioref">Voulgaris, Mansfield, and Li 2025</a>)</span>.</p>
 </section>
 </section>
 <section id="opportunities-for-future-development" class="level1">
@@ -2612,7 +2598,7 @@ Figure 9: Structure of *.bldg file
 </section>
 <section id="additional-constraint-families" class="level2">
 <h2 class="anchored" data-anchor-id="additional-constraint-families">Additional constraint families</h2>
-<p>This implementation of OZFS prioritized constraints present in the Dallas-Fort Worth metropolitan area and those included in the National Zoning Atlas. The full extent of zoning constraint definitions is vast. Principle <span class="citation" data-cites="placecode2018">(<a href="#ref-placecode2018" role="doc-biblioref">2018</a>))</span> and Lehnerer <span class="citation" data-cites="lehnerer_grand_2009">(<a href="#ref-lehnerer_grand_2009" role="doc-biblioref">2009</a>)</span> have each attempted to provide exhaustive and irreducible lists. Extending the constraint dictionary beyond the initial set will be essential for ensuring broad applicability for the standard.</p>
+<p>This implementation of OZFS prioritized constraints present in the Dallas-Fort Worth metropolitan area and those included in the National Zoning Atlas. The full extent of zoning constraint definitions is vast. Principle <span class="citation" data-cites="placecode2018">(<a href="#ref-placecode2018" role="doc-biblioref">2018</a>)</span> and Lehnerer <span class="citation" data-cites="lehnerer_grand_2009">(<a href="#ref-lehnerer_grand_2009" role="doc-biblioref">2009</a>)</span> have each attempted to provide exhaustive and irreducible lists. Extending the constraint dictionary beyond the initial set will be essential for ensuring broad applicability for the standard.</p>
 </section>
 <section id="split-districts" class="level2">
 <h2 class="anchored" data-anchor-id="split-districts">Split districts</h2>
@@ -2630,13 +2616,12 @@ Figure 9: Structure of *.bldg file
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>This data standard represents an important step towards the development of scaleable, automated methods that can facilitate strategic increases in the supply of housing in the United States through their direct use by developers and policy-makers. They also offer researchers new opportunities to uncover the ways in which zoning regulations vary across the United States.</p>
+<p>This data standard represents an important step towards the development of scaleable, automated methods that can facilitate strategic increases in the supply of housing in the United States through their direct use by developers and policy-makers. It also offers researchers new opportunities to uncover the ways in which zoning regulations vary across the United States. We invite all interested parties to suggest improvements and modifications for future versions of the data standard, to use the OZFS to encode the zoning regulations of additional cities, and to develop software to analyze zoning data that is encoded in this format.</p>
 </section>
 <section id="references" class="level1 unnumbered">
 
 
 </section>
-
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-boeing2019urban" class="csl-entry" role="listitem">
@@ -2653,6 +2638,9 @@ City of Cockrell Hill. 2010. <span>“Zoning and Development Code.”</span> <a 
 </div>
 <div id="ref-CityOfDallas_51A_4_111" class="csl-entry" role="listitem">
 City of Dallas. 2024. <span>“Dallas City Code, Division 51A‑4.110: Residential District Regulations; Section 51A‑4.111: Agricultural [a(a)] District.”</span> <a href="https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-75272" class="uri">https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-75272</a>.
+</div>
+<div id="ref-FortWorthZoningCode" class="csl-entry" role="listitem">
+City of Fort Worth, Texas. 2007. <span>“Appendix a — Zoning Regulations, <em>Fort Worth Code of Ordinances</em>.”</span> <a href="https://codelibrary.amlegal.com/codes/ftworth/latest/ftworth_tx/0-0-0-32923" class="uri">https://codelibrary.amlegal.com/codes/ftworth/latest/ftworth_tx/0-0-0-32923</a>; American Legal Publishing.
 </div>
 <div id="ref-conway_if_2021" class="csl-entry" role="listitem">
 Conway, Matthew Wigginton. 2021. <span>“If You Zone It, Who Will Come, and How Will They Travel? The Effects of Relaxed Zoning Regulations on Travel Behavior.”</span> PhD thesis, United States – Arizona: Arizona State University. <a href="https://www.proquest.com/docview/2533144762/abstract/3AA6C787EA7A466DPQ/1">https://www.proquest.com/docview/2533144762/abstract/3AA6C787EA7A466DPQ/1</a>.
@@ -2711,15 +2699,19 @@ U.S. Census Bureau, Geography Division. 2024. <span>“TIGER/<span>Line</span> S
 <div id="ref-various_appraisal_districts_land_2024" class="csl-entry" role="listitem">
 Various Appraisal Districts. 2024. <span>“Land Parcels.”</span> Web. <a href="https://data.geographic.texas.gov/collection/?c=d0f7da13-ab09-4994-a16f-d52589e2476e">https://data.geographic.texas.gov/collection/?c=d0f7da13-ab09-4994-a16f-d52589e2476e</a>.
 </div>
+<div id="ref-ozfs_parcels_71_dfw_2025" class="csl-entry" role="listitem">
+Voulgaris, Carole Turley, Houpu Li, and Kamryn Mansfield. 2025. <span>“<span class="nocase">OZFS parcel data for 71 cities in the Dallas area</span>.”</span> Harvard Dataverse. <a href="https://doi.org/10.7910/DVN/VYFKEQ">https://doi.org/10.7910/DVN/VYFKEQ</a>.
+</div>
+<div id="ref-ozfs_buildings_2025" class="csl-entry" role="listitem">
+Voulgaris, Carole Turley, Kamryn Mansfield, and Houpu Li. 2025. <span>“<span>OZFS Sample Building Files</span>.”</span> Harvard Dataverse. <a href="https://doi.org/10.7910/DVN/B0P3Q7">https://doi.org/10.7910/DVN/B0P3Q7</a>.
+</div>
+<div id="ref-ozfs_zones_71_dfw2025" class="csl-entry" role="listitem">
+Voulgaris, Carole Turley, Kamryn Mansfield, Houpu Li, Lauren Ames Fischer, Yang Zhou, and Rimshi Agrawal. 2025. <span>“<span class="nocase">OZFS zoning data for 71 cities in the Dallas area</span>.”</span> Harvard Dataverse. <a href="https://doi.org/10.7910/DVN/YMKPSO">https://doi.org/10.7910/DVN/YMKPSO</a>.
+</div>
 <div id="ref-voulgaris2025transit" class="csl-entry" role="listitem">
 Voulgaris, Carole Turley, Rosalie Singerman Ray, and Lauren Ames Fischer. 2025. <span>“Transit Board Diversity and Pandemic Service Cuts in Vulnerable Communities.”</span> <em>Transportation Research Record</em> 2679 (2): 575–91.
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Cockrell Hill, Dallas, Garland, Highland Park, Irving, Rowlett, and University Park.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
