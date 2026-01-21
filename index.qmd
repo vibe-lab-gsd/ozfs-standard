@@ -19,13 +19,13 @@ execute:
   echo: false
   warning: false
 format:
-  # docx:
-  #   reference-doc: custom-reference-doc.docx
-  html:
-    self-contained: true
-    theme: minty
-    toc: true
-    toc-location: left
+   docx:
+     reference-doc: custom-reference-doc.docx
+  # html:
+  #   self-contained: true
+  #   theme: minty
+  #   toc: true
+  #   toc-location: left
 editor: visual
 ---
 
@@ -137,7 +137,7 @@ The top level of the file is an array with six key-value pairs:
 
     -   `planned_dev` is a binary value indicating whether this is a planned development district (where the entire district will be developed by a single developer who negotiates constraints directly with the municipality). This value is optional and is assumed to have a value of false if it is missing.
 
-    -   `overlay` is a binary value indicating whether this district is an overlay district (a district that modifies the requirements of any base districts it overlaps). This value is optional and is assumed to have a value of false if it is missing.
+    -   `overlay` indicates whether this district is an overlay district (a district that modifies the requirements of any base districts it overlaps) and (optionally) whether the overlay districts restricts or relaxes the requirements of its overlapping base district. This value is optional and is assumed to have a value of false (indicating that the district is not an overlay district) if it is missing. If it is an overlay district, it should have a value of "true," "restrict" (to indicate that the overlay further restricts the requirements of the base district), or "relax" (to indicate that the overlay district relaxes the requirements of the base district).
 
     -   `res_types_allowed` is a list of residential land uses that are allowed in the district. All values in the list must also appear in the `definitions` array. If this list of values is missing, it is assumed that no residential uses are allowed in the district. This list of values is not required if either the value of the `planned_dev` key or the value of the `overlay` key is true.
 
@@ -265,7 +265,15 @@ Each feature in the parcel dataset will also have a key, `side` , that can take 
 -   `unknown` indicates that this is a line string representing the side of a parcel that has not been classified into one of the above categories (for irregular parcel geometries and/or parcels where the relationship to the adjacent street network is unclear).
 -   `centroid` indicates that this is a point representing the parcel's centroid.
 
-Parcel centroids have three additional key/value pairs. `lot_width` indicates the width of the parcel in feet. `lot_depth` indicates the depth of the parcel in feet. `lot_area` indicates the area of the parcel in acres.
+Parcel centroids have four additional key/value pairs:
+
+-   `lot_width` indicates the width of the parcel in feet.
+
+-   `lot_depth` indicates the depth of the parcel in feet.
+
+-   `lot_area` indicates the area of the parcel in acres.
+
+-   `vacant` takes a value of true or false and indicates whether the lot is vacant.
 
 In addition to parcel geometry features, the \*.parcel file must also include a `version` key indicating what version of the OZFS standard the file is consistent with. The version described in this paper is 0.5.0.
 
@@ -340,7 +348,7 @@ Several important opportunities for improvement remain open for future versions:
 
 ## Overlay districts and spatially-defined modifiers
 
-The current schema records all base districts and overlays together, identifying districts as overlays but does not yet capture their regulations nor priority rules to help reconcile overlays with the base district. Future work could:
+The current schema records all base districts and overlays together, identifying districts as overlays (and optionally indicates whether they restrict or relax base district regulations) but does not fully capture their regulations nor priority rules to help reconcile multiple overlays with the base district. Future work could:
 
 -   Allow multiple simultaneous overlays (e.g. “Downtown Core” + “Inclusionary Housing”);
 
