@@ -19,13 +19,13 @@ execute:
   echo: false
   warning: false
 format:
-   docx:
-     reference-doc: custom-reference-doc.docx
-  # html:
-  #   self-contained: true
-  #   theme: minty
-  #   toc: true
-  #   toc-location: left
+#    docx:
+#      reference-doc: custom-reference-doc.docx
+  html:
+    self-contained: true
+    theme: minty
+    toc: true
+    toc-location: left
 editor: visual
 ---
 
@@ -49,7 +49,7 @@ OSM, an effort to assemble an open-source, digital map of the world, was establi
 
 GTFS was initially developed through a joint effort by Google and Portland TriMet in 2005 to facilitate incorporating transit route and schedule data into Google Maps' trip-planning application [@goldstein_pioneering_2013]. It encodes information about transit routes, stops, trips, and agencies as tabular data in a set of csv files. The data standard since has expanded to include additional tables (each in its own csv file) to include information about transit characteristics such as fares or pathways through stations. A strength of both of these efforts has been the use of a flexible data standard that can evolve to fully describe its subject while maintaining backwards-compatibility with data compiled under earlier versions of the standard.
 
-Calls for a “GTFS for zoning” date back more than a decade [@salzberg_lets_2013]. While OSM allows for large-n analysis of street network topology [@boeing2019urban] and GTFS likewise allows for analysis of transit service availability within neighborhoods and across cities [@voulgaris2025transit; @deweese2020tale], similar work analyzing zoning codes across jurisdiction remains time- and resource-prohibitive. An example of the type of research and analysis that is stymied by the lack of standardized, machine-readable zoning data is a study by Conway [-@conway_if_2021], which addresses the question of how statewide proposals to relax zoning restrictions in California might impact traffic congestion in and around Los Angeles. That analysis required strong assumptions with regards to, for example, allowable setbacks, since these data were not available in a consistent format for municipalities across the state. These assumptions (derived from existing building footprints) were not unreasonable and yielded sensible estimates of of congestion impacts across the Los Angeles region. However, this approach would be less likely to yield useful results about the effects of the proposed policies on specific road segments or within small areas.
+Calls for a “GTFS for zoning” date back more than a decade [@salzberg_lets_2013]. While OSM allows for large-n analysis of street network topology [@boeing2019urban] and GTFS likewise allows for analysis of transit service availability within neighborhoods and across cities [@voulgaris2025transit; @deweese2020tale], similar work analyzing zoning codes across jurisdiction remains time- and resource-prohibitive. Examples of the type of research and analysis that are stymied by the lack of standardized, machine-readable zoning data are studies by @conway_if_2021 and @monkkonen_one_2020, which address the question of how statewide proposals to relax zoning restrictions in California might the production of housing in cities across the state [@monkkonen_one_2020] or across the Los Angeles region [@conway_if_2021]. Those analyses required strong assumptions with regards to, for example, allowable setbacks, since these data were not available in a consistent format for municipalities across the state. Such assumptions (derived from existing building envelopes) were not unreasonable and yielded sensible estimates of likely aggregate impacts. However, this approach would be less reliable for evaluating the feasibility of a particular prototype building on a particular parcel.
 
 ## Cross-jurisdictional zoning atlases
 
