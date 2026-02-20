@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 
+# Add a comment
 *.Rproj
