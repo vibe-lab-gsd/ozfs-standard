@@ -648,6 +648,8 @@ to indicate how many units of each type are in the building.
 
 # Sample Dataset
 
+[[[We'll need to update this part.]]]
+
 We have compiled a sample dataset with zoning regulations and parcel
 geometry for a set of 71 municipalities in the Dallas/Forth Worth region
 of Texas, as well as sample building characteristic data for four
@@ -698,103 +700,4 @@ used to test applications intended to check whether a proposed building
 is allowable under existing zoning regulations on a particular parcel.
 These sample building files are available from the Harvard Dataverse
 (Voulgaris, Mansfield, and Li 2025).
-
-# Opportunities for future development
-
-This paper, including the accompanying appendices, represents a complete
-description of the data standard. The full text of the this paper (with
-appendices) can be found at
-<https://github.com/vibe-lab-gsd/ozfs-standard>. We welcome potential
-users and other interested parties to submit issues and/or pull requests
-with comments and suggestions to improve the usefulness of the data
-standard, or to note inaccuracies in the sample dataset.
-
-Several important opportunities for improvement remain open for future
-versions:
-
-## Overlay districts and spatially-defined modifiers
-
-The current schema records all base districts and overlays together,
-identifying districts as overlays (and optionally indicates whether they
-restrict or relax base district regulations) but does not fully capture
-their regulations nor priority rules to help reconcile multiple overlays
-with the base district. Future work could:
-
--   Allow multiple simultaneous overlays (e.g. “Downtown Core” +
-    “Inclusionary Housing”);
-
--   Include attributes that would establish precedence among overlapping
-    districts so applications can resolve conflicts;
-
--   Support geometry-based overlays defined mathematically, for example:
-    “within a quarter mile of a transit station” or “2000 feet outside
-    of an airport runway,” which may require the storage of official and
-    unofficial environmental layers (wetlands, river fronts, flood
-    plains, site grading) with rigor sufficient for zoning use.
-
-The above approach could align with the method patented by Sigaty et al.
-(Sigaty et al. 2013).
-
-## Additional constraint families
-
-This implementation of OZFS prioritized constraints present in the
-Dallas-Fort Worth metropolitan area and those included in the National
-Zoning Atlas. The full extent of zoning constraint definitions is vast.
-Principle (2018) and Lehnerer (2009) have each attempted to provide
-exhaustive and irreducible lists. Extending the constraint dictionary
-beyond the initial set will be essential for ensuring broad
-applicability for the standard.
-
-## Split districts
-
-Where a parcel straddles two districts, jurisdictions differ on whether
-the parcel must be subdivided, may distribute entitlements, or must
-apply the most restrictive rule. A subsequent version could encode
-jurisdiction-specific precedence flags (e.g. “restrictive-prevails” vs
-“pro-rated FAR”) and/or per-municipality reconciliation logic.
-
-## Site grade
-
-The \*.parcel file currently includes information about the
-two-dimensional geometry of each parcel, but does not include any
-information about grades and elevations. This information could be
-relevant for some zoning analysis where the grade might have an effect,
-for example, on how the height of a building is measured. Future
-extensions of the data standard could incorporate information about
-grades and elevations in the \*.parcel file. Keys could also be added to
-the \*.zoning file to specify how site grade might influence the
-definitions of building heights in each municipality. Our initial test
-cases were in the Dallas-Forth Worth region, where there is minimal
-variation in elevation.
-
-## Building Representation
-
-The current \*.bldg file structure is only capable of describing
-rectangular buildings by encoding the width and depth of the building. A
-method to describe building’s with a more complex footprint could be
-explored in future versions of the data standard. This could potentially
-be accomplished by adding geometry to the \*.bldg file in a similar way
-geometry is contained in the \*.parcel file.
-
-Another addition could include ways to describe the orientation of the
-building in both the \*.bldg file and the \*.zoning file. The current
-data standard assumes that the building can be oriented in any
-direction, but there may be cases where the zoning code requires the
-building to be oriented in a specific way. This addition would require
-distinguishing and labeling the sides of the building in the \*.bldg
-file and adding building orientation constraints to the \*.zoning file.
-
-# Conclusion
-
-This data standard represents an important step towards the development
-of scaleable, automated methods that can facilitate strategic increases
-in the supply of housing in the United States through their direct use
-by developers and policy-makers. It also offers researchers new
-opportunities to uncover the ways in which zoning regulations vary
-across the United States. We invite all interested parties to suggest
-improvements and modifications for future versions of the data standard,
-to use the OZFS to encode the zoning regulations of additional cities,
-and to develop software to analyze zoning data that is encoded in this
-format.
-
 
