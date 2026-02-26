@@ -3,5 +3,11 @@
 .RData
 .Ruserdata
 
-# Add a comment
 *.Rproj
+
+# large parcel files
+Arlington.parcel
+Dallas.parcel
+Fort Worth.parcel
+Garland.parcel
+Irving.parcel
