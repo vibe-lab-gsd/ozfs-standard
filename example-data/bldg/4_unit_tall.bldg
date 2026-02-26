@@ -1,0 +1,59 @@
+{
+    "bldg_info": {
+        "height_top": 40,
+        "height_plate":39,
+        "roof_type":"flat",
+        "width": 32,
+        "depth": 60,
+        "sep_platting":false,
+        "unit_separation":"party_wall"
+    },
+    "unit_info": [
+        {
+            "fl_area": 1178,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": -1,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1178,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 1,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1178,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 2,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1178,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 3,
+            "outside_entry": false
+        }
+    ],
+    "level_info": [
+        {
+            "level": -1,
+            "gross_fl_area": 1250
+        },
+        {
+            "level": 1,
+            "gross_fl_area": 1250
+        },
+        {
+            "level": 2,
+            "gross_fl_area": 1250
+        },
+        {
+            "level": 3,
+            "gross_fl_area": 1250
+        }
+    ]
+}
