@@ -61,18 +61,12 @@ of the \*.zoning file is illustrated is illustrated in outline form
 below.
 
 -   `[filename.zoning]`
-
     -   `Type: "FeatureCollection"`
-
     -   `version: "0.5.0"`
-
     -   `muni_name:` (required)
-
     -   `date:` (required)
-
     -   `definitions:` (required) *(structured array, see further detail
         below)*
-
     -   `features:` (required) *(structured array, see further detail
         below)*
 
@@ -114,35 +108,20 @@ this case, the district boundary). The structure of the features array
 is illustrated in outline form below.
 
 -   `features`
-
     -   `[[1]]`
-
         -   `type: "Feature"`
-
         -   `properties`
-
             -   `dist_name:` (optional)
-
             -   `dist_abbr:` (required)
-
             -   `planned_dev:` (optional)
-
             -   `overlay:` (optional)
-
             -   `res_types_allowed:` (conditionally required)
-
             -   `constraints`
-
         -   `geometry`
-
     -   `...`
-
     -   `[[n]]`
-
         -   `type: "Feature"`
-
         -   `properties`
-
         -   `geometry`
 
 The value for the `properties` key is a list of key-value pairs that may
@@ -222,52 +201,31 @@ syntax) and are stored in the structure illustrated below in outline
 form.
 
 -   `constraints`
-
     -   `[[constraint name 1]]`
-
         -   `min_val (conditionally required)`
-
             -   `[[1]]`
-
                 -   `expression: (required)`
-
                 -   `condition: (conditionally required)`
-
                 -   `min_max: (conditionally required)`
-
             -   `...`
-
             -   `[[n]]`
-
         -   `max_val (conditionally required)`
-
             -   `[[1]]`
-
                 -   `expression: (required)`
-
                 -   `condition: (conditionally required)`
-
                 -   `min_max: (conditionally required)`
-
             -   `...`
-
             -   `[[n]]`
-
     -   `...`
-
     -   `[[constraint name n]]`
 
 Possible constraint names include:
 
 -   `setback_front`: The front setback, in units of feet
-
 -   `far`: The floor area ratio
-
 -   `setback_side_int`: The interior side setback, in units of feet
-
 -   `setback_side_ext`: The exterior side setback (for corner lots) in
-    units of feet
-
+    units of feet.
 -   `lot_cov_bldg`: the percentage of the lot area covered by buildings,
     expressed as whole-number percentage points.
 
@@ -290,9 +248,7 @@ including the following key-value pairs:
     be use in constraint and condition expressions are:
 
     -   `lot_width`: The width of the parcel, in feet.
-
     -   `lot_area`: The area of the parcel, in acres.
-
     -   `height`: The building height, in feet.
 
     [Appendix
@@ -337,13 +293,9 @@ This requirement could be added to the constraints array in the
 \*.zoning file as follows:
 
 -   `constraints`
-
     -   `setback_side_int`
-
         -   `min_val`
-
             -   `[[1]]`
-
                 -   `expression: "20"`
 
 **Example 2: Using min_max field.** For the Cockrell Hill Single-Family
@@ -360,15 +312,10 @@ the two expressions. This requirement could be added to the constraints
 array in the \*.zoning file as follows:
 
 -   `constraints`
-
     -   `setback_side_int`
-
         -   `min_val`
-
             -   `[[1]]`
-
                 -   `expression: [ "5", "0.1 * lot_width" ]`
-
                 -   `min_max: "max"`
 
 **Example 3: Multiple conditions.** **?@fig-const-ex-3** from the Fort
@@ -386,21 +333,13 @@ This requirement could be added to the constraints array in the
 \*.zoning file as follows:
 
 -   `constraints`
-
     -   `setback_side_int`
-
         -   `min_val`
-
             -   `[[1]]`
-
                 -   `condition: "height <= 35"`
-
                 -   `expression: "25"`
-
             -   `[[2]]`
-
                 -   `condition: "height > 35"`
-
                 -   `expression: "25 + (height - 35)"`
 
 **Example 4: Complex conditions.** The setback requirments for the Urban
@@ -448,76 +387,41 @@ This requirement could be added to the constraints array in the
 \*.zoning file as follows:
 
 -   `features`
-
     -   `[[1]]`
-
         -   `type: "Feature"`
-
         -   `properties`
-
             -   `dist_abbr: "UC"`
-
             -   `res_types_allowed:`
-
 -   `constraints`
-
     -   `setback_front`
-
         -   `min_val`
-
             -   `[[1]]`
-
                 -   `condition: ["Along a a residential mew street (category D)", "70 percent of build-to line occupied by structures"]`
                 -   `expression: "0"`
-
             -   `[[2]]`
-
                 -   `condition: ["Along a residential street (category C)", "Building fronts public open space"]`
-
                 -   `expression: "5"`
-
             -   `[[3]]`
-
                 -   `condition: "Along a residential street (category C)"`
-
                 -   `expression: "8"`
-
             -   `[[4]]`
-
                 -   `condition: "Along all other public streets"`
-
                 -   `expression: "10"`
-
         -   `max_val`
-
             -   
-
     -   `front_vary_portion`
-
         -   `max_val`
-
             -   `[[3]]`
-
                 -   `condition: "Along all other public streets"`
-
                 -   `expression: "25"`
-
     -   `front_vary_range`
-
         -   `min_val`
-
             -   `[[3]]`
-
                 -   `condition: "Along all other public streets"`
-
                 -   `expression: "5"`
-
         -   `max_val`
-
             -   `[[3]]`
-
                 -   `condition: "Along all other public streets"`
-
                 -   `expression: "25"`
 
 ### Definitions
@@ -534,19 +438,12 @@ future extensions of the standard.
             -   `condition:`
             -   `expression:`
         -   `...`
-
         -   `[[n]]`
-
     -   `res_type`
-
         -   `[[1]]`
-
             -   `condition`
-
             -   `expression`
-
         -   `...`
-
         -   `[[n]]`
 
 For each definition, one or more arrays comprising conditions and
@@ -634,11 +531,8 @@ can take one of six values:
 Parcel centroids have four additional key/value pairs:
 
 -   `lot_width` indicates the width of the parcel in feet.
-
 -   `lot_depth` indicates the depth of the parcel in feet.
-
 -   `lot_area` indicates the area of the parcel in acres.
-
 -   `vacant` takes a value of true or false and indicates whether the
     lot is vacant.
 
