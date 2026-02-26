@@ -529,15 +529,10 @@ for types of residential buildings. Other definitions may be added to
 future extensions of the standard.
 
 -   `definitions`
-
     -   `height`
-
         -   `[[1]]`
-
             -   `condition:`
-
             -   `expression:`
-
         -   `...`
 
         -   `[[n]]`
@@ -570,18 +565,26 @@ between the top of the roof and the eave for all roof types except a
 flat roof (see [Appendix
 C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html)
 for an illustration of various roof types), the height definition would
-be coded as illustrated in
-<a href="#fig-height-def-ex" class="quarto-xref">Figure 1</a>.
+be coded as illustrated below
 
-<img src="figures/height-def-ex.png" width="3839" />
+-   `height`
+    -   `[[1]]`
+        -   `condition: "roof_type == 'flat'"`
+        -   `expression: "height_plate"`
+    -   `[[2]]`
+        -   `condition: "roof_type != 'flat'"`
+        -   `expression: "(height_top + heigth_eave) / 2"`
 
 Conditions do not necessarily need to be mutually exclusive. When they
 are not, they are applied in the order in which they appear. For
 example, if the residential building type (`res_type`) of a building
 with three or more units is defined as `multifamily` building unless all
 units have outside entrances on the ground level, in which case it is
-defined as a `townhouse`, this could be encoded as illustrated in
-<a href="#fig-res-type-def-ex" class="quarto-xref">Figure 2</a>. In that
+defined as a `townhouse`, this could be encoded as shown below. 
+
+<img src="figures/res-type-def-ex.png" width="5690" />
+
+In that
 example, all buildings with only one dwelling unit would be defined as
 single-family. Of the remaining buildings, all buildings with two units
 would be defined as duplexes. Of the remaining buildings (all of which
@@ -589,8 +592,6 @@ would have three or more dwelling units), those in which all units have
 an outside, ground-level entrances would be classified as townhouses,
 and all other buildings with three or more units would be classified as
 multifamily buildings.
-
-<img src="figures/res-type-def-ex.png" width="5690" />
 
 ## Parcel geometry
 
@@ -648,9 +649,41 @@ file is consistent with. The version described in this paper is 0.5.0.
 ## Building characteristics
 
 Building characteristics for a single building are stored in json file
-with the structure illustrated in
-<a href="#fig-bldg-data" class="quarto-xref">Figure 3</a>. The file
-includes three arrays:
+with the structure illustrated below.
+
+-   `[filename].bldg`
+    -   `bldg_info`
+        -   `height_top:` (required)
+        -   `height_plate:` (required)
+        -   `height_eave:` (conditionally required)
+        -   `height_deck:` (conditionally required)
+        -   `height_parapet:` (optional)
+        -   `height_tower:` (optional)
+        -   `roof_type:` (required)
+        -   `roof pitch:` (conditionally required)
+        -   `width:` (required)
+        -   `depth:` (required)
+        -   `sep_platting:` (conditionally required)
+        -   `unit_separation:` (conditionally required)
+        -   `sep_wall_length:` (conditionally required)
+        -   `parking:` (optional)
+    -   `level_info`
+        - `[[1]]`
+            -   `level:` (required)
+            -   `gross_fl_area:` (required)
+        -   `...`
+        -   `[[n]]`
+            -   `level:` (required)
+            -   `gross_fl_area:` (required)
+    -   `unit_info`
+        -   `[[1]]`
+            -   `fl_area:` (required)
+            -   `bedrooms:` (required)
+            -   `entry_level:` (required)
+            -   `outside_entry:` (required)
+            -   `qty:` (required)
+
+The file includes three arrays:
 
 -   `bldg_info` includes information on the characteristics of the
     overall building (building dimensions and number of parking spaces
@@ -659,7 +692,6 @@ includes three arrays:
     building, and
 -   `level_info` contains information on each level within the building.
 
-<img src="figures/bldg_data_structure.png" width="3680" />
 
 ### Building dimensions
 
@@ -711,12 +743,9 @@ of the same type if they have the same values for each characteristic
 below:
 
 -   `fl_area`: The floor area of the unit in square feet.
-
 -   `bedrooms`: The number of bedrooms in the unit, expressed as a whole
     number with a minimum value of zero (for a studio unit).
-
 -   `entry_level`: The level number the entrance to the unit is on.
-
 -   `outside_entry`: A binary value indicating whether the entrance to
     the unit is directly from the outside of the building.
 
@@ -874,131 +903,4 @@ to use the OZFS to encode the zoning regulations of additional cities,
 and to develop software to analyze zoning data that is encoded in this
 format.
 
-# References
 
-Boeing, Geoff. 2019. “Urban Spatial Order: Street Network Orientation,
-Configuration, and Entropy.” *Applied Network Science* 4 (1): 1–19.
-
-Bronin, Sara C., and Ilya Ilyankou. 2021. “How to Make a Zoning Atlas: A
-Methodology for Translating and Standardizing District-Specific
-Regulations.” Rochester, NY. <https://doi.org/10.2139/ssrn.3996609>.
-
-Bronin, Sara C., Scott Markley, Aline Fader, and Evan Derickson. 2023.
-“How to Make a Zoning Atlas 2.0: The Official Methodology of the
-National Zoning Atlas.” Rochester, NY: Social Science Research Network.
-<https://doi.org/10.2139/ssrn.4476927>.
-
-City of Cockrell Hill. 2010. “Zoning and Development Code.”
-<https://www.cityofcockrellhill.us/DocumentCenter/View/389/ZONINGCODE2010-FULL>.
-
-City of Dallas. 2024. “Dallas City Code, Division 51A‑4.110: Residential
-District Regulations; Section 51A‑4.111: Agricultural \[a(a)\]
-District.”
-<https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-75272>.
-
-City of Fort Worth, Texas. 2007. “Appendix a — Zoning Regulations, *Fort
-Worth Code of Ordinances*.”
-<https://codelibrary.amlegal.com/codes/ftworth/latest/ftworth_tx/0-0-0-32923>;
-American Legal Publishing.
-
-Conway, Matthew Wigginton. 2021. “If You Zone It, Who Will Come, and How
-Will They Travel? The Effects of Relaxed Zoning Regulations on Travel
-Behavior.” PhD thesis, United States – Arizona: Arizona State
-University.
-<https://www.proquest.com/docview/2533144762/abstract/3AA6C787EA7A466DPQ/1>.
-
-Dallas City. 2024. *The Dallas City Code*.
-<https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-75159>.
-
-DeWeese, James, Leila Hawa, Hanna Demyk, Zane Davey, Anastasia Belikow,
-and Ahmed El-Geneidy. 2020. “A Tale of 40 Cities: A Preliminary Analysis
-of Equity Impacts of COVID-19 Service Adjustments Across North America.”
-*Findings*.
-
-Hirt, Sonia. 2018. *Zoned in the USA: The Origins and Implications of
-American Land-Use Regulation*. Cornell University Press.
-
-Kahn, Eli. 2024. “NZA Data Dictionary.” Fairfax, CA: Mercatus Center,
-George Mason University.
-<https://www.mercatus.org/sites/default/files/2024-09/zoning_atlas_data_dictionary_1.pdf>.
-
-Lehnerer, Alex. 2009. *Grand Urban Rules*. 010 Publishers.
-
-McHugh, Bibiana. 2013. “Pioneering Open Data Standards: The GTFS Story.”
-In *Beyond Transparency: Open Data and the Future of Civic Innovation*,
-edited by Brett Goldstein and Lauren Dyson, 1st edition, 125–36. San
-Francisco: Code for America Press.
-
-Mercatus Center. 2024. “State and Regional Zoning Atlas Datasets
-Mercatus Center.” August 2024.
-<https://www.mercatus.org/state-and-regional-zoning-atlas-datasets>.
-
-Metropolitan Area Planning Council. 2025. “MAPC Zoning Atlas MAPC Zoning
-Atlas.” 2025. <https://zoningatlas.mapc.org/>.
-
-Monkkonen, Paavo, Ian Carlton, and Kate Macfarlane. 2020. “One to Four:
-The Market Potential of Fourplexes in California’s Single-Family
-Neighborhoods,” July. <https://escholarship.org/uc/item/8gh2x0tj>.
-
-National Zoning Atlas. 2025a. “Massachusetts Zoning Atlas. National
-Zoning Atlas.” 2025. <https://www.zoningatlas.org/massachusetts>.
-
-———. 2025b. “National Zoning Atlas. National Zoning Atlas.” May 12,
-2025. <https://www.zoningatlas.org>.
-
-Newman, Peter, and Andy Thornley. 1996. *Urban Planning in Europe:
-International Competition, National Systems and Planning Projects*.
-London ; New York: Routledge.
-
-Open Street Map Contributors. 2025a. “Tags.” February 27, 2025.
-<https://wiki.openstreetmap.org/wiki/Tags>.
-
-———. 2025b. “History of OpenStreetMap.” July 4, 2025.
-<https://wiki.openstreetmap.org/wiki/History_of_OpenStreetMap>.
-
-Principle. 2018. “PlaceCode: The Next Generation of Form-Based Codes.”
-2018. <https://www.principle.us/placecode>.
-
-Reardon, Tim, Jessie Partridge, and Lily Perkins-High. 2020.
-“Introduction to the Zoning Atlas.” Boston: Metropolitan Area Planning
-Councul. <https://zoningatlas.mapc.org/reports/1>.
-
-Salzberg, Andrew. 2013. “Let’s Build an Open Zoning Data Standard.
-Andrew Salzberg.” February 22, 2013.
-<https://andrewsalzberg.wordpress.com/2013/02/22/lets-build-an-open-zoning-data-standard/>.
-
-Sigaty, Todd Michael, Eugene Jerome Pasquarelli, Gregg Andrew
-Pasquarelli, Timothy Michael Martone, and Sarah Elizabeth Williams.
-2013. “System and Method for 3-d Massing of a Building Envelope.” Google
-Patents.
-
-Town of Addison, Texas. 2024. “Appendix a — Unified Development Code,
-*Code of Ordinances of the Town of Addison, Texas*.”
-<https://library.municode.com/tx/addison/codes/code_of_ordinances?nodeId=APXAUNDECO>;
-Municode.
-
-U.S. Census Bureau, Geography Division. 2024. “TIGER/Line Shapefiles:
-Roads Layer (Äll Roads/̈ Linear Features).” Shapefile (GIS vector),
-downloaded from the 2024 TIGER/Line Shapefiles.
-<https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html>.
-
-Various Appraisal Districts. 2024. “Land Parcels.” Web.
-<https://data.geographic.texas.gov/collection/?c=d0f7da13-ab09-4994-a16f-d52589e2476e>.
-
-Voulgaris, Carole Turley, Houpu Li, and Kamryn Mansfield. 2025.
-“<span class="nocase">OZFS parcel data for 71 cities in the Dallas
-area</span>.” Harvard Dataverse. <https://doi.org/10.7910/DVN/VYFKEQ>.
-
-Voulgaris, Carole Turley, Kamryn Mansfield, and Houpu Li. 2025. “OZFS
-Sample Building Files.” Harvard Dataverse.
-<https://doi.org/10.7910/DVN/B0P3Q7>.
-
-Voulgaris, Carole Turley, Kamryn Mansfield, Houpu Li, Lauren Ames
-Fischer, Yang Zhou, and Rimshi Agrawal. 2025. “<span class="nocase">OZFS
-zoning data for 71 cities in the Dallas area</span>.” Harvard Dataverse.
-<https://doi.org/10.7910/DVN/YMKPSO>.
-
-Voulgaris, Carole Turley, Rosalie Singerman Ray, and Lauren Ames
-Fischer. 2025. “Transit Board Diversity and Pandemic Service Cuts in
-Vulnerable Communities.” *Transportation Research Record* 2679 (2):
-575–91.
