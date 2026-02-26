@@ -1,0 +1,1 @@
+This folder will include random sample of parcels from the all-parcels folder.
