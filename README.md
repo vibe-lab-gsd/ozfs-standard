@@ -648,56 +648,5 @@ to indicate how many units of each type are in the building.
 
 # Sample Dataset
 
-[[[We'll need to update this part.]]]
-
-We have compiled a sample dataset with zoning regulations and parcel
-geometry for a set of 71 municipalities in the Dallas/Forth Worth region
-of Texas, as well as sample building characteristic data for four
-hypothetical residential buildings.
-
-## Zoning regulations
-
-The \*zoning files were created using NZA data published by the Mercatus
-Center at George Mason University (Mercatus Center 2024) as a starting
-point. We converted that data for each of 71 cities in the Dallas-Forth
-Worth region into a \*.zoning file consistent with the OZFS data
-standard. Textual notes in NZA fields were used to create key:value tags
-that were not represented by any NZA field and/or to formulate
-expressions to represent context-dependent constraints. [Appendix
-D](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html)
-offers a detailed description of process for converting data from the
-NZA data data format (as represented by the data published by Mercatus
-Center) to the OZFS data format. NZA data does not include municipality
-specific definitions for residential building types or for building
-heights. We added these definitions directly from their respective
-municipal zoning codes. We encoded the zoning regulations for the city
-of Dallas (which is not included in the data published by the Mercatus
-Center) directly from the zoning code text (Dallas City 2024).
-
-The sample set of zoning regulations for 71 municipalities in the
-Dallas-Forth Worth region in available from the Harvard Dataverse
-(Voulgaris et al. 2025).
-
-## Parcel geometry
-
-The \*.parcel files were derived from the 2024 Land Parcels page of the
-Texas Geographic Information Office (TxGIO) data hub parcel data
-(Various Appraisal Districts 2024) and from the road centerline files
-from the 2024 United States Census Bureau TIGER/Line Shapefiles (U.S.
-Census Bureau, Geography Division 2024). [Appendix
-E](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html)
-contains details on how the \*.parcel files were assembled from these
-sources. and the \*.parcel files themselves are available from the
-Harvard Dataverse (Voulgaris, Li, and Mansfield 2025).
-
-## Building characteristics
-
-We have also created sample \*.bldg files for each of four hypothetical
-buildings: One two-unit building; two different four-unit buildings, and
-a twelve-unit building. These can be used as an example to guide the
-creation of \*.bldg files for other proposed buildings. They can also be
-used to test applications intended to check whether a proposed building
-is allowable under existing zoning regulations on a particular parcel.
-These sample building files are available from the Harvard Dataverse
-(Voulgaris, Mansfield, and Li 2025).
+We'll fill this in later.
 
