@@ -251,19 +251,17 @@ including the following key-value pairs:
     -   `lot_area`: The area of the parcel, in acres.
     -   `height`: The building height, in feet.
 
-    [Appendix
-    B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html)
-    includes a full list of the of the variables that can be used in
-    constraint and condition expressions, along with a description of
-    each variable. If the condition under which the value applies cannot
-    be described as a logical expression (one that evaluates to True or
-    False) with one or more of those variables, it may be described in a
-    text string (which will limit machine-readability).
+[Appendix B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md)
+includes a full list of the of the variables that can be used in
+constraint and condition expressions, along with a description of
+each variable. If the condition under which the value applies cannot
+be described as a logical expression (one that evaluates to True or
+False) with one or more of those variables, it may be described in a
+text string (which will limit machine-readability).
 
 -   `expression`: These can either be constant numeric values or
     equations (in Python syntax) referring to variables listed in
-    [Appendix
-    B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
+    [Appendix B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
     This can be a list of multiple values or expressions, in which case
     the `min_max` key should be used to specify whether the minimum or
     maximum value in the list should be used. If the value of the
@@ -452,15 +450,15 @@ circumstance under which the value of the `expression` key applies and
 should be a logical statement (one that returns a value of true or
 false) in Python syntax, referencing any of the variable names listed in
 [Appendix
-B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
+B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
 The value of the `expression` key should be an equation (in Python
 syntax) referencing any of the variable names listed in [Appendix
-B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
+B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
 As an example, if the height of a building is defined as the top of the
 highest wall plate for buildings with a flat roof type and the mid-point
 between the top of the roof and the eave for all roof types except a
 flat roof (see [Appendix
-C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html)
+C](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-c.md)
 for an illustration of various roof types), the height definition would
 be coded as illustrated below
 
@@ -606,7 +604,7 @@ includes the height from the ground to the top of the building
 (`height_top`), from the ground to the highest wall plate
 (`height_plate`), as well as the building `width`, the building `depth`,
 and the building’s roof type (`roof_type`). Refer to [Appendix
-C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html)
+C](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-c.md)
 for an illustration of roof types that are defined for use in OZFS.
 
 As noted in the section on zoning constraints, there are differences
