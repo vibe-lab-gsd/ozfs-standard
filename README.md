@@ -231,7 +231,7 @@ Possible constraint names include:
 
 `setback_front` (the front setback), `far` (the floor area ratio), and
 `lot_cov_bldg` (the lot coverage). [Appendix
-A](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-a.html)
+A](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-a.md)
 includes a complete list of constraints that have been defined for the
 \*.zoning file, together with their descriptions. For each constraint
 that is included in the constraints array, a minimum value `min_val`
