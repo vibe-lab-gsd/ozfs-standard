@@ -479,7 +479,19 @@ with three or more units is defined as `multifamily` building unless all
 units have outside entrances on the ground level, in which case it is
 defined as a `townhouse`, this could be encoded as shown below. 
 
-<img src="figures/res-type-def-ex.png" width="5690" />
+-   `res_type`
+    -   `[[1]]`
+        -   `condition: "total_units ==1"`
+        -   `expression: "single-family`
+    -   `[[2]]`
+        -   `condition: "total_units == 2"`
+        -   `expression: "duplex"`
+    -   `[[3]]`
+        -   `condition: "n_outside_entry == total_units and n_ground_entry == total_units"`
+        -   `expression: "townhouse`
+    -   `[[4]]`
+        -   `condition: "true"`
+        -   `expression: "multifamily`
 
 In that
 example, all buildings with only one dwelling unit would be defined as
