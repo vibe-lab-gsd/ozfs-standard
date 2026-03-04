@@ -65,6 +65,7 @@ below.
     -   `version: "0.5.0"`
     -   `muni_name:` (required)
     -   `date:` (required)
+    -   `source:` (required)
     -   `definitions:` (required) *(structured array, see further detail
         below)*
     -   `features:` (required) *(structured array, see further detail
@@ -74,16 +75,14 @@ The top level of the file is an array with six key-value pairs:
 
 -   `Type`: As for geojson files, the value for this key should be
     “FeatureCollection.”
-
 -   `version`: The version of the OZFS data standard used in this file.
     The current version of the standard is 0.5.0.
-
 -   `muni_name`: The name of the municipality this zoning code refers
     to. This is a required value.
-
 -   `date`: The most recent date on which the zoning regulations are
     known to have been in effect. This is a required value.
-
+-   `source`: This is a url or other note indicating where the information in this
+    file comes from. In general, this will be an online municipal code.
 -   `definitions` is an array of definitions of terms (in the current
     version of the standard, height and residential building types) that
     may very from one municipality to the next and are defined in the
