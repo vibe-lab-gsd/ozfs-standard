@@ -65,6 +65,7 @@ below.
     -   `version: "0.5.0"`
     -   `muni_name:` (required)
     -   `date:` (required)
+    -   `source:` (required)
     -   `definitions:` (required) *(structured array, see further detail
         below)*
     -   `features:` (required) *(structured array, see further detail
@@ -74,16 +75,14 @@ The top level of the file is an array with six key-value pairs:
 
 -   `Type`: As for geojson files, the value for this key should be
     “FeatureCollection.”
-
 -   `version`: The version of the OZFS data standard used in this file.
     The current version of the standard is 0.5.0.
-
 -   `muni_name`: The name of the municipality this zoning code refers
     to. This is a required value.
-
 -   `date`: The most recent date on which the zoning regulations are
     known to have been in effect. This is a required value.
-
+-   `source`: This is a url or other note indicating where the information in this
+    file comes from. In general, this will be an online municipal code.
 -   `definitions` is an array of definitions of terms (in the current
     version of the standard, height and residential building types) that
     may very from one municipality to the next and are defined in the
@@ -231,7 +230,7 @@ Possible constraint names include:
 
 `setback_front` (the front setback), `far` (the floor area ratio), and
 `lot_cov_bldg` (the lot coverage). [Appendix
-A](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-a.html)
+A](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-a.md)
 includes a complete list of constraints that have been defined for the
 \*.zoning file, together with their descriptions. For each constraint
 that is included in the constraints array, a minimum value `min_val`
@@ -251,19 +250,17 @@ including the following key-value pairs:
     -   `lot_area`: The area of the parcel, in acres.
     -   `height`: The building height, in feet.
 
-    [Appendix
-    B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html)
-    includes a full list of the of the variables that can be used in
-    constraint and condition expressions, along with a description of
-    each variable. If the condition under which the value applies cannot
-    be described as a logical expression (one that evaluates to True or
-    False) with one or more of those variables, it may be described in a
-    text string (which will limit machine-readability).
+[Appendix B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md)
+includes a full list of the of the variables that can be used in
+constraint and condition expressions, along with a description of
+each variable. If the condition under which the value applies cannot
+be described as a logical expression (one that evaluates to True or
+False) with one or more of those variables, it may be described in a
+text string (which will limit machine-readability).
 
 -   `expression`: These can either be constant numeric values or
     equations (in Python syntax) referring to variables listed in
-    [Appendix
-    B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
+    [Appendix B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
     This can be a list of multiple values or expressions, in which case
     the `min_max` key should be used to specify whether the minimum or
     maximum value in the list should be used. If the value of the
@@ -452,15 +449,15 @@ circumstance under which the value of the `expression` key applies and
 should be a logical statement (one that returns a value of true or
 false) in Python syntax, referencing any of the variable names listed in
 [Appendix
-B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
+B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
 The value of the `expression` key should be an equation (in Python
 syntax) referencing any of the variable names listed in [Appendix
-B](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-b.html).
+B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
 As an example, if the height of a building is defined as the top of the
 highest wall plate for buildings with a flat roof type and the mid-point
 between the top of the roof and the eave for all roof types except a
 flat roof (see [Appendix
-C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html)
+C](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-c.md)
 for an illustration of various roof types), the height definition would
 be coded as illustrated below
 
@@ -479,7 +476,19 @@ with three or more units is defined as `multifamily` building unless all
 units have outside entrances on the ground level, in which case it is
 defined as a `townhouse`, this could be encoded as shown below. 
 
-<img src="figures/res-type-def-ex.png" width="5690" />
+-   `res_type`
+    -   `[[1]]`
+        -   `condition: "total_units ==1"`
+        -   `expression: "single-family`
+    -   `[[2]]`
+        -   `condition: "total_units == 2"`
+        -   `expression: "duplex"`
+    -   `[[3]]`
+        -   `condition: "n_outside_entry == total_units and n_ground_entry == total_units"`
+        -   `expression: "townhouse`
+    -   `[[4]]`
+        -   `condition: "true"`
+        -   `expression: "multifamily`
 
 In that
 example, all buildings with only one dwelling unit would be defined as
@@ -594,7 +603,7 @@ includes the height from the ground to the top of the building
 (`height_top`), from the ground to the highest wall plate
 (`height_plate`), as well as the building `width`, the building `depth`,
 and the building’s roof type (`roof_type`). Refer to [Appendix
-C](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-c.html)
+C](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-c.md)
 for an illustration of roof types that are defined for use in OZFS.
 
 As noted in the section on zoning constraints, there are differences
@@ -648,56 +657,5 @@ to indicate how many units of each type are in the building.
 
 # Sample Dataset
 
-[[[We'll need to update this part.]]]
-
-We have compiled a sample dataset with zoning regulations and parcel
-geometry for a set of 71 municipalities in the Dallas/Forth Worth region
-of Texas, as well as sample building characteristic data for four
-hypothetical residential buildings.
-
-## Zoning regulations
-
-The \*zoning files were created using NZA data published by the Mercatus
-Center at George Mason University (Mercatus Center 2024) as a starting
-point. We converted that data for each of 71 cities in the Dallas-Forth
-Worth region into a \*.zoning file consistent with the OZFS data
-standard. Textual notes in NZA fields were used to create key:value tags
-that were not represented by any NZA field and/or to formulate
-expressions to represent context-dependent constraints. [Appendix
-D](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-d.html)
-offers a detailed description of process for converting data from the
-NZA data data format (as represented by the data published by Mercatus
-Center) to the OZFS data format. NZA data does not include municipality
-specific definitions for residential building types or for building
-heights. We added these definitions directly from their respective
-municipal zoning codes. We encoded the zoning regulations for the city
-of Dallas (which is not included in the data published by the Mercatus
-Center) directly from the zoning code text (Dallas City 2024).
-
-The sample set of zoning regulations for 71 municipalities in the
-Dallas-Forth Worth region in available from the Harvard Dataverse
-(Voulgaris et al. 2025).
-
-## Parcel geometry
-
-The \*.parcel files were derived from the 2024 Land Parcels page of the
-Texas Geographic Information Office (TxGIO) data hub parcel data
-(Various Appraisal Districts 2024) and from the road centerline files
-from the 2024 United States Census Bureau TIGER/Line Shapefiles (U.S.
-Census Bureau, Geography Division 2024). [Appendix
-E](https://vibe-lab-gsd.github.io/ozfs-standard/appendices/appendix-e.html)
-contains details on how the \*.parcel files were assembled from these
-sources. and the \*.parcel files themselves are available from the
-Harvard Dataverse (Voulgaris, Li, and Mansfield 2025).
-
-## Building characteristics
-
-We have also created sample \*.bldg files for each of four hypothetical
-buildings: One two-unit building; two different four-unit buildings, and
-a twelve-unit building. These can be used as an example to guide the
-creation of \*.bldg files for other proposed buildings. They can also be
-used to test applications intended to check whether a proposed building
-is allowable under existing zoning regulations on a particular parcel.
-These sample building files are available from the Harvard Dataverse
-(Voulgaris, Mansfield, and Li 2025).
+We'll fill this in later.
 
