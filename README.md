@@ -423,6 +423,34 @@ This requirement could be added to the constraints array in the
 
 ### Definitions
 
+<<<<<ADD NOTE: When reidential type uses are not define in a definitions 
+section, use the following defaults:
+
+"res_type": [
+      {
+        "condition": "total_units == 1",
+        "expression": "'single_family'"
+      },
+      {
+        "condition": "total_units == 2",
+        "expression": "'duplex'"
+      },
+      {
+        "condition": [
+          "total_units > 2",
+          "floors > 1",
+          "n_outside_entry == total_units",
+          "n_ground_entry == total_units"
+        ],
+        "expression": "'townhouse'"
+      },
+      {
+        "condition": "total_units > 2",
+        "expression": "'multifamily'"
+      }
+    ]
+  },
+
 There may be terms that are used in many different zoning codes, but
 with definitions that vary across municipalities. The current version of
 the OZFS standard (version 0.5.0) requires definitions for height and
