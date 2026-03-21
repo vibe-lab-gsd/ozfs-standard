@@ -15,6 +15,8 @@ in the \*.zoning file in the OZFS data standard.
 | `height_eave` | Distance from the ground to the eave of the building. | Feet |
 | `lot_cov_bldg` | Percent of lot area covered by buildings | Whole-number percentage points |
 | `lot_area` | The area of the lot | Acres |
+| `lot_depth` | The depth of the lot | Feet |
+| `lot_width` | The width of the lot | Feet |
 | `parking_covered` | The number of covered parking spaces | Number of spaces |
 | `parking_enclosed` | The number of enclosed parking spaces | Number of spaces |
 | `parking_uncovered` | The number of uncovered parking spaces | Number of spaces |
