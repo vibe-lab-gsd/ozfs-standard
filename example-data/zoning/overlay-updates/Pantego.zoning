@@ -2,12 +2,8 @@
   "type": "FeatureCollection",
   "version": "0.5.0",
   "muni_name": "Pantego",
-<<<<<<< HEAD
-  "date": "2024-08-14",
-=======
   "date": "2024-01-22",
   "source": "https://ecode360.com/40180322#40180322",
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
   "definitions": {
     "height": [
       {
@@ -72,7 +68,6 @@
         "planned_dev": false,
         "res_types_allowed": "1_unit",
         "constraints": {
-<<<<<<< HEAD
           "lot_size": {
             "min_val": [
               {
@@ -82,8 +77,6 @@
               }
             ]
           },
-=======
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "setback_front": {
             "min_val": [
               {
@@ -129,18 +122,6 @@
               }
             ]
           },
-<<<<<<< HEAD
-=======
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "parking_uncovered": {
             "min_val": [
               {
@@ -171,19 +152,11 @@
               }
             ]
           },
-<<<<<<< HEAD
           "height": {
             "max_val": [
               {
                 "expression": [
                   "35"
-=======
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.23"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
                 ]
               }
             ]
@@ -35352,7 +35325,6 @@
           "2_unit"
         ],
         "constraints": {
-<<<<<<< HEAD
           "lot_size": {
             "min_val": [
               {
@@ -35362,8 +35334,6 @@
               }
             ]
           },
-=======
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "setback_front": {
             "min_val": [
               {
@@ -35376,7 +35346,6 @@
           "setback_side_int": {
             "min_val": [
               {
-<<<<<<< HEAD
                 "condition": "Abutting R-1",
                 "expression": [
                   "10"
@@ -35387,20 +35356,12 @@
                 "expression": [
                   "5"
                 ]
-=======
-                "expression": [
-                  "5",
-                  "10"
-                ],
-                "condition": "10 if abutting R-1"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
               }
             ]
           },
           "setback_side_ext": {
             "min_val": [
               {
-<<<<<<< HEAD
                 "condition": "Abutting R-1",
                 "expression": [
                   "10"
@@ -35411,13 +35372,6 @@
                 "expression": [
                   "5"
                 ]
-=======
-                "expression": [
-                  "5",
-                  "10"
-                ],
-                "condition": "10 if abutting R-1"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
               }
             ]
           },
@@ -35439,18 +35393,6 @@
               }
             ]
           },
-<<<<<<< HEAD
-=======
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "parking_uncovered": {
             "min_val": [
               {
@@ -35481,19 +35423,11 @@
               }
             ]
           },
-<<<<<<< HEAD
           "height": {
             "max_val": [
               {
                 "expression": [
                   "35"
-=======
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.23"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
                 ]
               }
             ]
@@ -36169,7 +36103,6 @@
         "dist_name": "Multifamily Townouse/Condo Residential",
         "dist_abbr": "R-3",
         "planned_dev": false,
-<<<<<<< HEAD
         "res_types_allowed": [
           "1_unit",
           "2_unit",
@@ -36200,9 +36133,6 @@
               }
             ]
           },
-=======
-        "constraints": {
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "setback_front": {
             "min_val": [
               {
@@ -36215,7 +36145,6 @@
           "setback_side_int": {
             "min_val": [
               {
-<<<<<<< HEAD
                 "condition": "Abutting R-1",
                 "expression": [
                   "10"
@@ -36232,13 +36161,6 @@
                 "expression": [
                   "5"
                 ]
-=======
-                "expression": [
-                  "5",
-                  "10"
-                ],
-                "condition": "10 if abutting R-1"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
               }
             ]
           },
@@ -36269,18 +36191,6 @@
               }
             ]
           },
-<<<<<<< HEAD
-=======
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "parking_uncovered": {
             "min_val": [
               {
@@ -36311,30 +36221,11 @@
               }
             ]
           },
-<<<<<<< HEAD
           "height": {
             "max_val": [
               {
                 "expression": [
                   "35"
-=======
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.16"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.057 * total_units"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
                 ]
               }
             ]
@@ -36343,7 +36234,6 @@
             "min_val": [
               {
                 "condition": [
-<<<<<<< HEAD
                   "res_type == 'townhome'"
                 ],
                 "expression": [
@@ -36352,8 +36242,6 @@
               },
               {
                 "condition": [
-=======
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
                   "bedrooms <= 1"
                 ],
                 "expression": [
@@ -36387,18 +36275,7 @@
               }
             ]
           }
-<<<<<<< HEAD
         }
-=======
-        },
-        "res_types_allowed": [
-          "1_unit",
-          "2_unit",
-          "3_unit",
-          "4_plus",
-          "townhome"
-        ]
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -36816,7 +36693,6 @@
           "townhome"
         ],
         "constraints": {
-<<<<<<< HEAD
           "lot_size": {
             "min_val": [
               {
@@ -36839,8 +36715,6 @@
               }
             ]
           },
-=======
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "setback_front": {
             "min_val": [
               {
@@ -36853,7 +36727,6 @@
           "setback_side_int": {
             "min_val": [
               {
-<<<<<<< HEAD
                 "condition": "Abutting R-1",
                 "expression": [
                   "10"
@@ -36870,13 +36743,6 @@
                 "expression": [
                   "5"
                 ]
-=======
-                "expression": [
-                  "5",
-                  "10"
-                ],
-                "condition": "10 if abutting R-1"
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
               }
             ]
           },
@@ -36946,19 +36812,6 @@
               }
             ]
           },
-<<<<<<< HEAD
-          "unit_size": {
-            "min_val": [
-              {
-                "condition": [
-                  "res_type == 'townhome'"
-                ],
-                "expression": [
-                  "1000"
-                ]
-              },
-              {
-=======
           "lot_size": {
             "min_val": [
               {
@@ -36982,7 +36835,6 @@
           "unit_size": {
             "min_val": [
               {
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
                 "condition": [
                   "bedrooms <= 1"
                 ],
@@ -49568,7 +49420,6 @@
         "dist_abbr": "PD",
         "planned_dev": true,
         "constraints": {
-<<<<<<< HEAD
           "lot_size": {
             "min_val": [
               {
@@ -49578,8 +49429,6 @@
               }
             ]
           },
-=======
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "setback_front": {
             "min_val": [
               {
@@ -49634,18 +49483,6 @@
               }
             ]
           },
-<<<<<<< HEAD
-=======
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.11"
-                ]
-              }
-            ]
-          },
->>>>>>> d51d690f781d49fa62768b06df978a15c18e98c2
           "unit_size": {
             "min_val": [
               {
