@@ -3,14 +3,14 @@ import random
 import os
 
 files = [
-    f for f in os.listdir("example-data/parcel/all-parcels/large-cities")
-    if os.path.isfile(os.path.join("example-data/parcel/all-parcels/large-cities", f))
+    f for f in os.listdir("example-data/parcel/all-parcels")
+    if os.path.isfile(os.path.join("example-data/parcel/all-parcels", f))
 ]
 
 for file in files:
     # --- File paths ---
-    input_file = "example-data/parcel/all-parcels/large-cities/" + file
-    output_file = "example-data/parcel/sampled-parcels/1pct_" + file
+    input_file = "example-data/parcel/all-parcels/" + file
+    output_file = "example-data/parcel/sampled-parcels/15pct_" + file
 
     # --- Load GeoJSON ---
     with open(input_file, "r") as f:
@@ -28,8 +28,8 @@ for file in files:
 
     parcel_ids = list(parcel_ids)
 
-    # --- Sample 1% of unique parcel IDs ---
-    sample_size = max(1, int(len(parcel_ids) * 0.01))  # ensure at least 1
+    # --- Sample 15% of unique parcel IDs ---
+    sample_size = max(1, int(len(parcel_ids) * 0.15))  # ensure at least 1
     sampled_ids = set(random.sample(parcel_ids, sample_size))
 
     # --- Filter features ---
