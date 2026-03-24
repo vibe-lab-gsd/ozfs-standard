@@ -68,6 +68,15 @@
         "planned_dev": false,
         "res_types_allowed": "1_unit",
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.23"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -113,15 +122,6 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
           "parking_uncovered": {
             "min_val": [
               {
@@ -152,11 +152,11 @@
               }
             ]
           },
-          "lot_size": {
-            "min_val": [
+          "height": {
+            "max_val": [
               {
                 "expression": [
-                  "0.23"
+                  "35"
                 ]
               }
             ]
@@ -35325,6 +35325,15 @@
           "2_unit"
         ],
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.23"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -35337,22 +35346,32 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
           "setback_side_ext": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
@@ -35370,15 +35389,6 @@
               {
                 "expression": [
                   "40"
-                ]
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
                 ]
               }
             ]
@@ -35413,11 +35423,11 @@
               }
             ]
           },
-          "lot_size": {
-            "min_val": [
+          "height": {
+            "max_val": [
               {
                 "expression": [
-                  "0.23"
+                  "35"
                 ]
               }
             ]
@@ -36093,7 +36103,36 @@
         "dist_name": "Multifamily Townouse/Condo Residential",
         "dist_abbr": "R-3",
         "planned_dev": false,
+        "res_types_allowed": [
+          "1_unit",
+          "2_unit",
+          "3_unit",
+          "4_plus",
+          "townhome"
+        ],
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.16",
+                  "0.08 * total_units"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                ],
+                "min_max": "max"
+              },
+              {
+                "expression": [
+                  "0.057 * total_units"
+                ],
+                "condition": [
+                  "res_type == 'townhome'"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -36106,11 +36145,22 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": "res_type == 'townhome'",
+                "expression": [
+                  "0"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
@@ -36137,15 +36187,6 @@
               {
                 "expression": [
                   "60"
-                ]
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
                 ]
               }
             ]
@@ -36180,28 +36221,25 @@
               }
             ]
           },
-          "lot_size": {
-            "min_val": [
+          "height": {
+            "max_val": [
               {
                 "expression": [
-                  "0.16"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.057 * total_units"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
+                  "35"
                 ]
               }
             ]
           },
           "unit_size": {
             "min_val": [
+              {
+                "condition": [
+                  "res_type == 'townhome'"
+                ],
+                "expression": [
+                  "1000"
+                ]
+              },
               {
                 "condition": [
                   "bedrooms <= 1"
@@ -36237,14 +36275,7 @@
               }
             ]
           }
-        },
-        "res_types_allowed": [
-          "1_unit",
-          "2_unit",
-          "3_unit",
-          "4_plus",
-          "townhome"
-        ]
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -36662,6 +36693,28 @@
           "townhome"
         ],
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.16",
+                  "0.028 * total_units"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                ],
+                "min_max": "max"
+              },
+              {
+                "expression": [
+                  "0.057 * total_units"
+                ],
+                "condition": [
+                  "res_type == 'townhome'"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -36674,11 +36727,22 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": "res_type == 'townhome'",
+                "expression": [
+                  "0"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
@@ -49356,6 +49420,15 @@
         "dist_abbr": "PD",
         "planned_dev": true,
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.11"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -49406,15 +49479,6 @@
               {
                 "expression": [
                   "35"
-                ]
-              }
-            ]
-          },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.11"
                 ]
               }
             ]

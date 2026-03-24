@@ -115,6 +115,7 @@ is illustrated in outline form below.
             -   `planned_dev:` (optional)
             -   `overlay:` (optional)
             -   `res_types_allowed:` (conditionally required)
+            -   `non_res_allowed:` (required)
             -   `constraints`
         -   `geometry`
     -   `...`
@@ -189,6 +190,8 @@ include the following:
     base district, it is assumed that no residential uses are allowed by
     right in the district.
 
+-   `non_res_allowed` is a binary variable indicating that non-residential uses
+    are allowed in the district.
 -   `constraints` is an array of constraints that define allowable
     building characteristics. The `constraints` is not necessary for
     planned development districts or for overlay districts that have a
