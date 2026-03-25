@@ -3,7 +3,6 @@
   "version": "0.5.0",
   "muni_name": "Addison",
   "date": "2025-12-04",
-  "source": "https://library.municode.com/tx/addison/codes/code_of_ordinances?nodeId=PTIICOOR_APXAUNDECO",
   "definitions": {
     "height": [
       {
@@ -56,6 +55,7 @@
         "dist_name": "Single-Family Dwelling",
         "dist_abbr": "R-1",
         "planned_dev": false,
+        "overlay": false,
         "res_types_allowed": "single_family",
         "constraints": {
           "setback_front": {
@@ -75,35 +75,35 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "30"
+                "expression": "20"
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "expression": "0.2 * lot_depth"
+                "expression": 20
               }
             ]
           },
           "height": {
             "max_val": [
               {
-                "expression": "29"
+                "expression": "35"
               }
             ]
           },
           "lot_area": {
             "min_val": [
               {
-                "expression": "0.28"
+                "expression": "0.38"
               }
             ]
           },
           "setback_side_sum": {
             "min_val": [
               {
-                "expression": "0.2 * lot_width"
+                "expression": 25
               }
             ]
           },
@@ -128,8 +128,7 @@
               }
             ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -743,40 +742,36 @@
         "dist_name": "Single-Family Dwelling",
         "dist_abbr": "R-2",
         "planned_dev": false,
+        "overlay": false,
         "res_types_allowed": "single_family",
         "constraints": {
-          "setback_front": {
+          "lot_area": {
             "min_val": [
               {
-                "expression": "30"
+                "expression": "0.13"
               }
+            ]
+          },
+          "setback_front": {
+            "min_val": [
+              ""
             ]
           },
           "setback_side_int": {
             "min_val": [
+              [],
               {
-                "expression": "5"
+                "expression": "0"
               }
             ]
+          },
+          "setback_side_ext": {
+            "": ""
           },
           "setback_rear": {
             "min_val": [
               {
-                "expression": "0.2 * lot_depth"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "29"
-              }
-            ]
-          },
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.21"
+                "expression": "50.2 * lot_depth"
               }
             ]
           },
@@ -784,13 +779,6 @@
             "min_val": [
               {
                 "expression": "0.2 * lot_width"
-              }
-            ]
-          },
-          "setback_side_ext": {
-            "min_val": [
-              {
-                "expression": "30"
               }
             ]
           },
@@ -805,6 +793,13 @@
             "max_val": [
               {
                 "expression": "2.5"
+              }
+            ]
+          },
+          "height": {
+            "max_val": [
+              {
+                "expression": "29"
               }
             ]
           },
@@ -815,8 +810,7 @@
               }
             ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": []
     },
@@ -826,7 +820,16 @@
         "dist_name": "Single-Family Dwelling",
         "dist_abbr": "R-3",
         "planned_dev": false,
+        "overlay": false,
+        "res_types_allowed": "single_family",
         "constraints": {
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.17"
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -841,38 +844,17 @@
               }
             ]
           },
-          "setback_rear": {
-            "min_val": [
-              {
-                "expression": "0.2 * lot_depth"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "29"
-              }
-            ]
-          },
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.17"
-              }
-            ]
-          },
-          "setback_side_sum": {
-            "min_val": [
-              {
-                "expression": "0.2 * lot_width"
-              }
-            ]
-          },
           "setback_side_ext": {
             "min_val": [
               {
                 "expression": "25"
+              }
+            ]
+          },
+          "setback_rear": {
+            "min_val": [
+              {
+                "expression": "0.2 * lot_depth"
               }
             ]
           },
@@ -890,16 +872,28 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "29"
+              }
+            ]
+          },
           "unit_size": {
             "min_val": [
               {
                 "expression": "1000"
               }
             ]
+          },
+          "setback_side_sum": {
+            "min_val": [
+              {
+                "expression": "0.2 * lot_width"
+              }
+            ]
           }
-        },
-        "res_types_allowed": "single_family",
-        "overlay": false
+        }
       },
       "geometry": []
     },
@@ -909,8 +903,16 @@
         "dist_name": "Single-Family Dwelling",
         "dist_abbr": "R-16",
         "planned_dev": false,
+        "overlay": false,
         "res_types_allowed": "single_family",
         "constraints": {
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.37"
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -925,6 +927,13 @@
               }
             ]
           },
+          "setback_side_ext": {
+            "min_val": [
+              {
+                "expression": "35"
+              }
+            ]
+          },
           "setback_rear": {
             "min_val": [
               {
@@ -933,34 +942,6 @@
                   "0.2 * lot_depth"
                 ],
                 "min_max": "max"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "29"
-              }
-            ]
-          },
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.37"
-              }
-            ]
-          },
-          "setback_side_sum": {
-            "min_val": [
-              {
-                "expression": "0.1 * lot_width"
-              }
-            ]
-          },
-          "setback_side_ext": {
-            "min_val": [
-              {
-                "expression": "35"
               }
             ]
           },
@@ -978,15 +959,28 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "29"
+              }
+            ]
+          },
           "unit_size": {
             "min_val": [
               {
                 "expression": "1000"
               }
             ]
+          },
+          "setback_side_sum": {
+            "min_val": [
+              {
+                "expression": "0.1 * lot_width"
+              }
+            ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1628,6 +1622,7 @@
         "dist_name": "Apartment Dwelling",
         "dist_abbr": "A",
         "planned_dev": false,
+        "overlay": false,
         "res_types_allowed": [
           "two_family",
           "three_plex",
@@ -1779,8 +1774,7 @@
               }
             ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -53452,5 +53446,6 @@
         ]
       }
     }
-  ]
+  ],
+  "source": "https://library.municode.com/tx/addison/codes/code_of_ordinances?nodeId=PTIICOOR_APXAUNDECO"
 }

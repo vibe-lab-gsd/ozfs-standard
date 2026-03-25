@@ -19,6 +19,9 @@ following values:
 - `"gambrel"`: A roof with two slopes on each of two opposite sides.
 
 - `"barrel"`: A roof with arcs on each of two opposite sides.
+- `"dome"`: A dome-shaped roof.
+
+NOTE: Add barrel and dome shapes to figure.
 
 <div id="fig-roofs">
 

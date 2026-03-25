@@ -115,6 +115,7 @@ is illustrated in outline form below.
             -   `planned_dev:` (optional)
             -   `overlay:` (optional)
             -   `res_types_allowed:` (conditionally required)
+            -   `non_res_allowed:` (required)
             -   `constraints`
         -   `geometry`
     -   `...`
@@ -189,6 +190,8 @@ include the following:
     base district, it is assumed that no residential uses are allowed by
     right in the district.
 
+-   `non_res_allowed` is a binary variable indicating that non-residential uses
+    are allowed in the district.
 -   `constraints` is an array of constraints that define allowable
     building characteristics. The `constraints` is not necessary for
     planned development districts or for overlay districts that have a
@@ -422,6 +425,34 @@ This requirement could be added to the constraints array in the
                 -   `expression: "25"`
 
 ### Definitions
+
+<<<<<ADD NOTE: When reidential type uses are not define in a definitions 
+section, use the following defaults:
+
+"res_type": [
+      {
+        "condition": "total_units == 1",
+        "expression": "'single_family'"
+      },
+      {
+        "condition": "total_units == 2",
+        "expression": "'duplex'"
+      },
+      {
+        "condition": [
+          "total_units > 2",
+          "floors > 1",
+          "n_outside_entry == total_units",
+          "n_ground_entry == total_units"
+        ],
+        "expression": "'townhouse'"
+      },
+      {
+        "condition": "total_units > 2",
+        "expression": "'multifamily'"
+      }
+    ]
+  },
 
 There may be terms that are used in many different zoning codes, but
 with definitions that vary across municipalities. The current version of
