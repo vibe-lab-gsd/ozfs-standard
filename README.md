@@ -114,7 +114,6 @@ is illustrated in outline form below.
             -   `planned_dev:` (optional)
             -   `overlay:` (optional)
             -   `res_types_allowed:` (conditionally required)
-            -   `non_res_allowed:` (required)
             -   `constraints`
         -   `geometry`
     -   `...`

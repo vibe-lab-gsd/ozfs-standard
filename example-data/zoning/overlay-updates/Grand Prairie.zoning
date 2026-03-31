@@ -148493,7 +148493,7 @@
         "dist_name": "Airport Height/Hazard Overlay",
         "dist_abbr": "AH/HO",
         "planned_dev": false,
-        "overlay": "no-residential-effect"
+        "overlay": "restrict"
       },
       "geometry": []
     },
@@ -148513,7 +148513,7 @@
         "dist_name": "Belt Line Corridor Overlay",
         "dist_abbr": "BL-C",
         "planned_dev": false,
-        "overlay": "no-residential-effect"
+        "overlay": "no-residential-effect" 
       },
       "geometry": []
     },

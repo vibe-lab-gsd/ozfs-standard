@@ -61,7 +61,7 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "10"
+                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more, "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
               }
             ]
           },
@@ -89,16 +89,7 @@
           "setback_side_sum": {
             "min_val": [
               {
-                "condition": "floors <= 1",
-                "expression": "0.2 * lot_width"
-              },
-              {
-                "condition": "floors > 1 and lot_width < 60",
                 "expression": "0.24 * lot_width"
-              },
-              {
-                "condition": "floors > 1 and lot_width >= 60",
-                "expression": "0.22 * lot_width"
               }
             ]
           }
