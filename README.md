@@ -111,6 +111,7 @@ is illustrated in outline form below.
             -   `dist_abbr:` (required)
             -   `planned_dev:` (optional)
             -   `overlay:` (optional)
+            -   `overlay_implied:` (optional)
             -   `res_types_allowed:` (conditionally required)
             -   `constraints`
         -   `geometry`
@@ -179,6 +180,12 @@ include the following:
     -   `"none-by-right"` indicates that any development within the
         overlay district requires discretionary approval. These are
         often (but not always) planned development overlay districts.
+
+-   `overlay_implied` should have a value of "True" if it is present and indicates
+    that district is an "implied" overlay district. Implied overlay districts
+    can be created to represent requirements that are based on distance from 
+    or adjacency to features such transit stations, green space, specific streets,
+    or other districts.
 
 -   `res_types_allowed` is a list of residential land uses that are
     allowed in the district. All values in the list must also appear in
@@ -337,6 +344,10 @@ This requirement could be added to the constraints array in the
             -   `[[2]]`
                 -   `condition: "height > 35"`
                 -   `expression: "25 + (height - 35)"`
+
+**Example 5: Implied overlay districts**
+
+To be added later. We have an example of this in Pantego.
 
 **Example 4: Unencodable conditions** 
 
@@ -555,7 +566,7 @@ by a party wall or fire wall, the `sep_wall_length` key stores the
 length of the separation wall. These keys may be used to determine
 whether the building meet’s a municipality’s definition of a townhome.
 There is also an optional `parking` key to indicate the number of
-parking spaces contained within the building’s structure (i.e. in a
+parking spaces contained within the building’s structure (i.e. in a
 garage).
 
 ### Level information
