@@ -9,7 +9,7 @@ from legacy tabular formats by storing only those variables actually
 defined in a district and permitting new key–value pairs without
 changing the underlying schema.
 
-OZFS makes six specific contributions:
+OZFS makes four specific contributions:
 
 1.  Non-tabular structure. A hierarchical JSON model represents
     districts and optional constraints, eliminating
@@ -19,20 +19,18 @@ OZFS makes six specific contributions:
     glossary for locally defined terms—e.g., townhouse, multifamily,
     building height—so that uniform semantics are not imposed.
 
-3.  Python-syntax mathematical expressions. Controls may be stored as
-    formulas (`MaxHeight` = 0.5 \* `LotDepth`), allowing rules that
-    reference parcel or building attributes.
-
-4.  Variable-referencing mechanism. Constraints can point to other
+3.  Python-syntax mathematical expressions. Constraints (e.g. maximum floor-area ratio,
+    minimum setbacks, maximum building height) 
+    may be stored as
+    formulas, allowing rules that
+    reference parcel or building attributes. Constraints can point to other
     variables in the same feed, supporting compound rules and one-time
-    entry of shared values.
-
-5.  Embedded conditional logic. The schema accommodates
+    entry of shared values. The schema thus accommodates
     context-dependent provisions
-    (`if BuildingSetback ≥ 15 then MaxHeight = 35 else 30`) that
+    (for example, building setbacks that vary with building height) that
     spreadsheets cannot capture consistently.
 
-6.  Standards for describing parcels and buildings. While previous
+4.  Standards for describing parcels and buildings. While previous
     efforts have focused on encoding characteristics of zoning
     regulations, we argue that the usefulness of that data depends on
     the interactions among characteristics of individual parcels and
