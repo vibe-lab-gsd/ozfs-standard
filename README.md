@@ -193,8 +193,6 @@ include the following:
     base district, it is assumed that no residential uses are allowed by
     right in the district.
 
--   `non_res_allowed` is a binary variable indicating that non-residential uses
-    are allowed in the district.
 -   `constraints` is an array of constraints that define allowable
     building characteristics. The `constraints` is not necessary for
     planned development districts or for overlay districts that have a
@@ -273,8 +271,9 @@ text string (which will limit machine-readability).
     `condition` key is a text string that is not a logical expression,
     the value of the `expression` key may be a list of numbers (where
     the text string will describe the circumstances in which each number
-    applies).
-
+    applies). Conditions are evaluated in the order in which they appear, so
+    the expression for the final condition can be "True" to indicate that the 
+    associated expression applied in all cases not covered by prior conditions.
 -   `min_max`: This key is required if the list of expressions has a
     more than one element in it and `condition` is a logical expression
     (rather than just a free-form text string). It is a character string
@@ -287,7 +286,7 @@ text string (which will limit machine-readability).
 The four examples below illustrate how zoning code text can be stored in
 the \*.zoning file.
 
-**Example 1: A single constraint value.** In Dallas, the minimum is side
+**Example 1: A single constraint value.** In Dallas, the minimum side
 setback is specified for agricultural districts as follows:
 
 > *Minimum side yard is 20 feet.* (City of Dallas 2024)
@@ -321,10 +320,8 @@ array in the \*.zoning file as follows:
                 -   `expression: [ "5", "0.1 * lot_width" ]`
                 -   `min_max: "max"`
 
-**Example 3: Multiple conditions.** **?@fig-const-ex-3** from the Fort
-Worth Zoning Ordinance (City of Fort Worth, Texas 2007) shows how a
-district’s setback requirements are recorded when the value depends on
-the building height.
+**Example 3: Multiple conditions.** The Fort
+Worth Zoning Ordinance has setback requirements that depend on a building's height.
 
 > *The height of a building in the “A” through “F” districts may be
 > increased when the front, side and rear yard dimensions are each
@@ -342,16 +339,61 @@ This requirement could be added to the constraints array in the
                 -   `condition: "height <= 35"`
                 -   `expression: "25"`
             -   `[[2]]`
-                -   `condition: "height > 35"`
+                -   `condition: True`
                 -   `expression: "25 + (height - 35)"`
 
-**Example 5: Implied overlay districts**
+**Example 4: Implied overlay districts**
 
-To be added later. We have an example of this in Pantego.
+In Pantego, Texas, the minimum side setback in the R-2 district is five feet 
+unless the parcel abuts the R-1 district, in which case it is ten feet. These 
+requirements can be encoded in one of two ways. The preferred method would be
+through the creation of an implied overlay district that includes the areas of
+parcels that abut the R-1 zoning district. Here is how side setbacks could be
+encoded with the creation of an implied overlay.
 
-**Example 4: Unencodable conditions** 
+-   `features`
+    -   `[[1]]`
+        -   `type: "Feature"`
+        -   `properties`
+            -   `dist_abbr: "R-2"`
+            -   `res_types_allowed: ["1-family", "2-family"]`
+            -   `constraints`
+                -   `...`
+                -   `setbact_side_int`
+                    -   `[[1]]`
+                        -   `expression: min_val: 5`
+                -   `...`
+        -   `geometry`
+    -   `[[2]]`
+        -   `type: "Feature"`
+        -   `properties`
+            -   `dist_abbr: "R-1-abutter"`
+            -   `overlay: "replace"`
+            -   `overlay_implied: True` 
+            -   `constraints`
+                -   `setbact_side_int`
+                    -   `[[1]]`
+                        -   `expression: min_val: 10`
+        -   `geometry`
 
-To be added later.
+**Example 5: Unencodable conditions** 
+
+In some cases, the creation of an implied overlay district may not be possible or 
+practical. In these cases, the condition can be encoded in natural language
+text rather than as a Python-syntax expression. Software attempting to interpret
+these conditions will generally need to note that there is ambiguity with
+regard to which expression applies. Here is how the above example would be 
+encoded without the creation of an implied overlay district.
+
+-   `constraints`
+    -   `setback_side_int`
+        -   `min_val`
+            -   `[[1]]`
+                -   `condition: "Parcel abuts R-1"`
+                -   `expression: 10`
+            -   `[[2]]`
+                -   `condition: True`
+                -   `expression: 5`
 
 ### Definitions
 
