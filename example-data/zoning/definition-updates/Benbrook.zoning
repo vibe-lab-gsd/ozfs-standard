@@ -56,8 +56,7 @@
       "properties": {
         "dist_name": "Community Facilities",
         "dist_abbr": "CF",
-        "planned_dev": false,
-        "overlay": false
+        "planned_dev": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -5132,9 +5131,15 @@
                 "expression": "25"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "200"
+              }
+            ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -6515,10 +6520,16 @@
                 "expression": "30"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
         },
-        "res_types_allowed": "one_family",
-        "overlay": false
+        "res_types_allowed": "one_family"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7016,9 +7027,15 @@
                 "expression": "40"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "75"
+              }
+            ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -13234,9 +13251,15 @@
                 "expression": "35"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
+              }
+            ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -19302,7 +19325,6 @@
         "dist_name": "One-Family Reduced",
         "dist_abbr": "BR",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": "one_family",
         "constraints": {
           "lot_area": {
@@ -19363,6 +19385,27 @@
             "min_val": [
               {
                 "expression": "1200"
+              }
+            ]
+          },
+          "height": {
+            "max_val": [
+              {
+                "expression": "35"
+              }
+            ]
+          },
+          "stories": {
+            "max_val": [
+              {
+                "expression": "2.5"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
               }
             ]
           }
@@ -20532,7 +20575,6 @@
         "dist_name": "Multiple-Family Restricted",
         "dist_abbr": "CR",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": "two_family",
         "constraints": {
           "lot_area": {
@@ -20615,6 +20657,13 @@
             "min_val": [
               {
                 "expression": "750"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
               }
             ]
           }
@@ -21080,11 +21129,10 @@
         "dist_name": "Multiple-Family",
         "dist_abbr": "C",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": [
           "two_family",
           "three_family",
-          "multiple_family",
+          "multifamily",
           "townhouse"
         ],
         "constraints": {
@@ -21173,6 +21221,13 @@
             "min_val": [
               {
                 "expression": "750"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
               }
             ]
           }
@@ -22882,11 +22937,10 @@
         "dist_name": "Multiple-Family",
         "dist_abbr": "D",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": [
           "two_family",
           "three_family",
-          "multiple_family",
+          "multifamily",
           "townhouse"
         ],
         "constraints": {
@@ -22975,7 +23029,19 @@
           "unit_size": {
             "min_val": [
               {
+                "condition": "total_units <= 4",
                 "expression": "750"
+              },
+              {
+                "condition": "total_units > 4",
+                "expression": "550"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "75"
               }
             ]
           }
@@ -26206,8 +26272,7 @@
       "properties": {
         "dist_name": "Commercial",
         "dist_abbr": "E",
-        "planned_dev": false,
-        "overlay": false
+        "planned_dev": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -27872,8 +27937,7 @@
       "properties": {
         "dist_name": "Commercial",
         "dist_abbr": "F",
-        "planned_dev": false,
-        "overlay": false
+        "planned_dev": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -29998,8 +30062,7 @@
       "properties": {
         "dist_name": "Highway Corridor",
         "dist_abbr": "HC",
-        "planned_dev": false,
-        "overlay": false
+        "planned_dev": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -31592,8 +31655,7 @@
       "properties": {
         "dist_name": "Commerce",
         "dist_abbr": "G",
-        "planned_dev": false,
-        "overlay": false
+        "planned_dev": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -32206,8 +32268,7 @@
       "properties": {
         "dist_name": "Industrial",
         "dist_abbr": "H",
-        "planned_dev": false,
-        "overlay": false
+        "planned_dev": false
       },
       "geometry": {
         "type": "Polygon",
@@ -32827,7 +32888,6 @@
         "dist_name": "Manufactured Home",
         "dist_abbr": "MH",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": "one_family",
         "constraints": {
           "setback_front": {
@@ -32899,6 +32959,13 @@
                 "expression": "2.5"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
+              }
+            ]
           }
         }
       },
@@ -32910,7 +32977,6 @@
         "dist_name": "Mixed Use",
         "dist_abbr": "MU",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": [
           "one_family",
           "two_family",
@@ -33062,8 +33128,7 @@
       "properties": {
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
-        "planned_dev": true,
-        "overlay": false
+        "planned_dev": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -33213,7 +33278,7 @@
         "dist_name": "NAS Overlay",
         "dist_abbr": "NAS",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "restrict"
       },
       "geometry": {
         "type": "Polygon",
@@ -33365,7 +33430,7 @@
         "dist_name": "Benbrook Boulevard Corridor Overlay",
         "dist_abbr": "BBCO",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "no_residential_effect"
       },
       "geometry": {
         "type": "Polygon",
