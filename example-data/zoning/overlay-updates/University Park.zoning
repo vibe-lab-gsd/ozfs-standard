@@ -5739,7 +5739,6 @@
         "dist_abbr": "SF-A",
         "planned_dev": false,
         "res_types_allowed": [
-          "detached_house",
           "attached_house"
         ],
         "constraints": {
@@ -5767,7 +5766,7 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "10"
+                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
               }
             ]
           },
