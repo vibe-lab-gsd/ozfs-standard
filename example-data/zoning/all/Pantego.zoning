@@ -49330,6 +49330,24 @@
               }
             ]
           },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": [
+                  "50"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "90"
+                ]
+              }
+            ]
+          },
           "unit_size": {
             "min_val": [
               {
