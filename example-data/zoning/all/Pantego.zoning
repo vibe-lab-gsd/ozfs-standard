@@ -7,7 +7,10 @@
         "dist_name": "One Family Residential",
         "dist_abbr": "R-1",
         "planned_dev": false,
-        "res_types_allowed": "1_unit",
+        "res_types_allowed": [
+          "1_unit",
+          "1_unit_inlaw"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -66,29 +69,19 @@
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": [
-                  "2 * total_units"
-                ],
                 "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit'"
+                  "res_type == '1_unit'"
+                ],
+                "expression": [
+                  2
                 ]
               },
               {
                 "condition": [
-                  "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == '1_unit_inlaw'"
                 ],
                 "expression": [
-                  "2 * total_units"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "(2 * total_units) + (total_units / 5)"
+                  3
                 ]
               }
             ]
@@ -51491,6 +51484,10 @@
       {
         "condition": "total_units == 1",
         "expression": "'1_unit'"
+      },
+      {
+        "condition": "total_units == 2, dist_abbr == 'R-1'",
+        "expression": "'1_unit_inlaw'"
       },
       {
         "condition": "total_units == 2",
