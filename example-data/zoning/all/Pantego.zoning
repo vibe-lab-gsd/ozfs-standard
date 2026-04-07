@@ -36086,7 +36086,7 @@
             "min_val": [
               {
                 "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhome'"
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhouse'"
                 ],
                 "expression": [
                   "2 * total_units"
@@ -36117,7 +36117,7 @@
                   "0.057 * total_units"
                 ],
                 "condition": [
-                  "res_type == 'townhome'"
+                  "res_type == 'townhouse'"
                 ]
               }
             ]
@@ -36165,7 +36165,7 @@
           "2_unit",
           "3_unit",
           "4_unit",
-          "townhome"
+          "townhouse"
         ]
       },
       "geometry": {
@@ -36582,7 +36582,7 @@
           "3_unit",
           "4_unit",
           "5_plus",
-          "townhome"
+          "townhouse"
         ],
         "constraints": {
           "setback_front": {
@@ -36637,7 +36637,7 @@
                   "2 * total_units"
                 ],
                 "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhome'"
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhouse'"
                 ]
               },
               {
@@ -36674,7 +36674,7 @@
                   "0.057 * total_units"
                 ],
                 "condition": [
-                  "res_type == 'townhome'"
+                  "res_type == 'townhouse'"
                 ]
               }
             ]
@@ -49266,6 +49266,9 @@
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
         "planned_dev": true,
+        "res_types_allowed": [
+          "townhouse"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -49308,6 +49311,18 @@
               {
                 "expression": [
                   "60"
+                ]
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units"
+                ],
+                "condition": [
+                  "res_type == 'townhouse'"
                 ]
               }
             ]
@@ -51518,7 +51533,7 @@
           "n_ground_entry == total_units",
           "sep_platting == TRUE"
         ],
-        "expression": "'townhome'"
+        "expression": "'townhouse'"
       },
       {
         "condition": "total_units == 3",
