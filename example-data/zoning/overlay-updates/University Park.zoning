@@ -5998,9 +5998,7 @@
         "dist_abbr": "D-1",
         "planned_dev": false,
         "res_types_allowed": [
-          "detached_house",
-          "duplex",
-          "attached_house"
+          "duplex"
         ],
         "constraints": {
           "lot_area": {
@@ -6024,11 +6022,10 @@
                 "expression": [
                   "0.1 * lot_width",
                   "6"
-                ],
-                "condition": "lot_width <= 80"
+                ]
               },
+            "max_val"
               {
-                "condition": "lot_width > 80",
                 "expression": "8"
               }
             ]
