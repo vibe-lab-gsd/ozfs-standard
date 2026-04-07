@@ -61,7 +61,9 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
@@ -1348,7 +1350,9 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
@@ -3641,10 +3645,12 @@
               }
             ]
           },
-          "setback_side_ext": {
+             "setback_side_ext": {
             "min_val": [
               {
-                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
@@ -4960,7 +4966,9 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
@@ -5766,7 +5774,9 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "condition": ["Corner lots with a width of 60 feet or less", "minimum street-side setback of 10% of lot width if the distance between the curb and sidewalk is 5 feet or more", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
@@ -6020,11 +6030,12 @@
               {
                 "min_max": "max",
                 "expression": [
-                  "0.1 * lot_width",
-                  "6"
+                "0.1 * lot_width",
+                "6"
                 ]
-              },
-            "max_val"
+              }
+            ],
+             "max_val": [
               {
                 "expression": "8"
               }
@@ -6033,19 +6044,16 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "10"
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "expression": "12.5",
-                "condition": "res_type == 'duplex'"
-              },
-              {
-                "expression": "12.5",
-                "condition": "res_type == 'detached_house' or res_type == 'attached_house'"
+                "expression": "12.5"
               }
             ]
           },
@@ -6139,9 +6147,7 @@
         "dist_abbr": "D-2",
         "planned_dev": false,
         "res_types_allowed": [
-          "detached_house",
-          "duplex",
-          "attached_house"
+          "duplex"
         ],
         "constraints": {
           "lot_area": {
@@ -6165,11 +6171,11 @@
                 "expression": [
                   "0.1 * lot_width",
                   "5"
-                ],
-                "condition": "lot_width <= 70"
-              },
+                ]
+              }
+            ],
+            "max_val": [
               {
-                "condition": "lot_width > 70",
                 "expression": "7"
               }
             ]
@@ -6177,19 +6183,16 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "10"
+                "expression": "0.1 * lot_width",
+                "condition": ["lot_width <= 60", "the sidewalk width is 4 feet or more", "AND the front setback complies with minimum front setback regulations"]
+
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "expression": "12.5",
-                "condition": "res_type == 'duplex'"
-              },
-              {
-                "expression": "12.5",
-                "condition": "res_type == 'detached_house' or res_type == 'attached_house'"
+                "expression": "12.5"
               }
             ]
           },
