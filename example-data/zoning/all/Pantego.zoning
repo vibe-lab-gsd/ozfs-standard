@@ -36048,10 +36048,8 @@
             "min_val": [
               {
                 "expression": [
-                  "5",
-                  "10"
-                ],
-                "condition": "10 if abutting R-1"
+                  "5"
+                ]
               }
             ]
           },
@@ -36094,17 +36092,8 @@
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": [
-                  "2 * total_units"
-                ],
                 "condition": [
                   "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhome'"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
                 ],
                 "expression": [
                   "2 * total_units"
@@ -36112,8 +36101,7 @@
               },
               {
                 "condition": [
-                  "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == '3_unit' or res_type == '4_unit'"
                 ],
                 "expression": [
                   "(2 * total_units) + (total_units / 5)"
@@ -36128,7 +36116,7 @@
                   "0.16"
                 ],
                 "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_unit' or res_type == '5_plus'"
                 ]
               },
               {
@@ -36183,7 +36171,7 @@
           "1_unit",
           "2_unit",
           "3_unit",
-          "4_plus",
+          "4_unit",
           "townhome"
         ]
       },
@@ -36599,7 +36587,8 @@
           "1_unit",
           "2_unit",
           "3_unit",
-          "4_plus",
+          "4_unit",
+          "5_plus",
           "townhome"
         ],
         "constraints": {
@@ -36616,10 +36605,8 @@
             "min_val": [
               {
                 "expression": [
-                  "5",
-                  "10"
-                ],
-                "condition": "10 if abutting R-1"
+                  "5"
+                ]
               }
             ]
           },
@@ -36661,21 +36648,11 @@
                 ]
               },
               {
-                "condition": [
-                  "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "2 * total_units"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
                 "expression": [
                   "(2 * total_units) + (total_units / 5)"
+                ],
+                "condition": [
+                  "res_type == '3_unit' or res_type == '4_unit' or res_type == '5_plus'"
                 ]
               }
             ]
@@ -36696,7 +36673,7 @@
                   "0.16"
                 ],
                 "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_unit' or res_type == '5_plus'"
                 ]
               },
               {
@@ -49798,7 +49775,8 @@
       },
       "geometry": {
         "type": "MultiPolygon",
-        "coordinates": [ [
+        "coordinates": [
+          [
             [
               [
                 -10815856.6208,
@@ -51473,7 +51451,8 @@
                 3856353.0286
               ]
             ]
-          ]]
+          ]
+        ]
       }
     }
   ],
@@ -51531,8 +51510,12 @@
         "expression": "'3_unit'"
       },
       {
-        "condition": "total_units > 3",
-        "expression": "'4_plus'"
+        "condition": "total_units == 4",
+        "expression": "'4_unit'"
+      },
+      {
+        "condition": "total_units >= 5",
+        "expression": "'5_plus'"
       }
     ]
   }
