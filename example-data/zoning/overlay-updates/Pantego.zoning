@@ -42,7 +42,8 @@
       },
       {
         "condition": [
-          "total_units > 2",
+          "total_units >= 4",
+          "total_units <= 8",
           "n_outside_entry == total_units",
           "n_ground_entry == total_units",
           "sep_platting == TRUE"
@@ -68,6 +69,15 @@
         "planned_dev": false,
         "res_types_allowed": "1_unit",
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.23"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -113,50 +123,23 @@
               }
             ]
           },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_unit"
+                ],
+                "condition": [
+                  "res_type == '1_unit'"
+                ]
+              }
+            ]
+          },
           "height": {
             "max_val": [
               {
                 "expression": [
                   "35"
-                ]
-              }
-            ]
-          },
-          "parking_uncovered": {
-            "min_val": [
-              {
-                "expression": [
-                  "2 * total_units"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit'"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "2 * total_units"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "(2 * total_units) + (total_units / 5)"
-                ]
-              }
-            ]
-          },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.23"
                 ]
               }
             ]
@@ -35325,6 +35308,15 @@
           "2_unit"
         ],
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.23"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -35337,22 +35329,32 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
           "setback_side_ext": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
@@ -35374,15 +35376,6 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
           "parking_uncovered": {
             "min_val": [
               {
@@ -35392,32 +35385,14 @@
                 "condition": [
                   "res_type == '1_unit' or res_type == '2_unit'"
                 ]
-              },
-              {
-                "condition": [
-                  "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "2 * total_units"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "(2 * total_units) + (total_units / 5)"
-                ]
               }
             ]
           },
-          "lot_size": {
-            "min_val": [
+          "height": {
+            "max_val": [
               {
                 "expression": [
-                  "0.23"
+                  "35"
                 ]
               }
             ]
@@ -36093,7 +36068,36 @@
         "dist_name": "Multifamily Townouse/Condo Residential",
         "dist_abbr": "R-3",
         "planned_dev": false,
+        "res_types_allowed": [
+          "1_unit",
+          "2_unit",
+          "3_unit",
+          "4_plus",
+          "townhome"
+        ],
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.16",
+                  "0.08 * total_units"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                ],
+                "min_max": "max"
+              },
+              {
+                "expression": [
+                  "0.057 * total_units"
+                ],
+                "condition": [
+                  "res_type == 'townhome'"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -36106,11 +36110,22 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": "res_type == 'townhome'",
+                "expression": [
+                  "0"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
@@ -36141,6 +36156,18 @@
               }
             ]
           },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus' or res_type == 'townhome'"
+                ]
+              }
+            ]
+          },
           "height": {
             "max_val": [
               {
@@ -36150,58 +36177,16 @@
               }
             ]
           },
-          "parking_uncovered": {
-            "min_val": [
-              {
-                "expression": [
-                  "2 * total_units"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhome'"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "2 * total_units"
-                ]
-              },
-              {
-                "condition": [
-                  "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "(2 * total_units) + (total_units / 5)"
-                ]
-              }
-            ]
-          },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.16"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.057 * total_units"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
-                ]
-              }
-            ]
-          },
           "unit_size": {
             "min_val": [
+              {
+                "condition": [
+                  "res_type == 'townhome'"
+                ],
+                "expression": [
+                  "1000"
+                ]
+              },
               {
                 "condition": [
                   "bedrooms <= 1"
@@ -36237,14 +36222,7 @@
               }
             ]
           }
-        },
-        "res_types_allowed": [
-          "1_unit",
-          "2_unit",
-          "3_unit",
-          "4_plus",
-          "townhome"
-        ]
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -36662,6 +36640,26 @@
           "townhome"
         ],
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.16"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                ]
+              },
+              {
+                "expression": [
+                  "0.057 * total_units"
+                ],
+                "condition": [
+                  "res_type == 'townhome'"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -36674,11 +36672,22 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "Abutting R-1",
                 "expression": [
-                  "5",
                   "10"
-                ],
-                "condition": "10 if abutting R-1"
+                ]
+              },
+              {
+                "condition": "res_type == 'townhome'",
+                "expression": [
+                  "0"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "5"
+                ]
               }
             ]
           },
@@ -36716,13 +36725,13 @@
                   "2 * total_units"
                 ],
                 "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhome'"
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == 'townhome'"
                 ]
               },
               {
                 "condition": [
                   "total_units < 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == '4_plus'"
                 ],
                 "expression": [
                   "2 * total_units"
@@ -36731,7 +36740,7 @@
               {
                 "condition": [
                   "total_units >= 5",
-                  "res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == '4_plus'"
                 ],
                 "expression": [
                   "(2 * total_units) + (total_units / 5)"
@@ -36744,26 +36753,6 @@
               {
                 "expression": [
                   "35"
-                ]
-              }
-            ]
-          },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.16"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.057 * total_units"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
               }
             ]
@@ -49356,6 +49345,15 @@
         "dist_abbr": "PD",
         "planned_dev": true,
         "constraints": {
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.11"
+                ]
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -49406,15 +49404,6 @@
               {
                 "expression": [
                   "35"
-                ]
-              }
-            ]
-          },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.11"
                 ]
               }
             ]

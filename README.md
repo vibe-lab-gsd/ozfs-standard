@@ -3,13 +3,13 @@
 The Open Zoning Feed Specification (OZFS) is offered as a scalable,
 extensible data schema for encoding residential zoning regulations at
 the parcel level in a way that is both machine-readable and
-jurisdiction-agnostic. OZFS is implemented in GeoJSON, a geographic
+jurisdiction-agnostic. OZFS is implemented in JSON and GeoJSON, a geographic
 extension of JSON that retains JSON’s nested flexibility. OZFS departs
 from legacy tabular formats by storing only those variables actually
 defined in a district and permitting new key–value pairs without
 changing the underlying schema.
 
-OZFS makes six specific contributions:
+OZFS makes four specific contributions:
 
 1.  Non-tabular structure. A hierarchical JSON model represents
     districts and optional constraints, eliminating
@@ -19,20 +19,18 @@ OZFS makes six specific contributions:
     glossary for locally defined terms—e.g., townhouse, multifamily,
     building height—so that uniform semantics are not imposed.
 
-3.  Python-syntax mathematical expressions. Controls may be stored as
-    formulas (`MaxHeight` = 0.5 \* `LotDepth`), allowing rules that
-    reference parcel or building attributes.
-
-4.  Variable-referencing mechanism. Constraints can point to other
+3.  Python-syntax mathematical expressions. Constraints (e.g. maximum floor-area ratio,
+    minimum setbacks, maximum building height) 
+    may be stored as
+    formulas, allowing rules that
+    reference parcel or building attributes. Constraints can point to other
     variables in the same feed, supporting compound rules and one-time
-    entry of shared values.
-
-5.  Embedded conditional logic. The schema accommodates
+    entry of shared values. The schema thus accommodates
     context-dependent provisions
-    (`if BuildingSetback ≥ 15 then MaxHeight = 35 else 30`) that
+    (for example, building setbacks that vary with building height) that
     spreadsheets cannot capture consistently.
 
-6.  Standards for describing parcels and buildings. While previous
+4.  Standards for describing parcels and buildings. While previous
     efforts have focused on encoding characteristics of zoning
     regulations, we argue that the usefulness of that data depends on
     the interactions among characteristics of individual parcels and
@@ -43,13 +41,13 @@ OZFS makes six specific contributions:
 
 The OZFS data standard includes three files types:
 
--   a file with a \*.zoning extension to describe the zoning regulations
+-   a file (following a GeoJSON format) with a \*.zoning extension to describe the zoning regulations
     for a particular municipality;
 
--   a file with a \*.parcel extension to describe the geometry of all
+-   a file (following a GeoJSON format) with a \*.parcel extension to describe the geometry of all
     parcels (or all parcels of interest) within a municipality; and
 
--   a file with a \*.building extension to describe the geometry of a
+-   a file (following a JSON format) with a \*.building extension to describe the geometry of a
     proposed building.
 
 ## Zoning regulations
@@ -88,7 +86,6 @@ The top level of the file is an array with six key-value pairs:
     may very from one municipality to the next and are defined in the
     text of the zoning code. These are defined in a structured array
     described in greater detail below.
-
 -   `features` contains information on each zoning district. As for
     definitions, these are defined in a structured array described in
     greater detail below.
@@ -114,6 +111,7 @@ is illustrated in outline form below.
             -   `dist_abbr:` (required)
             -   `planned_dev:` (optional)
             -   `overlay:` (optional)
+            -   `overlay_implied:` (optional)
             -   `res_types_allowed:` (conditionally required)
             -   `constraints`
         -   `geometry`
@@ -182,6 +180,12 @@ include the following:
     -   `"none-by-right"` indicates that any development within the
         overlay district requires discretionary approval. These are
         often (but not always) planned development overlay districts.
+
+-   `overlay_implied` should have a value of "True" if it is present and indicates
+    that district is an "implied" overlay district. Implied overlay districts
+    can be created to represent requirements that are based on distance from 
+    or adjacency to features such transit stations, green space, specific streets,
+    or other districts.
 
 -   `res_types_allowed` is a list of residential land uses that are
     allowed in the district. All values in the list must also appear in
@@ -267,8 +271,9 @@ text string (which will limit machine-readability).
     `condition` key is a text string that is not a logical expression,
     the value of the `expression` key may be a list of numbers (where
     the text string will describe the circumstances in which each number
-    applies).
-
+    applies). Conditions are evaluated in the order in which they appear, so
+    the expression for the final condition can be "True" to indicate that the 
+    associated expression applied in all cases not covered by prior conditions.
 -   `min_max`: This key is required if the list of expressions has a
     more than one element in it and `condition` is a logical expression
     (rather than just a free-form text string). It is a character string
@@ -281,7 +286,7 @@ text string (which will limit machine-readability).
 The four examples below illustrate how zoning code text can be stored in
 the \*.zoning file.
 
-**Example 1: A single constraint value.** In Dallas, the minimum is side
+**Example 1: A single constraint value.** In Dallas, the minimum side
 setback is specified for agricultural districts as follows:
 
 > *Minimum side yard is 20 feet.* (City of Dallas 2024)
@@ -315,10 +320,8 @@ array in the \*.zoning file as follows:
                 -   `expression: [ "5", "0.1 * lot_width" ]`
                 -   `min_max: "max"`
 
-**Example 3: Multiple conditions.** **?@fig-const-ex-3** from the Fort
-Worth Zoning Ordinance (City of Fort Worth, Texas 2007) shows how a
-district’s setback requirements are recorded when the value depends on
-the building height.
+**Example 3: Multiple conditions.** The Fort
+Worth Zoning Ordinance has setback requirements that depend on a building's height.
 
 > *The height of a building in the “A” through “F” districts may be
 > increased when the front, side and rear yard dimensions are each
@@ -336,120 +339,63 @@ This requirement could be added to the constraints array in the
                 -   `condition: "height <= 35"`
                 -   `expression: "25"`
             -   `[[2]]`
-                -   `condition: "height > 35"`
+                -   `condition: True`
                 -   `expression: "25 + (height - 35)"`
 
-**Example 4: Complex conditions.** The setback requirments for the Urban
-Center District in Addison, Texas (Town of Addison, Texas 2024) are:
+**Example 4: Implied overlay districts**
 
-NOTE: Addison’s code has since been updated. Either update this example,
-or find a new example.
-
-> *The build-to line for primary buildings, structures, walls and fences
-> shall be ten feet on all public street frontages except along
-> residential streets (category C) and residential mew streets (category
-> D), which shall have build-to lines as established later in this
-> section. Up to 25 percent of any street frontage of a building may
-> vary from this build-to line, but shall not be less than five feet,
-> nor more than 25 feet.*
->
-> *The build-to line for residential streets (category C) shall be five
-> feet where a building or structure fronts public open space. In all
-> other cases along residential streets, a maximum of 75 percent of any
-> block face may be constructed to the five-foot build-to line with the
-> remainder of the block face being constructed no closer than eight
-> feet, nor more than 25 feet from the R.O.W.*
->
-> *The build-to line for residential mew streets (category D) shall be
-> contiguous with the R.O.W. A minimum of 70 percent of the build-to
-> line of any block or parcel must be occupied by buildings or parking
-> structures.*
-
-Location-based conditions can be addressed through the creation of
-implied overlay districts.
-
-Since residential street categories are not defined in the \*.zoning
-file, these requirements cannot be stored in a way that would be
-directly interprered by software. However, the data standard still
-allows these requirements to be recorded, so software could return a
-note on the potential ambiguity. The current version of the \*.bldg file
-does store information on the building’s orientation with respect to the
-street, so While a software algorithm may not be able to interpret
-complex conditions like those listed for the Urban Center District in
-Addison , they can still be stored in the \*.zoning file as shown in
-**?@fig-const-ex-4**. Note that the setback exceptions for parts of the
-block face were not encoded.
-
-This requirement could be added to the constraints array in the
-\*.zoning file as follows:
+In Pantego, Texas, the minimum side setback in the R-2 district is five feet 
+unless the parcel abuts the R-1 district, in which case it is ten feet. These 
+requirements can be encoded in one of two ways. The preferred method would be
+through the creation of an implied overlay district that includes the areas of
+parcels that abut the R-1 zoning district. Here is how side setbacks could be
+encoded with the creation of an implied overlay.
 
 -   `features`
     -   `[[1]]`
         -   `type: "Feature"`
         -   `properties`
-            -   `dist_abbr: "UC"`
-            -   `res_types_allowed:`
+            -   `dist_abbr: "R-2"`
+            -   `res_types_allowed: ["1-family", "2-family"]`
+            -   `constraints`
+                -   `...`
+                -   `setbact_side_int`
+                    -   `[[1]]`
+                        -   `expression: min_val: 5`
+                -   `...`
+        -   `geometry`
+    -   `[[2]]`
+        -   `type: "Feature"`
+        -   `properties`
+            -   `dist_abbr: "R-1-abutter"`
+            -   `overlay: "replace"`
+            -   `overlay_implied: True` 
+            -   `constraints`
+                -   `setbact_side_int`
+                    -   `[[1]]`
+                        -   `expression: min_val: 10`
+        -   `geometry`
+
+**Example 5: Unencodable conditions** 
+
+In some cases, the creation of an implied overlay district may not be possible or 
+practical. In these cases, the condition can be encoded in natural language
+text rather than as a Python-syntax expression. Software attempting to interpret
+these conditions will generally need to note that there is ambiguity with
+regard to which expression applies. Here is how the above example would be 
+encoded without the creation of an implied overlay district.
+
 -   `constraints`
-    -   `setback_front`
+    -   `setback_side_int`
         -   `min_val`
             -   `[[1]]`
-                -   `condition: ["Along a a residential mew street (category D)", "70 percent of build-to line occupied by structures"]`
-                -   `expression: "0"`
+                -   `condition: "Parcel abuts R-1"`
+                -   `expression: 10`
             -   `[[2]]`
-                -   `condition: ["Along a residential street (category C)", "Building fronts public open space"]`
-                -   `expression: "5"`
-            -   `[[3]]`
-                -   `condition: "Along a residential street (category C)"`
-                -   `expression: "8"`
-            -   `[[4]]`
-                -   `condition: "Along all other public streets"`
-                -   `expression: "10"`
-        -   `max_val`
-            -   
-    -   `front_vary_portion`
-        -   `max_val`
-            -   `[[3]]`
-                -   `condition: "Along all other public streets"`
-                -   `expression: "25"`
-    -   `front_vary_range`
-        -   `min_val`
-            -   `[[3]]`
-                -   `condition: "Along all other public streets"`
-                -   `expression: "5"`
-        -   `max_val`
-            -   `[[3]]`
-                -   `condition: "Along all other public streets"`
-                -   `expression: "25"`
+                -   `condition: True`
+                -   `expression: 5`
 
 ### Definitions
-
-<<<<<ADD NOTE: When reidential type uses are not define in a definitions 
-section, use the following defaults:
-
-"res_type": [
-      {
-        "condition": "total_units == 1",
-        "expression": "'single_family'"
-      },
-      {
-        "condition": "total_units == 2",
-        "expression": "'duplex'"
-      },
-      {
-        "condition": [
-          "total_units > 2",
-          "floors > 1",
-          "n_outside_entry == total_units",
-          "n_ground_entry == total_units"
-        ],
-        "expression": "'townhouse'"
-      },
-      {
-        "condition": "total_units > 2",
-        "expression": "'multifamily'"
-      }
-    ]
-  },
 
 There may be terms that are used in many different zoning codes, but
 with definitions that vary across municipalities. The current version of
@@ -480,14 +426,12 @@ false) in Python syntax, referencing any of the variable names listed in
 B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
 The value of the `expression` key should be an equation (in Python
 syntax) referencing any of the variable names listed in [Appendix
-B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md).
-As an example, if the height of a building is defined as the top of the
-highest wall plate for buildings with a flat roof type and the mid-point
-between the top of the roof and the eave for all roof types except a
-flat roof (see [Appendix
-C](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-c.md)
-for an illustration of various roof types), the height definition would
-be coded as illustrated below
+B](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-b.md). 
+Conditions do not necessarily need to be mutually exclusive. When they
+are not, they are applied in the order in which they appear.
+
+If the text of the zoning code does not include an explicit definition for 
+building height, the following default definition should be used:
 
 -   `height`
     -   `[[1]]`
@@ -496,10 +440,27 @@ be coded as illustrated below
     -   `[[2]]`
         -   `condition: "roof_type != 'flat'"`
         -   `expression: "(height_top + heigth_eave) / 2"`
+        
+In this default definition, if the height of a building is defined as the top of the
+highest wall plate for buildings with a flat roof type and the mid-point
+between the top of the roof and the eave for all roof types except a
+flat roof (see [Appendix
+C](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-c.md)
+for an illustration of various roof types).
 
-Conditions do not necessarily need to be mutually exclusive. When they
-are not, they are applied in the order in which they appear. For
-example, if the residential building type (`res_type`) of a building
+Definitions should not be included for residential types that are not referenced
+in any district. All residential types that are referenced in a district should
+be defined in the definitions array.
+
+If the text of the zoning code does not include explicit definitions for any
+residential types that are included as allowable residential uses in the features 
+array, a set of default definitions should be included for each of those 
+residential types, based on commonly-used understandings of those terms. 
+For example, the following definitions would be appropriate for a municipality
+with districts that allow single-family, duplex, townhouse, and multifamily
+residential types.
+
+For example, if the residential building type (`res_type`) of a building
 with three or more units is defined as `multifamily` building unless all
 units have outside entrances on the ground level, in which case it is
 defined as a `townhouse`, this could be encoded as shown below. 
@@ -512,20 +473,13 @@ defined as a `townhouse`, this could be encoded as shown below.
         -   `condition: "total_units == 2"`
         -   `expression: "duplex"`
     -   `[[3]]`
-        -   `condition: "n_outside_entry == total_units and n_ground_entry == total_units"`
+        -   `condition: "n_outside_entry == total_units and n_ground_entry == total_units and total_units > 2"`
         -   `expression: "townhouse`
     -   `[[4]]`
-        -   `condition: "true"`
+        -   `condition: "total_units > 2"`
         -   `expression: "multifamily`
 
-In that
-example, all buildings with only one dwelling unit would be defined as
-single-family. Of the remaining buildings, all buildings with two units
-would be defined as duplexes. Of the remaining buildings (all of which
-would have three or more dwelling units), those in which all units have
-an outside, ground-level entrances would be classified as townhouses,
-and all other buildings with three or more units would be classified as
-multifamily buildings.
+
 
 ## Parcel geometry
 
@@ -570,12 +524,12 @@ Parcel centroids have four additional key/value pairs:
 -   `lot_width` indicates the width of the parcel in feet.
 -   `lot_depth` indicates the depth of the parcel in feet.
 -   `lot_area` indicates the area of the parcel in acres.
--   `vacant` takes a value of true or false and indicates whether the
-    lot is vacant.
+-   `vacant` takes a value of True if the lot is vacant (if the lot is not vacant, 
+    this key can be omitted or it can take a value of False).
 
 In addition to parcel geometry features, the \*.parcel file must also
 include a `version` key indicating what version of the OZFS standard the
-file is consistent with. The version described in this paper is 0.5.0.
+file is consistent with. The version described here is 0.5.0.
 
 ## Building characteristics
 
@@ -654,7 +608,7 @@ by a party wall or fire wall, the `sep_wall_length` key stores the
 length of the separation wall. These keys may be used to determine
 whether the building meet’s a municipality’s definition of a townhome.
 There is also an optional `parking` key to indicate the number of
-parking spaces contained within the building’s structure (i.e. in a
+parking spaces contained within the building’s structure (i.e. in a
 garage).
 
 ### Level information
