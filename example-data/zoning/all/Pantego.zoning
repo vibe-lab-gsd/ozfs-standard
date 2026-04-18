@@ -49835,19 +49835,10 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Specific Use Permit",
-        "dist_abbr": "Specific Use Permit",
-        "planned_dev": false
-      },
-      "geometry": []
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "dist_name": "Park Row Corridor",
         "dist_abbr": "PRC",
         "planned_dev": false,
-        "overlay": "no-residential-effect"
+        "overlay": "none-by-right"
       },
       "geometry": [
         "type": "MultiPolygon",
