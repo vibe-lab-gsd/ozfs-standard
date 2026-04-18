@@ -1,5 +1,74 @@
 {
   "type": "FeatureCollection",
+  "version": "0.5.0",
+  "muni_name": "Pantego",
+  "date": "2024-01-22",
+  "definitions": {
+    "height": [
+      {
+        "condition": "roof_type == 'flat'",
+        "expression": "height_top"
+      },
+      {
+        "condition": "roof_type == 'hip'",
+        "expression": "0.5 * (height_top + height_eave)"
+      },
+      {
+        "condition": "roof_type == 'mansard'",
+        "expression": "height_deck"
+      },
+      {
+        "condition": "roof_type == 'gable'",
+        "expression": "0.5 * (height_top + height_eave)"
+      },
+      {
+        "condition": "roof_type == 'skillion'",
+        "expression": "0.5 * (height_top + height_eave)"
+      },
+      {
+        "condition": "roof_type == 'gambrel'",
+        "expression": "0.5 * (height_top + height_eave)"
+      }
+    ],
+    "res_type": [
+      {
+        "condition": "total_units == 1",
+        "expression": "'1_unit'"
+      },
+      {
+        "condition": [
+          "total_units == 2",
+          "dist_abbr == 'R-1'"
+        ],
+        "expression": "'2_unit_inlaw'"
+      },
+      {
+        "condition": "total_units == 2",
+        "expression": "'2_unit'"
+      },
+      {
+        "condition": [
+          "total_units > 2",
+          "n_outside_entry == total_units",
+          "n_ground_entry == total_units",
+          "sep_platting == TRUE"
+        ],
+        "expression": "'townhouse'"
+      },
+      {
+        "condition": "total_units == 3",
+        "expression": "'3_unit'"
+      },
+      {
+        "condition": "total_units == 4",
+        "expression": "'4_unit'"
+      },
+      {
+        "condition": "total_units >= 5",
+        "expression": "'5_plus'"
+      }
+    ]
+  },
   "features": [
     {
       "type": "Feature",
@@ -57,15 +126,6 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
           "parking_uncovered": {
             "min_val": [
               {
@@ -78,10 +138,39 @@
               },
               {
                 "condition": [
-                  "res_type == '1_unit_inlaw'"
+                  "res_type == '2_unit_inlaw'"
                 ],
                 "expression": [
                   3
+                ]
+              }
+            ]
+          },
+          "height": {
+            "max_val": [
+              {
+                "expression": [
+                  "35"
+                ]
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "condition": [
+                  "res_type == '1_unit'"
+                ],
+                "expression": [
+                  "1600"
+                ]
+              },
+              {
+                "condition": [
+                  "res_type == '2_unit_inlaw'"
+                ],
+                "expression": [
+                  "400"
                 ]
               }
             ]
@@ -91,15 +180,6 @@
               {
                 "expression": [
                   "0.23"
-                ]
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "1600"
                 ]
               }
             ]
@@ -35308,15 +35388,6 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
           "parking_uncovered": {
             "min_val": [
               {
@@ -35347,11 +35418,11 @@
               }
             ]
           },
-          "lot_size": {
-            "min_val": [
+          "height": {
+            "max_val": [
               {
                 "expression": [
-                  "0.23"
+                  "35"
                 ]
               }
             ]
@@ -35361,6 +35432,15 @@
               {
                 "expression": [
                   "1200"
+                ]
+              }
+            ]
+          },
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.23"
                 ]
               }
             ]
@@ -36027,6 +36107,13 @@
         "dist_name": "Multifamily Townouse/Condo Residential",
         "dist_abbr": "R-3",
         "planned_dev": false,
+        "res_types_allowed": [
+          "1_unit",
+          "2_unit",
+          "3_unit",
+          "4_unit",
+          "townhouse"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -36073,6 +36160,26 @@
               }
             ]
           },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhouse'"
+                ]
+              },
+              {
+                "condition": [
+                  "res_type == '3_unit' or res_type == '4_unit'"
+                ],
+                "expression": [
+                  "(2 * total_units) + (total_units / 5)"
+                ]
+              }
+            ]
+          },
           "height": {
             "max_val": [
               {
@@ -36082,22 +36189,30 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "unit_size": {
             "min_val": [
               {
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == 'townhouse'"
-                ],
                 "expression": [
-                  "2 * total_units"
+                  "1000"
+                ],
+                "condition": [
+                  "bedrooms <= 1"
                 ]
               },
               {
                 "condition": [
-                  "res_type == '3_unit' or res_type == '4_unit'"
+                  "bedrooms == 2"
                 ],
                 "expression": [
-                  "(2 * total_units) + (total_units / 5)"
+                  "1150"
+                ]
+              },
+              {
+                "condition": [
+                  "bedrooms >= 3"
+                ],
+                "expression": [
+                  "1300"
                 ]
               }
             ]
@@ -36122,34 +36237,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "condition": [
-                  "bedrooms <= 1"
-                ],
-                "expression": [
-                  "1000"
-                ]
-              },
-              {
-                "condition": [
-                  "bedrooms == 2"
-                ],
-                "expression": [
-                  "1150"
-                ]
-              },
-              {
-                "condition": [
-                  "bedrooms >= 3"
-                ],
-                "expression": [
-                  "1300"
-                ]
-              }
-            ]
-          },
           "unit_density": {
             "max_val": [
               {
@@ -36159,14 +36246,7 @@
               }
             ]
           }
-        },
-        "res_types_allowed": [
-          "1_unit",
-          "2_unit",
-          "3_unit",
-          "4_unit",
-          "townhouse"
-        ]
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -36659,34 +36739,14 @@
               }
             ]
           },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.16"
-                ],
-                "condition": [
-                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_unit' or res_type == '5_plus'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.057 * total_units"
-                ],
-                "condition": [
-                  "res_type == 'townhouse'"
-                ]
-              }
-            ]
-          },
           "unit_size": {
             "min_val": [
               {
-                "condition": [
-                  "bedrooms <= 1"
-                ],
                 "expression": [
                   "1000"
+                ],
+                "condition": [
+                  "bedrooms <= 1"
                 ]
               },
               {
@@ -36703,6 +36763,26 @@
                 ],
                 "expression": [
                   "1300"
+                ]
+              }
+            ]
+          },
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.16"
+                ],
+                "condition": [
+                  "res_type == '1_unit' or res_type == '2_unit' or res_type == '3_unit' or res_type == '4_unit' or res_type == '5_plus'"
+                ]
+              },
+              {
+                "expression": [
+                  "0.057 * total_units"
+                ],
+                "condition": [
+                  "res_type == 'townhouse'"
                 ]
               }
             ]
@@ -51482,71 +51562,5 @@
       }
     }
   ],
-  "version": "0.5.0",
-  "muni_name": "Pantego",
-  "date": "2024-01-22",
-  "source": "https://ecode360.com/40180322#40180322",
-  "definitions": {
-    "height": [
-      {
-        "condition": "roof_type == 'flat'",
-        "expression": "height_top"
-      },
-      {
-        "condition": "roof_type == 'hip'",
-        "expression": "0.5 * (height_top + height_eave)"
-      },
-      {
-        "condition": "roof_type == 'mansard'",
-        "expression": "height_deck"
-      },
-      {
-        "condition": "roof_type == 'gable'",
-        "expression": "0.5 * (height_top + height_eave)"
-      },
-      {
-        "condition": "roof_type == 'skillion'",
-        "expression": "0.5 * (height_top + height_eave)"
-      },
-      {
-        "condition": "roof_type == 'gambrel'",
-        "expression": "0.5 * (height_top + height_eave)"
-      }
-    ],
-    "res_type": [
-      {
-        "condition": "total_units == 1",
-        "expression": "'1_unit'"
-      },
-      {
-        "condition": "total_units == 2, dist_abbr == 'R-1'",
-        "expression": "'1_unit_inlaw'"
-      },
-      {
-        "condition": "total_units == 2",
-        "expression": "'2_unit'"
-      },
-      {
-        "condition": [
-          "total_units > 2",
-          "n_outside_entry == total_units",
-          "n_ground_entry == total_units",
-          "sep_platting == TRUE"
-        ],
-        "expression": "'townhouse'"
-      },
-      {
-        "condition": "total_units == 3",
-        "expression": "'3_unit'"
-      },
-      {
-        "condition": "total_units == 4",
-        "expression": "'4_unit'"
-      },
-      {
-        "condition": "total_units >= 5",
-        "expression": "'5_plus'"
-      }
-    ]
-  }
+  "source": "https://ecode360.com/40180322#40180322"
 }
