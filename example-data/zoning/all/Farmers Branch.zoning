@@ -54,8 +54,10 @@
         "dist_name": "One-Family Residence -1",
         "dist_abbr": "R-1",
         "planned_dev": false,
-        "overlay": false,
-        "res_types_allowed": "one_family_detached",
+        "overlay": null,
+        "res_types_allowed": [
+          "one_family_detached"
+        ],
         "constraints": {
           "lot_area": {
             "min_val": [
@@ -85,11 +87,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "min_max": "min",
-                "expression": [
-                  "0.1 * lot_width",
-                  "20"
-                ]
+                "expression": "50",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -131,8 +130,23 @@
                 "expression": "2200"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "150"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "150"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "Polygon",
@@ -486,7 +500,9 @@
         "dist_name": "One-Family Residence -2",
         "dist_abbr": "R-2",
         "planned_dev": false,
-        "res_types_allowed": "one_family_detached",
+        "res_types_allowed": [
+          "one_family_detached"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -530,7 +546,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -554,9 +571,24 @@
                 "expression": "1900"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
         },
-        "overlay": false
+        "overlay": null,
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3197,7 +3229,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -3221,10 +3254,27 @@
                 "expression": "2 * total_units"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "80"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
         },
-        "res_types_allowed": "one_family_detached",
-        "overlay": false
+        "res_types_allowed": [
+          "one_family_detached"
+        ],
+        "overlay": null,
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -5438,7 +5488,9 @@
         "dist_name": "One-Family Residence -4",
         "dist_abbr": "R-4",
         "planned_dev": false,
-        "res_types_allowed": "one_family_detached",
+        "res_types_allowed": [
+          "one_family_detached"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -5482,7 +5534,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -5506,9 +5559,24 @@
                 "expression": "2 * total_units"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "80"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
         },
-        "overlay": false
+        "overlay": null,
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -9054,7 +9122,9 @@
         "dist_name": "One-Family Residence -5",
         "dist_abbr": "R-5",
         "planned_dev": false,
-        "res_types_allowed": "one_family_detached",
+        "res_types_allowed": [
+          "one_family_detached"
+        ],
         "constraints": {
           "lot_area": {
             "min_val": [
@@ -9080,7 +9150,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -9122,9 +9193,24 @@
                 "expression": "2 * total_units"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
         },
-        "overlay": false
+        "overlay": null,
+        "non_res_allowed": false
       },
       "geometry": []
     },
@@ -9134,7 +9220,7 @@
         "dist_name": "One-Family Residence -6",
         "dist_abbr": "R-6",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "one_family_attached"
@@ -9164,7 +9250,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -9206,8 +9293,23 @@
                 ]
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12339,7 +12441,7 @@
         "dist_name": "Two-Family Residence",
         "dist_abbr": "D-1",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "two_family",
@@ -12375,7 +12477,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -12417,8 +12520,23 @@
                 "expression": "1200"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "Polygon",
@@ -12974,7 +13092,7 @@
         "dist_name": "Two-Family Residence",
         "dist_abbr": "D-2",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "two_family"
@@ -12984,7 +13102,7 @@
             "min_val": [
               {
                 "condition": "res_type == 'one_family_detached'",
-                "expression": "0.17"
+                "expression": "0.1722"
               },
               {
                 "condition": "res_type == 'two_family'",
@@ -13009,7 +13127,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "5"
+                "expression": "25",
+                "condition": "corner lot; both street exposures treated as front yards per Sec. 3.3I.2.c"
               }
             ]
           },
@@ -13051,8 +13170,23 @@
                 "expression": "1000"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": []
     },
@@ -13062,7 +13196,7 @@
         "dist_name": "Multiple-Family Residence -1",
         "dist_abbr": "MF-1",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "two_family",
@@ -13103,7 +13237,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "0.1 * lot_width"
+                "expression": "30",
+                "condition": "corner lot with MF dwelling not exceeding 2 stories per Sec. 3.3I.2.g"
               }
             ]
           },
@@ -13180,7 +13315,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": []
     },
@@ -13190,7 +13326,7 @@
         "dist_name": "Multiple-Family Residence -2",
         "dist_abbr": "MF-2",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "two_family",
@@ -13235,7 +13371,8 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "0.1 * lot_width"
+                "expression": "30",
+                "condition": "corner lot with MF dwelling not exceeding 2 stories per Sec. 3.3I.2.g"
               }
             ]
           },
@@ -13319,7 +13456,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -13805,7 +13943,7 @@
         "dist_name": "Multiple-Family Residence -3",
         "dist_abbr": "MF-3",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "two_family",
@@ -13934,7 +14072,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "Polygon",
@@ -14102,7 +14241,7 @@
         "dist_name": "Multiple-Family Residence -4",
         "dist_abbr": "MF-4",
         "planned_dev": false,
-        "overlay": false,
+        "overlay": null,
         "res_types_allowed": [
           "one_family_detached",
           "two_family",
@@ -14216,7 +14355,7 @@
                   "bedrooms <= 1",
                   "res_type == 'multiple_family'"
                 ],
-                "expression": "825"
+                "expression": "650"
               },
               {
                 "condition": [
@@ -14231,13 +14370,6 @@
                   "res_type == 'multiple_family'"
                 ],
                 "expression": "1000"
-              },
-              {
-                "condition": [
-                  "bedrooms == 4",
-                  "res_type == 'multiple_family'"
-                ],
-                "expression": "1000"
               }
             ]
           },
@@ -14248,7 +14380,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": false
       },
       "geometry": []
     },
@@ -14258,7 +14391,8 @@
         "dist_name": "Institutional-Religious Uses",
         "dist_abbr": "I-RU",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -14764,7 +14898,8 @@
         "dist_name": "Office",
         "dist_abbr": "O",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -15442,7 +15577,8 @@
         "dist_name": "Local Retail -1",
         "dist_abbr": "LR-1",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -15956,7 +16092,8 @@
         "dist_name": "Local Retail -2",
         "dist_abbr": "LR-2",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -17218,7 +17355,8 @@
         "dist_name": "Commercial",
         "dist_abbr": "C",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -17228,7 +17366,8 @@
         "dist_name": "Light Industrial",
         "dist_abbr": "LI",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -19564,7 +19703,8 @@
         "dist_name": "Heavy Industrial",
         "dist_abbr": "HI",
         "planned_dev": false,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -19574,7 +19714,8 @@
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
         "planned_dev": true,
-        "overlay": false
+        "overlay": false,
+        "non_res_allowed": null
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -25382,7 +25523,8 @@
         "dist_name": "Flood Plain",
         "dist_abbr": "FP",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "restrict",
+        "non_res_allowed": null
       },
       "geometry": []
     },
@@ -25392,7 +25534,8 @@
         "dist_name": "Historic Landmark",
         "dist_abbr": "H",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "demolition_only",
+        "non_res_allowed": null
       },
       "geometry": []
     },
@@ -25402,7 +25545,8 @@
         "dist_name": "East Side Business",
         "dist_abbr": "ESB",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "no_residential_effect",
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -25412,7 +25556,8 @@
         "dist_name": "Beer and Wine Sale Overlay",
         "dist_abbr": "BW",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "no_residential_effect",
+        "non_res_allowed": null
       },
       "geometry": []
     },
@@ -25422,7 +25567,8 @@
         "dist_name": "Alcoholic Beverage (On Premise) Overlay",
         "dist_abbr": "AB-OP",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "no_residential_effect",
+        "non_res_allowed": null
       },
       "geometry": []
     },
@@ -25432,7 +25578,8 @@
         "dist_name": "Entertainment Overlay",
         "dist_abbr": "EO",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "no_residential_effect",
+        "non_res_allowed": null
       },
       "geometry": []
     },
@@ -25442,7 +25589,8 @@
         "dist_name": "TIF",
         "dist_abbr": "TIF",
         "planned_dev": false,
-        "overlay": false
+        "overlay": "TRUE",
+        "non_res_allowed": null
       },
       "geometry": []
     }

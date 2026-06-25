@@ -114,8 +114,23 @@
                 "expression": "1100"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "150"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "150"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -56256,8 +56271,23 @@
                 "expression": "2100"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "125"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -56396,8 +56426,23 @@
                 "expression": "1900"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "75"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -65626,8 +65671,23 @@
                 "expression": "1500"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -107826,8 +107886,27 @@
                 "expression": "1500"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "condition": "lot_type == 'corner'",
+                "expression": "60"
+              },
+              {
+                "expression": "55"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "90"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -107891,7 +107970,7 @@
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": "2.25 * total_units"
+                "expression": "0.25 * total_units"
               }
             ]
           },
@@ -107922,8 +108001,34 @@
                 "expression": "6"
               }
             ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "condition": "lot_position == 'end'",
+                "expression": "30"
+              },
+              {
+                "expression": "20"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "90"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -108148,7 +108253,7 @@
                 "condition": "depends on street it faces",
                 "expression": [
                   "10",
-                  "52"
+                  "25"
                 ]
               }
             ]
@@ -108178,8 +108283,23 @@
                 "condition": "res_type == 'single_family'"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "75"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -111820,17 +111940,15 @@
           "single_attached"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
-                "expression": "20"
+                "expression": "15"
+              }
+            ],
+            "max_val": [
+              {
+                "expression": "30"
               }
             ]
           },
@@ -111844,18 +111962,24 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "20"
+                "expression": "15"
+              }
+            ],
+            "max_val": [
+              {
+                "expression": "30"
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "condition": "depends on street it faces",
-                "expression": [
-                  "12",
-                  "20"
-                ]
+                "expression": "15"
+              }
+            ],
+            "max_val": [
+              {
+                "expression": "30"
               }
             ]
           },
@@ -111876,7 +112000,12 @@
           "height": {
             "max_val": [
               {
-                "expression": "50"
+                "expression": "60"
+              }
+            ],
+            "min_val": [
+              {
+                "expression": "40"
               }
             ]
           },
@@ -111906,11 +112035,26 @@
           "unit_density": {
             "max_val": [
               {
-                "expression": "32"
+                "expression": "80"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "75"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -111955,7 +112099,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -119954,7 +120099,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -119963,7 +120109,8 @@
       "properties": {
         "dist_name": "Neighborhood Office",
         "dist_abbr": "NO",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -121552,7 +121699,8 @@
       "properties": {
         "dist_name": "Community Office",
         "dist_abbr": "CO",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -123163,7 +123311,8 @@
       "properties": {
         "dist_name": "Neighborhood Services",
         "dist_abbr": "NS",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -123432,7 +123581,8 @@
       "properties": {
         "dist_name": "Community Retail",
         "dist_abbr": "CR",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -140387,7 +140537,8 @@
       "properties": {
         "dist_name": "Light Commercial",
         "dist_abbr": "LC",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -141758,7 +141909,8 @@
       "properties": {
         "dist_name": "Heavy Commercial",
         "dist_abbr": "HC",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -144507,7 +144659,8 @@
       "properties": {
         "dist_name": "Industrial",
         "dist_abbr": "IN",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -148677,8 +148830,23 @@
                 "expression": "725"
               }
             ]
+          },
+          "setback_side_int": {
+            "min_val": [
+              {
+                "expression": "5"
+              }
+            ]
+          },
+          "unit_density": {
+            "min_val": [
+              {
+                "expression": "30"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -148776,8 +148944,23 @@
                 "expression": "725"
               }
             ]
+          },
+          "setback_side_int": {
+            "min_val": [
+              {
+                "expression": "5"
+              }
+            ]
+          },
+          "unit_density": {
+            "min_val": [
+              {
+                "expression": "40"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -148905,7 +149088,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -149838,7 +150022,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -149861,7 +150046,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -149883,7 +150069,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -149909,7 +150096,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -149931,7 +150119,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -149941,7 +150130,8 @@
         "dist_name": "Downtown Automotive Overlay",
         "dist_abbr": "DAO",
         "planned_dev": false,
-        "overlay": "no-residential-effect"
+        "overlay": "no_residential_effect",
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -149951,7 +150141,8 @@
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
         "planned_dev": true,
-        "overlay": "none-by-right"
+        "overlay": "none-by-right",
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -227603,7 +227794,8 @@
         "dist_name": "Specific Use Provision",
         "dist_abbr": "SUP",
         "planned_dev": false,
-        "overlay": "no-residential-effect"
+        "overlay": "no_residential_effect",
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -227612,7 +227804,8 @@
       "properties": {
         "dist_name": "Multiple Districts",
         "dist_abbr": "MD",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
