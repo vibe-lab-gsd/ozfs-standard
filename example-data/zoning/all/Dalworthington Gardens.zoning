@@ -45773,12 +45773,13 @@
         "dist_name": "Residential",
         "dist_abbr": "GH",
         "planned_dev": false,
+        "res_types_allowed": "1_unit",
         "constraints": {
           "lot_size": {
             "min_val": [
               {
                 "expression": [
-                  "0.14000000000000001"
+                  "0.14"
                 ]
               }
             ]
@@ -45842,6 +45843,33 @@
               {
                 "expression": [
                   "2000"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": [
+                  "50"
+                ]
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2"
                 ]
               }
             ]
