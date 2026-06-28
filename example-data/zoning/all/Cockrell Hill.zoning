@@ -54,15 +54,6 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Residential",
-        "dist_abbr": "R",
-        "planned_dev": false
-      },
-      "geometry": []
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "dist_name": "Single-Family",
         "dist_abbr": "R-S",
         "planned_dev": false,
@@ -71,13 +62,6 @@
           "two_family"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.16"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -88,29 +72,38 @@
           "setback_side_int": {
             "min_val": [
               {
-                "min_max": "max",
                 "expression": [
                   "5",
                   "0.1 * lot_width"
-                ]
+                ],
+                "min_max": "max"
               }
             ]
           },
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "25"
+                "expression": [
+                  5,
+                  "0.1 * lot_width"
+                ],
+                "min_max": "max"
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "min_max": "max",
+                "condition": "\"Double frontage\"",
+                "expression": "25"
+              },
+              {
+                "condition": true,
                 "expression": [
                   "5",
                   "0.1 * lot_width"
-                ]
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -121,24 +114,47 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "35"
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": "4 * total_units"
+                "expression": "2 * total_units"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.16"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
               }
             ]
           },
           "stories": {
             "max_val": [
               {
-                "expression": "2.5"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "35"
+                "expression": [
+                  2.5
+                ]
               }
             ]
           }
@@ -9131,51 +9147,43 @@
           "townhouse"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.16",
-                "condition": "res_type == 'single_family' or res_type == 'two_family' or (res_type == 'multiple_family' and total_units == 3) or res_type == 'townhouse'"
-              },
-              {
-                "expression": "0.16 + 0.02 * (total_units - 3)",
-                "condition": "(res_type == 'multiple_family' and total_units >= 4)"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
-                "expression": "25"
+                "expression": "15"
               }
             ]
           },
           "setback_side_int": {
             "min_val": [
               {
-                "min_max": "max",
                 "expression": [
                   "5",
                   "0.1 * lot_width"
-                ]
+                ],
+                "min_max": "max"
               }
             ]
           },
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "25"
+                "expression": [
+                  5,
+                  "0.1 * lot_width"
+                ],
+                "min_max": "max"
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "min_max": "max",
                 "expression": [
                   "5",
                   "0.1 * lot_width"
-                ]
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -9186,15 +9194,29 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "35"
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": "2 * total_units",
-                "condition": "res_type == 'multiple_family'"
+                "expression": "2 * total_units"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "condition": "total units <= 3",
+                "expression": "0.16"
               },
               {
-                "expression": "4 * total_units",
-                "condition": "res_type == 'single_family' or res_type == 'two_family' or res_type == 'townhouse'"
+                "condition": "total_units >= 4",
+                "expression": "0.16 + 0.02 * (total_units - 3)"
               }
             ]
           },
@@ -9202,13 +9224,6 @@
             "max_val": [
               {
                 "expression": "2"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "35"
               }
             ]
           }
@@ -11057,18 +11072,6 @@
           "townhouse"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.16",
-                "condition": "res_type == 'single_family' or res_type == 'two_family' or (res_type == 'multiple_family' and total_units == 3) or res_type == 'townhouse'"
-              },
-              {
-                "expression": "0.16 + 0.02 * (total_units - 3)",
-                "condition": "(res_type == 'multiple_family' and total_units >= 4)"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -11079,11 +11082,11 @@
           "setback_side_int": {
             "min_val": [
               {
-                "min_max": "max",
                 "expression": [
                   "5",
                   "0.1 * lot_width"
-                ]
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -11097,11 +11100,11 @@
           "setback_rear": {
             "min_val": [
               {
-                "min_max": "max",
                 "expression": [
                   "5",
                   "0.1 * lot_width"
-                ]
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -11109,6 +11112,13 @@
             "max_val": [
               {
                 "expression": "60"
+              }
+            ]
+          },
+          "height": {
+            "max_val": [
+              {
+                "expression": "35"
               }
             ]
           },
@@ -11124,17 +11134,22 @@
               }
             ]
           },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.16",
+                "condition": "res_type == 'single_family' or res_type == 'two_family' or (res_type == 'multiple_family' and total_units == 3) or res_type == 'townhouse'"
+              },
+              {
+                "expression": "0.16 + 0.02 * (total_units - 3)",
+                "condition": "(res_type == 'multiple_family' and total_units >= 4)"
+              }
+            ]
+          },
           "stories": {
             "max_val": [
               {
                 "expression": "2"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "35"
               }
             ]
           }
