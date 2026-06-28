@@ -68,21 +68,10 @@
         "planned_dev": false,
         "res_types_allowed": "1_unit",
         "constraints": {
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  0.5
-                ]
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
-                "expression": [
-                  "50"
-                ]
+                "expression": "50"
               }
             ]
           },
@@ -90,7 +79,8 @@
             "min_val": [
               {
                 "expression": [
-                  "[25, 25 + (height - 35)]"
+                  25,
+                  "25 + (height - 35)"
                 ],
                 "min_max": "max"
               }
@@ -100,7 +90,8 @@
             "min_val": [
               {
                 "expression": [
-                  "[35, 35 + (height - 35)]"
+                  35,
+                  "35 + (height - 35)"
                 ],
                 "min_max": "max"
               }
@@ -109,20 +100,18 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": [
-                  "\"Double frontage\""
-                ],
+                "condition": "\"Double frontage\"",
                 "expression": [
-                  "[35, 35 + (height - 35)] "
+                  35,
+                  "35 + (height - 35) "
                 ],
                 "min_max": "max"
               },
               {
-                "condition": [
-                  true
-                ],
+                "condition": true,
                 "expression": [
-                  "[25, 25 + (height - 35)]"
+                  25,
+                  "25 + (height - 35)"
                 ],
                 "min_max": "max"
               }
@@ -131,45 +120,42 @@
           "lot_cov_bldg": {
             "max_val": [
               {
-                "expression": [
-                  "25"
-                ]
+                "expression": "25"
               }
             ]
           },
           "height": {
             "max_val": [
               {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "1250"
-                ]
-              }
-            ]
-          },
-          "lot_width": {
-            "min_val": [
-              {
-                "expression": [
-                  "80"
-                ]
+                "expression": "35"
               }
             ]
           },
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": [
-                  "2 * total_units"
-                ]
+                "expression": "2 * total_units"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": 80
+              }
+            ]
+          },
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": 0.5
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": 1250
               }
             ]
           }
@@ -42615,32 +42601,10 @@
           "townhome"
         ],
         "constraints": {
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  0.5
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.17 * total_units"
-                ],
-                "condition": [
-                  "res_type != '1_unit'"
-                ]
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
-                "expression": [
-                  "25"
-                ]
+                "expression": "25"
               }
             ]
           },
@@ -42648,7 +42612,8 @@
             "min_val": [
               {
                 "expression": [
-                  "[5, 5 + (height - 35)]"
+                  5,
+                  "5 + (height - 35)"
                 ],
                 "min_max": "max"
               }
@@ -42658,7 +42623,8 @@
             "min_val": [
               {
                 "expression": [
-                  "[15, 15 + (height - 35)]"
+                  15,
+                  "15 + (height - 35)"
                 ],
                 "min_max": "max"
               }
@@ -42667,20 +42633,18 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": [
-                  "\"Double frontage\""
-                ],
+                "condition": "\"Double frontage\"",
                 "expression": [
-                  "[20, 20 + (height - 35)]"
+                  20,
+                  "20 + (height - 35)"
                 ],
                 "min_max": "max"
               },
               {
-                "condition": [
-                  true
-                ],
+                "condition": true,
                 "expression": [
-                  "[10, 10 + (height - 35)]"
+                  10,
+                  "10 + (height - 35)"
                 ],
                 "min_max": "max"
               }
@@ -42689,45 +42653,47 @@
           "lot_cov_bldg": {
             "max_val": [
               {
-                "expression": [
-                  "40"
-                ]
+                "expression": "40"
               }
             ]
           },
           "height": {
             "max_val": [
               {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "800"
-                ]
-              }
-            ]
-          },
-          "lot_width": {
-            "min_val": [
-              {
-                "expression": [
-                  "60"
-                ]
+                "expression": "35"
               }
             ]
           },
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": [
-                  "2.25 * total_uni"
-                ]
+                "expression": "2.25 * total_units"
+              }
+            ]
+          },
+          "lot_size": {
+            "min_val": [
+              {
+                "condition": "res_type == '1_unit'",
+                "expression": "0.5"
+              },
+              {
+                "condition": "res_type != '1_unit'",
+                "expression": "0.17 * total_units"
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": "800"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
               }
             ]
           }
@@ -45775,102 +45741,80 @@
         "planned_dev": false,
         "res_types_allowed": "1_unit",
         "constraints": {
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.14"
-                ]
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
-                "expression": [
-                  "15"
-                ]
+                "expression": "15"
               }
             ]
           },
           "setback_side_int": {
             "min_val": [
               {
-                "expression": [
-                  "5"
-                ]
+                "expression": "5"
               }
             ]
           },
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": [
-                  "15"
-                ]
+                "expression": "15"
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "expression": [
-                  "15"
-                ]
+                "expression": "15"
               }
             ]
           },
           "lot_cov_bldg": {
             "max_val": [
               {
-                "expression": [
-                  "50"
-                ]
+                "expression": "50"
               }
             ]
           },
           "height": {
             "max_val": [
               {
-                "expression": [
-                  "35"
-                ]
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2000"
-                ]
-              }
-            ]
-          },
-          "lot_width": {
-            "min_val": [
-              {
-                "expression": [
-                  "50"
-                ]
+                "expression": "35"
               }
             ]
           },
           "parking_uncovered": {
             "min_val": [
               {
-                "expression": [
-                  "2"
-                ]
+                "expression": "2"
               }
             ]
           },
           "parking_enclosed": {
             "min_val": [
               {
-                "expression": [
-                  "2"
-                ]
+                "expression": 2
+              }
+            ]
+          },
+          "lot_size": {
+            "min_val": [
+              {
+                "expression": 0.14
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": 2000
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": 50
               }
             ]
           }
