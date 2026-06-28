@@ -90,8 +90,9 @@
             "min_val": [
               {
                 "expression": [
-                  "25"
-                ]
+                  "[25, 25 + (height - 35)]"
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -99,8 +100,9 @@
             "min_val": [
               {
                 "expression": [
-                  "35"
-                ]
+                  "[35, 35 + (height - 35)]"
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -111,16 +113,18 @@
                   "\"Double frontage\""
                 ],
                 "expression": [
-                  "35"
-                ]
+                  "[35, 35 + (height - 35)] "
+                ],
+                "min_max": "max"
               },
               {
                 "condition": [
                   true
                 ],
                 "expression": [
-                  25
-                ]
+                  "[25, 25 + (height - 35)]"
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -42605,6 +42609,7 @@
         "planned_dev": false,
         "res_types_allowed": [
           "1_unit",
+          "2_unit",
           "3_unit",
           "4_plus",
           "townhome"
@@ -42614,10 +42619,10 @@
             "min_val": [
               {
                 "expression": [
-                  "0.5 * total_units"
+                  0.5
                 ],
                 "condition": [
-                  "res_type == '1_unit' or res_type == 'townhome'"
+                  "res_type == '1_unit'"
                 ]
               },
               {
@@ -42625,7 +42630,7 @@
                   "0.17 * total_units"
                 ],
                 "condition": [
-                  "res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type != '1_unit'"
                 ]
               }
             ]
@@ -42642,22 +42647,10 @@
           "setback_side_int": {
             "min_val": [
               {
-                "condition": [
-                  "height <= 35",
-                  "res_type == '1_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ],
                 "expression": [
-                  "5",
-                  "height > 35"
-                ]
-              },
-              {
-                "expression": [
-                  "5"
+                  "[5, 5 + (height - 35)]"
                 ],
-                "condition": [
-                  "res_type == 'townhome'"
-                ]
+                "min_max": "max"
               }
             ]
           },
@@ -42665,8 +42658,9 @@
             "min_val": [
               {
                 "expression": [
-                  "15"
-                ]
+                  "[15, 15 + (height - 35)]"
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -42674,23 +42668,21 @@
             "min_val": [
               {
                 "condition": [
-                  "height <= 35",
-                  "10 normally, 20 for double frontage"
+                  "\"Double frontage\""
                 ],
                 "expression": [
-                  "10",
-                  "20"
-                ]
+                  "[20, 20 + (height - 35)]"
+                ],
+                "min_max": "max"
               },
               {
                 "condition": [
-                  "height > 35",
-                  "10 normally, 20 for double frontage"
+                  true
                 ],
                 "expression": [
-                  "10 + (height - 35)",
-                  "20 + (height - 35)"
-                ]
+                  "[10, 10 + (height - 35)]"
+                ],
+                "min_max": "max"
               }
             ]
           },
@@ -42707,7 +42699,7 @@
             "max_val": [
               {
                 "expression": [
-                  "45"
+                  "35"
                 ]
               }
             ]
@@ -42717,6 +42709,24 @@
               {
                 "expression": [
                   "800"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": [
+                  "60"
+                ]
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2.25 * total_uni"
                 ]
               }
             ]
