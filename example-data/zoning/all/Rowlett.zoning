@@ -55,10 +55,12 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—40/24",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d40/24",
         "dist_abbr": "SF-40",
         "planned_dev": false,
-        "res_types_allowed": "single_family",
+        "res_types_allowed": [
+          "single_family"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -137,8 +139,23 @@
                 "expression": "1"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "140"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "240"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -5065,10 +5082,12 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—20/24",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d20/24",
         "dist_abbr": "SF-20",
         "planned_dev": false,
-        "res_types_allowed": "single_family",
+        "res_types_allowed": [
+          "single_family"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -5163,8 +5182,23 @@
                 "expression": "2.2"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "120"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "150"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -5823,7 +5857,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—15/21",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d15/21",
         "dist_abbr": "SF-15",
         "planned_dev": false,
         "constraints": {
@@ -5920,9 +5954,26 @@
                 "expression": "2.5"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "120"
+              }
+            ]
           }
         },
-        "res_types_allowed": "single_family"
+        "res_types_allowed": [
+          "single_family"
+        ],
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7059,10 +7110,12 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—10/21",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d10/21",
         "dist_abbr": "SF-10",
         "planned_dev": false,
-        "res_types_allowed": "single_family",
+        "res_types_allowed": [
+          "single_family"
+        ],
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -7157,8 +7210,23 @@
                 "expression": "4.4"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "80"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -15799,10 +15867,12 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—9/18",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d9/18",
         "dist_abbr": "SF-9",
         "planned_dev": false,
-        "res_types_allowed": "single_family",
+        "res_types_allowed": [
+          "single_family"
+        ],
         "constraints": {
           "lot_area": {
             "min_val": [
@@ -15897,8 +15967,23 @@
                 "expression": "4.8"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "65"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -22739,10 +22824,12 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—8/18",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d8/18",
         "dist_abbr": "SF-8",
         "planned_dev": false,
-        "res_types_allowed": "single_family",
+        "res_types_allowed": [
+          "single_family"
+        ],
         "constraints": {
           "lot_area": {
             "min_val": [
@@ -22837,8 +22924,23 @@
                 "expression": "5.4"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "65"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -27793,10 +27895,12 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—7/15",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d7/15",
         "dist_abbr": "SF-7",
         "planned_dev": false,
-        "res_types_allowed": "single_family",
+        "res_types_allowed": [
+          "single_family"
+        ],
         "constraints": {
           "lot_area": {
             "min_val": [
@@ -27891,15 +27995,30 @@
                 "expression": "6.2"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "65"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential—5/15",
+        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d5/15",
         "dist_abbr": "SF-5",
         "planned_dev": false,
         "res_types_allowed": [
@@ -27910,7 +28029,7 @@
           "lot_area": {
             "min_val": [
               {
-                "expression": "0.12"
+                "expression": "0.1148"
               }
             ]
           },
@@ -28004,8 +28123,23 @@
                 "expression": "8"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "50"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -28088,14 +28222,13 @@
         "res_types_allowed": [
           "single_family",
           "two_family",
-          "multifamily",
           "townhouse"
         ],
         "constraints": {
           "lot_area": {
             "min_val": [
               {
-                "expression": "0.08"
+                "expression": "0.20"
               }
             ]
           },
@@ -28181,8 +28314,23 @@
                 "expression": "10.2"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "65"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "110"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -28643,12 +28791,28 @@
                 "expression": "98"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "30"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
         },
         "res_types_allowed": [
+          "single_family",
           "multifamily",
           "townhouse"
-        ]
+        ],
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -28778,8 +28942,23 @@
                 "expression": "17.4"
               }
             ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "70"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -28930,12 +29109,16 @@
           "unit_size": {
             "min_val": [
               {
-                "condition": "bedrooms <= 1",
+                "condition": "bedrooms == 0",
                 "expression": "1000"
               },
               {
-                "condition": "bedrooms == 2",
+                "condition": "bedrooms == 1",
                 "expression": "700"
+              },
+              {
+                "condition": "bedrooms == 2",
+                "expression": "900"
               },
               {
                 "condition": "bedrooms > 2",
@@ -28950,7 +29133,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -40473,7 +40657,8 @@
       "properties": {
         "dist_name": "Mixed-Use Waterfront",
         "dist_abbr": "MU-WF",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -83000,7 +83185,8 @@
         "dist_name": "Industrial Overlay",
         "dist_abbr": "IO",
         "planned_dev": false,
-        "overlay": "replace"
+        "overlay": "replace",
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -83767,7 +83953,9 @@
         "dist_name": "Rural Neighborhood",
         "dist_abbr": "RN",
         "planned_dev": false,
-        "res_types_allowed": "single_family"
+        "res_types_allowed": [
+          "single_family"
+        ]
       },
       "geometry": []
     },
@@ -83788,7 +83976,8 @@
       "properties": {
         "dist_name": "Form Based",
         "dist_abbr": "FB",
-        "planned_dev": false
+        "planned_dev": false,
+        "overlay": "replace"
       },
       "geometry": []
     },
