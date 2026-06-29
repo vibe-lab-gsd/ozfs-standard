@@ -94,15 +94,23 @@
               },
               {
                 "condition": "floors > 1 and lot_width < 60",
-                "expression": "0.24 * lot_width"
+                "expression": "0.22 * lot_width"
               },
               {
                 "condition": "floors > 1 and lot_width >= 60",
-                "expression": "0.22 * lot_width"
+                "expression": "0.24 * lot_width"
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -1383,15 +1391,30 @@
               },
               {
                 "condition": "floors > 1 and lot_width < 60",
-                "expression": "0.24 * lot_width"
+                "expression": "0.22 * lot_width"
               },
               {
                 "condition": "floors > 1 and lot_width >= 60",
-                "expression": "0.22 * lot_width"
+                "expression": "0.24 * lot_width"
+              }
+            ]
+          },
+          "setback_side_ext": {
+            "min_val": [
+              {
+                "expression": "10"
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3681,16 +3704,31 @@
               },
               {
                 "condition": "floors > 1 and lot_width < 60",
-                "expression": "0.24 * lot_width"
+                "expression": "0.22 * lot_width"
               },
               {
                 "condition": "floors > 1 and lot_width >= 60",
-                "expression": "0.22 * lot_width"
+                "expression": "0.24 * lot_width"
+              }
+            ]
+          },
+          "setback_side_ext": {
+            "min_val": [
+              {
+                "expression": "10"
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
               }
             ]
           }
         },
-        "res_types_allowed": "detached_house"
+        "res_types_allowed": "detached_house",
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -4999,15 +5037,30 @@
               },
               {
                 "condition": "floors > 1 and lot_width < 60",
-                "expression": "0.24 * lot_width"
+                "expression": "0.22 * lot_width"
               },
               {
                 "condition": "floors > 1 and lot_width >= 60",
-                "expression": "0.22 * lot_width"
+                "expression": "0.24 * lot_width"
+              }
+            ]
+          },
+          "setback_side_ext": {
+            "min_val": [
+              {
+                "expression": "10"
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -5806,8 +5859,16 @@
                 "expression": "4"
               }
             ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -6074,8 +6135,16 @@
                 "expression": "35"
               }
             ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -6218,8 +6287,16 @@
                 "expression": "35"
               }
             ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
+              }
+            ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -6804,7 +6881,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -6862,7 +6940,7 @@
                 "condition": "res_type == 'detached_house' or res_type == 'duplex' or res_type == 'attached_house'"
               },
               {
-                "expression": "0.04 * total_units",
+                "expression": "0.0413 * total_units",
                 "condition": "res_type == 'apartment'"
               }
             ]
@@ -6959,7 +7037,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7528,7 +7607,8 @@
           "duplex",
           "apartment",
           "attached_house"
-        ]
+        ],
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7669,7 +7749,8 @@
       "properties": {
         "dist_name": "Office - 1",
         "dist_abbr": "O-1",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7742,7 +7823,8 @@
       "properties": {
         "dist_name": "Office - 2",
         "dist_abbr": "O-2",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -7751,7 +7833,8 @@
       "properties": {
         "dist_name": "General Retail",
         "dist_abbr": "GR",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7916,7 +7999,8 @@
       "properties": {
         "dist_name": "Commercial",
         "dist_abbr": "C",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -8021,7 +8105,8 @@
       "properties": {
         "dist_name": "Retail Center (Park Cities Plaza)",
         "dist_abbr": "RC",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -8064,7 +8149,8 @@
       "properties": {
         "dist_name": "Shopping Center (Preston Center East)",
         "dist_abbr": "SC",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -8223,7 +8309,8 @@
       "properties": {
         "dist_name": "University Campus",
         "dist_abbr": "UC",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -8232,7 +8319,8 @@
       "properties": {
         "dist_name": "University Campus 1",
         "dist_abbr": "UC-1",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -9175,7 +9263,8 @@
       "properties": {
         "dist_name": "University Campus 2",
         "dist_abbr": "UC-2",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -9974,8 +10063,8 @@
             "min_val": [
               {
                 "condition": [
-                  "35 ft if along Dublin Street",
-                  "res_type == 'duplex'"
+                  "35 ft if lot abuts Dublin Street (all res types)",
+                  "TRUE"
                 ],
                 "expression": [
                   "25",
@@ -10009,7 +10098,7 @@
               {
                 "condition": "35 ft if along Dublin Street",
                 "expression": [
-                  "25",
+                  "10",
                   "35"
                 ]
               }
@@ -10034,7 +10123,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
@@ -10127,7 +10217,8 @@
               }
             ]
           }
-        }
+        },
+        "non_res_allowed": true
       },
       "geometry": []
     },
@@ -10136,7 +10227,8 @@
       "properties": {
         "dist_name": "Parking",
         "dist_abbr": "P",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -10329,7 +10421,8 @@
       "properties": {
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
-        "planned_dev": true
+        "planned_dev": true,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -13758,7 +13851,8 @@
       "properties": {
         "dist_name": "Agriculture",
         "dist_abbr": "AG",
-        "planned_dev": false
+        "planned_dev": false,
+        "non_res_allowed": true
       },
       "geometry": {
         "type": "Polygon",
