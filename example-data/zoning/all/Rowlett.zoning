@@ -55,7 +55,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d40/24",
+        "dist_name": "Single-Family Residential—40/24",
         "dist_abbr": "SF-40",
         "planned_dev": false,
         "res_types_allowed": [
@@ -5082,7 +5082,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d20/24",
+        "dist_name": "Single-Family Residential—20/24",
         "dist_abbr": "SF-20",
         "planned_dev": false,
         "res_types_allowed": [
@@ -5857,7 +5857,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d15/21",
+        "dist_name": "Single-Family Residential—15/21",
         "dist_abbr": "SF-15",
         "planned_dev": false,
         "constraints": {
@@ -7110,7 +7110,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d10/21",
+        "dist_name": "Single-Family Residential—10/21",
         "dist_abbr": "SF-10",
         "planned_dev": false,
         "res_types_allowed": [
@@ -15867,7 +15867,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d9/18",
+        "dist_name": "Single-Family Residential—9/18",
         "dist_abbr": "SF-9",
         "planned_dev": false,
         "res_types_allowed": [
@@ -22824,7 +22824,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d8/18",
+        "dist_name": "Single-Family Residential—8/18",
         "dist_abbr": "SF-8",
         "planned_dev": false,
         "res_types_allowed": [
@@ -27895,7 +27895,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d7/15",
+        "dist_name": "Single-Family Residential—7/15",
         "dist_abbr": "SF-7",
         "planned_dev": false,
         "res_types_allowed": [
@@ -28018,7 +28018,7 @@
     {
       "type": "Feature",
       "properties": {
-        "dist_name": "Single-Family Residential\u00e2\u20ac\u201d5/15",
+        "dist_name": "Single-Family Residential—5/15",
         "dist_abbr": "SF-5",
         "planned_dev": false,
         "res_types_allowed": [
