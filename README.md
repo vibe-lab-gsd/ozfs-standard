@@ -545,7 +545,7 @@ with the structure illustrated below.
         -   `height_parapet:` (optional)
         -   `height_tower:` (optional)
         -   `roof_type:` (required)
-        -   `roof pitch:` (conditionally required)
+        -   `roof_pitch:` (conditionally required)
         -   `width:` (required)
         -   `depth:` (required)
         -   `sep_platting:` (conditionally required)
