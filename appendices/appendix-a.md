@@ -20,6 +20,7 @@ in the \*.zoning file in the OZFS data standard.
 | `parking_covered` | The number of covered parking spaces | Number of spaces |
 | `parking_enclosed` | The number of enclosed parking spaces | Number of spaces |
 | `parking_uncovered` | The number of uncovered parking spaces | Number of spaces |
+| `roof_pitch` | The ratio of rise to run | None (dimensionless ratio) |
 | `setback_dist_boundary` | The distance from the building to the boundary of the zoning district. | Feet |
 | `setback_front` | The distance from the building to the front of the parcel. | Feet |
 | `setback_front_sum` | The sum of the front setback (distance from the building to the front of the parcel) and the rear setback (distance from the building to the rear of the parcel). | Feet |
