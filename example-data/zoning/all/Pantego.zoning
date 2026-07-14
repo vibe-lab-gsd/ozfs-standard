@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "version": "0.5.0",
   "muni_name": "Pantego",
-  "date": "2024-01-22",
+  "date": "2026-07-09",
   "definitions": {
     "height": [
       {
@@ -38,7 +38,7 @@
       {
         "condition": [
           "total_units == 2",
-          "dist_abbr == 'R-1'"
+          "min_unit_size <= gross_fl_area * 0.25"
         ],
         "expression": "'2_unit_inlaw'"
       },
