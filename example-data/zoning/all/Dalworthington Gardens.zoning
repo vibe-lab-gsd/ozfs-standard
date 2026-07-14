@@ -42595,7 +42595,6 @@
         "planned_dev": false,
         "res_types_allowed": [
           "1_unit",
-          "2_unit",
           "3_unit",
           "4_plus",
           "townhome"
@@ -45815,6 +45814,13 @@
             "min_val": [
               {
                 "expression": 50
+              }
+            ]
+          },
+          "roof_pitch": {
+            "min_val": [
+              {
+                "expression": 0.33
               }
             ]
           }
