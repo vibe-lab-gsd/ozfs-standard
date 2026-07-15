@@ -1,0 +1,51 @@
+ARLINGTON, TX — OPEN ITEMS FROM OZFS CROSS-CHECK / CORRECTION PASS
+Last updated: 2026-07-14
+Target file: Arlington.zoning (this directory)
+Source ordinance: City of Arlington, TX Unified Development Code (amended through
+Ordinance No. 25-059, Aug 26 2025)
+
+These items were explicitly left untouched by the 14-task correction pass applied
+on 2026-07-14 (commit 2fff3c4). Each one requires additional PDF section extraction
+or a human/legal ruling before it can be resolved — do not guess values for these
+without new source material.
+
+1. parking_uncovered values (all residential/mixed-use districts)
+   Governed citywide by use-type Table 5.4-1 (Sec. 5.4.3), not encoded per-district.
+   That table was never extracted. Cannot confirm or refute current values.
+
+2. unit_size on DB, NMU, RMU
+   Governed by Sec. 5.5.2.C, never extracted.
+   (Note: RMF-22's unit_size WAS resolved and removed — its subsection is
+   confirmed marked "2. Reserved" in sections/SEC_2_2.md line 751. This item
+   applies only to DB, NMU, RMU.)
+
+3. APO-1 / APO-2 / APO-3 / APO-4 sub-districts
+   No counterpart in the extracted ordinance truth table. Sec. 5.8.2 (Airport
+   Overlay operative standards) was never extracted, so these four features
+   cannot be confirmed as legitimate noise-contour sub-zones or flagged as
+   erroneous. Left as-is in the .zoning file pending that extraction.
+
+4. NMU / RMU unit_density conflict — deliberately unresolved
+   Ordinance has an internal conflict: the numbered density table (Sec. 2.3.12.B
+   for NMU) states max 36 units/acre; the district's own purpose paragraph states
+   max 40 (NMU) / 100 (RMU). Per an explicit user decision made during the
+   correction pass, neither value was applied — the .zoning file still carries
+   its original (also unsupported) value of 22 for NMU and no unit_density key
+   at all for RMU. This needs a human/legal ruling on which ordinance passage
+   controls, not an automated fix.
+
+5. VG unit_density
+   Deferred to Sec. 5.5.5, never extracted.
+
+6. RMF-22 height
+   Deferred to Sec. 5.5.4, never extracted. RMF-22 currently has no height
+   constraint in the .zoning file.
+
+7. EDO street-frontage setback
+   Defers to Sec. 5.8.1.D, never extracted. EDO's overlay constraints in the
+   .zoning file intentionally omit any setback_front value rather than
+   fabricate one.
+
+To resolve any of the above, extract the referenced ordinance section into the
+Arlington/extract/ working set and re-run the cross-check workflow for just
+that item.
