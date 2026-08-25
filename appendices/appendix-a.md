@@ -25,6 +25,7 @@ in the \*.zoning file in the OZFS data standard.
 | `setback_front` | The distance from the building to the front of the parcel. | Feet |
 | `setback_front_sum` | The sum of the front setback (distance from the building to the front of the parcel) and the rear setback (distance from the building to the rear of the parcel). | Feet |
 | `setback_rear` | The distance from the building to the rear of the parcel. | Feet |
+| `setback_rear_ext` | The distance from the building to the rear of a double frontage parcel. | Feet |
 | `setback_side_ext` | The distance from the building to the exterior (street-facing) side of a corner parcel | Feet |
 | `setback_side_int` | The distance from the building to the interior side of a parcel (the side that is adjacent to another parcel). | Feet |
 | `setback_side_sum` | The sum of both side setbacks. | Feet |
