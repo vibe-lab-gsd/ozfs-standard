@@ -100,18 +100,22 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "\"Double frontage\"",
-                "expression": [
-                  35,
-                  "35 + (height - 35) "
-                ],
-                "min_max": "max"
-              },
-              {
                 "condition": true,
                 "expression": [
                   25,
                   "25 + (height - 35)"
+                ],
+                "min_max": "max"
+              }
+            ]
+          },
+          "ext_setback_rear": {
+            "min_val": [
+              {
+                "condition": true,
+                "expression": [
+                  35,
+                  "35 + (height - 35) "
                 ],
                 "min_max": "max"
               }
@@ -42632,18 +42636,21 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "\"Double frontage\"",
-                "expression": [
-                  20,
-                  "20 + (height - 35)"
-                ],
-                "min_max": "max"
-              },
-              {
                 "condition": true,
                 "expression": [
                   10,
                   "10 + (height - 35)"
+                ],
+                "min_max": "max"
+              }
+            ]
+          },
+          "ext_setback_rear": {
+            "min_val": [
+              {
+                "expression": [
+                  20,
+                  "20 + (height - 35)"
                 ],
                 "min_max": "max"
               }
