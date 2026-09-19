@@ -1847,7 +1847,7 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "parking_covered": {
             "min_val": [
               {
                 "expression": "2 * total_units"
@@ -36378,7 +36378,7 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "parking_covered": {
             "min_val": [
               {
                 "expression": "total_units",
@@ -36478,7 +36478,7 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "parking_enclosed": {
             "min_val": [
               {
                 "expression": "total_units",
@@ -36487,6 +36487,14 @@
               {
                 "expression": "2 * total_units",
                 "condition": "res_type == 'single_family' or res_type == 'duplex' or res_type == 'multifamily'"
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": "0.5 * total_units",
+                "condition": "res_type == 'multifamily'"
               }
             ]
           },
@@ -36836,10 +36844,17 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "parking_enclosed": {
             "min_val": [
               {
                 "expression": "2 * total_units"
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": "0.5 * total_units"
               }
             ]
           },
