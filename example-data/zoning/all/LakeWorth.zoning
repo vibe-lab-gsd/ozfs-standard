@@ -1895,6 +1895,13 @@
                 "expression": "0.5"
               }
             ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": "8"
+              }
+            ]
           }
         }
       },
@@ -36286,12 +36293,44 @@
         "dist_name": "Single Family Residential 0",
         "dist_abbr": "SF 0",
         "planned_dev": false,
+        "overlay": false,
         "res_types_allowed": [
           "single_family",
           "duplex",
           "single_attached"
         ],
         "constraints": {
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.11",
+                "condition": "res_type == 'single_family' or res_type == 'duplex'"
+              },
+              {
+                "expression": "0.057",
+                "condition": "res_type == 'single_attached'"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "50",
+                "condition": "res_type == 'single_family' or res_type == 'duplex'"
+              },
+              {
+                "expression": "25",
+                "condition": "res_type == 'single_attached'"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
+          },
           "setback_front": {
             "min_val": [
               {
@@ -36302,7 +36341,12 @@
           "setback_side_int": {
             "min_val": [
               {
-                "expression": "10"
+                "expression": "10",
+                "condition": "res_type == 'single_family' or res_type == 'duplex'"
+              },
+              {
+                "expression": "0",
+                "condition": "res_type == 'single_attached'"
               }
             ]
           },
@@ -36353,22 +36397,17 @@
               }
             ]
           },
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.11",
-                "condition": "res_type == 'single_family' or res_type == 'duplex'"
-              },
-              {
-                "expression": "0.057",
-                "condition": "res_type == 'single_attached'"
-              }
-            ]
-          },
           "stories": {
             "max_val": [
               {
                 "expression": "2"
+              }
+            ]
+          },
+          "roof_pitch": {
+            "min_val": [
+              {
+                "expression": "0.5"
               }
             ]
           },
@@ -36379,8 +36418,7 @@
               }
             ]
           }
-        },
-        "overlay": false
+        }
       },
       "geometry": []
     },
@@ -36422,19 +36460,14 @@
           "setback_side_ext": {
             "min_val": [
               {
-                "expression": "10",
-                "condition": "res_type == 'duplex'"
-              },
-              {
-                "expression": "20",
-                "condition": "res_type == 'single_family' or res_type == 'multifamily' or res_type == 'single_attached'"
+                "expression": "20"
               }
             ]
           },
           "setback_rear": {
             "min_val": [
               {
-                "expression": "25"
+                "expression": "20"
               }
             ]
           },
@@ -36468,6 +36501,13 @@
             "max_val": [
               {
                 "expression": "45"
+              }
+            ]
+          },
+          "roof_pitch": {
+            "min_val": [
+              {
+                "expression": "0.5"
               }
             ]
           },
