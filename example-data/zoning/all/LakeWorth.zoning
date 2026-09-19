@@ -39165,8 +39165,8 @@
       "type": "Feature",
       "properties": {
         "dist_name": "Mixed Use Planned Development",
-        "dist_abbr": "MUPD",
-        "planned_dev": false,
+        "dist_abbr": "MU-PD",
+        "planned_dev": true,
         "overlay": false,
         "constraints": {
           "setback_front": {
