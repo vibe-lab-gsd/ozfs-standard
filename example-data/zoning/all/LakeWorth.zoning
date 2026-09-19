@@ -1805,13 +1805,6 @@
         "overlay": false,
         "res_types_allowed": "single_family",
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.17"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -1847,10 +1840,45 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "35"
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
                 "expression": "2 * total_units"
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": "1500"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.17"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
               }
             ]
           },
@@ -1861,17 +1889,10 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": "35"
-              }
-            ]
-          },
-          "unit_size": {
+          "roof_pitch": {
             "min_val": [
               {
-                "expression": "1500"
+                "expression": "0.5"
               }
             ]
           }
@@ -36265,25 +36286,12 @@
         "dist_name": "Single Family Residential 0",
         "dist_abbr": "SF 0",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": [
           "single_family",
           "duplex",
           "single_attached"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.11",
-                "condition": "res_type == 'single_family' or res_type == 'duplex'"
-              },
-              {
-                "expression": "0.057",
-                "condition": "res_type == 'single_attached'"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -36319,6 +36327,13 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "35"
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
@@ -36331,24 +36346,29 @@
               }
             ]
           },
-          "stories": {
-            "max_val": [
-              {
-                "expression": "2"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "35"
-              }
-            ]
-          },
           "unit_size": {
             "min_val": [
               {
                 "expression": "1200"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.11",
+                "condition": "res_type == 'single_family' or res_type == 'duplex'"
+              },
+              {
+                "expression": "0.057",
+                "condition": "res_type == 'single_attached'"
+              }
+            ]
+          },
+          "stories": {
+            "max_val": [
+              {
+                "expression": "2"
               }
             ]
           },
@@ -36359,7 +36379,8 @@
               }
             ]
           }
-        }
+        },
+        "overlay": false
       },
       "geometry": []
     },
