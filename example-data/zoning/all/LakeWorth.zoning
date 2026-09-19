@@ -39167,7 +39167,7 @@
         "dist_name": "Mixed Use Planned Development",
         "dist_abbr": "MU-PD",
         "planned_dev": true,
-        "overlay": false,
+        "overlay": "none-by-right",
         "constraints": {
           "setback_front": {
             "min_val": [
