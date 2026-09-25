@@ -38,13 +38,6 @@
       },
       {
         "condition": [
-          "total_units == 1",
-          "sep_platting == TRUE"
-        ],
-        "expression": "'single_zero'"
-      },
-      {
-        "condition": [
           "total_units == 2",
           "n_outside_entry == total_units",
           "n_ground_entry == total_units",
@@ -57888,7 +57881,6 @@
         "dist_abbr": "SF-Z",
         "planned_dev": false,
         "res_types_allowed": [
-          "single_zero",
           "single_detached"
         ],
         "constraints": {
@@ -58052,7 +58044,7 @@
         "planned_dev": false,
         "res_types_allowed": [
           "single_attached",
-          "dup",
+          "duplex",
           "single_detached"
         ],
         "constraints": {
