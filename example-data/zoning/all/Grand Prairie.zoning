@@ -59806,69 +59806,40 @@
         "dist_abbr": "MF-1",
         "planned_dev": false,
         "res_types_allowed": [
-          "1_unit",
-          "2_unit",
-          "3_unit",
-          "4_plus",
-          "townhome"
+          "single_attached",
+          "townhouse",
+          "3-4_family",
+          "multi_family"
         ],
         "constraints": {
-          "lot_size": {
-            "min_val": [
-              {
-                "condition": [
-                  "0.04-0.08 for 30% of lots, 0.08 for other 70%",
-                  "res_type == 'townhome'"
-                ],
-                "expression": [
-                  "0.04",
-                  "0.08"
-                ]
-              },
-              {
-                "expression": [
-                  "0.15"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
-                ]
-              },
-              {
-                "expression": [
-                  "0.28000000000000003"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ]
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
                 "condition": [
-                  "5 ft setbacks if unit fronts a street",
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == 'townhouse'"
                 ],
-                "expression": [
-                  "5",
-                  "30"
-                ]
-              },
-              {
                 "expression": [
                   "17"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
               },
               {
+                "condition": [
+                  "res_type == 'single_attached'"
+                ],
                 "expression": [
                   "25"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
+                ]
+              },
+              {
+                "condition": "\"Units front street\"",
+                "expression": [
+                  "5"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "30"
                 ]
               }
             ]
@@ -59876,37 +59847,25 @@
           "setback_side_int": {
             "min_val": [
               {
-                "expression": [
-                  "5"
-                ],
                 "condition": [
-                  "res_type == '1_unit'"
+                  "res_type == 'townhouse'"
+                ],
+                "expression": [
+                  "35"
                 ]
               },
               {
                 "condition": [
-                  "height <= 35",
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == 'single_attached'"
                 ],
                 "expression": [
-                  "45"
+                  "25"
                 ]
               },
               {
-                "condition": [
-                  "height > 35",
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ],
+                "condition": true,
                 "expression": [
                   "45 + (height - 35)"
-                ]
-              },
-              {
-                "expression": [
-                  "5"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
               }
             ]
@@ -59914,29 +59873,25 @@
           "setback_side_ext": {
             "min_val": [
               {
+                "condition": [
+                  "res_type == 'townhouse'"
+                ],
                 "expression": [
                   "15"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
                 ]
               },
               {
                 "condition": [
-                  "5 ft setbacks if unit fronts a street",
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == 'single_attached'"
                 ],
                 "expression": [
-                  "5",
-                  "30"
+                  "15"
                 ]
               },
               {
+                "condition": true,
                 "expression": [
-                  "15"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
+                  "45 + (height - 35)"
                 ]
               }
             ]
@@ -59945,42 +59900,31 @@
             "min_val": [
               {
                 "condition": [
-                  "Rear setbacks are 10 feet along alleys, 20 feet along arterial roads, and 20 feet for rear entry garage doors",
-                  "res_type == '1_unit'"
+                  "res_type == 'single_attached' or res_type == 'townhouse'",
+                  "\"Rear setback along arterial\""
                 ],
                 "expression": [
-                  "10",
                   "20"
                 ]
               },
               {
                 "condition": [
-                  "height <= 35",
-                  "small setback for rear setbacks along alleys",
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "res_type == 'single_attached' or res_type == 'townhouse'"
                 ],
-                "expression": [
-                  "30",
-                  "45"
-                ]
-              },
-              {
-                "condition": [
-                  "height > 35",
-                  "small setback for rear setbacks along alleys",
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ],
-                "expression": [
-                  "30 + (height - 35)",
-                  "45 + (height - 35)"
-                ]
-              },
-              {
                 "expression": [
                   "10"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along alley\" ",
+                "expression": [
+                  "30 + (height - 35)"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "45 + (height - 35)"
                 ]
               }
             ]
@@ -60001,43 +59945,6 @@
                 ],
                 "condition": [
                   "res_type == 'townhome'"
-                ]
-              }
-            ]
-          },
-          "parking_uncovered": {
-            "min_val": [
-              {
-                "expression": [
-                  "2 * total_units"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
-                ]
-              },
-              {
-                "expression": [
-                  "total_units / 5"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
-                ]
-              },
-              {
-                "expression": [
-                  "1.25 * (units_0bed + units_1bed) + 2 * (units_2bed + units_3bed + units_4bed)"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
-                ]
-              }
-            ]
-          },
-          "stories": {
-            "max_val": [
-              {
-                "expression": [
-                  "3"
                 ]
               }
             ]
@@ -60066,6 +59973,15 @@
                 ],
                 "condition": [
                   "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                ]
+              }
+            ]
+          },
+          "stories": {
+            "max_val": [
+              {
+                "expression": [
+                  "3"
                 ]
               }
             ]
@@ -60100,6 +60016,34 @@
               }
             ]
           },
+          "lot_area": {
+            "min_val": [
+              {
+                "condition": [
+                  "res_type == 'townhouse'"
+                ],
+                "expression": [
+                  "0.04"
+                ]
+              },
+              {
+                "condition": [
+                  "res_type == 'single_attached'"
+                ],
+                "expression": [
+                  "0.15"
+                ]
+              },
+              {
+                "condition": [
+                  "res_type == '3-4_family' or res_type == 'multi_family'"
+                ],
+                "expression": [
+                  "0.275"
+                ]
+              }
+            ]
+          },
           "unit_density": {
             "max_val": [
               {
@@ -60116,6 +60060,34 @@
                 ],
                 "condition": [
                   "res_type == 'townhome'"
+                ]
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units"
+                ],
+                "condition": [
+                  "res_type == '1_unit'"
+                ]
+              },
+              {
+                "expression": [
+                  "total_units / 5"
+                ],
+                "condition": [
+                  "res_type == 'townhome'"
+                ]
+              },
+              {
+                "expression": [
+                  "1.25 * (units_0bed + units_1bed) + 2 * (units_2bed + units_3bed + units_4bed)"
+                ],
+                "condition": [
+                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
                 ]
               }
             ]
