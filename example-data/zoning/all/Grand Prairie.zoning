@@ -47,7 +47,7 @@
           "n_ground_entry == total_units",
           "sep_platting == TRUE"
         ],
-        "expression": "'townhome'"
+        "expression": "'townhouse'"
       },
       {
         "condition": "total_units == 3",
@@ -24897,10 +24897,21 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "Rear setbacks are 25 feet along alleys, 40 feet along arterial roads, and 25 feet for rear entry garage doors",
+                "condition": "\"Rear setback along alley\"",
                 "expression": [
-                  "25",
+                  "10"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
                   "40"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "25"
                 ]
               }
             ]
@@ -24937,6 +24948,33 @@
               {
                 "expression": [
                   "1"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": [
+                  "150"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "150"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "min_val": [
+              {
+                "expression": [
+                  "1.0"
                 ]
               }
             ]
