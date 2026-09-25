@@ -24971,7 +24971,7 @@
             ]
           },
           "unit_density": {
-            "min_val": [
+            "max_val": [
               {
                 "expression": [
                   "1.0"
@@ -25181,7 +25181,7 @@
             ]
           },
           "unit_density": {
-            "min_val": [
+            "max_val": [
               {
                 "expression": [
                   "3."
@@ -33225,7 +33225,7 @@
             ]
           },
           "unit_density": {
-            "min_val": [
+            "max_val": [
               {
                 "expression": [
                   "4.5"
@@ -37811,7 +37811,7 @@
             ]
           },
           "unit_density": {
-            "min_val": [
+            "max_val": [
               {
                 "expression": [
                   "5.2"
@@ -46059,10 +46059,21 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "Rear setbacks are 10 feet along alleys, 20 feet along arterial roads, and 20 feet for rear entry garage doors",
+                "condition": "\"Rear setback along alley\"",
                 "expression": [
-                  "10",
+                  "10"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
                   "20"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "10"
                 ]
               }
             ]
@@ -46094,11 +46105,45 @@
               }
             ]
           },
-          "lot_size": {
+          "lot_area": {
             "min_val": [
               {
                 "expression": [
-                  "0.17"
+                  "0.165"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "condition": "\"Developed under Appendix W (Residential Development Standards)\"",
+                "expression": [
+                  "65"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "60"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "110"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "5.8"
                 ]
               }
             ]
@@ -55795,10 +55840,21 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "Rear setbacks are 10 feet along alleys, 20 feet along arterial roads, and 20 feet for rear entry garage doors",
+                "condition": "\"Rear setback along alley\"",
                 "expression": [
-                  "10",
+                  "10"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
                   "20"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "10"
                 ]
               }
             ]
@@ -55830,11 +55886,45 @@
               }
             ]
           },
-          "lot_size": {
+          "lot_area": {
             "min_val": [
               {
                 "expression": [
                   "0.15"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "condition": "\"Developed under Appendix W (Residential Development Standards)\"",
+                "expression": [
+                  "65"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "60"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "100"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "8.7"
                 ]
               }
             ]
@@ -57085,10 +57175,21 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "Rear setbacks are 10 feet along alleys, 20 feet along arterial roads, and 20 feet for rear entry garage doors",
+                "condition": "\"Rear setback along alley\"",
                 "expression": [
-                  "10",
+                  "10"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
                   "20"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "10"
                 ]
               }
             ]
@@ -57120,11 +57221,45 @@
               }
             ]
           },
-          "lot_size": {
+          "lot_area": {
             "min_val": [
               {
                 "expression": [
-                  "0.12"
+                  "0.115"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "condition (copy)": "\"Developed under Appendix W (Residential Development Standards)\"",
+                "expression": [
+                  "65"
+                ]
+              },
+              {
+                "condition (copy)": true,
+                "expression": [
+                  "50"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "100"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "8.7"
                 ]
               }
             ]
@@ -57736,82 +57871,29 @@
           "townhome"
         ],
         "constraints": {
-          "setback_side_int": {
-            "min_val": [
-              {
-                "expression": [
-                  "10"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
-                ]
-              },
-              {
-                "expression": [
-                  "0"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
-                ]
-              }
-            ]
-          },
-          "setback_rear": {
-            "min_val": [
-              {
-                "expression": [
-                  "10",
-                  "20"
-                ],
-                "condition": [
-                  "Rear setbacks are 10 feet along alleys, 20 feet along arterial roads, and 20 feet for rear entry garage doors",
-                  "res_type == '1_unit'"
-                ]
-              },
-              {
-                "expression": [
-                  "10"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
-                ]
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "25"
-                ]
-              }
-            ]
-          },
-          "lot_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "0.12"
-                ]
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
                 "expression": [
                   "25"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
-              },
+              }
+            ]
+          },
+          "setback_side_int": {
+            "min_val": [
               {
                 "expression": [
-                  "25"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
+                  "0"
+                ]
+              }
+            ]
+          },
+          "setback_side_sum": {
+            "min_val": [
+              {
+                "expression": [
+                  "10"
                 ]
               }
             ]
@@ -57836,6 +57918,28 @@
               }
             ]
           },
+          "setback_rear": {
+            "min_val": [
+              {
+                "condition": "\"Rear setback along alley\"",
+                "expression": [
+                  "10"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
+                  "20"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "10"
+                ]
+              }
+            ]
+          },
           "lot_cov_bldg": {
             "max_val": [
               {
@@ -57845,11 +57949,11 @@
               }
             ]
           },
-          "parking_uncovered": {
-            "min_val": [
+          "height": {
+            "max_val": [
               {
                 "expression": [
-                  "2 * total_units"
+                  "25"
                 ]
               }
             ]
@@ -57859,6 +57963,58 @@
               {
                 "expression": [
                   "1400"
+                ]
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": [
+                  "0.115"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "condition (copy)": "\"Developed under Appendix W (Residential Development Standards)\"",
+                "expression": [
+                  "65"
+                ]
+              },
+              {
+                "condition (copy)": true,
+                "expression": [
+                  "50"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "100"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "8."
+                ]
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units"
                 ]
               }
             ]
