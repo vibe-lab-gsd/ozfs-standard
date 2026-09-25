@@ -24943,7 +24943,7 @@
               }
             ]
           },
-          "lot_size": {
+          "lot_area": {
             "min_val": [
               {
                 "expression": [
@@ -25075,6 +25075,7 @@
         "dist_name": "Single Family-One Residential",
         "dist_abbr": "SF-1",
         "planned_dev": false,
+        "res_types_allowed": "1_unit",
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -25106,11 +25107,22 @@
           "setback_rear": {
             "min_val": [
               {
+                "condition": "\"Rear setback along alley\"",
                 "expression": [
-                  "10",
+                  "10"
+                ]
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
                   "30"
-                ],
-                "condition": "Rear setbacks are 10 feet along alleys, 30 feet along arterial roads, and 20 feet for rear entry garage doors"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "10"
+                ]
               }
             ]
           },
@@ -25141,17 +25153,43 @@
               }
             ]
           },
-          "lot_size": {
+          "lot_area": {
             "min_val": [
               {
                 "expression": [
-                  "0.28000000000000003"
+                  "0.275"
+                ]
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": [
+                  "80"
+                ]
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": [
+                  "120"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "min_val": [
+              {
+                "expression": [
+                  "3."
                 ]
               }
             ]
           }
-        },
-        "res_types_allowed": "1_unit"
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
