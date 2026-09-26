@@ -100,7 +100,6 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": true,
                 "expression": [
                   25,
                   "25 + (height - 35)"
@@ -119,7 +118,7 @@
           "height": {
             "max_val": [
               {
-                "expression": "35"
+                "expression": "45"
               }
             ]
           },
@@ -42640,8 +42639,7 @@
                   10,
                   "10 + (height - 35)"
                 ],
-                "min_max": "max",
-                "condition": true
+                "min_max": "max"
               }
             ]
           },
@@ -42655,7 +42653,7 @@
           "height": {
             "max_val": [
               {
-                "expression": "35"
+                "expression": "45"
               }
             ]
           },
@@ -45785,7 +45783,7 @@
           "height": {
             "max_val": [
               {
-                "expression": "35"
+                "expression": "30"
               }
             ]
           },
