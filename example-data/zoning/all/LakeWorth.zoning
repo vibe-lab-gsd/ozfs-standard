@@ -1803,7 +1803,6 @@
         "dist_name": "Single Family Residential 7.5",
         "dist_abbr": "SF 7.5",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": "single_family",
         "constraints": {
           "setback_front": {
@@ -1848,24 +1847,10 @@
               }
             ]
           },
-          "parking_covered": {
-            "min_val": [
-              {
-                "expression": "2 * total_units"
-              }
-            ]
-          },
           "unit_size": {
             "min_val": [
               {
                 "expression": "1500"
-              }
-            ]
-          },
-          "lot_width": {
-            "min_val": [
-              {
-                "expression": "60"
               }
             ]
           },
@@ -1876,10 +1861,31 @@
               }
             ]
           },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "60"
+              }
+            ]
+          },
           "lot_depth": {
             "min_val": [
               {
                 "expression": "100"
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": "8"
+              }
+            ]
+          },
+          "parking_covered": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
               }
             ]
           },
@@ -1896,15 +1902,9 @@
                 "expression": "0.5"
               }
             ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": "8"
-              }
-            ]
           }
-        }
+        },
+        "overlay": false
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -36294,44 +36294,12 @@
         "dist_name": "Single Family Residential 0",
         "dist_abbr": "SF 0",
         "planned_dev": false,
-        "overlay": false,
         "res_types_allowed": [
           "single_family",
           "duplex",
           "single_attached"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "0.11",
-                "condition": "res_type == 'single_family' or res_type == 'duplex'"
-              },
-              {
-                "expression": "0.057",
-                "condition": "res_type == 'single_attached'"
-              }
-            ]
-          },
-          "lot_width": {
-            "min_val": [
-              {
-                "expression": "50",
-                "condition": "res_type == 'single_family' or res_type == 'duplex'"
-              },
-              {
-                "expression": "25",
-                "condition": "res_type == 'single_attached'"
-              }
-            ]
-          },
-          "lot_depth": {
-            "min_val": [
-              {
-                "expression": "100"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -36379,6 +36347,51 @@
               }
             ]
           },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": "1200"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "0.11",
+                "condition": "res_type == 'single_family' or res_type == 'duplex'"
+              },
+              {
+                "expression": "0.057",
+                "condition": "res_type == 'single_attached'"
+              }
+            ]
+          },
+          "lot_width": {
+            "min_val": [
+              {
+                "expression": "50",
+                "condition": "res_type == 'single_family' or res_type == 'duplex'"
+              },
+              {
+                "expression": "25",
+                "condition": "res_type == 'single_attached'"
+              }
+            ]
+          },
+          "lot_depth": {
+            "min_val": [
+              {
+                "expression": "100"
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": "8"
+              }
+            ]
+          },
           "parking_covered": {
             "min_val": [
               {
@@ -36388,13 +36401,6 @@
               {
                 "expression": "2 * total_units",
                 "condition": "res_type == 'single_family' or res_type == 'duplex'"
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": "1200"
               }
             ]
           },
@@ -36411,15 +36417,9 @@
                 "expression": "0.5"
               }
             ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": "8"
-              }
-            ]
           }
-        }
+        },
+        "overlay": false
       },
       "geometry": []
     },
@@ -36437,13 +36437,6 @@
           "single_attached"
         ],
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "expression": "5"
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -36479,6 +36472,47 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "45"
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": "500",
+                "condition": "bedrooms == 0"
+              },
+              {
+                "condition": "bedrooms == 1",
+                "expression": "750"
+              },
+              {
+                "condition": "bedrooms == 2",
+                "expression": "900"
+              },
+              {
+                "condition": "bedrooms >= 3",
+                "expression": "1250"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": "5"
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": "24"
+              }
+            ]
+          },
           "parking_enclosed": {
             "min_val": [
               {
@@ -36506,44 +36540,10 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": "45"
-              }
-            ]
-          },
           "roof_pitch": {
             "min_val": [
               {
                 "expression": "0.5"
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "condition": "bedrooms == 0",
-                "expression": "500"
-              },
-              {
-                "condition": "bedrooms == 1",
-                "expression": "750"
-              },
-              {
-                "condition": "bedrooms == 2",
-                "expression": "900"
-              },
-              {
-                "condition": "bedrooms >= 3",
-                "expression": "1250"
-              }
-            ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": "24"
               }
             ]
           }
@@ -36792,17 +36792,6 @@
         "overlay": false,
         "res_types_allowed": "single_family",
         "constraints": {
-          "lot_area": {
-            "min_val": [
-              {
-                "min_max": "max",
-                "expression": [
-                  "fl_area * 3",
-                  "0.06"
-                ]
-              }
-            ]
-          },
           "setback_front": {
             "min_val": [
               {
@@ -36813,6 +36802,11 @@
           "setback_side_int": {
             "min_val": [
               {
+                "condition": "\"Between buildings\"",
+                "expression": "10"
+              },
+              {
+                "condition": true,
                 "expression": "5"
               }
             ]
@@ -36845,6 +36839,38 @@
               }
             ]
           },
+          "height": {
+            "max_val": [
+              {
+                "expression": "25"
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": "900"
+              }
+            ]
+          },
+          "lot_area": {
+            "min_val": [
+              {
+                "expression": [
+                  "fl_area * 3",
+                  "0.06"
+                ],
+                "min_max": "max"
+              }
+            ]
+          },
+          "unit_density": {
+            "min_val": [
+              {
+                "expression": "12"
+              }
+            ]
+          },
           "parking_enclosed": {
             "min_val": [
               {
@@ -36863,27 +36889,6 @@
             "max_val": [
               {
                 "expression": "1"
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": "25"
-              }
-            ]
-          },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": "900"
-              }
-            ]
-          },
-          "unit_density": {
-            "min_val": [
-              {
-                "expression": "12"
               }
             ]
           }
@@ -39183,7 +39188,6 @@
         "dist_name": "Mixed Use Planned Development",
         "dist_abbr": "MU-PD",
         "planned_dev": true,
-        "overlay": "none-by-right",
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -39201,6 +39205,13 @@
             "min_val": [
               {
                 "expression": "5"
+              }
+            ]
+          },
+          "height": {
+            "max_val": [
+              {
+                "expression": "45"
               }
             ]
           },
@@ -39223,13 +39234,6 @@
               }
             ]
           },
-          "height": {
-            "max_val": [
-              {
-                "expression": "45"
-              }
-            ]
-          },
           "far": {
             "max_val": [
               {
@@ -39241,7 +39245,8 @@
               }
             ]
           }
-        }
+        },
+        "overlay": "none-by-right"
       },
       "geometry": {
         "type": "MultiPolygon",
