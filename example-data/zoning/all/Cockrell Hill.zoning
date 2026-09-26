@@ -157,6 +157,22 @@
                 ]
               }
             ]
+          },
+          "total_units": {
+            "max_val": [
+              {
+                "condition": "\"Depending on composition of block frontage\"",
+                "expression": [
+                  2
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  1
+                ]
+              }
+            ]
           }
         }
       },
@@ -9201,18 +9217,11 @@
               }
             ]
           },
-          "parking_uncovered": {
-            "min_val": [
-              {
-                "expression": "2 * total_units"
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
-                "condition": "total units <= 3",
-                "expression": "0.16"
+                "expression": "0.16",
+                "condition": "total units <= 3"
               },
               {
                 "condition": "total_units >= 4",
@@ -9224,6 +9233,13 @@
             "max_val": [
               {
                 "expression": "2"
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": "2 * total_units"
               }
             ]
           }
@@ -11122,18 +11138,6 @@
               }
             ]
           },
-          "parking_uncovered": {
-            "min_val": [
-              {
-                "expression": "2 * total_units",
-                "condition": "res_type == 'multiple_family'"
-              },
-              {
-                "expression": "4 * total_units",
-                "condition": "res_type == 'single_family' or res_type == 'two_family' or res_type == 'townhouse'"
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
@@ -11150,6 +11154,18 @@
             "max_val": [
               {
                 "expression": "2"
+              }
+            ]
+          },
+          "parking_uncovered": {
+            "min_val": [
+              {
+                "expression": "2 * total_units",
+                "condition": "res_type == 'multiple_family'"
+              },
+              {
+                "expression": "4 * total_units",
+                "condition": "res_type == 'single_family' or res_type == 'two_family' or res_type == 'townhouse'"
               }
             ]
           }
