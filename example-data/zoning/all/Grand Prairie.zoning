@@ -24957,15 +24957,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2600"
-                ]
-              }
-            ]
-          },
           "lot_width": {
             "min_val": [
               {
@@ -24984,11 +24975,29 @@
               }
             ]
           },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "2600"
+                ]
+              }
+            ]
+          },
           "unit_density": {
             "max_val": [
               {
                 "expression": [
                   "1.0"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
                 ]
               }
             ]
@@ -25167,15 +25176,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2400"
-                ]
-              }
-            ]
-          },
           "lot_width": {
             "min_val": [
               {
@@ -25194,11 +25194,29 @@
               }
             ]
           },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "2400"
+                ]
+              }
+            ]
+          },
           "unit_density": {
             "max_val": [
               {
                 "expression": [
                   "3."
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
                 ]
               }
             ]
@@ -33202,29 +33220,11 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2200"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
                 "expression": [
                   "0.22"
-                ]
-              }
-            ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": [
-                  "4.5"
                 ]
               }
             ]
@@ -33243,6 +33243,33 @@
               {
                 "expression": [
                   "120"
+                ]
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "2200"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "4.5"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
                 ]
               }
             ]
@@ -37788,29 +37815,11 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2000"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
                 "expression": [
                   "0.19"
-                ]
-              }
-            ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": [
-                  "5.2"
                 ]
               }
             ]
@@ -37829,6 +37838,33 @@
               {
                 "expression": [
                   "120"
+                ]
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "2000"
+                ]
+              }
+            ]
+          },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "5.2"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
                 ]
               }
             ]
@@ -46110,15 +46146,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "1800"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
@@ -46153,11 +46180,29 @@
               }
             ]
           },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "1800"
+                ]
+              }
+            ]
+          },
           "unit_density": {
             "max_val": [
               {
                 "expression": [
                   "5.8"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
                 ]
               }
             ]
@@ -55891,15 +55936,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "1600"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
@@ -55934,11 +55970,29 @@
               }
             ]
           },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "1600"
+                ]
+              }
+            ]
+          },
           "unit_density": {
             "max_val": [
               {
                 "expression": [
                   "8.7"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
                 ]
               }
             ]
@@ -57157,6 +57211,7 @@
         "dist_name": "Single Family-Six Residential",
         "dist_abbr": "SF-6",
         "planned_dev": false,
+        "res_types_allowed": "single_detached",
         "constraints": {
           "setback_front": {
             "min_val": [
@@ -57225,15 +57280,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "1400"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
@@ -57268,6 +57314,15 @@
               }
             ]
           },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "1400"
+                ]
+              }
+            ]
+          },
           "unit_density": {
             "max_val": [
               {
@@ -57276,9 +57331,17 @@
                 ]
               }
             ]
+          },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "2 * total_units "
+                ]
+              }
+            ]
           }
-        },
-        "res_types_allowed": "single_detached"
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -57971,15 +58034,6 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "1400"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
@@ -58023,7 +58077,16 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "1400"
+                ]
+              }
+            ]
+          },
+          "parking_enclosed": {
             "min_val": [
               {
                 "expression": [
@@ -58218,22 +58281,11 @@
               }
             ]
           },
-          "parking_uncovered": {
+          "parking_enclosed": {
             "min_val": [
               {
                 "expression": [
-                  "total_units / 5"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus' or res_type == 'townhome'"
-                ]
-              },
-              {
-                "expression": [
-                  "units_0bed + units_1bed + 2 * (units_2bed + units_3bed + units_4bed)"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
                 ]
               }
             ]
@@ -59704,14 +59756,20 @@
               }
             ]
           },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "expression": [
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
+                ]
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
                 "expression": [
                   "total_units / 5"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus' or res_type == 'townhome'"
                 ]
               }
             ]
@@ -59835,6 +59893,7 @@
         "res_types_allowed": [
           "single_attached",
           "townhouse",
+          "single_detached",
           "3-4_family",
           "multi_family"
         ],
@@ -59851,7 +59910,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "25"
@@ -59878,7 +59937,7 @@
                   "res_type == 'townhouse'"
                 ],
                 "expression": [
-                  "35"
+                  "0"
                 ]
               },
               {
@@ -59886,7 +59945,15 @@
                   "res_type == 'single_attached'"
                 ],
                 "expression": [
-                  "25"
+                  "6"
+                ]
+              },
+              {
+                "condition": [
+                  "res_type == 'single_detached'"
+                ],
+                "expression": [
+                  "5"
                 ]
               },
               {
@@ -59901,15 +59968,7 @@
             "min_val": [
               {
                 "condition": [
-                  "res_type == 'townhouse'"
-                ],
-                "expression": [
-                  "15"
-                ]
-              },
-              {
-                "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'townhouse' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "15"
@@ -59933,7 +59992,7 @@
             "min_val": [
               {
                 "condition": [
-                  "res_type == 'single_attached' or res_type == 'townhouse'",
+                  "res_type == 'single_attached' or res_type == 'townhouse' or res_type == 'single_detached'",
                   "\"Rear setback along arterial\""
                 ],
                 "expression": [
@@ -59942,7 +60001,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached' or res_type == 'townhouse'"
+                  "res_type == 'single_attached' or res_type == 'townhouse' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "10"
@@ -59974,7 +60033,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "50"
@@ -60000,7 +60059,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "25"
@@ -60045,6 +60104,14 @@
                 ]
               },
               {
+                "condition": [
+                  "res_type == 'single_detached'"
+                ],
+                "expression": [
+                  "1600"
+                ]
+              },
+              {
                 "condition": true,
                 "expression": [
                   "600"
@@ -60064,7 +60131,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "0.15"
@@ -60090,7 +60157,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "60"
@@ -60116,7 +60183,7 @@
               },
               {
                 "condition": [
-                  "res_type == 'single_attached'"
+                  "res_type == 'single_attached' or res_type == 'single_detached'"
                 ],
                 "expression": [
                   "100"
@@ -60149,6 +60216,14 @@
                 ]
               },
               {
+                "condition": [
+                  "res_type == 'single_detached'"
+                ],
+                "expression": [
+                  "8.7"
+                ]
+              },
+              {
                 "condition": true,
                 "expression": [
                   "12"
@@ -60166,30 +60241,40 @@
               }
             ]
           },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "condition": "res_type == 'single_detached'",
+                "expression": [
+                  "2 * total_units"
+                ]
+              },
+              {
+                "condition": "res_type == 'single_attached' or res_type == 'townhouse'",
+                "expression": [
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
+                ]
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
+                "condition": "res_type == 'single_attached' or res_type == 'single_detached'",
                 "expression": [
-                  "2 * total_units"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
+                  0
                 ]
               },
               {
+                "condition": "res_type == 'townhouse'",
                 "expression": [
                   "total_units / 5"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
               },
               {
+                "condition": true,
                 "expression": [
-                  "1.25 * (units_0bed + units_1bed) + 2 * (units_2bed + units_3bed + units_4bed)"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
                 ]
               }
             ]
@@ -65732,7 +65817,7 @@
                   "res_type == 'townhouse'"
                 ],
                 "expression": [
-                  "35"
+                  "0"
                 ]
               },
               {
@@ -65740,7 +65825,7 @@
                   "res_type == 'single_attached'"
                 ],
                 "expression": [
-                  "25"
+                  "6"
                 ]
               },
               {
@@ -66026,30 +66111,34 @@
               }
             ]
           },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "condition": "res_type == 'single_attached' or res_type == 'townhouse'",
+                "expression": [
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
+                ]
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
+                "condition": "res_type == 'single_attached'",
                 "expression": [
-                  "2 * total_units"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
+                  0
                 ]
               },
               {
+                "condition": "res_type == 'townhouse'",
                 "expression": [
                   "total_units / 5"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
               },
               {
+                "condition": true,
                 "expression": [
-                  "1.25 * (units_0bed + units_1bed) + 2 * (units_2bed + units_3bed + units_4bed)"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
                 ]
               }
             ]
@@ -67722,7 +67811,7 @@
                   "res_type == 'townhouse'"
                 ],
                 "expression": [
-                  "35"
+                  "0"
                 ]
               },
               {
@@ -67730,7 +67819,7 @@
                   "res_type == 'single_attached'"
                 ],
                 "expression": [
-                  "25"
+                  "6"
                 ]
               },
               {
@@ -68016,30 +68105,34 @@
               }
             ]
           },
+          "parking_enclosed": {
+            "min_val": [
+              {
+                "condition": "res_type == 'single_attached' or res_type == 'townhouse'",
+                "expression": [
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
+                ]
+              }
+            ]
+          },
           "parking_uncovered": {
             "min_val": [
               {
+                "condition": "res_type == 'single_attached'",
                 "expression": [
-                  "2 * total_units"
-                ],
-                "condition": [
-                  "res_type == '1_unit'"
+                  0
                 ]
               },
               {
+                "condition": "res_type == 'townhouse'",
                 "expression": [
                   "total_units / 5"
-                ],
-                "condition": [
-                  "res_type == 'townhome'"
                 ]
               },
               {
+                "condition": true,
                 "expression": [
-                  "1.25 * (units_0bed + units_1bed) + 2 * (units_2bed + units_3bed + units_4bed)"
-                ],
-                "condition": [
-                  "res_type == '2_unit' or res_type == '3_unit' or res_type == '4_plus'"
+                  "units_0bed + units_1bed + (2 * (units_2bed + units_3bed + units4bed))"
                 ]
               }
             ]
