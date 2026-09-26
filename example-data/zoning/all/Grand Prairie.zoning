@@ -24911,10 +24911,10 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "\"Rear setback along alley\"",
                 "expression": [
                   "10"
-                ]
+                ],
+                "condition": "\"Rear setback along alley\""
               },
               {
                 "condition": "\"Rear setback along arterial\"",
@@ -24948,20 +24948,20 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2600"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
                 "expression": [
                   "1"
+                ]
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "2600"
                 ]
               }
             ]
@@ -25121,10 +25121,10 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "\"Rear setback along alley\"",
                 "expression": [
                   "10"
-                ]
+                ],
+                "condition": "\"Rear setback along alley\""
               },
               {
                 "condition": "\"Rear setback along arterial\"",
@@ -25158,20 +25158,20 @@
               }
             ]
           },
-          "unit_size": {
-            "min_val": [
-              {
-                "expression": [
-                  "2400"
-                ]
-              }
-            ]
-          },
           "lot_area": {
             "min_val": [
               {
                 "expression": [
                   "0.275"
+                ]
+              }
+            ]
+          },
+          "unit_size": {
+            "min_val": [
+              {
+                "expression": [
+                  "2400"
                 ]
               }
             ]
@@ -33165,10 +33165,10 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "\"Rear setback along alley\"",
                 "expression": [
                   "10"
-                ]
+                ],
+                "condition": "\"Rear setback along alley\""
               },
               {
                 "condition": "\"Rear setback along arterial\"",
@@ -33220,6 +33220,15 @@
               }
             ]
           },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "4.5"
+                ]
+              }
+            ]
+          },
           "lot_width": {
             "min_val": [
               {
@@ -33234,15 +33243,6 @@
               {
                 "expression": [
                   "120"
-                ]
-              }
-            ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": [
-                  "4.5"
                 ]
               }
             ]
@@ -37751,10 +37751,10 @@
           "setback_rear": {
             "min_val": [
               {
-                "condition": "\"Rear setback along alley\"",
                 "expression": [
                   "10"
-                ]
+                ],
+                "condition": "\"Rear setback along alley\""
               },
               {
                 "condition": "\"Rear setback along arterial\"",
@@ -37806,6 +37806,15 @@
               }
             ]
           },
+          "unit_density": {
+            "max_val": [
+              {
+                "expression": [
+                  "5.2"
+                ]
+              }
+            ]
+          },
           "lot_width": {
             "min_val": [
               {
@@ -37820,15 +37829,6 @@
               {
                 "expression": [
                   "120"
-                ]
-              }
-            ]
-          },
-          "unit_density": {
-            "max_val": [
-              {
-                "expression": [
-                  "5.2"
                 ]
               }
             ]
@@ -57157,10 +57157,40 @@
         "dist_name": "Single Family-Six Residential",
         "dist_abbr": "SF-6",
         "planned_dev": false,
-        "res_types_allowed": "single_detached",
         "constraints": {
           "setback_front": {
             "min_val": [
+              {
+                "expression": [
+                  "25"
+                ]
+              }
+            ]
+          },
+          "setback_rear": {
+            "min_val": [
+              {
+                "expression": [
+                  "10"
+                ],
+                "condition": "\"Rear setback along alley\""
+              },
+              {
+                "condition": "\"Rear setback along arterial\"",
+                "expression": [
+                  "20"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "10"
+                ]
+              }
+            ]
+          },
+          "height": {
+            "max_val": [
               {
                 "expression": [
                   "25"
@@ -57186,42 +57216,11 @@
               }
             ]
           },
-          "setback_rear": {
-            "min_val": [
-              {
-                "condition": "\"Rear setback along alley\"",
-                "expression": [
-                  "10"
-                ]
-              },
-              {
-                "condition": "\"Rear setback along arterial\"",
-                "expression": [
-                  "20"
-                ]
-              },
-              {
-                "condition": true,
-                "expression": [
-                  "10"
-                ]
-              }
-            ]
-          },
           "lot_cov_bldg": {
             "max_val": [
               {
                 "expression": [
                   "50"
-                ]
-              }
-            ]
-          },
-          "height": {
-            "max_val": [
-              {
-                "expression": [
-                  "25"
                 ]
               }
             ]
@@ -57278,7 +57277,8 @@
               }
             ]
           }
-        }
+        },
+        "res_types_allowed": "single_detached"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -59634,8 +59634,15 @@
           "unit_size": {
             "min_val": [
               {
+                "condition": "\"Applies to 30% of units\"",
                 "expression": [
                   "1150"
+                ]
+              },
+              {
+                "condition": "\"Applies to 70% of units\"",
+                "expression": [
+                  "1300"
                 ]
               }
             ]
@@ -59643,8 +59650,15 @@
           "lot_area": {
             "min_val": [
               {
+                "condition": "\"Applies to 30% of units\"",
                 "expression": [
-                  "0.04"
+                  "0.026"
+                ]
+              },
+              {
+                "condition": "\"Applies to 70% of units\"",
+                "expression": [
+                  "0.075"
                 ]
               }
             ]
@@ -59652,8 +59666,15 @@
           "lot_width": {
             "min_val": [
               {
+                "condition": "\"Applies to 30% of units\"",
                 "expression": [
                   "21"
+                ]
+              },
+              {
+                "condition": "\"Applies to 70% of units\"",
+                "expression": [
+                  "30"
                 ]
               }
             ]
@@ -59661,8 +59682,15 @@
           "lot_depth": {
             "min_val": [
               {
+                "condition": "\"Applies to 30% of units\"",
                 "expression": [
                   "80"
+                ]
+              },
+              {
+                "condition": "\"Applies to 70% of units\"",
+                "expression": [
+                  "100"
                 ]
               }
             ]
@@ -65848,6 +65876,12 @@
                 ],
                 "expression": [
                   "3"
+                ]
+              },
+              {
+                "condition": true,
+                "expression": [
+                  "100"
                 ]
               }
             ]
