@@ -1,0 +1,111 @@
+{
+    "bldg_info": {
+        "height_top": 60,
+        "height_plate":58,
+        "roof_type":"flat",
+        "width": 65,
+        "depth": 76,
+        "parking": 8,
+        "sep_platting":false,
+        "unit_separation":"party_wall"
+    },
+    "unit_info": [
+        {
+            "fl_area": 1138,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 2,
+            "outside_entry": false
+        },{
+            "fl_area": 716,
+            "bedrooms": 1,
+            "qty": 1,
+            "entry_level": 2,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 971,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 2,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1223,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 2,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 990,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 3,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 863,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 3,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 951,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 3,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1244,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 3,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1034,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 4,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 822,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 4,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1062,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 4,
+            "outside_entry": false
+        },
+        {
+            "fl_area": 1133,
+            "bedrooms": 2,
+            "qty": 1,
+            "entry_level": 4,
+            "outside_entry": false
+        }
+    ],
+    "level_info": [
+        {
+            "level": 2,
+            "gross_fl_area": 4400
+        },
+        {
+            "level": 3,
+            "gross_fl_area": 4400
+        },
+        {
+            "level": 4,
+            "gross_fl_area": 4400
+        }
+    ]
+}
