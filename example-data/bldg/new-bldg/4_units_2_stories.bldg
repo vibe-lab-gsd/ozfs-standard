@@ -3,8 +3,8 @@
     "height_top": 24,
     "height_plate": 22,
     "roof_type": "flat",
-    "width": 83,
-    "depth": 57,
+    "width": 85,
+    "depth": 60,
     "parking": 4,
     "sep_platting": false,
     "unit_separation": "party_wall"
@@ -42,11 +42,11 @@
   "level_info": [
     {
       "level": 1,
-      "gross_fl_area": 4731
+      "gross_fl_area": 5100
     },
     {
       "level": 2,
-      "gross_fl_area": 4731
+      "gross_fl_area": 5100
     }
   ]
 }
