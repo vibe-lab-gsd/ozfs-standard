@@ -39246,7 +39246,7 @@
             ]
           }
         },
-        "overlay": "none-by-right"
+        "overlay": "none_by_right"
       },
       "geometry": {
         "type": "MultiPolygon",

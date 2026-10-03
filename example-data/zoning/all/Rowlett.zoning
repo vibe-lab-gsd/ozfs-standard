@@ -56865,7 +56865,7 @@
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
         "planned_dev": true,
-        "overlay": "none-by-right"
+        "overlay": "none_by_right"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -85291,7 +85291,7 @@
         "dist_name": "Special Use Permit",
         "dist_abbr": "SUP",
         "planned_dev": false,
-        "overlay": "none-by-right"
+        "overlay": "none_by_right"
       },
       "geometry": {
         "type": "MultiPolygon",

@@ -80463,7 +80463,7 @@
         "dist_name": "Planned Development",
         "dist_abbr": "PD",
         "planned_dev": true,
-        "overlay": "none-by-right"
+        "overlay": "none_by_right"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -122705,7 +122705,7 @@
         "dist_name": "Redevelopment",
         "dist_abbr": "PD-R",
         "planned_dev": true,
-        "overlay": "none-by-right"
+        "overlay": "none_by_right"
       },
       "geometry": []
     },

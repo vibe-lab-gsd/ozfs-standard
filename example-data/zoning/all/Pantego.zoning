@@ -49838,7 +49838,7 @@
         "dist_name": "Park Row Corridor",
         "dist_abbr": "PRC",
         "planned_dev": false,
-        "overlay": "none-by-right"
+        "overlay": "none_by_right"
       },
       "geometry": [
         "type": "MultiPolygon",
