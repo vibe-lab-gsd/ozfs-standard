@@ -143,10 +143,6 @@ include the following:
     overlay districts, the value of the overlay key should be one of the
     following:
 
-    -   `"TRUE"` indicates that it is an overlay district and that no
-        other information is available (the data standard does not
-        require complete information on overlay districts).
-
     -   `"restrict"` indicates that the overlay district further
         restricts the requirements of the base district. In other words,
         when there is a conflict between the requirements of the base
@@ -177,7 +173,7 @@ include the following:
         built. Historic preservation districts may fall into this
         category.
 
-    -   `"none-by-right"` indicates that any development within the
+    -   `"none_by_right"` indicates that any development within the
         overlay district requires discretionary approval. These are
         often (but not always) planned development overlay districts.
 
