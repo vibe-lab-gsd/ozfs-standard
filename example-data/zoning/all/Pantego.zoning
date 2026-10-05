@@ -49840,9 +49840,10 @@
         "planned_dev": false,
         "overlay": "none_by_right"
       },
-      "geometry": [
+      "geometry": {
         "type": "MultiPolygon",
         "coordinates": [
+        [
           [
             [
               -97.14066429554141,
@@ -50367,6 +50368,7 @@
           ]
         ]
       ]
+    }
     },
     {
       "type": "Feature",
