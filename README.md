@@ -215,6 +215,7 @@ form.
                 -   `min_max: (conditionally required)`
             -   `...`
             -   `[[n]]`
+        - `notes`
     -   `...`
     -   `[[constraint name n]]`
 
@@ -228,8 +229,7 @@ Possible constraint names include:
 -   `lot_cov_bldg`: the percentage of the lot area covered by buildings,
     expressed as whole-number percentage points.
 
-`setback_front` (the front setback), `far` (the floor area ratio), and
-`lot_cov_bldg` (the lot coverage). [Appendix
+[Appendix
 A](https://github.com/vibe-lab-gsd/ozfs-standard/blob/main/appendices/appendix-a.md)
 includes a complete list of constraints that have been defined for the
 \*.zoning file, together with their descriptions. For each constraint
@@ -270,7 +270,7 @@ text string (which will limit machine-readability).
     applies). Conditions are evaluated in the order in which they appear, so
     the expression for the final condition can be "True" to indicate that the 
     associated expression applied in all cases not covered by prior conditions.
--   `min_max`: This key is required if the list of expressions has a
+-   `min_max`: This key is required if the list of expressions has
     more than one element in it and `condition` is a logical expression
     (rather than just a free-form text string). It is a character string
     that can take one of two values: `min` or `max`. A value of `min`
@@ -278,6 +278,10 @@ text string (which will limit machine-readability).
     possible values listed in the `expression` key. A value of `maximum`
     indicates that the governing constraint is the maximum of the
     possible values listed in the `expression` key.
+
+At the same level as min_val and max_val, the optional `notes` key can store a string 
+with any notes that the user feels to add. This will be skipped by most software 
+that parses through the zoning requirements. 
 
 The four examples below illustrate how zoning code text can be stored in
 the \*.zoning file.
@@ -356,8 +360,9 @@ encoded with the creation of an implied overlay.
             -   `constraints`
                 -   `...`
                 -   `setbact_side_int`
-                    -   `[[1]]`
-                        -   `expression: min_val: 5`
+                    -   `min_val`
+                        -   `[[1]]`
+                            -   `expression: 5`
                 -   `...`
         -   `geometry`
     -   `[[2]]`
@@ -368,8 +373,9 @@ encoded with the creation of an implied overlay.
             -   `overlay_implied: True` 
             -   `constraints`
                 -   `setbact_side_int`
-                    -   `[[1]]`
-                        -   `expression: min_val: 10`
+                    - `min_val` 
+                        -   `[[1]]`
+                            -   `expression: 10`
         -   `geometry`
 
 **Example 5: Unencodable conditions** 
@@ -390,6 +396,7 @@ encoded without the creation of an implied overlay district.
             -   `[[2]]`
                 -   `condition: True`
                 -   `expression: 5`
+        - `notes: "See section ### for additional detials"`
 
 ### Definitions
 
