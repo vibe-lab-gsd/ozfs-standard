@@ -41440,7 +41440,7 @@
         "dist_name": "Naval Air Station Overlay",
         "dist_abbr": "NAS",
         "planned_dev": false,
-        "overlay": true
+        "overlay": "none_by_right"
       },
       "geometry": {
         "type": "MultiPolygon",
